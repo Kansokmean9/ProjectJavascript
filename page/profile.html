@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Admin Dashboard</title>
+    <link rel="stylesheet" href="/asset/bootstrap/css/bootstrap.css">
+    <link href="/asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .main-content {
+            margin-left: 250px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                margin-left: -250px;
+            }
+
+            .sidebar.active {
+                margin-left: 0;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        li::before {
+            background-color: inherit;
+        }
+
+        .bg-primary {
+            background-color: rgb(16, 151, 205) !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="dashboardContainer">
+        <div class="sidebar bg-primary text-white p-3" style="width: 250px;">
+            <h3 class="text-center my-4">Admin Portfolio</h3>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active text-white" href="/index.html" data-section="dashboard">
+                        <i class="bi bi-grid me-2"></i> Dashboard
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#" data-section="contact">
+                        <i class="bi bi-envelope me-2"></i> Contact
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#" data-section="education">
+                        <i class="bi bi-mortarboard me-2"></i> Education
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#" data-section="skills">
+                        <i class="bi bi-briefcase me-2"></i> Skills
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#" data-section="projects">
+                        <i class="bi bi-credit-card-2-back"></i> Projects
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#" data-section="experience">
+                        <i class="bi bi-briefcase me-2"></i> Experience
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#" data-section="language">
+                        <i class="bi bi-translate me-2"></i> Language
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#" data-section="profile">
+                        <i class="bi bi-person me-2"></i> Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#" data-section="biography">
+                        <i class="bi bi-file-text me-2"></i> Biography
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    <button id="sidebarToggle" class="btn btn-outline-secondary d-lg-none me-2">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="notificationBtn">
+                                <i class="bi bi-bell"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="container-fluid py-4">
+
+                <div id="dashboardContent">
+                    <div id="profileContent" class="">
+                        <h4 class="mb-4">Profile</h4>
+                        <button class="btn btn-primary" id="logoutBtn" onclick="logoutbtn()">Logout</button>
+                    </div>
+                </div>
+
+                <!-- <div id="projectsContent" class="d-none">
+                    <h4 class="mb-4">Projects Management</h4>
+                    <form id="projectForm" class="card mb-4">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="projectName" class="form-label">Project Name</label>
+                                <input type="text" class="form-control" id="projectName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="projectTechnologies" class="form-label">Technologies</label>
+                                <input type="text" class="form-control" id="projectTechnologies"
+                                    placeholder="Technologies (comma-separated)" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="projectStatus" class="form-label">Status</label>
+                                <select class="form-select" id="projectStatus" required>
+                                    <option value="Active">Active</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Project</button>
+                        </div>
+                    </form>
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Projects List</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Project Name</th>
+                                            <th>Technologies</th>
+                                            <th>Created at</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="projectsListTableBody">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- <div id="skillsContent" class="d-none">
+                    <h4 class="mb-4">Skills Management</h4>
+                    <form id="skillForm" class="card mb-4">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="skillName" class="form-label">Skill Name</label>
+                                <input type="text" class="form-control" id="skillName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="skillLevel" class="form-label">Skill Level</label>
+                                <select class="form-select" id="skillLevel" required>
+                                    <option value="Beginner">Beginner</option>
+                                    <option value="Intermediate">Intermediate</option>
+                                    <option value="Advanced">Advanced</option>
+                                    <option value="Expert">Expert</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Skill</button>
+                        </div>
+                    </form>
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Skills List</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Skill Name</th>
+                                            <th>Skill Level</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="skillsTableBody">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+<!-- 
+                <div id="contactContent" class="d-none">
+                    <h4 class="mb-4">Contact Information</h4>
+                </div>
+
+                <div id="educationContent" class="d-none">
+                    <h4 class="mb-4">Education</h4>
+                </div>
+
+                <div id="experienceContent" class="d-none">
+                    <h4 class="mb-4">Work Experience</h4>
+                </div>
+
+                <div id="languageContent" class="d-none">
+                    <h4 class="mb-4">Languages</h4>
+                </div>
+                <div id="profileContent" class="d-none">
+                    <h4 class="mb-4">Profile</h4>
+                    <button class="btn btn-primary" id="logoutBtn" onclick="logoutbtn()">Logout</button>
+                </div>
+
+                <div id="biographyContent" class="d-none">
+                    <h4 class="mb-4">Biography</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus error corrupti adipisci
+                        facere quisquam eius reprehenderit quis! Dolorum, sit perspiciatis explicabo voluptatum
+                        excepturi, molestiae iste hic pariatur cumque ullam iure.</p>
+
+                </div> -->
+            </main>
+        </div>
+    </div>
+
+    <script src="/asset/bootstrap/js/bootstrap.bundle.js"></script>
+    <script>
+
+        // // Login functionality
+        // const loginForm = document.getElementById('loginForm');
+        // const loginContainer = document.getElementById('loginContainer');
+        // const dashboardContainer = document.getElementById('dashboardContainer');
+
+
+        // // Logout functionality
+        // const logoutBtn = document.getElementById('logoutBtn');
+        // logoutBtn.addEventListener('click', (e) => {
+        //     e.preventDefault();
+        //     location.reload();
+        //     localStorage.removeItem('isLoggedIn');
+        //     dashboardContainer.classList.add('d-none');
+        //     loginContainer.classList.remove('d-none');
+        // });
+
+        // Sidebar toggle
+        const sidebar = document.querySelector('.sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+
+        // // Notification button click event
+        // const notificationBtn = document.getElementById('notificationBtn');
+        // notificationBtn.addEventListener('click', () => {
+        //     alert('Notifications feature coming soon!');
+        //     location.reload();
+        // });
+
+        // // Navigation
+        // const navLinks = document.querySelectorAll('.nav-link');
+        // const sectionTitle = document.getElementById('sectionTitle');
+        // const contentSections = {
+        //     dashboard: document.getElementById('dashboardContent'),
+        //     projects: document.getElementById('projectsContent'),
+        //     skills: document.getElementById('skillsContent'),
+        //     contact: document.getElementById('contactContent'),
+        //     education: document.getElementById('educationContent'),
+        //     experience: document.getElementById('experienceContent'),
+        //     language: document.getElementById('languageContent'),
+        //     profile: document.getElementById('profileContent'),
+        //     biography: document.getElementById('biographyContent')
+        // };
+
+        // navLinks.forEach(link => {
+        //     link.addEventListener('click', (e) => {
+        //         e.preventDefault();
+        //         const section = link.getAttribute('data-section');
+
+        //         // Update active link
+        //         navLinks.forEach(navLink => navLink.classList.remove('active'));
+        //         link.classList.add('active');
+
+        //         // Update section title
+        //         sectionTitle.textContent = link.textContent.trim();
+
+        //         // Show/hide content sections
+        //         Object.values(contentSections).forEach(content => content.classList.add('d-none'));
+        //         contentSections[section].classList.remove('d-none');
+        //     });
+        // });
+
+        // // Project Form Submission
+        // const projectForm = document.getElementById('projectForm');
+        // const projectsTableBody = document.getElementById('projectsTableBody');
+        // const projectsListTableBody = document.getElementById('projectsListTableBody');
+
+        // projectForm.addEventListener('submit', (e) => {
+        //     e.preventDefault();
+        //     const projectName = document.getElementById('projectName').value;
+        //     const projectTechnologies = document.getElementById('projectTechnologies').value;
+        //     const projectStatus = document.getElementById('projectStatus').value;
+        //     const createdAt = new Date().toLocaleDateString();
+
+        //     const newRow = `
+        //         <tr>
+        //             <td>${projectName}</td>
+        //             <td>${projectTechnologies}</td>
+        //             <td>${createdAt}</td>
+        //             <td><span class="badge bg-success">${projectStatus}</span></td>
+        //         </tr>
+        //     `;
+
+        //     projectsTableBody.innerHTML += newRow;
+        //     projectsListTableBody.innerHTML += newRow;
+
+        //     projectForm.reset();
+        // });
+
+        // // Skill Form Submission
+        // const skillForm = document.getElementById('skillForm');
+        // const skillsTableBody = document.getElementById('skillsTableBody');
+
+        // skillForm.addEventListener('submit', (e) => {
+        //     e.preventDefault();
+        //     const skillName = document.getElementById('skillName').value;
+        //     const skillLevel = document.getElementById('skillLevel').value;
+
+        //     const newRow = `
+        //         <tr>
+        //             <td>${skillName}</td>
+        //             <td>${skillLevel}</td>
+        //         </tr>
+        //     `;
+
+        //     skillsTableBody.innerHTML += newRow;
+        //     skillForm.reset();
+        // });
+
+
+        function logoutbtn() {
+            console.log('test'); 
+
+            fetch(`https://mps7.chandalen.dev/api/logout`, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(json => {
+                    console.log(json);
+                    alert('bbbbbbbbbbbb');
+                    if (json) {
+
+                        // alert(res.message)
+                        console.log(res)
+                        // location.href = 'http://127.0.0.1:5501/login.html';
+
+
+                    }
+                })
+                
+
+        }
+    </script>
+</body>
+
+</html>
