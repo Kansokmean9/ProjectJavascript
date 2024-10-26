@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>profile</title>
+    <title>experience</title>
     <link rel="stylesheet" href="/asset/bootstrap/css/bootstrap.css">
     <link href="/asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <style>
@@ -73,7 +73,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="/page/project.html" data-section="projects">
-                        <i class="bi bi-credit-card-2-back"></i> Projects
+                        <i class="bi bi-credit-card-2-back me-2"></i> Projects
                     </a>
                 </li>
                 <li class="nav-item">
@@ -88,7 +88,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="/page/profile.html" data-section="profile">
-                        <i class="bi bi-person me-2 me-2"></i> Profile
+                        <i class="bi bi-person me-2"></i> Profile
                     </a>
                 </li>
                 <li class="nav-item">
@@ -118,48 +118,19 @@
             <main class="container-fluid py-4">
 
                 <div id="dashboardContent">
-                    <div id="profileContent" class="">
-                        <h4 class="mb-4">Profile</h4>
-                        <button class="btn btn-primary" id="logoutBtn" onclick="logoutbtn()">Logout</button>
+                    <div id="experienceContent" >
+                        <h4 class="mb-4">Work Experience</h4>
                     </div>
                 </div>
 
+                
             </main>
         </div>
     </div>
 
-    <script src="/asset/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="asset/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="/asset/js/javascript.js"></script>
 
-    <script>
-
-        function logoutbtn() {
-            let id = sessionStorage.getItem('Token');
-            console.log(id); 
-
-            fetch(`https://mps7.chandalen.dev/api/logout`, {
-                method: 'DELETE',
-                headers: {
-                "Authorization": `Bearer ${id}`
-                }
-            })
-                .then(res => res.json())
-                .then(json => {
-                    if(json.message == "Logout successful."){
-
-                        alert(json.message);
-                        sessionStorage.clear();
-                        location.href = 'http://127.0.0.1:5501/login.html';
-                    }else{
-                        alert(json.message);
-                    }
-
-                    
-                })       
-
-        }
-        
-    </script>
 </body>
 
 </html>
