@@ -19,7 +19,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" >
+                    <input type="password" class="form-control" id="password">
                 </div>
                 <button type="button" class="btn btn-primary w-100" onclick="adddata()">Sign in</button>
             </form>
@@ -27,53 +27,75 @@
     </div>
 </body>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="asset/bootstrap/js/bootstrap.bundle.js"></script>
-    <script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="asset/bootstrap/js/bootstrap.bundle.js"></script>
+<script>
 
-        function adddata() {
-            const form = document.getElementById('loginForm');
-            let formData = new FormData(form); // Create FormData object
+    function adddata() {
+        const form = document.getElementById('loginForm');
+        let formData = new FormData(form); // Create FormData object
 
-            const username = document.getElementById('username');
-            const password = document.getElementById('password');
-            console.log(username.value);
-            
-            formData.append('email', username.value);
-            formData.append('password', password.value);
+        const username = document.getElementById('username');
+        const password = document.getElementById('password');
+        console.log(username.value);
 
-            
+        formData.append('email', username.value);
+        formData.append('password', password.value);
 
-            console.log(formData);
-            
-            fetch('https://mps7.chandalen.dev/api/login', {
-                method: 'POST',
-                body: formData, 
-            })
-                // .then(res => res.json())
-                .then(res => res.json())
-                .then(json => {
-                    console.log(json);
-                    if(json.data.length == 0){
+
+
+        console.log(formData);
+        fetch('https://mps7.chandalen.dev/api/login', {
+            method: 'POST',
+            body: formData,
+        })
+            // .then(res => res.json())
+            .then(res => res.json())
+            .then(json => {
+                console.log(json);
+                if (json.data.length == 0) {
+
+                    alert(json.message)
+                } else {
+                    if (json.message == "Invalid input value") {
+                        alert(json.message);
+                    } else {
                         
-                        alert(json.message)
-                    }else{
-                        if(json.message == "Invalid input value"){
-                            alert(json.message);
-                        }else{
-
+                        let timerInterval;
+                        Swal.fire({
+                            title: "Login processing!",
+                            html: "Wait for <b></b> milliseconds.",
+                            timer: 1300,
+                            timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading();
+                                const timer = Swal.getPopup().querySelector("b");
+                                timerInterval = setInterval(() => {
+                                    timer.textContent = `${Swal.getTimerLeft()}`;
+                                }, 100);
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval);
+                            }
+                        }).then((result) => {
                             let token = json.data.token;
-                            sessionStorage.setItem('Token', token); //getid to store in session storage
+                            sessionStorage.setItem('Token', token);
                             location.href = 'http://127.0.0.1:5501/index.html';
-                        }
+                            /* Read more about handling dismissals below */
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                console.log("I was closed by the timer");
+                            }
+                        });
+                        
                     }
+                }
 
-                })
-            
+            })
 
-        }
-        
-             
-    </script>
+
+    }
+
+
+</script>
 
 </html>

@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.sidebar {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.main-content {
+    margin-left: 250px;
+}
+
+@media (max-width: 1200px) {
+    .sidebar {
+        margin-left: -250px;
+    }
+
+    .sidebar.active {
+        margin-left: 0;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+}
+
+li::before {
+    background-color: inherit;
+}
+
+.bg-primary {
+    background-color: rgb(16, 151, 205) !important;
+}
