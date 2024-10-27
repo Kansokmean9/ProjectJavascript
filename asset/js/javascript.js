@@ -13,14 +13,14 @@
         });
 
         // get me
-        let id = sessionStorage.getItem('Token');
-        console.log(id);
+        let token = sessionStorage.getItem('Token');
+        console.log(token);
 
         fetch(`https://mps7.chandalen.dev/api/me`, {
             method: 'GET',
             headers: {
                 "Accept": "application/json",
-                "Authorization": `Bearer ${id}`
+                "Authorization": `Bearer ${token}`
             }
         })
             .then(res => res.json())
