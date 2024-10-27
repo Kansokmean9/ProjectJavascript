@@ -141,11 +141,37 @@
         background-color: rgb(241, 94, 94);
 
     }
-    #saveAdmindata{
-        /* width: 90px;
-        height: 30px; */
+
+    #saveInfo,
+    #savePass {
         margin-top: 15px;
         padding: 3px 10px;
+    }
+
+    .lb {
+        font-size: large;
+    }
+
+    #profile .row input {
+        width: 250px;
+        height: 35px;
+        padding-left: 10px;
+        border: 1px solid gray;
+        border-radius: 5px;
+    }
+
+    #profile .row input:focus {
+        outline: 1px solid #009dff;
+    }
+
+    #profile .row .col-md-6 {
+        border-left: 2px solid #009dff;
+    }
+
+    .hvr-icon-back:hover .hvr-icon {
+        /* transform: translateX(-4px) !important; */
+        color: red;
+        /* margin-left: -10px; */
     }
 </style>
 
@@ -186,7 +212,8 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <a href="/index.html"><i class="bi bi-arrow-left"></i> Back to dashboard</a>
+                <a class="hvr-icon-back" href="/index.html"><i class="bi bi-arrow-left hvr-icon"></i> Back to
+                    dashboard</a>
             </div>
         </div>
         <div class="row">
@@ -206,77 +233,51 @@
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div class="row">
                             <div class="col-md-6">
-                                <label>User Id</label>
+                                <label class="lb">Admin ID</label>
                             </div>
                             <div class="col-md-6">
-                                <p id="idAd">Kshiti123</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Name</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p id="nameAd">Kshiti Ghelani</p>
+                                <p class="lb" id="idAd">Kshiti123</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label>Email</label>
+                                <label class="lb">Name</label>
                             </div>
                             <div class="col-md-6">
-                                <p id="gmailAd">kshitighelani@gmail.com</p>
+                                <p class="lb" id="nameAd">Kshiti Ghelani</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="lb">Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="lb" id="gmailAd">kshitighelani@gmail.com</p>
                             </div>
                         </div>
 
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="row">
-                            <div class="col-md-6 mt-2">
-                                <label>Name</label>
+                            <div class="col-md-6 mt-2 leftEdit">
+                                <label>Name</label><br>
+                                <input type="text" id="upName"><br>
+                                <label>Gmail</label><br>
+                                <input type="text" id="upGmail"><br>
+                                <button id="saveInfo" class="btn btn-primary" onclick="saveinfo()">Save</button>
                             </div>
                             <div class="col-md-6 mt-2">
-                                <input type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mt-2">
-                                <label>Gmail</label>
-                            </div>
-                            <div class="col-md-6 mt-2">
-                                <input type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mt-2">
-                                <label>Current password</label>
-                            </div>
-                            <div class="col-md-6 mt-2">
-                                <input type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mt-2">
-                                <label>New password</label>
-                            </div>
-                            <div class="col-md-6 mt-2">
-                                <input type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mt-2">
-                                <label>Comfirm password</label>
-                            </div>
-                            <div class="col-md-6 mt-2">
-                                <input type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-3">
-                                <button id="saveAdmindata" class="btn btn-primary">save</button>
-                            </div>
-                        </div>
+                                <!-- <input type="text" id="upName"> -->
+                                <label>Current password</label><br>
+                                <input type="text" id="crPass" placeholder="Current passsword"><br>
+                                <label>New password</label><br>
+                                <input type="text" id="newPass" placeholder="New passsword">
+                                <label>Comfirm password</label><br>
+                                <input type="text" id="cfPass" placeholder="Comfirm passsword"><br>
+                                <button id="savePass" class="btn btn-primary" onclick="savePass()">Save change</button>
 
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -304,9 +305,14 @@
                     // console.log(json);
                     document.getElementById('avtadmin').src = json.data.avatar;
                     document.getElementById('adminName').innerHTML = json.data.name;
+
                     document.getElementById('idAd').innerHTML = json.data.id;
                     document.getElementById('nameAd').innerHTML = json.data.name;
                     document.getElementById('gmailAd').innerHTML = json.data.email;
+                    // form edit
+                    document.getElementById('upName').value = json.data.name;
+                    document.getElementById('upGmail').value = json.data.email;
+                    // document.getElementById('gmailAd').innerHTML = json.data.passsword;
 
                 })
         }
@@ -376,9 +382,59 @@
             });
         }
 
-        // function deleteavt() {
+        // save info
+        function saveinfo() {
+            let names = document.getElementById('upName');
+            let emails = document.getElementById('upGmail');
 
-        // }
+            fetch(`https://mps7.chandalen.dev/api/own/personal-information`, {
+                method: 'PUT',
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "name": names.value,
+                    "email": emails.value
+                }) 
+            })
+                .then(res => res.json())
+                .then(json => {
+                    console.log(json)
+                    alert(json.message);
+                    getme(); 
+                })
+                .catch(err => console.error('Error:', err));
+
+        }
+        function savePass() {
+            let crPass = document.getElementById('crPass');
+            let newPass = document.getElementById('newPass');
+            let cfPass = document.getElementById('cfPass');
+
+            fetch(`https://mps7.chandalen.dev/api/own/password`, {
+                method: 'PUT',
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "current_password": crPass.value,
+                    "password": newPass.value,
+                    "password_confirmation" : cfPass.value
+                }) 
+            })
+                .then(res => res.json())
+                .then(json => {
+                    console.log(json)
+                    alert(json.message);
+                    getme(); 
+                })
+                .catch(err => console.error('Error:', err));
+
+        }
     </script>
 </body>
 

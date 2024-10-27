@@ -18,13 +18,13 @@
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    border: 1px solid rgb(12, 131, 170);
     margin-right: 15px;
 }
 #avatar #avtadmin{
     width: 35px;
     height: 35px;
     border-radius: 50%;
+    border: 1px solid rgb(12, 131, 170);
 }
 .sidebar {
     height: 100vh;
@@ -59,12 +59,12 @@ li::before {
 .bg-primary {
     background-color: rgb(16, 151, 205) !important;
 }
-#adminName{
-    font-family: Preahvihear, jost;
+#adminName,#nameAd{
+    font-family: jost,Preahvihear;
 }
-#nameAd{
+/* #nameAd{
     font-family: jost;
-}
+} */
 .welcome{
     color: rgb(72, 153, 240);
 }
