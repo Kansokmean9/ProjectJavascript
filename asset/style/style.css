@@ -66,8 +66,27 @@ li::before {
     font-family: jost;
 } */
 .welcome{
-    color: rgb(72, 153, 240);
+    color: #4899f0;
 }
 #dashboardContent{
     margin-right: 15px;
+}
+.btn-close-bar{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(191, 110, 110);
+    color: white;
+    margin-left: -10px;
+}
+#sidebarToggle{
+    width: 30px;
+    height: 30px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #4899f0;
 }
