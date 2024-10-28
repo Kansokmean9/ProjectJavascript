@@ -9,9 +9,9 @@
     <link href="asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="asset/style/style.css">
     <style>
-        
 
-        
+
+
     </style>
 
 </head>
@@ -105,30 +105,39 @@
                 <div id="dashboardContent">
                     <h3 id="sectionTitle" class="mb-4">Dashboard</h3>
                     <div class="row mb-4">
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Total Projects</h5>
+                                    <h5 class="card-title">Total Veiw</h5>
                                     <p class="card-text text-muted">Number of projects in your portfolio</p>
-                                    <h2 class="card-text">15</h2>
+                                    <h2 class="card-text" id="tview" >0</h2>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Skills</h5>
+                                    <h5 class="card-title">Total contact</h5>
                                     <p class="card-text text-muted">Total number of skills listed</p>
-                                    <h2 class="card-text">24</h2>
+                                    <h2 class="card-text" id="tcontact">0</h2>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Profile Views</h5>
+                                    <h5 class="card-title">Total own project</h5>
                                     <p class="card-text text-muted">Views in the last 30 days</p>
-                                    <h2 class="card-text">3,027</h2>
+                                    <h2 class="card-text" id="tproject">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Total blog</h5>
+                                    <p class="card-text text-muted">Views in the last 30 days</p>
+                                    <h2 class="card-text" id="tblog">0</h2>
                                 </div>
                             </div>
                         </div>
@@ -164,8 +173,27 @@
 
     <script src="asset/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="/asset/js/javascript.js"></script>
+    <script>
+        //get index dasbaord
 
+        fetch(`https://mps7.chandalen.dev/api/dashboard`, {
+            method: 'GET',
+            headers: {
+                "Accept": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        })
+            .then(res => res.json())
+            .then(json => {
+                console.log(json.data.total_view);
+                document.getElementById('tview').innerText = json.data.total_view;
+                document.getElementById('tcontact').innerText = json.data.total_contact;
+                document.getElementById('tproject').innerText = json.data.total_own_project;
+                document.getElementById('tblog').innerText = json.data.total_blog;
+                // document.getElementById('tcontact').innerHTML = json.data.name;
 
+            })
+    </script>
 </body>
 
 </html>

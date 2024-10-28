@@ -1,9 +1,4 @@
 // Sidebar toggle
-// const sidebar = document.querySelector('.sidebar');
-// const sidebarToggle = document.getElementById('sidebarToggle');
-// sidebarToggle.addEventListener('click', () => {
-//     sidebar.classList.toggle('active');
-// });
 const sidebar = document.querySelector('.sidebar');
 const sidebarToggle = document.getElementById('sidebarToggle');
 const closeSidebar = document.getElementById('closeSidebar');
@@ -42,3 +37,6 @@ fetch(`https://mps7.chandalen.dev/api/me`, {
         document.getElementById('adminName').innerHTML = json.data.name;
 
     })
+
+
+
