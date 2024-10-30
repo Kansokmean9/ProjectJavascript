@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Spicy+Rice&display=swap');
 *{
     margin: 0;
     padding: 0;
@@ -27,7 +28,12 @@
     border: 1px solid rgb(12, 131, 170);
 }
 .sidebar {
-    height: 100vh;
+    background-color: #edf2f9;
+    height: 88vh;
+    margin-top: 63px;
+    margin-left: 20px;
+    width: 220px !important;
+    border-radius: 10px;
     position: fixed;
     top: 0;
     left: 0;
@@ -36,6 +42,29 @@
 
 .main-content {
     margin-left: 250px;
+
+}
+
+.text-addmin{
+    font-family: "Spicy Rice", serif;
+    font-size: 23px;
+    font-weight: bold;
+    color: rgb(5, 113, 207);
+    margin: 0px !important;
+}
+
+.text-db{
+    font-size: 23px;
+}
+
+#dashboardContent .row .col-md-3 .card{
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+    border: none;
+}
+
+#dashboardContent .card{
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+    border: none;
 }
 
 @media (max-width: 1200px) {
@@ -57,7 +86,9 @@ li::before {
 }
 
 .bg-primary {
-    background-color: rgb(16, 151, 205) !important;
+    /* background-color: rgb(16, 151, 205) !important; */
+    background: rgb(5,90,162);
+background: linear-gradient(118deg, rgba(5,90,162,1) 0%, rgba(53,158,231,1) 99%);
 }
 #adminName,#nameAd{
     font-family: jost,Preahvihear;
