@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,7 +64,7 @@
                         Swal.fire({
                             title: "Login processing!",
                             html: "Wait for <b></b> milliseconds.",
-                            timer: 1000,
+                            timer: 800,
                             timerProgressBar: true,
                             didOpen: () => {
                                 Swal.showLoading();
@@ -86,13 +85,11 @@
                                 console.log("I was closed by the timer");
                             }
                         });
-                        
+
                     }
                 }
-
             })
     }
-
 </script>
 
 </html>
