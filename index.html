@@ -135,8 +135,10 @@
                         <div class="col-md-3 mb-3 ">
                             <div class="card ">
                                 <div class="card-body">
+
                                     <h6 class="card-title">Total Veiw</h6>
                                     <p class="card-text text-muted">Number of projects in your portfolio</p>
+
                                     <h2 class="card-text" id="tview" >0</h2>
                                 </div>
                             </div>
@@ -144,8 +146,10 @@
                         <div class="col-md-3 mb-3">
                             <div class="card ">
                                 <div class="card-body">
+
                                     <h6 class="card-title">Total contact</h6>
                                     <p class="card-text text-muted">Total number of skills listed</p>
+
                                     <h2 class="card-text" id="tcontact">0</h2>
                                 </div>
                             </div>
@@ -153,8 +157,10 @@
                         <div class="col-md-3 mb-3">
                             <div class="card ">
                                 <div class="card-body">
+
                                     <h6 class="card-title">Total own project</h6>
                                     <p class="card-text text-muted">Views in the last 30 days</p>
+
                                     <h2 class="card-text" id="tproject">0</h2>
                                 </div>
                             </div>
@@ -162,8 +168,10 @@
                         <div class="col-md-3 mb-3">
                             <div class="card ">
                                 <div class="card-body">
+
                                     <h6 class="card-title">Total blog</h6>
                                     <p class="card-text text-muted">Views in the last 30 days</p>
+
                                     <h2 class="card-text" id="tblog">0</h2>
                                 </div>
                             </div>
@@ -217,7 +225,6 @@
                 document.getElementById('tcontact').innerText = json.data.total_contact;
                 document.getElementById('tproject').innerText = json.data.total_own_project;
                 document.getElementById('tblog').innerText = json.data.total_blog;
-                // document.getElementById('tcontact').innerHTML = json.data.name;
 
             })
     </script>
