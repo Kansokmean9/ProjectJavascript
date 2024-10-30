@@ -94,11 +94,12 @@ background: linear-gradient(118deg, rgba(5,90,162,1) 0%, rgba(53,158,231,1) 99%)
 #adminName,#nameAd{
     font-family: jost,Preahvihear;
 }
-/* #nameAd{
-    font-family: jost;
-} */
-.welcome{
+#adminName{
+    font-weight: bold;
     color: #4899f0;
+}
+.welcome{
+    color: black;
 }
 #dashboardContent{
     margin-right: 15px;

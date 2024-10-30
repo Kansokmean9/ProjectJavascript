@@ -79,7 +79,7 @@
                         }).then((result) => {
                             let token = json.data.token;
                             sessionStorage.setItem('Token', token);
-                            location.href = 'http://127.0.0.1:5501/index.html';
+                            location.href = 'index.html';
                             /* Read more about handling dismissals below */
                             if (result.dismiss === Swal.DismissReason.timer) {
                                 console.log("I was closed by the timer");
