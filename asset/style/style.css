@@ -14,6 +14,9 @@
     font-family: Preahvihear;
     src: url(/asset/font/khmer/Preahvihear-Regular.ttf);
 }
+body{
+    background-color: #edf2f9;
+}
 
 #avatar{
     width: 35px;
@@ -56,7 +59,9 @@
 .text-db{
     font-size: 23px;
 }
-
+#dashboardContent{
+    margin-top: 50px;
+}
 #dashboardContent .row .col-md-3 .card{
     box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
     border: none;
@@ -122,4 +127,13 @@ background: linear-gradient(118deg, rgba(5,90,162,1) 0%, rgba(53,158,231,1) 99%)
     justify-content: center;
     align-items: center;
     background-color: #4899f0;
+}
+#bioForm label{
+    font-weight: bold;
+    color: rgb(73, 73, 73);
+}
+.navbar.navbar-expand-lg{
+    position: fixed;
+    z-index: 99;
+    width: 100%;
 }
