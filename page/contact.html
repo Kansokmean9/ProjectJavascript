@@ -8,9 +8,14 @@
     <link rel="stylesheet" href="/asset/bootstrap/css/bootstrap.css">
     <link href="/asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="/asset/style/style.css">
-
+    
 </head>
-
+<style>
+    th{
+        padding: 20px;
+        background-color: skyblue;
+    }
+</style>
 <body>
 
     <div id="dashboardContainer">
@@ -96,21 +101,63 @@
             </nav>
 
             <main class="container-fluid py-4">
-
                 <div id="dashboardContent">
                     <div id="contactContent" class="">
                         <h4 class="mb-4">Contact Information</h4>
+                        <table border="1">
+                            <thead>
+                                <th>id</th>
+                                <th>name</th>
+                                <th>email</th>
+                                <th>phone</th>
+                                <th>subject</th>
+                                <th>message</th>
+                                <th>created_at</th>
+                                <th>created_at_format</th>
+                                <th>Action</th>
+                            </thead>
+                            <tbody>
+                    
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
-                
             </main>
         </div>
     </div>
-
     <script src="asset/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="/asset/js/javascript.js"></script>
-    
+    <script>
+        fetch('https://mps7.chandalen.dev/api/contacts?page=1&per_page=10&search',{
+                method: 'GET',
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+            .then(res => res.json())
+            .then(json => {
+                console.log(json);
+                let tr = '';
+                json.data.forEach(element => {
+                    tr += `<tr class="bg bg-body-tertiary">
+                        <td class="p-5">${element.id}</td>
+                        <td>${element.name}</td>
+                        <td>${element.email}</td>
+                        <td>${element.phone}</td>
+                        <td>${element.subject || 'N/A'}</td>
+                        <td>${element.message}</td>
+                        <td>${element.created_at}</td>
+                        <td>${element.created_at_format}</td>
+                        <td>
+                            <img src="asset/edit.png" width="30px" height="30px">
+                             <img src="asset/edit.png" width="30px" height="30px">
+                           
+                        </td>
+                    </tr>`;
+                });
+                document.querySelector('tbody').innerHTML = tr;
+            })
+    </script>
 </body>
-
 </html>
