@@ -5,9 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>education</title>
-    <link rel="stylesheet" href="/asset/bootstrap/css/bootstrap.css">
-    <link href="/asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="/asset/style/style.css">
+
+    <link rel="stylesheet" href="../asset/bootstrap/css/bootstrap.css">
+    <link href="../asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../asset/style/style.css">
+
 </head>
  <style>
     th{
@@ -22,14 +24,46 @@
 <body>
 
     <div id="dashboardContainer">
+
+        
+        <nav class="navbar navbar-expand-lg navbar-light border-bottom" style="background-color: #edf2f9;">
+            <!-- <div id="toggleNavigationTooltip" class="ratias" style="background-color: red; width: 50px; height: 39px; margin-left: 20px; border-radius: 100px;"></div> -->
+
+            <div class="logo" style="width: 300px; margin-left: 5px;">
+                <h1 class="text-center text-addmin my-4 text-uppercase">Admin Portfolio</h1>
+            </div>
+
+            <div class="container-fluid">
+                <button id="sidebarToggle" class="btn btn-outline-secondary d-xl-none me-2">
+                    <i class="bi bi-list"></i>
+                </button>
+
+                <h2 class="welcome" style="font-size: 30px;">Wellcome dear <span id="adminName"></span>!</h2>
+                <ul class="navbar-nav ms-auto d-flex align-items-center">
+                    <li class="pe-2">
+                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank" class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i class="bi bi-box-arrow-up-right"></i> Open Site</a>
+                    </li>
+                    
+                    <li class="nav-item pe-2">
+                        <a class="nav-link" href="#" id="notificationBtn">
+                            <i class="bi bi-bell fs-5"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item align-items-center d-flex">
+                        <a href="profileAdmin.html" id="avatar"><img id="avtadmin" src="#" alt=""></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
         <div class="sidebar bg-primary text-white p-3" style="width: 250px;">
             <button id="closeSidebar" class="btn btn-light d-xl-none mb-3 btn-close-bar">
                 <i class="bi bi-chevron-left"></i>
             </button>
-            <h3 class="text-center my-4">Admin Portfolio</h3>
+            <!-- <h3 class="text-center my-4 text-db">Admin Portfolio</h3> -->
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active text-white" href="/index.html" data-section="dashboard">
+                    <a class="nav-link active text-white" href="../index.html" data-section="dashboard">
                         <i class="bi bi-grid me-2"></i> Dashboard
                     </a>
                 </li>
@@ -83,6 +117,7 @@
         </div>
 
         <div class="main-content">
+
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                 <div class="container-fluid">
                     <button id="sidebarToggle" class="btn btn-outline-secondary  d-xl-none me-2">
@@ -102,8 +137,10 @@
                     </ul>
                 </div>
             </nav>
+
             <main class="container-fluid py-4">
                 <div id="dashboardContent">
+
                     <div id="EduContent" >
                         <h4 class="mb-4">Education</h4>
                         <form id="EduForm" class="card mb-4">
@@ -144,13 +181,15 @@
                                 </tbody>
                             </table>
                         <!-- </div> -->
+
                     </div>
                 </div>
             </main>
         </div>
     </div>
-    <script src="asset/bootstrap/js/bootstrap.bundle.js"></script>
-    <script src="/asset/js/javascript.js"></script>
+
+    <script src="../asset/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="../asset/js/javascript.js"></script>
     <script>
     function GetDate(){
         fetch('https://mps7.chandalen.dev/api/educations')
@@ -175,6 +214,7 @@
     })
     }
     GetDate();
+
 
     let education=[];
     let currentIndex = -1; 

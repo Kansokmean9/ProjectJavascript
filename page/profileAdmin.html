@@ -5,14 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>admin profile</title>
-    <link href="/asset/bootstrap/css/bootstrap.css" rel="stylesheet" id="bootstrap-css">
-    <link rel="stylesheet" href="/asset/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="/asset/style/style.css">
+    <link href="../asset/bootstrap/css/bootstrap.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="../asset/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="../asset/style/style.css">
 
 </head>
 <style>
     body {
-        background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+        background: rgb(5,90,162);
+        background: linear-gradient(118deg, rgba(5,90,162,1) 0%, rgba(53,158,231,1) 99%);
         display: flex;
         /* align-items: center; */
         height: 100vh;
@@ -20,8 +21,8 @@
 
     .emp-profile {
         margin-top: 75px;
-        padding: 4%;
-        height: 80vh;
+        padding-top: 35px;
+        height: 600px;
         border-radius: 0.5rem;
         background: #fff;
         /* position: fixed; */
@@ -165,7 +166,7 @@
     }
 
     #profile .row .col-md-6 {
-        border-left: 2px solid #009dff;
+        border-left: 1px solid #009dff;
     }
 
     .hvr-icon-back:hover .hvr-icon {
@@ -277,7 +278,7 @@
                                 <label>Current password</label><br>
                                 <input type="text" id="crPass" placeholder="Current passsword"><br>
                                 <label class="mt-2">New password</label><br>
-                                <input type="text" id="newPass" placeholder="New passsword">
+                                <input type="text" id="newPass" placeholder="New passsword"><br>
                                 <label class="mt-2">Comfirm password</label><br>
                                 <input type="text" id="cfPass" placeholder="Comfirm passsword"><br>
                                 <button id="savePass" class="btn btn-primary" onclick="savePass()">Save change</button>
@@ -291,7 +292,7 @@
         <!-- </form> -->
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="../asset/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // get me
