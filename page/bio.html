@@ -5,15 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>biography</title>
-    <link rel="stylesheet" href="/asset/bootstrap/css/bootstrap.css">
-    <link href="/asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="/asset/style/style.css">
+    <link rel="stylesheet" href="../asset/bootstrap/css/bootstrap.css">
+    <link href="../asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../asset/style/style.css">
 </head>
+
 
 <body>
 
     <div id="dashboardContainer">
-        
+
         <nav class="navbar navbar-expand-lg navbar-light border-bottom" style="background-color: #edf2f9;">
             <!-- <div id="toggleNavigationTooltip" class="ratias" style="background-color: red; width: 50px; height: 39px; margin-left: 20px; border-radius: 100px;"></div> -->
 
@@ -29,16 +30,18 @@
                 <h2 class="welcome" style="font-size: 30px;">Wellcome dear <span id="adminName"></span>!</h2>
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
                     <li class="pe-2">
-                        <a href="ronaldo-master/ronaldo-master/index.html" class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i class="bi bi-box-arrow-up-right"></i> Open Site</a>
+                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank" class="btn btn-dark rounded-5"
+                            style="height: 30px; line-height: 10px;"><i class="bi bi-box-arrow-up-right"></i> Open
+                            Site</a>
                     </li>
-                    
+
                     <li class="nav-item pe-2">
                         <a class="nav-link" href="#" id="notificationBtn">
                             <i class="bi bi-bell fs-5"></i>
                         </a>
                     </li>
                     <li class="nav-item align-items-center d-flex">
-                        <a href="/page/profileAdmin.html" id="avatar"><img id="avtadmin" src="#" alt=""></a>
+                        <a href="profileAdmin.html" id="avatar"><img id="avtadmin" src="#" alt=""></a>
                     </li>
                 </ul>
             </div>
@@ -51,7 +54,7 @@
             <!-- <h3 class="text-center my-4 text-db">Admin Portfolio</h3> -->
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active text-white" href="/index.html" data-section="dashboard">
+                    <a class="nav-link active text-white" href="../index.html" data-section="dashboard">
                         <i class="bi bi-grid me-2"></i> Dashboard
                     </a>
                 </li>
@@ -96,7 +99,7 @@
                         <i class="bi bi-person me-2"></i> Profile
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item bg-primary">
                     <a class="nav-link text-white" href="bio.html" data-section="biography">
                         <i class="bi bi-file-text me-2"></i> Biography
                     </a>
@@ -105,47 +108,180 @@
         </div>
 
         <div class="main-content">
-            <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                
-                <div class="container-fluid">
-                    <button id="sidebarToggle" class="btn btn-outline-secondary  d-xl-none me-2">
-                        <i class="bi bi-list"></i>
-                    </button>
-
-                    <h2 class="welcome">Wellcome dear <span id="adminName"></span>!</h2>
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" id="notificationBtn" >
-                                <i class="bi bi-bell fs-5"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item align-items-center d-flex">
-                            <a href="profileAdmin.html" id="avatar"><img id="avtadmin" src="#" alt=""></a>
-                        </li>
-                    </ul>
-                </div>
-            </nav> -->
 
             <main class="container-fluid py-4">
 
                 <div id="dashboardContent">
                     <div id="biographyContent" class="">
                         <h4 class="mb-4 text-db">Biography</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus error corrupti adipisci
-                            facere quisquam eius reprehenderit quis! Dolorum, sit perspiciatis explicabo voluptatum
-                            excepturi, molestiae iste hic pariatur cumque ullam iure.</p>
-    
+                        <form id="bioForm" class="card mb-4">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="heorBio" class="form-label">Hero biography</label>
+                                    <input class="form-control" type="text" id="heorBio">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="aboutTitle" class="form-label">About title</label>
+                                    <input class="form-control" type="text" id="aboutTitle">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="subtitle" class="form-label">About subtitle</label>
+                                    <textarea class="form-control" type="text" id="subtitle" rows="4"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="aboutBio" class="form-label">About biography</label>
+                                    <textarea class="form-control" type="text" id="aboutBio" rows="5"></textarea>
+                                </div>
+                                <button type="button" class="btn btn-primary" onclick="updateBio()">Save biography</button>
+
+
+                            </div>
+                        </form>
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="PUT" id="logoSkillform">
+                                    <div class="d-flex align-items-center">
+                                        <div class="mb-3">
+                                            <label for="skilllogo1" class="form-label">Skill two logo</label><br>
+                                            <input class="form-control" type="file" id="skilllogo1">
+
+                                        </div>
+                                        <div class="h-100  border ms-3" style="height: 50px;">
+                                            <img id="logo1" src="https://mps7.chandalen.dev/storage/skill/vue.png"
+                                                height="50px" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="mb-3">
+                                            <label for="skilllogo2" class="form-label">Skill two logo</label><br>
+                                            <input class="form-control" type="file" id="skilllogo2">
+
+                                        </div>
+                                        <div class="h-100  border ms-3" style="height: 50px;">
+                                            <img id="logo2"
+                                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/2048px-HTML5_logo_and_wordmark.svg.png"
+                                                height="50px" alt="">
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" onclick="updateLogo()">Save
+                                        logo</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                
+
             </main>
         </div>
     </div>
 
-    <script src="asset/bootstrap/js/bootstrap.bundle.js"></script>
-    <script src="/asset/js/javascript.js"></script>
-    
+    <script src="../asset/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="../asset/js/javascript.js"></script>
+
+    <script>
+        function getme() {
+            fetch(`https://mps7.chandalen.dev/api/profile`, {
+                method: 'GET',
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+                .then(res => res.json())
+                .then(json => {
+                    // alert(json.data.profile.km_first_name);
+                    let biography = json.data.bio;
+                    document.getElementById('heorBio').value = biography.en_hero_bio;
+                    document.getElementById('aboutTitle').value = biography.en_about_title;
+                    document.getElementById('aboutBio').innerHTML = biography.en_about_bio;
+                    document.getElementById('subtitle').innerHTML = biography.en_about_sub_title;
+                    document.getElementById('logo1').src = biography.skill_logo_one;
+                    document.getElementById('logo2').src = biography.skill_logo_two;
+
+
+                })
+        }
+        getme();
+
+        function updateBio() {
+            let heorBio = document.getElementById('heorBio').value;
+            let aboutTitle = document.getElementById('aboutTitle').value;
+            let aboutBio = document.getElementById('aboutBio').value;
+            let subtitle = document.getElementById('subtitle').value;
+            fetch(`https://mps7.chandalen.dev/api/biographies`, {
+                method: 'PUT',
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "en_hero_bio": heorBio,
+                    "en_about_title": aboutTitle,
+                    "en_about_bio": aboutBio,
+                    "en_about_sub_title": subtitle,
+                    "km_hero_bio": heorBio,
+                    "km_about_title": aboutTitle,
+                    "km_about_bio": aboutBio,
+                    "km_about_sub_title": subtitle
+
+                })
+            })
+                .then(res => res.json())
+                .then(json => {
+                    console.log(json)
+                    alert(json.message);
+                    getme();
+                })
+                .catch(err => console.error('Error:', err));
+        }
+        function updateLogo() {
+            const form = document.getElementById('logoSkillform');
+            const formData = new FormData(form);
+            let logo1 = document.getElementById('skilllogo1');
+            let logo2 = document.getElementById('skilllogo2');
+            {
+                if (logo1.files.length > 0) {
+                    formData.append('logo', logo1.files[0]);
+                }
+                fetch(`https://mps7.chandalen.dev/api/biographies/skill-logo-one`, {
+                    method: 'POST',
+                    headers: {
+                        "Accept": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then(json => {
+                        alert(json.message);
+                        getme(); // Refresh user details after updating the avatar
+                    })
+                    .catch(err => console.error('Error:', err));
+            }
+            {
+                if (logo2.files.length > 0) {
+                    formData.append('logo', logo2.files[0]);
+                }
+                fetch(`https://mps7.chandalen.dev/api/biographies/skill-logo-two`, {
+                    method: 'POST',
+                    headers: {
+                        "Accept": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then(json => {
+                        alert(json.message);
+                        getme(); // Refresh user details after updating the avatar
+                    })
+                    .catch(err => console.error('Error:', err));
+            }
+        }
+    </script>
+
 </body>
 
 </html>
