@@ -5,12 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>education</title>
+
     <link rel="stylesheet" href="../asset/bootstrap/css/bootstrap.css">
     <link href="../asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../asset/style/style.css">
 
 </head>
-
+ <style>
+    th{
+      
+        color: white;
+        padding: 20px;
+    }
+    table{
+       width: 100%;
+    }
+ </style>
 <body>
 
     <div id="dashboardContainer">
@@ -108,22 +118,145 @@
 
         <div class="main-content">
 
-            <main class="container-fluid py-4">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    <button id="sidebarToggle" class="btn btn-outline-secondary  d-xl-none me-2">
+                        <i class="bi bi-list"></i>
+                    </button>
 
+                    <h2 class="welcome">Wellcome dear <span id="adminName"></span>!</h2>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="notificationBtn" >
+                                <i class="bi bi-bell fs-5"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item align-items-center d-flex">
+                            <a href="profileAdmin.html" id="avatar"><img id="avtadmin" src="#" alt=""></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="container-fluid py-4">
                 <div id="dashboardContent">
-                    <div id="educationContent" >
-                        <h4 class="mb-4 text-db">Education</h4>
+
+                    <div id="EduContent" >
+                        <h4 class="mb-4">Education</h4>
+                        <form id="EduForm" class="card mb-4">
+                            <div class="card-body">
+                                <div class="mb-3 px-2">
+                                    <label for="en_degree" class="form-label">en_degree</label>
+                                    <input type="text" class="form-control" id="en_degree" required>
+                                </div>
+                                <div class="mb-3 px-2">
+                                    <label for="en_school" class="form-label">en_school</label>
+                                    <input type="text" class="form-control" id="en_school" required>
+                                </div>
+                            
+                                    <div class="mb-3 px-2">
+                                        <label for="start_year" class="form-label">start_year</label>
+                                        <input type="text" class="form-control" id="start_year" required>
+                                    </div>
+                                    <div class="mb-3 px-2">
+                                        <label for="end_year" class="form-label">end_year</label>
+                                        <input type="text" class="form-control" id="end_year" required>
+                                    </div>       
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn btn-primary">Add new</button>
+                                </div>
+                            </div>
+                        </form>
+                            <table border="0" class="bg-primary" >
+                                <thead class="bg-tertiary">
+                                    <th >ID</th>
+                                    <th>en_degree</th>
+                                    <th>en_school</th>
+                                    <th>start_year</th>
+                                    <th>end_year</th>
+                                    <th>Active</th>
+                                </thead>
+                                <tbody>
+                        
+                                </tbody>
+                            </table>
+                        <!-- </div> -->
+
                     </div>
                 </div>
-
             </main>
         </div>
     </div>
 
     <script src="../asset/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="../asset/js/javascript.js"></script>
-    
+    <script>
+    function GetDate(){
+        fetch('https://mps7.chandalen.dev/api/educations')
+    .then(res=>res.json())
+    .then(json=>{
+        console.log(json.data);
+        let tr = '';
+        json.data.forEach(element => {
+            tr += `<tr class="bg bg-body-secondary">
+                <td class="text-center py-4">${element.id}</td>
+                <td>${element.en_degree}</td>
+                <td>${element.en_school}</td>
+                <td>${element.start_year}</td>
+                <td>${element.end_year}</td>
+               <td class="text-center">
+                    <img src="/asset/edit.png" onclick="imgEdit()" width="20px" height="20px">
+                    <img src="/asset/rubbish-bin.png" onclick="imgDelete()" width="20px" height="20px">     
+                </td>
+            </tr>`;
+        });
+        document.querySelector('tbody').innerHTML = tr;
+    })
+    }
+    GetDate();
 
+
+    let education=[];
+    let currentIndex = -1; 
+    function imgDelete(index) {
+    // Confirm deletion
+    const confirmation = confirm("Do you want to delete?");
+    if (confirmation) {
+        employees.splice(index, 1); 
+        renderEducationList() 
+    } 
+}
+function renderEducationList() {
+    const employeeList = document.getElementById('employeeList').getElementsByTagName('tbody')[0];
+    employeeList.innerHTML = '';
+    
+    employees.forEach((emp, index) => {
+        const row = employeeList.insertRow();
+        row.insertCell(0).innerText = emp.en_degree;
+        row.insertCell(1).innerText = emp.en_school;
+        row.insertCell(2).innerText = emp.start_year;
+        row.insertCell(3).innerText = emp.end_year;
+ 
+        const actionsCell = row.insertCell(4);
+        
+        // Create Edit image
+        const editImage = document.createElement('img');
+        editImage.src = 'edit.png';  
+        editImage.alt = 'Edit';
+        editImage.style.cursor = 'pointer';
+        editImage.onclick = () => editEmployee(index);
+        actionsCell.appendChild(editImage);
+        
+        // Create Delete image
+        const deleteImage = document.createElement('img');
+        deleteImage.src = 'rubbish-bin.png';
+        deleteImage.alt = 'Delete';
+        deleteImage.style.cursor = 'pointer';
+        deleteImage.onclick = () => deleteEmployee(index);
+        actionsCell.appendChild(deleteImage);
+    });
+}
+</script>
 </body>
 
 </html>
