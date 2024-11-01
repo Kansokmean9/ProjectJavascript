@@ -1,35 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Spicy+Rice&display=swap');
-*{
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 /* font English */
 @font-face {
     font-family: jost;
     src: url(/asset/font/Eng/Jost-Regular.ttf);
 }
+
 /* font Khmer */
 @font-face {
     font-family: Preahvihear;
     src: url(/asset/font/khmer/Preahvihear-Regular.ttf);
 }
-body{
+
+body {
     background-color: #edf2f9;
 }
 
-#avatar{
+#avatar {
     width: 35px;
     height: 35px;
     border-radius: 50%;
     margin-right: 15px;
 }
-#avatar #avtadmin{
+
+#avatar #avtadmin {
     width: 35px;
     height: 35px;
     border-radius: 50%;
     border: 1px solid rgb(12, 131, 170);
 }
+
 .sidebar {
     background-color: #edf2f9;
     height: 88vh;
@@ -48,7 +54,7 @@ body{
 
 }
 
-.text-addmin{
+.text-addmin {
     font-family: "Spicy Rice", serif;
     font-size: 23px;
     font-weight: bold;
@@ -56,18 +62,20 @@ body{
     margin: 0px !important;
 }
 
-.text-db{
+.text-db {
     font-size: 23px;
 }
-#dashboardContent{
+
+#dashboardContent {
     margin-top: 50px;
 }
-#dashboardContent .row .col-md-3 .card{
+
+#dashboardContent .row .col-md-3 .card {
     box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
     border: none;
 }
 
-#dashboardContent .card{
+#dashboardContent .card {
     box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
     border: none;
 }
@@ -93,23 +101,29 @@ li::before {
 
 .bg-primary {
     /* background-color: rgb(16, 151, 205) !important; */
-    background: rgb(5,90,162);
-background: linear-gradient(118deg, rgba(5,90,162,1) 0%, rgba(53,158,231,1) 99%);
+    background: rgb(5, 90, 162);
+    background: linear-gradient(118deg, rgba(5, 90, 162, 1) 0%, rgba(53, 158, 231, 1) 99%);
 }
-#adminName,#nameAd{
-    font-family: jost,Preahvihear;
+
+#adminName,
+#nameAd {
+    font-family: jost, Preahvihear;
 }
-#adminName{
+
+#adminName {
     font-weight: bold;
     color: #4899f0;
 }
-.welcome{
+
+.welcome {
     color: black;
 }
-#dashboardContent{
+
+#dashboardContent {
     margin-right: 15px;
 }
-.btn-close-bar{
+
+.btn-close-bar {
     width: 30px;
     height: 30px;
     display: flex;
@@ -119,7 +133,8 @@ background: linear-gradient(118deg, rgba(5,90,162,1) 0%, rgba(53,158,231,1) 99%)
     color: white;
     margin-left: -10px;
 }
-#sidebarToggle{
+
+#sidebarToggle {
     width: 30px;
     height: 30px;
     color: white;
@@ -128,12 +143,19 @@ background: linear-gradient(118deg, rgba(5,90,162,1) 0%, rgba(53,158,231,1) 99%)
     align-items: center;
     background-color: #4899f0;
 }
-#bioForm label{
+
+#bioForm label {
     font-weight: bold;
     color: rgb(73, 73, 73);
 }
-.navbar.navbar-expand-lg{
+
+.navbar.navbar-expand-lg {
     position: fixed;
     z-index: 99;
     width: 100%;
+}
+
+.bg-primary {
+    --bs-bg-opacity: 1;
+    background-color: inherit !important;
 }

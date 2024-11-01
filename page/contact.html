@@ -63,7 +63,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item  bg-primary">
                     <a class="nav-link text-white" href="contact.html" data-section="contact">
                         <i class="bi bi-envelope me-2"></i> Contact
                     </a>
@@ -113,26 +113,6 @@
 
         <div class="main-content">
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <div class="container-fluid">
-                    <button id="sidebarToggle" class="btn btn-outline-secondary  d-xl-none me-2">
-                        <i class="bi bi-list"></i>
-                    </button>
-
-                    <h2 class="welcome">Wellcome dear <span id="adminName"></span>!</h2>
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" id="notificationBtn" >
-                                <i class="bi bi-bell fs-5"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item align-items-center d-flex">
-                            <a href="profileAdmin.html" id="avatar"><img id="avtadmin" src="#" alt=""></a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
             <main class="container-fluid py-4">
                 <div id="dashboardContent">
                     <div id="contactContent" class="">
@@ -146,7 +126,6 @@
                                 <th>phone</th>
                                 <th>subject</th>
                                 <th>message</th>
-                                <th>created_at</th>
                                 <th>created_at_format</th>
                                 <th>Action</th>
                             </thead>
@@ -183,11 +162,10 @@
                         <td>${element.phone}</td>
                         <td>${element.subject || 'N/A'}</td>
                         <td>${element.message}</td>
-                        <td>${element.created_at}</td>
                         <td>${element.created_at_format}</td>
                         <td class="text-center">
-                            <img src="/asset/edit.png" width="20px" height="20px">
-                             <img src="/asset/rubbish-bin.png" width="20px" height="20px">
+                            <img onclick="alert()" src="../asset/edit.png" width="20px" height="20px">
+                            <img class="ms-2" onclick="alert()" src="../asset/rubbish-bin.png" width="20px" height="20px">
                            
                         </td>
                     </tr>`;

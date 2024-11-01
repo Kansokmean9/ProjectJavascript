@@ -9,10 +9,8 @@
     <link href="asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="asset/style/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    
-    <style>
-        
 
+    <style>
         #tooltip {
             display: none;
             position: absolute;
@@ -44,12 +42,15 @@
                     <i class="bi bi-list"></i>
                 </button>
 
-                <h2 class="welcome" style="font-size: 30px;">Wellcome dear <span id="adminName" style="font-weight: bold;"></span>!</h2>
+                <h2 class="welcome" style="font-size: 30px;">Wellcome dear <span id="adminName"
+                        style="font-weight: bold;"></span>!</h2>
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
                     <li class="pe-2">
-                        <a href="ronaldo-master/ronaldo-master/index.html" target="_blank" class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i class="bi bi-box-arrow-up-right"></i> Open Site</a>
+                        <a href="ronaldo-master/ronaldo-master/index.html" target="_blank"
+                            class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
+                                class="bi bi-box-arrow-up-right"></i> Open Site</a>
                     </li>
-                    
+
                     <li class="nav-item pe-2">
                         <a class="nav-link" href="#" id="notificationBtn">
                             <i class="bi bi-bell fs-5"></i>
@@ -61,12 +62,10 @@
                 </ul>
             </div>
         </nav>
-        
         <div id="" class="sidebar bg-primary text-white p-3" style="width: 250px;">
             <button id="closeSidebar" class="btn btn-light d-xl-none mb-3 btn-close-bar">
                 <i class="bi bi-chevron-left"></i>
             </button>
-            
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link active text-white" href="index.html" data-section="dashboard">
@@ -137,7 +136,7 @@
                                     <h6 class="card-title">Total Veiw</h6>
                                     <p class="card-text text-muted">Number of veiwer portfolio.</p>
 
-                                    <h2 class="card-text" id="tview" >0</h2>
+                                    <h2 class="card-text" id="tview">0</h2>
                                 </div>
                             </div>
                         </div>
@@ -230,7 +229,7 @@
         // Toggle Navigation Tooltip
         const toggleTooltip = document.getElementById('toggleNavigationTooltip');
         const tooltip = document.getElementById('tooltip');
-        
+
         toggleTooltip.addEventListener('click', () => {
             tooltip.style.display = tooltip.style.display === 'none' ? 'block' : 'none';
         });

@@ -73,7 +73,7 @@
                         <i class="bi bi-envelope me-2"></i> Contact
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item bg-primary">
                     <a class="nav-link text-white" href="education.html" data-section="education">
                         <i class="bi bi-mortarboard me-2"></i> Education
                     </a>
@@ -118,26 +118,6 @@
 
         <div class="main-content">
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <div class="container-fluid">
-                    <button id="sidebarToggle" class="btn btn-outline-secondary  d-xl-none me-2">
-                        <i class="bi bi-list"></i>
-                    </button>
-
-                    <h2 class="welcome">Wellcome dear <span id="adminName"></span>!</h2>
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" id="notificationBtn" >
-                                <i class="bi bi-bell fs-5"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item align-items-center d-flex">
-                            <a href="profileAdmin.html" id="avatar"><img id="avtadmin" src="#" alt=""></a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
             <main class="container-fluid py-4">
                 <div id="dashboardContent">
 
@@ -146,23 +126,23 @@
                         <form id="EduForm" class="card mb-4">
                             <div class="card-body">
                                 <div class="mb-3 px-2">
-                                    <label for="en_degree" class="form-label">en_degree</label>
+                                    <label for="en_degree" class="form-label">Degree</label>
                                     <input type="text" class="form-control" id="en_degree" required>
                                 </div>
                                 <div class="mb-3 px-2">
-                                    <label for="en_school" class="form-label">en_school</label>
+                                    <label for="en_school" class="form-label">School</label>
                                     <input type="text" class="form-control" id="en_school" required>
                                 </div>
                             
                                     <div class="mb-3 px-2">
-                                        <label for="start_year" class="form-label">start_year</label>
+                                        <label for="start_year" class="form-label">Start year</label>
                                         <input type="text" class="form-control" id="start_year" required>
                                     </div>
                                     <div class="mb-3 px-2">
-                                        <label for="end_year" class="form-label">end_year</label>
+                                        <label for="end_year" class="form-label">End year</label>
                                         <input type="text" class="form-control" id="end_year" required>
                                     </div>       
-                                <div class="col-12 text-center">
+                                <div class="col-12">
                                     <button type="submit" class="btn btn-primary">Add new</button>
                                 </div>
                             </div>
@@ -170,11 +150,11 @@
                             <table border="0" class="bg-primary" >
                                 <thead class="bg-tertiary">
                                     <th >ID</th>
-                                    <th>en_degree</th>
-                                    <th>en_school</th>
-                                    <th>start_year</th>
-                                    <th>end_year</th>
-                                    <th>Active</th>
+                                    <th>Degree</th>
+                                    <th>School</th>
+                                    <th>Start year</th>
+                                    <th>End year</th>
+                                    <th>Action</th>
                                 </thead>
                                 <tbody>
                         
@@ -205,8 +185,8 @@
                 <td>${element.start_year}</td>
                 <td>${element.end_year}</td>
                <td class="text-center">
-                    <img src="/asset/edit.png" onclick="imgEdit()" width="20px" height="20px">
-                    <img src="/asset/rubbish-bin.png" onclick="imgDelete()" width="20px" height="20px">     
+                    <img onclick="alert()" src="../asset/edit.png" onclick="imgEdit()" width="20px" height="20px">
+                    <img class="ms-2" onclick="alert()" src="../asset/rubbish-bin.png" onclick="imgDelete()" width="20px" height="20px">     
                 </td>
             </tr>`;
         });
