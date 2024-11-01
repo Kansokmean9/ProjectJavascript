@@ -13,7 +13,7 @@
 </head>
 <style>
     th{
-        padding: 20px;
+        /* padding: 20px; */
         background-color: skyblue;
     }
 </style>
@@ -118,16 +118,16 @@
                     <div id="contactContent" class="">
 
                         <h4 class="mb-4">Contact Information</h4>
-                        <table border="0">
+                        <table style="width: 100%;" border="0">
                             <thead>
-                                <th>id</th>
-                                <th>name</th>
-                                <th>email</th>
-                                <th>phone</th>
-                                <th>subject</th>
-                                <th>message</th>
-                                <th>created_at_format</th>
-                                <th>Action</th>
+                                <th class="p-4">id</th>
+                                <th class="px-1">name</th>
+                                <th class="px-1">email</th>
+                                <th class="px-1">phone</th>
+                                <th class="px-1">subject</th>
+                                <th class="px-1"  style="width:300px">message</th>
+                                <th class="px-1">created_at_format</th>
+                                <th class="px-1">Action</th>
                             </thead>
                             <tbody>
                     
@@ -156,14 +156,14 @@
                 let tr = '';
                 json.data.forEach(element => {
                     tr += `<tr class="bg bg-body-tertiary">
-                        <td class="p-5">${element.id}</td>
-                        <td>${element.name}</td>
-                        <td>${element.email}</td>
-                        <td>${element.phone}</td>
-                        <td>${element.subject || 'N/A'}</td>
-                        <td>${element.message}</td>
-                        <td>${element.created_at_format}</td>
-                        <td class="text-center">
+                        <td class="p-4">${element.id}</td>
+                        <td class="px-1 py-4">${element.name}</td>
+                        <td class="px-1 py-4">${element.email}</td>
+                        <td class="px-1 py-4">${element.phone}</td>
+                        <td class="px-1 py-4">${element.subject || 'N/A'}</td>
+                        <td class="px-1 py-4">${element.message}</td>
+                        <td class="px-1 py-4">${element.created_at_format}</td>
+                        <td class="px-3" class="text-center">
                             <img onclick="alert()" src="../asset/edit.png" width="20px" height="20px">
                             <img class="ms-2" onclick="alert()" src="../asset/rubbish-bin.png" width="20px" height="20px">
                            

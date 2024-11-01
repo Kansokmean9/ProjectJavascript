@@ -18,11 +18,12 @@
     src: url(/asset/font/khmer/Preahvihear-Regular.ttf);
 }
 
-body {
+body{
     background-color: #edf2f9;
 }
 
-#avatar {
+#avatar{
+
     width: 35px;
     height: 35px;
     border-radius: 50%;
