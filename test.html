@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Range Slider</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/css/bootstrap-slider.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: bold;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .slider-selection {
+            background: #f77500 !important;
+        }
+
+        .slider.slider-horizontal {
+            width: 100% !important;
+            height: 20px;
+        }
+
+        .slider-handle {
+            background-color: #fff !important;
+            box-shadow: 1px 1px 24px -2px rgba(0, 0, 0, 0.75) !important;
+        }
+
+        .tooltip-inner {
+            max-width: 200px;
+            padding: 3px 8px;
+            color: #bdbdbd !important;
+            text-align: center;
+            background-color: transparent !important;
+            border-radius: 4px;
+        }
+
+        .slider .tooltip.top {
+            margin-top: -25px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="text-center mb-4">Interactive Range Slider</h2>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="slider-wrapper">
+                    <input id="ex1Slider" type="text" class="input-range" min="0" max="100" data-slider-step="1" data-slider-value="14" tooltip="always" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 offset-md-3 text-center mt-4">
+                <h4>Selected Value: <span id="sliderValue">14</span>%</h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Bootstrap Slider JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.min.js"></script>
+
+    <script>
+        (function() {
+            document.addEventListener('DOMContentLoaded', function() {
+                const slider = document.getElementById('ex1Slider');
+                const sliderValueDisplay = document.getElementById('sliderValue');
+
+                // Initialize the slider
+                const sliderInstance = new Slider(slider, {
+                    formatter: function(value) {
+                        sliderValueDisplay.textContent = value; // Update displayed value
+                        return value + '%';
+                    },
+                    min: parseFloat(slider.getAttribute('min')),
+                    max: parseFloat(slider.getAttribute('max')),
+                    range: false, // Single handle, not a range slider
+                    value: parseFloat(slider.getAttribute('data-slider-value')),
+                    tooltip: 'always' // Always show the tooltip
+                });
+
+                // Set initial displayed value
+                sliderValueDisplay.textContent = sliderInstance.getValue();
+
+                // Update tooltip when slider value changes
+                sliderInstance.on('change', function(sliderValue) {
+                    sliderValueDisplay.textContent = sliderValue.newValue; // Update displayed value
+                });
+            });
+        })();
+    </script>
+</body>
+
+</html>
