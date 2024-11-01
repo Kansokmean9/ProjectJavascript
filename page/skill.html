@@ -13,7 +13,7 @@
 <body>
 
     <div id="dashboardContainer">
-        
+
         <nav class="navbar navbar-expand-lg navbar-light border-bottom" style="background-color: #edf2f9;">
             <!-- <div id="toggleNavigationTooltip" class="ratias" style="background-color: red; width: 50px; height: 39px; margin-left: 20px; border-radius: 100px;"></div> -->
 
@@ -31,7 +31,7 @@
                     <li class="pe-2">
                         <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank" class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i class="bi bi-box-arrow-up-right"></i> Open Site</a>
                     </li>
-                    
+
                     <li class="nav-item pe-2">
                         <a class="nav-link" href="#" id="notificationBtn">
                             <i class="bi bi-bell fs-5"></i>
@@ -108,7 +108,7 @@
 
             <main class="container-fluid py-4">
                 <div id="dashboardContent">
-                    <div id="skillsContent" >
+                    <div id="skillsContent">
                         <h4 class="mb-4 text-db">Skills Management</h4>
                         <form id="skillForm" class="card mb-4">
                             <div class="card-body">
@@ -117,13 +117,10 @@
                                     <input type="text" class="form-control" id="skillName" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="skillLevel" class="form-label">Skill Level</label>
-                                    <select class="form-select" id="skillLevel" required>
-                                        <option value="Beginner">Beginner</option>
-                                        <option value="Intermediate">Intermediate</option>
-                                        <option value="Advanced">Advanced</option>
-                                        <option value="Expert">Expert</option>
-                                    </select>
+                                    <label for="skillLevel" class="form-label">Percent Skill</label><br>
+                                    <output type="number" id="output" class="output">10</output>
+                                    <input class="w-100" type="range" name="range" id="range" value="10" min="0" max="100" oninput="output.value = this.value">
+                                    
                                 </div>
                                 <button type="submit" class="btn btn-primary">Add Skill</button>
                             </div>
@@ -159,7 +156,7 @@
 
 
     <script>
-        
+
         // Skill Form Submission
         const skillForm = document.getElementById('skillForm');
         const skillsTableBody = document.getElementById('skillsTableBody');
