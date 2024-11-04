@@ -131,11 +131,11 @@
                                     <div class="card-body">
                                         <div class="mb-3 px-2">
                                             <label for="title" class="form-label">Title</label>
-                                            <input type="text" class="form-control" id="title" required>
+                                            <input type="text" class="form-control" id="title" placeholder="Enter title" required>
                                         </div>
                                         <div class="mb-3 px-2">
                                             <label for="workplace" class="form-label">Workplace</label>
-                                            <input type="text" class="form-control" id="workplace" required>
+                                            <input type="text" class="form-control" id="workplace" placeholder="Enter workplace" required>
                                         </div>
 
                                         <div class="mb-3 px-2">
@@ -202,13 +202,16 @@
                     <div class="modal-body">
                         <form action="PUT" id="updateForm">
                             <label for="utitle">Title</label>
-                            <input id="utitle" type="text" style="width: 100%;">
-                            <label for="uworkplace" class="mt-2">Work place</label>
-                            <input id="uworkplace" type="text" style="width: 100%;">
+
+                            <input class="form-control" id="utitle" type="text" placeholder="New title"
+                                style="width: 100%;">
+                            <label for="uworkplace" class="mt-2">Workplace</label>
+                            <input class="form-control" id="uworkplace" type="text" placeholder="New Workplace"
+                                style="width: 100%;">
                             <label for="ustart_year" class="mt-2">Start year</label>
-                            <input id="ustart_year" type="date" style="width: 100%;">
+                            <input class="form-control" id="ustart_year" type="date" style="width: 100%;">
                             <label for="uend_year" class="mt-2">End year</label>
-                            <input id="uend_year" type="date" style="width: 100%;">
+                            <input class="form-control" id="uend_year" type="date" style="width: 100%;">
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -319,16 +322,32 @@
                 }
             });
         }
+
+        /////update////////
         let idUpdate = 0;
-        function toUpdate(id){
+        let utitle = document.getElementById('utitle');
+        let uworkplace = document.getElementById('uworkplace');
+        let ustart_year = document.getElementById('ustart_year');
+        let uend_year = document.getElementById('uend_year');
+        function toUpdate(id) {
             idUpdate = id;
+            fetch('https://mps7.chandalen.dev/api/experiences')
+                .then(res => res.json())
+                .then(json => {
+                    console.log(json.data);
+                    json.data.forEach(element => {
+
+                        if (element.id == id) {
+                            utitle.value = element.en_title;
+                            uworkplace.value = element.en_workplace;
+                           
+                        }
+                    });
+
+                })
 
         }
-        function updateExperience(){
-            let utitle = document.getElementById('utitle');
-            let uworkplace = document.getElementById('uworkplace');
-            let ustart_year = document.getElementById('ustart_year');
-            let uend_year = document.getElementById('uend_year');
+        function updateExperience() {
             console.log(utitle.value);
             fetch(`https://mps7.chandalen.dev/api/experiences/${idUpdate}`, {
                 method: 'PUT',
@@ -354,7 +373,6 @@
                     GetDate(); // Refresh user details after updating the avatar
                 })
                 .catch(err => console.error('Error:', err));
-        
         }
 
     </script>

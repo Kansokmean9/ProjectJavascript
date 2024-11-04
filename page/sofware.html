@@ -8,6 +8,17 @@
     <link rel="stylesheet" href="../asset/bootstrap/css/bootstrap.css">
     <link href="../asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../asset/style/style.css">
+    <style>
+        th {
+    
+            color: white;
+            padding: 20px;
+        }
+    
+        table {
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
@@ -106,16 +117,66 @@
         <div class="main-content">
 
             <main class="container-fluid py-4">
-
                 <div id="dashboardContent">
-                    <div id="softwareContent" >
-                        <h4 class="mb-4 text-db">Software Information</h4>
-                        <button>aa</button>
+                    <div id="skillsContent">
+                        <h4 class="mb-4 text-db">Skills Management</h4>
+                        <form id="skillForm" class="card  mb-4">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="skillName" class="form-label">Skill Name</label>
+                                    <input type="text" class="form-control" id="skillName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="skillLevel" class="form-label">Percent Skill</label><br>
+                                    <output type="number" id="output" class="output">50</output>
+                                    <input class="w-100" type="range" value="50" min="0" max="100"
+                                        oninput="output.value = this.value">
+
+                                </div>
+                                <button type="submit" class="btn btn-primary" onclick="addSkill()">Add Skill</button>
+                            </div>
+                        </form>
+                                    <table border="0" class="bg-primary">
+                                        <thead class="bg-tertiary">
+                                            <th>ID</th>
+                                            <th>Title</th>
+                                            <th>Workplace</th>
+                                            <th>Action</th>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
                     </div>
                 </div>
-
-                
             </main>
+        </div>
+
+        <div class="modal fade" id="myModal1" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-uppercase" id="myModalLabel1"> Update data!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="PUT" id="updateForm">
+                            <label for="unskillname">Skill Name</label>
+                            <input class="form-control" id="unskillname" type="text" placeholder="New title"
+                                style="width: 100%;">
+
+                            <label for="unskillLevel" class="form-label">Percent Skill</label><br>
+                            <output type="number" id="unskillLevel" class="output">50</output>
+                            <input id="rangePercent" class="w-100" type="range" value="50" min="0" max="100"
+                                oninput="unskillLevel.value = this.value">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
+                        <button type="button" class="btn btn-primary" onclick="updateSkill()">Save changes</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
