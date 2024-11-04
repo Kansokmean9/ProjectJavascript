@@ -11,11 +11,10 @@
 </head>
 <style>
     th {
-
         color: white;
         padding: 20px;
     }
-
+    
     table {
         width: 100%;
     }
@@ -40,8 +39,7 @@
                 <h2 class="welcome" style="font-size: 30px;">Wellcome dear <span id="adminName"></span>!</h2>
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
                     <li class="pe-2">
-                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank"
-                            class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
+                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank" class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
                                 class="bi bi-box-arrow-up-right"></i> Open Site</a>
                     </li>
 
@@ -132,8 +130,7 @@
                                 <div class="mb-3">
                                     <label for="skillLevel" class="form-label">Percent Skill</label><br>
                                     <output type="number" id="output" class="output">50</output>
-                                    <input class="w-100" type="range" value="50" min="0" max="100"
-                                        oninput="output.value = this.value">
+                                    <input class="w-100" type="range" value="50" min="0" max="100" oninput="output.value = this.value">
 
                                 </div>
                                 <button type="submit" class="btn btn-primary" onclick="addSkill()">Add Skill</button>
@@ -165,13 +162,11 @@
                     <div class="modal-body">
                         <form action="PUT" id="updateForm">
                             <label for="unskillname">Skill Name</label>
-                            <input class="form-control" id="unskillname" type="text" placeholder="New title"
-                                style="width: 100%;">
+                            <input class="form-control" id="unskillname" type="text" placeholder="New title" style="width: 100%;">
 
                             <label for="unskillLevel" class="form-label">Percent Skill</label><br>
                             <output type="number" id="unskillLevel" class="output">50</output>
-                            <input id="rangePercent" class="w-100" type="range" value="50" min="0" max="100"
-                                oninput="unskillLevel.value = this.value">
+                            <input id="rangePercent" class="w-100" type="range" value="50" min="0" max="100" oninput="unskillLevel.value = this.value">
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -191,7 +186,6 @@
 
 
     <script>
-
         // Skill Form Submission
         const skillForm = document.getElementById('skillForm');
         const skillsTableBody = document.getElementById('skillsTableBody');
@@ -240,17 +234,17 @@
 
 
             fetch(`https://mps7.chandalen.dev/api/skills`, {
-                method: 'POST',
-                headers: {
-                    "Accept": "application/json",
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    "name": skillName.value,
-                    "percent": skillLevel.value,
+                    method: 'POST',
+                    headers: {
+                        "Accept": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "name": skillName.value,
+                        "percent": skillLevel.value,
+                    })
                 })
-            })
                 .then(res => res.json())
                 .then(json => {
                     console.log(json)
@@ -258,7 +252,7 @@
                     getskill();
                 })
                 .catch(err => console.error('Error:', err));
-            
+
         }
 
         function deleteExperience(id) {
@@ -273,17 +267,17 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     fetch(`https://mps7.chandalen.dev/api/skills/${id}`, {
-                        method: 'DELETE',
-                        headers: {
-                            "Accept": "application/json",
-                            "Authorization": `Bearer ${token}`,
-                            "Content-Type": "application/json"
+                            method: 'DELETE',
+                            headers: {
+                                "Accept": "application/json",
+                                "Authorization": `Bearer ${token}`,
+                                "Content-Type": "application/json"
 
-                        }
-                    })
+                            }
+                        })
                         .then(res => res.json())
                         .then(json => {
-                            console.log(json);  // Log the response to see if delete was successful
+                            console.log(json); // Log the response to see if delete was successful
                             if (json.result) {
                                 Swal.fire({
                                     title: "Deleted!",
@@ -330,18 +324,18 @@
         function updateSkill() {
             console.log(unskillname.value);
             fetch(`https://mps7.chandalen.dev/api/skills/${idUpdate}`, {
-                method: 'PUT',
-                headers: {
-                    "Accept": "application/json",
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json"
+                    method: 'PUT',
+                    headers: {
+                        "Accept": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
 
-                },
-                body: JSON.stringify({
-                    "name": unskillname.value,
-                    "percent": unskillLevel.value,
+                    },
+                    body: JSON.stringify({
+                        "name": unskillname.value,
+                        "percent": unskillLevel.value,
+                    })
                 })
-            })
                 .then(res => res.json())
                 .then(json => {
                     bootstrap.Modal.getInstance(
