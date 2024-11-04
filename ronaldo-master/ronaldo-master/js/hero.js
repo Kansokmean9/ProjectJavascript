@@ -18,7 +18,10 @@ function fetchAbout() {
         const name = document.getElementById('navbar-name');
         let names = document.getElementById('names');
         name.innerHTML = profile.en_first_name[0];
-        names.innerHTML = profile.en_first_name + " " + profile.en_last_name;
+        let naa =  profile.en_first_name;
+        let result = naa.slice(1);
+
+        names.innerHTML = result + " " + profile.en_last_name;
 
         // Image footer
         const image_contact = document.getElementById('image-contact');
