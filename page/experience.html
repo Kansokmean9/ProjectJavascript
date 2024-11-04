@@ -11,9 +11,15 @@
 
 </head>
 <style>
+    .cs{
+        cursor: pointer;
+    }
     th {
 
         color: white;
+        padding: 20px;
+    }
+    td{
         padding: 20px;
     }
 
@@ -38,7 +44,7 @@
                     <i class="bi bi-list"></i>
                 </button>
 
-                <h2 class="welcome" style="font-size: 30px;">Wellcome dear <span id="adminName"></span>!</h2>
+                <h2 class="welcome" style="font-size: 30px;">Welcome admin <span id="adminName"></span>!</h2>
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
                     <li class="pe-2">
                         <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank"
@@ -126,16 +132,18 @@
                     <div id="experienceContent">
                         <h4 class="mb-4 text-db">Work Experience</h4>
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12">
                                 <form id="experForm" class="card mb-4 ">
                                     <div class="card-body">
                                         <div class="mb-3 px-2">
                                             <label for="title" class="form-label">Title</label>
-                                            <input type="text" class="form-control" id="title" placeholder="Enter title" required>
+                                            <input type="text" class="form-control" id="title" placeholder="Enter title"
+                                                required>
                                         </div>
                                         <div class="mb-3 px-2">
                                             <label for="workplace" class="form-label">Workplace</label>
-                                            <input type="text" class="form-control" id="workplace" placeholder="Enter workplace" required>
+                                            <input type="text" class="form-control" id="workplace"
+                                                placeholder="Enter workplace" required>
                                         </div>
 
                                         <div class="mb-3 px-2">
@@ -153,7 +161,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="col-6">
+                            <!-- <div class="col-6">
                                 <form id="experPointForm" class="card mb-4">
                                     <div class="card-body">
                                         <div class="mb-3 px-2">
@@ -171,10 +179,10 @@
                                         </div>
                                     </div>
                                 </form>
-                            </div>
+                            </div> -->
 
                         </div>
-                        <table border="0" class="bg-primary">
+                        <table border="0" class="bg-primarys">
                             <thead class="bg-tertiary">
                                 <th>ID</th>
                                 <th>Title</th>
@@ -233,15 +241,21 @@
                     console.log(json.data);
                     let tr = '';
                     json.data.forEach(element => {
+                        let endyear = '';
+                        if (element.end_year == null) {
+                            endyear = "Present";
+                        } else {
+                            endyear = element.end_year;
+                        }
                         tr += `<tr class="bg bg-body-secondary">
-                <td class="text-center py-4">${element.id}</td>
+                <td>${element.id}</td>
                 <td>${element.en_title}</td>
                 <td>${element.en_workplace}</td>
                 <td>${element.start_year}</td>
-                <td>${element.end_year}</td>
-               <td class="text-center">
-                    <img src="../asset/edit.png" data-bs-toggle="modal" data-bs-target="#myModal1" onclick="toUpdate(${element.id})" width="20px" height="20px">
-                    <img class="ms-2" src="../asset/rubbish-bin.png" onclick="deleteExperience(${element.id})" width="20px" height="20px">     
+                <td>${endyear}</td>
+               <td>
+                    <img class=" cs" src="../asset/edit.png" data-bs-toggle="modal" data-bs-target="#myModal1"  onclick="toUpdate(${element.id})" width="20px" height="20px">
+                    <img class="ms-2 cs " src="../asset/rubbish-bin.png" onclick="deleteExperience(${element.id})" width="20px" height="20px">     
                 </td>
             </tr>`;
                     });
@@ -264,6 +278,7 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
+                    
                     "en_title": title.value,
                     "en_workplace": workplace.value,
                     "start_year": start_year.value,
@@ -338,7 +353,7 @@
                         if (element.id == id) {
                             utitle.value = element.en_title;
                             uworkplace.value = element.en_workplace;
-                           
+
                         }
                     });
 

@@ -105,6 +105,10 @@ li::before {
     background: rgb(5, 90, 162);
     background: linear-gradient(118deg, rgba(5, 90, 162, 1) 0%, rgba(53, 158, 231, 1) 99%);
 }
+.bg-primarys {
+    /* background-color: rgb(16, 151, 205) !important; */
+    background: linear-gradient(118deg, rgba(53, 158, 231, 1) 0%, rgb(6, 103, 187) 99%);
+}
 
 #adminName,
 #nameAd {
@@ -145,9 +149,9 @@ li::before {
     background-color: #4899f0;
 }
 
-#bioForm label {
-    font-weight: bold;
-    color: rgb(73, 73, 73);
+label {
+    font-weight: 600;
+    color: rgb(2, 88, 114);
 }
 
 .navbar.navbar-expand-lg {
@@ -159,4 +163,12 @@ li::before {
 .bg-primary {
     --bs-bg-opacity: 1;
     background-color: inherit !important;
+}
+#dashboardContent table{
+    border-radius: 6px;
+    overflow: hidden;
+}
+#dashboardContent table tbody tr{
+    /* background-color: rgb(189, 212, 222) !important; */
+    border-top: 1px solid rgb(180, 216, 255);
 }

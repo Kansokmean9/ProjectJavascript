@@ -20,7 +20,6 @@ function fetchAbout() {
         name.innerHTML = profile.en_first_name[0];
         let naa =  profile.en_first_name;
         let result = naa.slice(1);
-
         names.innerHTML = result + " " + profile.en_last_name;
 
         // Image footer

@@ -14,12 +14,15 @@
     .cs {
         cursor: pointer;
     }
-    
+
     th {
         color: white;
         padding: 20px;
     }
-    
+    td{
+        padding: 20px;
+    }
+
     table {
         width: 100%;
     }
@@ -42,10 +45,12 @@
                     <i class="bi bi-list"></i>
                 </button>
 
-                <h2 class="welcome" style="font-size: 30px;">Wellcome dear <span id="adminName"></span>!</h2>
+                <h2 class="welcome" style="font-size: 30px;">Welcome admin <span id="adminName"></span>!</h2>
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
                     <li class="pe-2">
-                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank" class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i class="bi bi-box-arrow-up-right"></i> Open Site</a>
+                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank"
+                            class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
+                                class="bi bi-box-arrow-up-right"></i> Open Site</a>
                     </li>
 
                     <li class="nav-item pe-2">
@@ -126,26 +131,26 @@
 
                 <div id="dashboardContent">
                     <div id="languageContent">
-                        <h4 class="mb-4 text-db">Languages</h4>
-
                         <div id="skillsContent">
                             <h4 class="mb-4 text-db">Language Management</h4>
                             <form id="languagesFrom" class="card  mb-4">
                                 <div class="card-body">
                                     <div class="mb-3">
-                                        <label for="languagesName" class="form-label">Language Name</label>
-                                        <input type="text" class="form-control" id="languagesName" required>
+                                        <label for="languagesName" class="form-label">Language</label>
+                                        <input type="text" class="form-control" id="languagesName" placeholder="Language" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="languagesLevel" class="form-label">Percent Language</label><br>
+                                        <label for="languagesLevel" class="form-label">Level Language</label><br>
                                         <output type="number" id="output" class="output">50</output>
-                                        <input class="w-100" type="range" value="50" min="0" max="100" oninput="output.value = this.value">
+                                        <input class="w-100" type="range" value="50" min="0" max="100"
+                                            oninput="output.value = this.value">
 
                                     </div>
-                                    <button type="submit" class="btn btn-primary" onclick="addSkill()">Add Skill</button>
+                                    <button type="submit" class="btn btn-primary" onclick="addSkill()">Add
+                                        Skill</button>
                                 </div>
                             </form>
-                            <table border="0" class="bg-primary">
+                            <table border="0" class="bg-primarys">
                                 <thead class="bg-tertiary">
                                     <th>ID</th>
                                     <th>Title</th>
@@ -159,42 +164,42 @@
 
                         </div>
                     </div>
-
+                </div>
 
             </main>
-            </div>
         </div>
-
-        <script src="asset/bootstrap/js/bootstrap.bundle.js"></script>
-        <script src="/asset/js/javascript.js"></script>
+    </div>
 
 
 
-        <div class="modal fade" id="languages" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title text-uppercase" id="myModalLabel1"> Update data!</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="PUT" id="updateForm">
-                            <label for="unlanguagesName">Skill Name</label>
-                            <input class="form-control" id="unlanguagesName" type="text" placeholder="New title" style="width: 100%;">
 
-                            <label for="unlanguagesLevel" class="form-label">Percent Language</label><br>
-                            <output type="number" id="unlanguagesLevel" class="output">50</output>
-                            <input id="rangePercent" class="w-100" type="range" value="50" min="0" max="100" oninput="unlanguagesLevel.value = this.value">
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
-                        <button type="button" class="btn btn-primary" onclick="updateSkill()">Save changes</button>
-                    </div>
+    <div class="modal fade" id="languages" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-uppercase" id="myModalLabel1"> Update data!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="PUT" id="updateForm">
+                        <label for="unlanguagesName">Language</label>
+                        <input class="form-control" id="unlanguagesName" type="text" placeholder="New language"
+                            style="width: 100%;">
+
+                        <label for="unlanguagesLevel" class="mt-2">Level language</label><br>
+                        <output type="number" id="unlanguagesLevel" class="output">50</output>
+                        <input id="rangePercent" class="w-100" type="range" value="50" min="0" max="100"
+                            oninput="unlanguagesLevel.value = this.value">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
+                    <button type="button" class="btn btn-primary" onclick="updateSkill()">Save changes</button>
                 </div>
             </div>
         </div>
     </div>
+
 
 
     <script src="../asset/bootstrap/js/bootstrap.bundle.js"></script>
@@ -230,12 +235,12 @@
                     let tr = '';
                     json.data.forEach(element => {
                         tr += `<tr class="bg bg-body-secondary">
-                <td class="text-center py-4">${element.id}</td>
+                <td>${element.id}</td>
                 <td>${element.en_name}</td>
                 <td>${element.percent}</td>
-               <td class="text-center">
-                    <img class=" cs " src="../asset/edit.png" data-bs-toggle="modal" data-bs-target="#languages"  onclick="toUpdate(${element.id})" width="20px" height="20px">
-                    <img class="ms-2 cs " src="../asset/rubbish-bin.png" onclick="deleteExperience(${element.id})" width="20px" height="20px">     
+               <td>
+                    <img class=" cs" src="../asset/edit.png" data-bs-toggle="modal" data-bs-target="#languages"  onclick="toUpdate(${element.id})" width="20px" height="20px">
+                    <img class="ms-2 cs " src="../asset/rubbish-bin.png" onclick="deleteLang(${element.id})" width="20px" height="20px">     
                 </td>
             </tr>`;
                     });
@@ -250,17 +255,17 @@
 
 
             fetch(`https://mps7.chandalen.dev/api/languages`, {
-                    method: 'POST',
-                    headers: {
-                        "Accept": "application/json",
-                        "Authorization": `Bearer ${token}`,
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        "en_name": languagesName.value,
-                        "percent": languagesLevel.value,
-                    })
+                method: 'POST',
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "en_name": languagesName.value,
+                    "percent": languagesLevel.value,
                 })
+            })
                 .then(res => res.json())
                 .then(json => {
                     console.log(json)
@@ -271,7 +276,7 @@
 
         }
 
-        function deleteExperience(id) {
+        function deleteLang(id) {
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -283,14 +288,14 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     fetch(`https://mps7.chandalen.dev/api/languages/${id}`, {
-                            method: 'DELETE',
-                            headers: {
-                                "Accept": "application/json",
-                                "Authorization": `Bearer ${token}`,
-                                "Content-Type": "application/json"
+                        method: 'DELETE',
+                        headers: {
+                            "Accept": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                            "Content-Type": "application/json"
 
-                            }
-                        })
+                        }
+                    })
                         .then(res => res.json())
                         .then(json => {
                             console.log(json); // Log the response to see if delete was successful
@@ -340,18 +345,18 @@
         function updateSkill() {
             console.log(unlanguagesName.value);
             fetch(`https://mps7.chandalen.dev/api/languages/${idUpdate}`, {
-                    method: 'PUT',
-                    headers: {
-                        "Accept": "application/json",
-                        "Authorization": `Bearer ${token}`,
-                        "Content-Type": "application/json"
+                method: 'PUT',
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
 
-                    },
-                    body: JSON.stringify({
-                        "en_name": unlanguagesName.value,
-                        "percent": unlanguagesLevel.value,
-                    })
+                },
+                body: JSON.stringify({
+                    "en_name": unlanguagesName.value,
+                    "percent": unlanguagesLevel.value,
                 })
+            })
                 .then(res => res.json())
                 .then(json => {
                     bootstrap.Modal.getInstance(
