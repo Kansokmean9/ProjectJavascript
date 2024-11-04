@@ -56,13 +56,22 @@
         margin: 0 0.5rem;
       }
     }
+    #names{
+      color:rgba(47, 47, 47, 0.893);
+    }
+    @media (max-width: 767px) {
+      #names{
+        color:#ffffff;
+      }
+
+    }
   </style>
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
     <div class="container">
-      <a class="navbar-brand" href="index.html"><span>R</span>onaldo</a>
+      <a class="navbar-brand"   href="index.html"><span id="navbar-name" ></span><span id="names" ></span></a>
       <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse"
         data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
@@ -103,6 +112,7 @@
       </div>
     </div>
   </section>
+  
 
   <section class="ftco-about img">
     <div class="container">
@@ -353,7 +363,9 @@
           </form>
         </div>
         <div class="col-md-6 d-flex">
-          <div class="img" style="background-image: url(images/about.jpg)"></div>
+          <div class="img">
+            <img  id="image-contact" alt="">
+          </div>
         </div>
       </div>
     </div>
@@ -499,6 +511,13 @@
   <script src="./js/contact.js"></script>
   <script src="./js/about.js"></script>
   <script src="./js/hero.js"></script>
+
+  <script>
+  
+    
+    
+    
+  </script>
 </body>
 
 </html>
