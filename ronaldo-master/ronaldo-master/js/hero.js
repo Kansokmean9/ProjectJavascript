@@ -18,20 +18,21 @@ function fetchAbout() {
         const name = document.getElementById('navbar-name');
         let names = document.getElementById('names');
         name.innerHTML = profile.en_first_name[0];
-        let nam = profile.en_first_name;
-        let result = nam.slice(1);
+        let naa =  profile.en_first_name;
+        let result = naa.slice(1);
         names.innerHTML = result + " " + profile.en_last_name;
 
         // Image footer
         const image_contact = document.getElementById('image-contact');
-        image_contact.src = profile.photo_about;
+        image_contact.style.backgroundImage = `url('${profile.photo_about}')`;
+        // image_contact.src = profile.photo_about;
 
         const About = `
           <div class="col-lg-6 col-md-6 align-items-center">
             <div class="text text-center">
               <span class="subheading">Hey! I am</span>
               <h2>${profile.en_first_name} ${profile.en_last_name}</h2>
-              <h3>${Bio.en_hero_bio}</h3>
+              <h3 class="px-5 mx-5">${Bio.en_hero_bio}</h3>
               <div class="social-icons">
                 <a href="${social.facebook}" target="_blank">
                   <i class="fab fa-facebook-f"></i>
@@ -45,8 +46,8 @@ function fetchAbout() {
               </div>
             </div>
           </div>
-          <div class="col-12 col-md-6 image_hero">
-            <div class="img w-100 h-100" style="background-image: url(${profile.photo_hero}); width: 600px; border-radius: 10px; background-size: cover; background-position: center;"></div>
+          <div class="mt-0 px-0 image_hero">
+             <div class="img image_hero w-100 h-100" style="background-image: url(${profile.photo_hero});  border-radius: 0px; background-size: cover; background-position: center;"></div>
           </div>
         `;
 

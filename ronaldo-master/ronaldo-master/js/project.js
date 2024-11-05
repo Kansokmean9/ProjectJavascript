@@ -13,7 +13,7 @@ function fetchProjects() {
             if (json.result && json.data) {
                 const projects = json.data.map(project => `
                     <div class="col-md-4 d-flex ">
-                        <div class="blog-entry justify-content-end">
+                        <div class="blog-entry justify-content-end w-100">
                             <a href="single.html" class="block-20" style="background-image: url('images/image_1.jpg')">
                             </a>
                             <div class="text mt-2 float-right d-block">

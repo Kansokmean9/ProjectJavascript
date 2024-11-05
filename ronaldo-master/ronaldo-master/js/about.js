@@ -17,7 +17,7 @@ function fetchAbout() {
             <div class="col-md-12 col-lg-6 d-flex">
               <div class="img-about img d-flex align-items-center justify-content-center">
                 <div class="overlay"></div>
-                <div class="img w-100 h-100" style="background-image: url(${profile.photo_about}); max-width: 600px; border-radius: 10px; background-size: cover; background-position: center;"></div>
+                <div class="img-about img w-75 h-75" style="background-image: url(${profile.photo_about}); max-width: 600px; border-radius: 7px; background-size: cover; background-position: center;"></div>
               </div>
             </div>
             <div class="col-md-6 col-lg-6 pl-md-5 py-5">
@@ -49,7 +49,8 @@ function fetchAbout() {
             </div>
           </div>
         `;
-
+        document.getElementById('logoskill2').innerHTML = `<a href="#" class="partner"><img src="${Bio.skill_logo_two}" class="img-fluid" alt="Colorlib Template" /></a>`
+        document.getElementById('logoskill1').innerHTML = `<a href="#" class="partner"><img src="${Bio.skill_logo_one}" class="img-fluid" alt="Colorlib Template" /></a>`
         document.getElementById('about-section').innerHTML = About;
         console.log(json.data);
       } else {
