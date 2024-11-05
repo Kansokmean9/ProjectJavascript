@@ -19,7 +19,7 @@ function Educations(data = '') {
                        
                         <div class="text pl-3">
                        
-                            <span class="date">${element.start_year} - ${element.end_year}</span>
+                            <span class="date">${element.start_year} - ${element.end_year || 'Present'}</span>
                             <h2>${element.en_degree}</h2>
                             <span class="position">${element.en_school}</span>
                     
