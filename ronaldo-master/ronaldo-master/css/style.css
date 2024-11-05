@@ -12600,3 +12600,7 @@ textarea.form-control {
   background-position: center;
   background-size: cover;
 }
+.ftco-animate{
+  display: flex;
+  align-items: center;
+}

@@ -49,7 +49,8 @@ function fetchAbout() {
             </div>
           </div>
         `;
-
+        document.getElementById('logoskill2').innerHTML = `<a href="#" class="partner"><img src="${Bio.skill_logo_two}" class="img-fluid" alt="Colorlib Template" /></a>`
+        document.getElementById('logoskill1').innerHTML = `<a href="#" class="partner"><img src="${Bio.skill_logo_one}" class="img-fluid" alt="Colorlib Template" /></a>`
         document.getElementById('about-section').innerHTML = About;
         console.log(json.data);
       } else {
