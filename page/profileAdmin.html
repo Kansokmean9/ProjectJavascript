@@ -217,7 +217,7 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <a class="hvr-icon-back" href="/index.html"><i class="bi bi-arrow-left hvr-icon"></i> Back to
+                <a class="hvr-icon-back" href="dashboard.html"><i class="bi bi-arrow-left hvr-icon"></i> Back to
                     dashboard</a>
             </div>
         </div>
@@ -471,7 +471,7 @@
                                 if (json.message == "Logout successful.") {
                                     // alert(json.message);
                                     sessionStorage.clear();
-                                    location.href = 'http://127.0.0.1:5501/login.html';
+                                    location.href = '../index.html';
                                 } else {
                                     Swal.fire({
                                         title: "Logout",
