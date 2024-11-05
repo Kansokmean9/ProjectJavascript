@@ -9,15 +9,20 @@
     <link href="../asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../asset/style/style.css">
     <style>
-        th {
+         .cs{
+        cursor: pointer;
+    }
+    th {
+        color: white;
+        padding: 20px;
+    }
+    td{
+        padding: 20px;
+    }
     
-            color: white;
-            padding: 20px;
-        }
-    
-        table {
-            width: 100%;
-        }
+    table {
+        width: 100%;
+    }
     </style>
 </head>
 
@@ -127,31 +132,20 @@
                         <form id="projectForm" class="card mb-4">
                             <div class="card-body">
                                 <div class="mb-3">
-                                    <label for="projectName" class="form-label">Khmer Name</label>
-                                    <input type="text" class="form-control" id="projectName" required>
+                                    <label for="projectName" class="form-label">Project Name</label>
+                                    <input type="text" class="form-control" id="projectName" placeholder="inter name" required>
                                 </div>
-                                <!-- <div class="mb-3">
-                                    <label for="projectTechnologies" class="form-label">Insert Name</label>
-                                    <input type="text" class="form-control" id="projectTechnologies"
-                                        placeholder="Inter name" required>
-                                </div> -->
+
                                 <div class="mb-3">
                                     <label for="projectTechnologies" class="form-label">workplace</label>
                                     <input type="text" class="form-control" id="projectTechnologies"
                                         placeholder="Inter workplace" required>
                                 </div>
-                                <!-- <div class="mb-3">
-                                    <label for="projectStatus" class="form-label">Status</label>
-                                    <select class="form-select" id="projectStatus" required>
-                                        <option value="Active">Active</option>
-                                        <option value="In Progress">In Progress</option>
-                                        <option value="Completed">Completed</option>
-                                    </select>
-                                </div> -->
-                                <button type="submit" class="btn btn-primary">Add Project</button>
+
+                                <button type="button" class="btn btn-primary" onclick="addproject()">Add Project</button>
                             </div>
                         </form>
-                        <table border="0" class="bg-primary">
+                        <table border="0" class="bg-primarys">
                             <thead class="bg-tertiary">
                                 <th>ID</th>
                                 <th>Title</th>
@@ -166,41 +160,40 @@
                 </div>
             </main>
         </div>
+        <div class="modal fade" id="myModal1" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-uppercase" id="myModalLabel1"> Update data!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="PUT" id="updateForm">
+                            <label for="unprojectname">Project Name</label>
+                            <input class="form-control" id="unprojectname" type="text" placeholder="New project name" style="width: 100%;">
+
+                            <label for="unworkplace" class="mt-2">Workplace</label><br>
+                            <input class="form-control" id="unworkplace" type="text" placeholder="New workplace" style="width: 100%;">
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
+                        <button type="button" class="btn btn-primary" onclick="updateproject()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="../asset/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="../asset/js/javascript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <script>
 
-
-        // Project Form Submission
-        const projectForm = document.getElementById('projectForm');
-        const projectsListTableBody = document.getElementById('projectsListTableBody');
-
-        projectForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const projectName = document.getElementById('projectName').value;
-            const projectTechnologies = document.getElementById('projectTechnologies').value;
-            const projectStatus = document.getElementById('projectStatus').value;
-            const createdAt = new Date().toLocaleDateString();
-
-            const newRow = `
-                <tr>
-                    <td>${projectName}</td>
-                    <td>${projectTechnologies}</td>
-                    <td>${createdAt}</td>
-                    <td><span class="badge bg-success">${projectStatus}</span></td>
-                </tr>
-            `;
-
-            projectsListTableBody.innerHTML += newRow;
-
-            projectForm.reset();
-        });
-
-        /// Get 
-        function getskill() {
+        function getsproject() {
             fetch('https://mps7.chandalen.dev/api/projects')
                 .then(res => res.json())
                 .then(json => {
@@ -208,10 +201,10 @@
                     let tr = '';
                     json.data.forEach(element => {
                         tr += `<tr class="bg bg-body-secondary">
-                <td class="text-center py-4">${element.id}</td>
-                <td>${element.name}</td>
-                <td>${element.percent}</td>
-               <td class="text-center">
+                <td>${element.id}</td>
+                <td>${element.en_name}</td>
+                <td>${element.en_workplace}</td>
+               <td>
                     <img src="../asset/edit.png" data-bs-toggle="modal" data-bs-target="#myModal1" onclick="toUpdate(${element.id})" width="20px" height="20px">
                     <img class="ms-2" src="../asset/rubbish-bin.png" onclick="deleteExperience(${element.id})" width="20px" height="20px">     
                 </td>
@@ -220,14 +213,14 @@
                     document.querySelector('tbody').innerHTML = tr;
                 })
         }
-        getskill();
+        getsproject();
 
 
 
         /// Add ///
-        function addSkill() {
-            let skillName = document.getElementById('projectName');
-            let skillLevel = document.getElementById('projectTechnologies');
+        function addproject() {
+            let projectName = document.getElementById('projectName');
+            let projectTechnologies = document.getElementById('projectTechnologies');
 
 
             fetch(`https://mps7.chandalen.dev/api/projects`, {
@@ -238,15 +231,15 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    "name": skillName.value,
-                    "percent": skillLevel.value,
+                    "en_name": projectName.value,
+                    "en_workplace": projectTechnologies.value,
                 })
             })
                 .then(res => res.json())
                 .then(json => {
                     console.log(json)
                     alert(json.message);
-                    getskill();
+                    getsproject();
                 })
                 .catch(err => console.error('Error:', err));
 
@@ -254,8 +247,8 @@
 
         /////update////////
         let idUpdate = 0;
-        let unskillname = document.getElementById('unskillname');
-        let unskillLevel = document.getElementById('unskillLevel');
+        let unprojectname = document.getElementById('unprojectname');
+        let unworkplace = document.getElementById('unworkplace');
 
         function toUpdate(id) {
             idUpdate = id;
@@ -266,9 +259,8 @@
                     json.data.forEach(element => {
 
                         if (element.id == id) {
-                            unskillname.value = element.name;
-                            unskillLevel.value = element.percent;
-                            document.getElementById('rangePercent').value = element.percent;
+                            unprojectname.value = element.en_name;
+                            unworkplace.value = element.en_workplace;
                         }
                     });
 
@@ -276,8 +268,8 @@
 
         }
 
-        function updateSkill() {
-            console.log(unskillname.value);
+        function updateproject() {
+            console.log(unprojectname.value);
             fetch(`https://mps7.chandalen.dev/api/projects/${idUpdate}`, {
                 method: 'PUT',
                 headers: {
@@ -287,8 +279,8 @@
 
                 },
                 body: JSON.stringify({
-                    "name": unskillname.value,
-                    "percent": unskillLevel.value,
+                    "en_name": unprojectname.value,
+                    "en_workplace": unworkplace.value,
                 })
             })
                 .then(res => res.json())
@@ -297,7 +289,7 @@
                         document.getElementById("myModal1")
                     ).hide();
                     alert(json.message);
-                    getskill(); // Refresh user details after updating the avatar
+                    getsproject(); // Refresh user details after updating the avatar
                 })
                 .catch(err => console.error('Error:', err));
 
@@ -333,7 +325,7 @@
                                     text: json.message,
                                     icon: "success"
                                 });
-                                getskill(); // Refresh data
+                                getsproject(); // Refresh data
                             } else {
                                 Swal.fire("Error!", "Failed to delete experience.", "error");
                             }
