@@ -130,11 +130,11 @@
                             <div class="card-body">
                                 <div class="mb-3 px-2">
                                     <label for="en_degree" class="form-label">Degree</label>
-                                    <input type="text" class="form-control" id="en_degree" required>
+                                    <input type="text" class="form-control" id="en_degree" placeholder="Enter Degree" required>
                                 </div>
                                 <div class="mb-3 px-2">
                                     <label for="en_school" class="form-label">School</label>
-                                    <input type="text" class="form-control" id="en_school" required>
+                                    <input type="text" class="form-control" id="en_school" placeholder="Enter school" required>
                                 </div>
                             
                                     <div class="mb-3 px-2">
@@ -150,7 +150,7 @@
                                 </div>
                             </div>
                         </form>
-                            <table border="0" class="bg-primary" >
+                            <table border="0" class="bg-primarys" >
                                 <thead class="bg-tertiary">
                                     <th >ID</th>
                                     <th>Degree</th>
@@ -333,7 +333,9 @@
 
         }
         function updateEducation() {
-            console.log(uen_degree.value);
+            // console.log(uen_degree.value);
+            console.log(uen_degree.value+' '+uen_shcool.value+' '+ustart_year.value+" "+uend_year.value);
+
             fetch(`https://mps7.chandalen.dev/api/educations/${idUpdate}`, {
                 method: 'PUT',
                 headers: {
@@ -343,14 +345,14 @@
 
                 },
                 body: JSON.stringify({
-                    "en_dgree": uen_degree.value,
-                    "en_shcool": uen_shcool.value,
+                    "en_degree": uen_degree.value,
+                    "en_school": uen_shcool.value,
                     "start_year": ustart_year.value,
                     "end_year": uend_year.value
                 })
             })
                 .then(res => res.json())
-                .then(json => {
+                .then(json => {                    
                     bootstrap.Modal.getInstance(
                         document.getElementById("myModal1")
                     ).hide();
