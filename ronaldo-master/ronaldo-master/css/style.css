@@ -10970,15 +10970,17 @@ h5,
   content: "";
   opacity: 0.1;
   width: 50%;
+  height: 120vh;
   background: #3e64ff;
+  border-radius: 0 0 50px 0;
 }
 .hero-wrap .text {
   width: 100%;
 }
 .hero-wrap .image_hero {
-  width: 500px;
-  height: 600px;
-  margin-top: 85px !important;
+  width: 50%;
+  height: 100vh;
+  /* margin-top: 85px !important; */
 }
 
 .slider-text .subheading {
@@ -12591,4 +12593,10 @@ textarea.form-control {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px;
   }
+}
+.img-contact{
+  height: 622.5px;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
 }

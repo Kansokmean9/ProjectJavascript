@@ -24,7 +24,8 @@ function fetchAbout() {
 
         // Image footer
         const image_contact = document.getElementById('image-contact');
-        image_contact.src = profile.photo_about;
+        image_contact.style.backgroundImage = `url('${profile.photo_about}')`;
+        // image_contact.src = profile.photo_about;
 
         const About = `
           <div class="col-lg-6 col-md-6 align-items-center">
@@ -45,8 +46,8 @@ function fetchAbout() {
               </div>
             </div>
           </div>
-          <div class="col-12 col-md-6 image_hero">
-            <div class="img w-100 h-100" style="background-image: url(${profile.photo_hero}); width: 600px; border-radius: 10px; background-size: cover; background-position: center;"></div>
+          <div class="mt-0 px-0 col-12 col-md-6 image_hero">
+            <div class="img w-100 h-100" style="background-image: url(${profile.photo_hero});  border-radius: 0px; background-size: cover; background-position: center;"></div>
           </div>
         `;
 
