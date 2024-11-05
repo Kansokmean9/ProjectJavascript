@@ -119,7 +119,7 @@
 
                     <div id="EduContent" >
                         <h4 class="mb-4">Education</h4>
-                        <form action="" id="EduForm" class="card mb-4">
+                        <form action="POST" id="EduForm" class="card mb-4">
                             <div class="card-body">
                                 <div class="mb-3 px-2">
                                     <label for="en_degree" class="form-label">Degree</label>
@@ -131,15 +131,15 @@
                                 </div>
                             
                                     <div class="mb-3 px-2">
-                                        <label for="start_year" class="form-label">Start year</label>
-                                        <input type="text" class="form-control" id="start_year" required>
+                                        <label for="start_year" class="mt-2">Start year</label>
+                                        <input class="form-control" id="start_year" type="date" style="width: 100%;">
                                     </div>
                                     <div class="mb-3 px-2">
-                                        <label for="end_year" class="form-label">End year</label>
-                                        <input type="text" class="form-control" id="end_year" required>
+                                        <label for="end_year" class="mt-2">End year</label>
+                                        <input class="form-control" id="end_year" type="date" style="width: 100%;">
                                     </div>       
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary" onclick="addEducation()">Add new</button>
+                                    <button type="button" class="btn btn-primary"  onclick="addEducation()">Add new</button>
                                 </div>
                             </div>
                         </form>
@@ -157,13 +157,43 @@
                                 </tbody>
                             </table>
                         <!-- </div> -->
-
                     </div>
                 </div>
             </main>
         </div>
     </div>
+    <div class="modal fade" id="myModal1" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-uppercase" id="myModalLabel1"> Update data!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="PUT" id="updateForm">
+                        <label for="uen_degree">degree</label>
 
+                        <input class="form-control" id="uen_degree" type="text" placeholder="New degree"
+                            style="width: 100%;">
+
+                        <label for="uen_shcool" class="mt-2">shcool</label>
+                        <input class="form-control" id="uen_shcool" type="text" placeholder="New shcool"
+                            style="width: 100%;">
+
+                        <label for="ustart_year" class="mt-2">Start year</label>
+                        <input class="form-control" id="ustart_year" type="date" style="width: 100%;">
+
+                        <label for="uend_year" class="mt-2">End year</label>
+                        <input class="form-control" id="uend_year" type="date" style="width: 100%;">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
+                    <button type="button" class="btn btn-primary" onclick="updateEducation()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="../asset/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="../asset/js/javascript.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -174,14 +204,14 @@
                 .then(json => {
                     let tr = '';
                     json.data.forEach(element => {
-                        tr += `<tr class="bg bg-body-secondary" data-id="${element.id}">
+                        tr += `<tr class="bg bg-white" data-id="${element.id}">
                             <td class="text-center py-4">${element.id}</td>
                             <td>${element.en_degree}</td>
                             <td>${element.en_school}</td>
                             <td>${element.start_year}</td>
                             <td>${element.end_year}</td>
                             <td class="text-center">
-                                <img src="../asset/edit.png" onclick="imgEdit(${element.id}, '${element.en_degree}', '${element.en_school}', '${element.start_year}', '${element.end_year}')" width="20px" height="20px">
+                                <img src="../asset/edit.png" data-bs-toggle="modal" data-bs-target="#myModal1" onclick="toUpdate(${element.id})"  width="20px" height="20px">
                                 <img class="ms-2" src="../asset/rubbish-bin.png" onclick="deleteEducation(${element.id})" width="20px" height="20px">     
                             </td>
                         </tr>`;
@@ -192,10 +222,10 @@
         GetDate() ;
         // document.getElementsByTagName("tbody").value;
         function addEducation() {
-            const en_degree = document.getElementById('en_degree');
-            const en_school = document.getElementById('en_school');
-            const start_year = document.getElementById('start_year');
-            const end_year = document.getElementById('end_year');
+            const en_degree = document.getElementById('en_degree').value;
+            const en_school = document.getElementById('en_school').value;
+            const start_year = document.getElementById('start_year').value;
+            const end_year = document.getElementById('end_year').value;
 
             fetch(`https://mps7.chandalen.dev/api/educations`, {
                 method: 'POST',
@@ -205,11 +235,13 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    "en_degree": en_degree.value,
-                    "en_school": en_school.value,
-                    "start_year": start_year.value,
-                    "end_year": end_year.value
+                    "en_degree": en_degree,
+                    "en_school": en_school,
+                    "start_year": start_year,
+                    "end_year": end_year
+                    
                 })
+                
             })
                 .then(res => res.json())
                 .then(json => {
@@ -218,6 +250,7 @@
                     GetDate();
                 })
                 .catch(err => console.error('Error:', err));
+             
 
         }
         // addEducation();
@@ -263,6 +296,58 @@
                 }
             });
         }
+        const idUpdate = 0;
+        const uen_degree = document.getElementById('uen_degree');
+        const uen_shcool = document.getElementById('uen_shcool');
+        const ustart_year = document.getElementById('ustart_year');
+        const uend_year = document.getElementById('uend_year');
+        function toUpdate(id) {
+            idUpdate = id;
+            fetch('https://mps7.chandalen.dev/api/educations')
+                .then(res => res.json())
+                .then(json => {
+                    console.log(json.data);
+                    json.data.forEach(element => {
+
+                        if (element.id == id) {
+                            uen_degree.value = element.en_degree;
+                            uen_shcool.value = element.en_school;
+                           
+                        }
+                    });
+
+                })
+
+        }
+        function updateEducation() {
+            console.log(uen_degree.value);
+            fetch(`https://mps7.chandalen.dev/api/educations/${idUpdate}`, {
+                method: 'PUT',
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+
+                },
+                body: JSON.stringify({
+                    "en_dgree": uen_degree.value,
+                    "en_shcool": uen_shcool.value,
+                    "start_year": ustart_year.value,
+                    "end_year": uend_year.value
+                })
+            })
+                .then(res => res.json())
+                .then(json => {
+                    bootstrap.Modal.getInstance(
+                        document.getElementById("myModal1")
+                    ).hide();
+                    alert(json.message);
+                    GetDate(); // Refresh user details after updating the avatar
+                })
+                .catch(err => console.error('Error:', err));
+        }
+
+       
     </script>
 </body>
 </html>
