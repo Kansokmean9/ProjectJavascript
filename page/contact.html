@@ -12,7 +12,9 @@
 
 </head>
 <style>
-    
+    .cs{
+        cursor: pointer;
+    }
     th {
 
         color: white;
@@ -180,7 +182,7 @@
                         <td class="px-1 py-4">${element.message}</td>
                         <td class="px-1 py-4">${element.created_at_format}</td>
                         <td class="px-3">
-                            <img class="ms-2" onclick="deletePost(${element.id})" src="../asset/rubbish-bin.png" width="20px" height="20px">
+                            <img class="ms-2 cs" onclick="deletePost(${element.id})" src="../asset/img/rubbish-bin.png" width="20px" height="20px">
                            
 
                         </td>

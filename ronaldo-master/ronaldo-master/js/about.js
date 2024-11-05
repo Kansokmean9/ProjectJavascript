@@ -17,7 +17,7 @@ function fetchAbout() {
             <div class="col-md-12 col-lg-6 d-flex">
               <div class="img-about img d-flex align-items-center justify-content-center">
                 <div class="overlay"></div>
-                <div class="img-about img w-75 h-75" style="background-image: url(${profile.photo_about}); max-width: 600px; border-radius: 7px; background-size: cover; background-position: center;"></div>
+                <div class="img-about img " style="width:85%; height:80%; background-image: url(${profile.photo_about}); max-width: 600px; border-radius: 7px; background-size: cover; background-position: center;"></div>
               </div>
             </div>
             <div class="col-md-6 col-lg-6 pl-md-5 py-5">
@@ -25,8 +25,8 @@ function fetchAbout() {
                 <div class="col-md-12 heading-section">
                   <h2 class="mb-4">About Me</h2>
                   <h4 class="mb-4">${Bio.en_about_title}</h4>
-
                   <p>${Bio.en_about_bio}</p>
+                  <p>${Bio.en_about_sub_title}</p>
                   <ul class="about-info mt-4 px-md-0 px-2">
                     <li class="d-flex">
                       <span>Name:</span> <span>${profile.en_first_name} ${profile.en_last_name}</span>

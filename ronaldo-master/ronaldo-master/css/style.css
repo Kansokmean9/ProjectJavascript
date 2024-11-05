@@ -4540,6 +4540,7 @@ input[type="button"].btn-block {
   text-decoration: none;
 }
 
+
 .navbar-nav {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4555,6 +4556,7 @@ input[type="button"].btn-block {
 .navbar-nav .nav-link {
   padding-right: 0;
   padding-left: 0;
+  /* color: rgb(0, 44, 78) !important; */
 }
 .navbar-nav .dropdown-menu {
   position: static;
@@ -10846,10 +10848,10 @@ h5,
   left: 0;
   top: 0;
   margin-top: -130px;
-  background: #fff !important;
+  background-color: #fff!important;
   -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  padding: 0 15px;
+  padding: 0px;
 }
 .ftco-navbar-light.scrolled .nav-item > .nav-link {
   color: #000000 !important;
@@ -10937,8 +10939,8 @@ h5,
   position: absolute;
   top: 50%;
   left: -12px;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   content: "";
   background: #3e64ff;
   z-index: -1;
@@ -10949,6 +10951,9 @@ h5,
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   border-radius: 50%;
+}
+#navbar-name{
+  font-size: 35px;
 }
 .navbar-brand span {
   color: #fff;
@@ -10982,7 +10987,31 @@ h5,
   height: 100vh;
   /* margin-top: 85px !important; */
 }
+.image_hero::after{
+  position: absolute;
+  content: '';
+  width: 55px;
+  height: 55px;
+  transform: rotate(45deg) translate(-70%);
+  background: #ebefff;
+  top: 350px;
+  
+}
+.arrow {
+  font-size: 50px;
+  color: #333;
+  animation: upDown 1s ease-in-out infinite;
+  top: 350px;
+  font-size: large;
+  z-index: 99;
+}
 
+/* Animation */
+@keyframes upDown {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
 .slider-text .subheading {
   text-transform: uppercase;
   font-size: 16px;
@@ -11004,6 +11033,7 @@ h5,
   background-position: center;
   background-size: cover;
 }
+
 
 .slider-text h2 {
   font-weight: 800;
@@ -11353,8 +11383,11 @@ h5,
   width: 100%;
   margin-bottom: 7em;
 }
+.page.three{
+  margin-bottom: 4rem;
+}
 .page.four {
-  margin-bottom: 0;
+  margin-bottom: 4rem;
 }
 .page .heading {
   font-weight: 800;
@@ -12600,7 +12633,4 @@ textarea.form-control {
   background-position: center;
   background-size: cover;
 }
-.ftco-animate{
-  display: flex;
-  align-items: center;
-}
+
