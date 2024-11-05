@@ -192,25 +192,7 @@
 
 
     <script>
-        // Skill Form Submission
-        const skillForm = document.getElementById('skillForm');
-        const skillsTableBody = document.getElementById('skillsTableBody');
-
-        skillForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const skillName = document.getElementById('skillName').value;
-            const skillLevel = document.getElementById('skillLevel').value;
-
-            const newRow = `
-                <tr>
-                    <td>${skillName}</td>
-                    <td>${skillLevel}</td>
-                </tr>
-            `;
-
-            skillsTableBody.innerHTML += newRow;
-            skillForm.reset();
-        });
+     
 
         function getskill() {
             fetch('https://mps7.chandalen.dev/api/skills')
@@ -224,8 +206,8 @@
                 <td>${element.name}</td>
                 <td>${element.percent}</td>
                <td >
-                   <img class=" cs" src="../asset/edit.png" data-bs-toggle="modal" data-bs-target="#myModal1"  onclick="toUpdate(${element.id})" width="20px" height="20px">
-                    <img class="ms-2 cs " src="../asset/rubbish-bin.png" onclick="deleteSkill(${element.id})" width="20px" height="20px">     
+                   <img class=" cs" src="../asset/img/edit.png" data-bs-toggle="modal" data-bs-target="#myModal1"  onclick="toUpdate(${element.id})" width="20px" height="20px">
+                    <img class="ms-2 cs " src="../asset/img/rubbish-bin.png" onclick="deleteSkill(${element.id})" width="20px" height="20px">     
                 </td>
             </tr>`;
                     });

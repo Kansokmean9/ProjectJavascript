@@ -244,18 +244,18 @@
     closeOnContentClick: true,
     closeBtnInside: false,
     fixedContentPos: true,
-    mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
+    mainClass: 'mfp-no-margins mfp-with-zoom', 
      gallery: {
       enabled: true,
       navigateByImgClick: true,
-      preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+      preload: [0,1] 
     },
     image: {
       verticalFit: true
     },
     zoom: {
       enabled: true,
-      duration: 300 // don't foget to change the duration also in CSS
+      duration: 300 
     }
   });
 
@@ -351,26 +351,14 @@ window.onload = function() {
 
 
 
-
-
-
-
-// this makes the height of each page equal to the height of the window
-// $('.page').css('height', $( window ).height());
-
 // scrollspy section
 (function($){
-  //variable that will hold the href attr of the links in the menu
   var sections = [];
-  //variable that stores the id of the section
   var id = false;
-  //variable for the selection of the anchors in the navbar
   var $navbara = $('#navi a');
   
   $navbara.click(function(e){
-    //prevent the page from refreshing
     e.preventDefault();
-    //set the top offset animation and speed
     $('html, body').animate({
       scrollTop: $($(this).attr('href')).offset().top - 180
 },500);
@@ -379,19 +367,14 @@ window.onload = function() {
   
   
   
-  //select all the anchors in the navbar one after another
   $navbara.each(function(){
-   // and adds them in the sections variable
     sections.push($($(this).attr('href')));
     
   })
   $(window).scroll(function(e){
-    // scrollTop retains the value of the scroll top with the reference at the middle of the page
     var scrollTop = $(this).scrollTop() + ($(window).height()/2);
-    //cycle through the values in sections array
     for (var i in sections) {
       var section = sections[i];
-      //if scrollTop variable is bigger than the top offset of a section in the sections array then 
       if (scrollTop > section.offset().top){
         var scrolled_id = section.attr('id');
       }

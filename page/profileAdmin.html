@@ -12,8 +12,8 @@
 </head>
 <style>
     body {
-        background: rgb(5,90,162);
-        background: linear-gradient(118deg, rgba(5,90,162,1) 0%, rgba(53,158,231,1) 99%);
+        /* background: rgb(5,90,162); */
+        /* background: linear-gradient(118deg, rgba(5,90,162,1) 0%, rgba(53,158,231,1) 99%); */
         display: flex;
         /* align-items: center; */
         height: 100vh;
@@ -26,6 +26,7 @@
         border-radius: 0.5rem;
         background: #fff;
         /* position: fixed; */
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
     }
 
     .profile-img {
@@ -165,9 +166,6 @@
         outline: 1px solid #009dff;
     }
 
-    #profile .row .col-md-6 {
-        border-left: 1px solid #009dff;
-    }
 
     .hvr-icon-back:hover .hvr-icon {
         /* transform: translateX(-4px) !important; */
@@ -177,6 +175,11 @@
     #profile .row .col-md-6 input::placeholder{
         color: rgb(199, 196, 196);
         font-size: 14px;
+    }
+    .border-start{
+        border-left: 1px solid #009dff !important;
+        padding-left: 50px !;
+        
     }
 </style>
 
@@ -199,7 +202,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="border-start ps-5 col-md-6">
                 <div class="profile-head">
                     <h2 id="adminName">Kshiti Ghelani</h2>
                     <h6>Admin</h6>
@@ -234,7 +237,7 @@
                 </div>
                 <button style="margin-left: 19%; margin-top: 80px;" class="btn btn-outline-danger" id="logoutBtn" onclick="logoutbtn()"><i class="bi bi-box-arrow-left"></i> Logout</button>
             </div>
-            <div class="col-md-8">
+            <div class="border-start ps-5 col-md-8">
                 <div class="tab-content profile-tab" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div class="row">
@@ -268,9 +271,9 @@
                             <div class="col-md-6 mt-2 leftEdit">
                                 <h5 class="text-primary">Update info.</h5>
                                 <label>Name</label><br>
-                                <input type="text" id="upName"><br>
+                                <input type="text" id="upName" placeholder="Full name"><br>
                                 <label class="mt-2">Gmail</label><br>
-                                <input type="text" id="upGmail"><br>
+                                <input type="text" id="upGmail" placeholder="Gmail"><br>
                                 <button id="saveInfo" class="btn btn-primary" onclick="saveinfo()">Save</button>
                             </div>
                             <div class="col-md-6 mt-2">

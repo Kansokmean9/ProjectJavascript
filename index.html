@@ -1,27 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="asset/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="asset/style/style.css">
+    <link rel="stylesheet" href="asset/bootstrap-icons/bootstrap-icons.css">
 </head>
+<style>
+    #hidePass {
+        position: absolute;
+        right: 7px;
+        top: 38px;
+    }
+
+    #va_user,
+    #va_pass {
+        color: red;
+        font-size: small;
+        /* margin-left: 135px; */
+    }
+
+    input {
+        border-radius: 10px !important;
+    }
+
+    .card {
+        border-radius: 15px !important;
+    }
+</style>
 
 <body>
-    <div id="loginContainer" class="container-fluid vh-100 d-flex align-items-center justify-content-center bg-light">
-        <div class="card p-4" style="max-width: 400px;">
-            <h2 class="text-center mb-4">Sign in</h2>
-            <form id="loginForm">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" placeholder="Username" class="form-control" id="username">
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" placeholder="Password" class="form-control" id="password">
-                </div>
-                <button type="button" class="btn btn-primary w-100" onclick="adddata()">Sign in</button>
-            </form>
+    <div id="loginContainer"
+        class="bg container-fluid vh-100 d-flex align-items-center justify-content-center bg-light">
+        <div class="position-absolute " style="margin-left: 30px; right: 100px; top: 80px; width: 250px;">
+            <img src="asset/img/bglogin1.png" class="w-100" alt="">
+        </div>
+        <div class="position-absolute " style="left: 100px; top: 400px;">
+            <img src="asset/img/bgloogin.png" alt="">
+        </div>
+
+        <div>
+            <div class="logo m-auto mb-3" style="width: 300px; margin-left: 5px; z-index: 99;">
+                <h1 class="text-center text-addmin my-4 text-uppercase fs-3">Admin Portfolio</h1>
+            </div>
+            <div class="card px-5 pt-5"
+                style="width: 400px; height: 430px; box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;">
+                <h2 class="text-center mb-4 fw-bold">LOG IN</h2>
+                <form id="loginForm">
+                    <div class="mb-2">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" placeholder="Username" class="form-control" id="username">
+                        <span id="va_user" class="opacity-0">.</span>
+                    </div>
+                    <div class="mb-2 position-relative">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" placeholder="Password" class="form-control" id="password">
+                        <span id="hidePass" style="cursor: pointer;" onclick="hidepass()"><i
+                                class="bi bi-eye-slash"></i></span>
+                        <span id="va_pass" class="opacity-0">.</span>
+
+                    </div>
+                    <div class="w-100 mt-4 text-center">
+                        <button type="button" id="btnsubmit" class="btn btn-primary w-75" onclick="adddata()">Log
+                            in</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </body>
@@ -31,13 +78,15 @@
 <script>
 
     function adddata() {
+        const btnSubmit = document.getElementById('btnsubmit');
+        btnSubmit.disabled = true;
+
         const form = document.getElementById('loginForm');
         let formData = new FormData(form); // Create FormData object
 
         const username = document.getElementById('username');
         const password = document.getElementById('password');
-        console.log(username.value);
-
+        // console.log(username.value);
         formData.append('email', username.value);
         formData.append('password', password.value);
 
@@ -48,18 +97,34 @@
             method: 'POST',
             body: formData,
         })
-            // .then(res => res.json())
             .then(res => res.json())
             .then(json => {
                 console.log(json);
                 if (json.data.length == 0) {
+                    document.getElementById('va_user').classList.add('opacity-0');
+                    document.getElementById('va_pass').classList.remove('opacity-0');
+                    password.classList.add('border');
+                    password.classList.add('border-danger');
+                    username.classList.remove('border');
+                    username.classList.remove('border-danger');
+                    document.getElementById('va_pass').innerHTML = json.message;
 
-                    alert(json.message)
                 } else {
                     if (json.message == "Invalid input value") {
-                        alert(json.message);
+                        document.getElementById('va_user').classList.remove('opacity-0');
+                        document.getElementById('va_pass').classList.add('opacity-0');
+                        username.classList.add('border');
+                        username.classList.add('border-danger');
+                        password.classList.remove('border');
+                        password.classList.remove('border-danger');
+                        if(username.value == ""){
+                            document.getElementById('va_user').innerHTML = json.data.email[1];
+                        }else{
+                            document.getElementById('va_user').innerHTML = json.data.email[0];
+                        }
+                        
+                        // document.getElementById('va_user').addclass
                     } else {
-
                         let timerInterval;
                         Swal.fire({
                             title: "Login processing!",
@@ -80,15 +145,26 @@
                             let token = json.data.token;
                             sessionStorage.setItem('Token', token);
                             location.href = 'page/dashboard.html';
-                            
                             if (result.dismiss === Swal.DismissReason.timer) {
                                 console.log("I was closed by the timer");
                             }
                         });
-
                     }
                 }
             })
+            .finally(() => {
+                btnSubmit.disabled = false; // Enable button after request completes
+            });
+    }
+    function hidepass() {
+        let pass = document.getElementById('password');
+        if (pass.type === 'password') {
+            pass.type = 'text';
+            document.getElementById('hidePass').innerHTML = `<i class="bi bi-eye-fill"></i>`;
+        } else {
+            pass.type = 'password';
+            document.getElementById('hidePass').innerHTML = `<i class="bi bi-eye-slash"></i>`;
+        }
     }
 </script>
 

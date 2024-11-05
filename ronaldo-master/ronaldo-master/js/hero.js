@@ -20,7 +20,7 @@ function fetchAbout() {
         name.innerHTML = profile.en_first_name[0];
         let naa =  profile.en_first_name;
         let result = naa.slice(1);
-        names.innerHTML = result + " " + profile.en_last_name;
+        names.innerHTML = "" + result + " " + profile.en_last_name;
 
         // Image footer
         const image_contact = document.getElementById('image-contact');
@@ -47,7 +47,8 @@ function fetchAbout() {
             </div>
           </div>
           <div class="mt-0 px-0 image_hero">
-             <div class="img image_hero w-100 h-100" style="background-image: url(${profile.photo_hero});  border-radius: 0px; background-size: cover; background-position: center;"></div>
+          <div class="arrow position-absolute"><i class="bi bi-chevron-double-down"></i></div>
+             <div class="img  w-100 h-100" style="background-image: url(${profile.photo_hero});  border-radius: 0px; background-size: cover; background-position: center;"></div>
           </div>
         `;
 

@@ -1,4 +1,3 @@
-//List data Educations
 function Educations(data = '') {
     fetch(`https://mps7.chandalen.dev/api/educations${data ? `?filter=${data}` : ''}`)
         .then(res => {
@@ -8,10 +7,8 @@ function Educations(data = '') {
             return res.json();
         })
         .then(json => {
-          //  console.log(json); // Log the entire response for debugging
             
             if (json.result) {
-              //  alert('Network response')
                 
                 const students = json.data.map(element => `
               
@@ -34,14 +31,11 @@ function Educations(data = '') {
         .catch(error => console.error('Error fetching data:', error));
 }
 
-// Call the function to fetch and display the data
 Educations();
 
 
 
 
-//Experience data
-//List data Educations
 function Experience(data = '') {
     fetch(`https://mps7.chandalen.dev/api/experiences${data ? `?filter=${data}` : ''}`)
         .then(res => {
@@ -51,7 +45,6 @@ function Experience(data = '') {
             return res.json();
         })
         .then(json => {
-           // console.log(json); // Log the entire response for debugging
             
             if (json.result) {
                 
