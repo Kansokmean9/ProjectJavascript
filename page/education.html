@@ -5,34 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>education</title>
-
     <link rel="stylesheet" href="../asset/bootstrap/css/bootstrap.css">
     <link href="../asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../asset/style/style.css">
-
 </head>
-<style>
+ <style>
     .cs{
         cursor: pointer;
     }
-    th,td {
+    th {
 
+        color: white;
         padding: 20px;
     }
-    th{
-        color: white;
+    td{
+        padding: 20px;
     }
 
     table {
         width: 100%;
     }
-</style>
-
+ </style>
 <body>
-
     <div id="dashboardContainer">
 
-
+        
         <nav class="navbar navbar-expand-lg navbar-light border-bottom" style="background-color: #edf2f9;">
             <!-- <div id="toggleNavigationTooltip" class="ratias" style="background-color: red; width: 50px; height: 39px; margin-left: 20px; border-radius: 100px;"></div> -->
 
@@ -45,14 +42,12 @@
                     <i class="bi bi-list"></i>
                 </button>
 
-                <h2 class="welcome" style="font-size: 30px;">Welcome admin <span id="adminName"></span>!</h2>
+                <h2 class="welcome" style="font-size: 30px;">Wellcome dear <span id="adminName"></span>!</h2>
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
                     <li class="pe-2">
-                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank"
-                            class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
-                                class="bi bi-box-arrow-up-right"></i> Open Site</a>
+                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank" class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i class="bi bi-box-arrow-up-right"></i> Open Site</a>
                     </li>
-
+                    
                     <li class="nav-item pe-2">
                         <a class="nav-link" href="#" id="notificationBtn">
                             <i class="bi bi-bell fs-5"></i>
@@ -64,7 +59,6 @@
                 </ul>
             </div>
         </nav>
-
         <div class="sidebar bg-primary text-white p-3" style="width: 250px;">
             <button id="closeSidebar" class="btn btn-light d-xl-none mb-3 btn-close-bar">
                 <i class="bi bi-chevron-left"></i>
@@ -130,129 +124,245 @@
             <main class="container-fluid py-4">
                 <div id="dashboardContent">
 
-                    <div id="EduContent">
+                    <div id="EduContent" >
                         <h4 class="mb-4">Education</h4>
-                        <form id="EduForm" class="card mb-4">
+                        <form action="POST" id="EduForm" class="card mb-4">
                             <div class="card-body">
                                 <div class="mb-3 px-2">
                                     <label for="en_degree" class="form-label">Degree</label>
-                                    <input type="text" class="form-control" id="en_degree" required>
+                                    <input type="text" class="form-control" id="en_degree" placeholder="Enter Degree" required>
                                 </div>
                                 <div class="mb-3 px-2">
                                     <label for="en_school" class="form-label">School</label>
-                                    <input type="text" class="form-control" id="en_school" required>
+                                    <input type="text" class="form-control" id="en_school" placeholder="Enter school" required>
                                 </div>
-
-                                <div class="mb-3 px-2">
-                                    <label for="start_year" class="form-label">Start year</label>
-                                    <input type="text" class="form-control" id="start_year" required>
-                                </div>
-                                <div class="mb-3 px-2">
-                                    <label for="end_year" class="form-label">End year</label>
-                                    <input type="text" class="form-control" id="end_year" required>
-                                </div>
+                            
+                                    <div class="mb-3 px-2">
+                                        <label for="start_year" class="mt-2">Start year</label>
+                                        <input class="form-control" id="start_year" type="date" style="width: 100%;">
+                                    </div>
+                                    <div class="mb-3 px-2">
+                                        <label for="end_year" class="mt-2">End year</label>
+                                        <input class="form-control" id="end_year" type="date" style="width: 100%;">
+                                    </div>       
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary">Add new</button>
+                                    <button type="button" class="btn btn-primary"  onclick="addEducation()">Add new</button>
                                 </div>
                             </div>
                         </form>
-                        <table border="0" class="bg-primarys">
-                            <thead class="bg-tertiary">
-                                <th>ID</th>
-                                <th>Degree</th>
-                                <th>School</th>
-                                <th>Start year</th>
-                                <th>End year</th>
-                                <th>Action</th>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                        </table>
+                            <table border="0" class="bg-primarys" >
+                                <thead class="bg-tertiary">
+                                    <th >ID</th>
+                                    <th>Degree</th>
+                                    <th>School</th>
+                                    <th>Start year</th>
+                                    <th>End year</th>
+                                    <th>Action</th>
+                                </thead>
+                                <tbody>
+                        
+                                </tbody>
+                            </table>
                         <!-- </div> -->
-
                     </div>
                 </div>
             </main>
         </div>
     </div>
+    <div class="modal fade" id="myModal1" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-uppercase" id="myModalLabel1"> Update data!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="PUT" id="updateForm">
+                        <label for="uen_degree">degree</label>
 
+                        <input class="form-control" id="uen_degree" type="text" placeholder="New degree"
+                            style="width: 100%;">
+
+                        <label for="uen_shcool" class="mt-2">shcool</label>
+                        <input class="form-control" id="uen_shcool" type="text" placeholder="New shcool"
+                            style="width: 100%;">
+
+                        <label for="ustart_year" class="mt-2">Start year</label>
+                        <input class="form-control" id="ustart_year" type="date" style="width: 100%;">
+
+                        <label for="uend_year" class="mt-2">End year</label>
+                        <input class="form-control" id="uend_year" type="date" style="width: 100%;">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
+                    <button type="button" class="btn btn-primary" onclick="updateEducation()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="../asset/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="../asset/js/javascript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function GetDate() {
             fetch('https://mps7.chandalen.dev/api/educations')
                 .then(res => res.json())
                 .then(json => {
-                    console.log(json.data);
                     let tr = '';
                     json.data.forEach(element => {
                         let endyear = '';
-                        console.log(element.end_year)
-                        if(element.end_year == null){
-                             endyear = "Present";
-                        }else{
-                             endyear = element.end_year;
+                        if (element.end_year == null) {
+                            endyear = "Present";
+                        } else {
+                            endyear = element.end_year;
                         }
-                        tr += `<tr class="bg bg-body-secondary">
-                <td>${element.id}</td>
-                <td>${element.en_degree}</td>
-                <td>${element.en_school}</td>
-                <td>${element.start_year}</td>
-                <td>${endyear}</td>
-               <td>
-                    <img class=" cs" src="../asset/edit.png" data-bs-toggle="modal" data-bs-target="#languages"  onclick="toUpdate(${element.id})" width="20px" height="20px">
-                    <img class="ms-2 cs " src="../asset/rubbish-bin.png" onclick="deleteExperience(${element.id})" width="20px" height="20px">     
-                </td>
-            </tr>`;
+                        tr += `<tr class="bg bg-body-secondary" data-id="${element.id}">
+                            <td>${element.id}</td>
+                            <td>${element.en_degree}</td>
+                            <td>${element.en_school}</td>
+                            <td>${element.start_year}</td>
+                            <td>${endyear}</td>
+                            <td>
+                                <img class="cs" src="../asset/edit.png" data-bs-toggle="modal" data-bs-target="#myModal1" onclick="toUpdate(${element.id})"  width="20px" height="20px">
+                                <img class="ms-2 cs" src="../asset/rubbish-bin.png" onclick="deleteEducation(${element.id})" width="20px" height="20px">     
+                            </td>
+                        </tr>`;
                     });
                     document.querySelector('tbody').innerHTML = tr;
+                });
+        }
+        GetDate() ;
+        // document.getElementsByTagName("tbody").value;
+        function addEducation() {
+            const en_degree = document.getElementById('en_degree').value;
+            const en_school = document.getElementById('en_school').value;
+            const start_year = document.getElementById('start_year').value;
+            const end_year = document.getElementById('end_year').value;
+
+            fetch(`https://mps7.chandalen.dev/api/educations`, {
+                method: 'POST',
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "en_degree": en_degree,
+                    "en_school": en_school,
+                    "start_year": start_year,
+                    "end_year": end_year
+                    
                 })
+                
+            })
+                .then(res => res.json())
+                .then(json => {
+                    console.log(json)
+                    alert(json.message);
+                    GetDate();
+                })
+                .catch(err => console.error('Error:', err));
+             
+
         }
-        GetDate();
+        // addEducation();
 
+        function deleteEducation(id) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`https://mps7.chandalen.dev/api/educations/${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            "Accept": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                            "Content-Type": "application/json"
 
-        let education = [];
-        let currentIndex = -1;
-        function imgDelete(index) {
-            // Confirm deletion
-            const confirmation = confirm("Do you want to delete?");
-            if (confirmation) {
-                employees.splice(index, 1);
-                renderEducationList()
-            }
-        }
-        function renderEducationList() {
-            const employeeList = document.getElementById('employeeList').getElementsByTagName('tbody')[0];
-            employeeList.innerHTML = '';
-
-            employees.forEach((emp, index) => {
-                const row = employeeList.insertRow();
-                row.insertCell(0).innerText = emp.en_degree;
-                row.insertCell(1).innerText = emp.en_school;
-                row.insertCell(2).innerText = emp.start_year;
-                row.insertCell(3).innerText = emp.end_year;
-
-                const actionsCell = row.insertCell(4);
-
-                // Create Edit image
-                const editImage = document.createElement('img');
-                editImage.src = 'edit.png';
-                editImage.alt = 'Edit';
-                editImage.style.cursor = 'pointer';
-                editImage.onclick = () => editEmployee(index);
-                actionsCell.appendChild(editImage);
-
-                // Create Delete image
-                const deleteImage = document.createElement('img');
-                deleteImage.src = 'rubbish-bin.png';
-                deleteImage.alt = 'Delete';
-                deleteImage.style.cursor = 'pointer';
-                deleteImage.onclick = () => deleteEmployee(index);
-                actionsCell.appendChild(deleteImage);
+                        }
+                    })
+                        .then(res => res.json())
+                        .then(json => {
+                            console.log(json);  // Log the response to see if delete was successful
+                            if (json.result) {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: json.message,
+                                    icon: "success"
+                                });
+                                GetDate(); // Refresh data
+                            } else {
+                                Swal.fire("Error!", "Failed to delete education.", "error");
+                            }
+                        })
+                        .catch(err => {
+                            console.error('Error:', err);
+                            Swal.fire("Error!", "An error occurred while deleting the education.", "error");
+                        });
+                }
             });
         }
+        let idUpdate = 0;
+        let uen_degree = document.getElementById('uen_degree');
+        let uen_shcool = document.getElementById('uen_shcool');
+        let ustart_year = document.getElementById('ustart_year');
+        let uend_year = document.getElementById('uend_year');
+        function toUpdate(id) {
+            idUpdate = id;
+            fetch('https://mps7.chandalen.dev/api/educations')
+                .then(res => res.json())
+                .then(json => {
+                    console.log(json.data);
+                    json.data.forEach(element => {
+
+                        if (element.id == id) {
+                            uen_degree.value = element.en_degree;
+                            uen_shcool.value = element.en_school;
+                           
+                        }
+                    });
+
+                })
+
+        }
+        function updateEducation() {
+            // console.log(uen_degree.value);
+            console.log(uen_degree.value+' '+uen_shcool.value+' '+ustart_year.value+" "+uend_year.value);
+
+            fetch(`https://mps7.chandalen.dev/api/educations/${idUpdate}`, {
+                method: 'PUT',
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+
+                },
+                body: JSON.stringify({
+                    "en_degree": uen_degree.value,
+                    "en_school": uen_shcool.value,
+                    "start_year": ustart_year.value,
+                    "end_year": uend_year.value
+                })
+            })
+                .then(res => res.json())
+                .then(json => {                    
+                    bootstrap.Modal.getInstance(
+                        document.getElementById("myModal1")
+                    ).hide();
+                    alert(json.message);
+                    GetDate(); // Refresh user details after updating the avatar
+                })
+                .catch(err => console.error('Error:', err));
+        }
+
+       
     </script>
 </body>
-
 </html>
