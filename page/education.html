@@ -10,13 +10,20 @@
     <link rel="stylesheet" href="../asset/style/style.css">
 </head>
  <style>
-    th{
-      
+    .cs{
+        cursor: pointer;
+    }
+    th {
+
         color: white;
         padding: 20px;
     }
-    table{
-       width: 100%;
+    td{
+        padding: 20px;
+    }
+
+    table {
+        width: 100%;
     }
  </style>
 <body>
@@ -204,15 +211,21 @@
                 .then(json => {
                     let tr = '';
                     json.data.forEach(element => {
+                        let endyear = '';
+                        if (element.end_year == null) {
+                            endyear = "Present";
+                        } else {
+                            endyear = element.end_year;
+                        }
                         tr += `<tr class="bg bg-body-secondary" data-id="${element.id}">
-                            <td class="text-center py-4">${element.id}</td>
+                            <td>${element.id}</td>
                             <td>${element.en_degree}</td>
                             <td>${element.en_school}</td>
                             <td>${element.start_year}</td>
-                            <td>${element.end_year}</td>
-                            <td class="text-center">
-                                <img src="../asset/edit.png" data-bs-toggle="modal" data-bs-target="#myModal1" onclick="toUpdate(${element.id})"  width="20px" height="20px">
-                                <img class="ms-2" src="../asset/rubbish-bin.png" onclick="deleteEducation(${element.id})" width="20px" height="20px">     
+                            <td>${endyear}</td>
+                            <td>
+                                <img class="cs" src="../asset/edit.png" data-bs-toggle="modal" data-bs-target="#myModal1" onclick="toUpdate(${element.id})"  width="20px" height="20px">
+                                <img class="ms-2 cs" src="../asset/rubbish-bin.png" onclick="deleteEducation(${element.id})" width="20px" height="20px">     
                             </td>
                         </tr>`;
                     });
@@ -296,11 +309,11 @@
                 }
             });
         }
-        const idUpdate = 0;
-        const uen_degree = document.getElementById('uen_degree');
-        const uen_shcool = document.getElementById('uen_shcool');
-        const ustart_year = document.getElementById('ustart_year');
-        const uend_year = document.getElementById('uend_year');
+        let idUpdate = 0;
+        let uen_degree = document.getElementById('uen_degree');
+        let uen_shcool = document.getElementById('uen_shcool');
+        let ustart_year = document.getElementById('ustart_year');
+        let uend_year = document.getElementById('uend_year');
         function toUpdate(id) {
             idUpdate = id;
             fetch('https://mps7.chandalen.dev/api/educations')
