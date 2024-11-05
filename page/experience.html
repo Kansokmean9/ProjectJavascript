@@ -210,6 +210,7 @@
                     <div class="modal-body">
                         <form action="PUT" id="updateForm">
                             <label for="utitle">Title</label>
+
                             <input class="form-control" id="utitle" type="text" placeholder="New title"
                                 style="width: 100%;">
                             <label for="uworkplace" class="mt-2">Workplace</label>
@@ -336,7 +337,7 @@
                 }
             });
         }
-        /////update////////
+
         let idUpdate = 0;
         let utitle = document.getElementById('utitle');
         let uworkplace = document.getElementById('uworkplace');
@@ -361,7 +362,6 @@
 
         }
         function updateExperience() {
-
             console.log(utitle.value);
             fetch(`https://mps7.chandalen.dev/api/experiences/${idUpdate}`, {
                 method: 'PUT',
@@ -387,7 +387,6 @@
                     GetDate(); // Refresh user details after updating the avatar
                 })
                 .catch(err => console.error('Error:', err));
-
         }
 
     </script>
