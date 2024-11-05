@@ -185,8 +185,6 @@ Software();
 
 //language data
 
-
-
 function Language(data = '') {
     fetch(`https://mps7.chandalen.dev/api/languages${data ? `?filter=${data}` : ''}`)
         .then(res => {

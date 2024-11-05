@@ -19,6 +19,9 @@ function fetchAbout() {
         let names = document.getElementById('names');
         name.innerHTML = profile.en_first_name[0];
         names.innerHTML = profile.en_first_name + " " + profile.en_last_name;
+        
+
+
 
         // Image footer
         const image_contact = document.getElementById('image-contact');
