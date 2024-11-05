@@ -22,8 +22,8 @@ function Educations(data = '') {
                             <span class="date">${element.start_year} - ${element.end_year}</span>
                             <h2>${element.en_degree}</h2>
                             <span class="position">${element.en_school}</span>
-                            <span class="position">${element.km_school}</span>
-                            <p>${element.km_degree}</p> <!-- Changed to use km_degree -->
+                    
+                            <p>${element.en_degree}</p> <!-- Changed to use km_degree -->
                         </div>
                     </div>
                 `).join('');
