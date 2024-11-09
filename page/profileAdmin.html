@@ -12,10 +12,8 @@
 </head>
 <style>
     body {
-        /* background: rgb(5,90,162); */
-        /* background: linear-gradient(118deg, rgba(5,90,162,1) 0%, rgba(53,158,231,1) 99%); */
+        
         display: flex;
-        /* align-items: center; */
         height: 100vh;
     }
 
@@ -25,7 +23,6 @@
         height: 600px;
         border-radius: 0.5rem;
         background: #fff;
-        /* position: fixed; */
         box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
     }
 
@@ -168,9 +165,7 @@
 
 
     .hvr-icon-back:hover .hvr-icon {
-        /* transform: translateX(-4px) !important; */
         color: red;
-        /* margin-left: -10px; */
     }
     #profile .row .col-md-6 input::placeholder{
         color: rgb(199, 196, 196);
@@ -185,7 +180,6 @@
 
 <body>
     <div class="container emp-profile">
-        <!-- <form method="post"> -->
         <div class="row mt-3">
             <div class="col-md-4">
                 <div class="d-flex justify-content-center">
@@ -292,7 +286,6 @@
                 </div>
             </div>
         </div>
-        <!-- </form> -->
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -346,7 +339,7 @@
                 .then(res => res.json())
                 .then(json => {
                     alert(json.message);
-                    getme(); // Refresh user details after updating the avatar
+                    getme(); 
                 })
                 .catch(err => console.error('Error:', err));
         }
@@ -488,9 +481,7 @@
                             })
                     }
                 });
-    
-    
-    
+   
             }
     
         </script>
