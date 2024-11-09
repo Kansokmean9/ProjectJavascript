@@ -61,6 +61,11 @@
 
 	};
 	burgerMenu();
+	window.addEventListener("scroll", function() {
+		if (window.scrollY === 0) {
+			this.document.getElementById('homepage').classList.add('active');
+		}
+	});
 
 
 	var onePageClick = function() {
