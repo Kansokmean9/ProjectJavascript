@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Spicy+Rice&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-size: 14px;
 }
 
 /* font English */
@@ -19,19 +21,13 @@
 }
 
 
-body{
+body {
     background-color: #edf2f9;
     font-family: "Poppins", sans-serif;
-    
-}
-.sidebar{
-    /* font-family: jost; */
-    font-family: "Poppins", sans-serif;
 
 }
 
-#avatar{
-
+#avatar {
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -48,7 +44,7 @@ body{
 .sidebar {
     background-color: #edf2f9;
     height: 88vh;
-    margin-top: 63px;
+    margin-top: 70px;
     margin-left: 20px;
     width: 220px !important;
     border-radius: 10px;
@@ -56,12 +52,12 @@ body{
     top: 0;
     left: 0;
     z-index: 1;
-    
+    font-family: "Poppins", sans-serif;
+
 }
 
 .main-content {
     margin-left: 250px;
-
 }
 
 .text-addmin {
@@ -111,13 +107,17 @@ li::before {
 }
 
 .bg-primary {
-    /* background-color: rgb(16, 151, 205) !important; */
-    background: rgb(5, 90, 162);
-    background: linear-gradient(118deg, rgba(5, 90, 162, 1) 0%, rgba(53, 158, 231, 1) 99%);
+    background: rgb(1, 75, 164);
+    background: linear-gradient(110deg,
+            rgba(1, 75, 164, 1) 0%,
+            rgba(34, 170, 251, 1) 99%);
 }
+
 .bg-primarys {
     /* background-color: rgb(16, 151, 205) !important; */
-    background: linear-gradient(118deg, rgba(53, 158, 231, 1) 0%, rgb(6, 103, 187) 99%);
+    background: linear-gradient(118deg,
+            rgba(53, 158, 231, 1) 0%,
+            rgb(6, 103, 187) 99%);
 }
 
 #adminName,
@@ -127,11 +127,13 @@ li::before {
 
 #adminName {
     font-weight: bold;
+    font-size: larger;
     color: #4899f0;
 }
 
 .welcome {
-    color: black;
+    color: rgb(67, 65, 65);
+    font-weight: bold;
 }
 
 #dashboardContent {
@@ -174,14 +176,141 @@ label {
     --bs-bg-opacity: 1;
     background-color: inherit !important;
 }
-#dashboardContent table{
+
+#dashboardContent table {
     border-radius: 6px;
     overflow: hidden;
 }
-#dashboardContent table tbody tr{
+
+.sidebar .nav .nav-item {
+    border-radius: 5px;
+}
+
+#dashboardContent table tbody tr {
     /* background-color: rgb(189, 212, 222) !important; */
     border-top: 1px solid rgb(180, 216, 255);
 }
-.sidebar .nav .nav-item{
+
+.update-photo {
+    border-radius: 50px 0 0 50px;
+    width: 120px;
+    height: 35px;
+    display: flex;
+    right: -86px;
+    justify-content: center;
+    align-items: center;
+    background: rgb(73, 167, 249);
+    /* background: blue; */
+    bottom: 8px;
+    transition: 0.5s;
+}
+
+.update-photo:hover {
+    cursor: pointer;
+    right: 0px;
+}
+
+
+
+.card {
+    border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card-view:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+h2.card-text {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.text-muted {
+    font-size: 0.9rem;
+}
+
+/* Responsive card icons */
+.icon-container {
+    font-size: 1.5rem;
+    color: #007bff;
+    margin-right: 0.5rem;
+}
+
+/* Table styling */
+.table thead th {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #818990;
+}
+
+.table tbody td {
+    font-size: 0.9rem;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+/* Smooth transition for text */
+h2.card-text,
+.card-title {
+    transition: color 0.3s ease;
+}
+
+
+
+/* Sidebar Styling */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* height: 100vh; */
+    overflow-y: auto;
+    transition: width 0.3s;
+}
+
+/* Hover effect on nav links */
+.sidebar .nav-link {
+    display: flex;
+    align-items: center;
+    /* padding: 0.75rem 1rem; */
     border-radius: 5px;
-} 
+    transition: background-color 0.2s, color 0.2s;
+}
+
+
+/* Active link styling */
+.sidebar .nav-link.active {
+    background: linear-gradient(110deg,
+            rgba(1, 75, 164, 1) 0%,
+            rgba(34, 170, 251, 1) 99%);
+    font-weight: bold;
+}
+
+/* Icon styling */
+.sidebar .nav-link i {
+    font-size: 1.2rem;
+    margin-right: 8px;
+}
+
+
+/* Hover and Active States */
+.sidebar .nav-link:hover {
+    background: linear-gradient(110deg,
+            rgba(1, 75, 164, 1) 0%,
+            rgba(34, 170, 251, 1) 99%);
+    color: #e0e0e0;
+}
+
+.sidebar .nav-link:hover i {
+    transform: scale(1.1);
+    color: #e0e0e0;
+}

@@ -22,6 +22,7 @@ function fetchAbout() {
         let result = naa.slice(1);
         names.innerHTML ="&nbsp;&nbsp; " + result + " " + profile.en_last_name;
 
+
         // Image footer
         const image_contact = document.getElementById('image-contact');
         image_contact.style.backgroundImage = `url('${profile.photo_about}')`;
