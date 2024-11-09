@@ -57,18 +57,21 @@
                         </a>
                     </li>
                     <li class="nav-item align-items-center d-flex">
-                        <a href="profileAdmin.html" id="avatar"><img id="avtadmin" src="#" alt=""></a>
+                        <a href="/page/profileAdmin.html" id="avatar"><img id="avtadmin" src="#" alt=""></a>
                     </li>
                 </ul>
             </div>
         </nav>
-        <div id="" class="sidebar bg-primary text-white p-3" style="width: 250px;">
+        <div id="sidebar" class="sidebar bg-primary text-white p-3 d-flex flex-column" style="width: 250px;">
+            <!-- Close Sidebar Button for Smaller Screens -->
             <button id="closeSidebar" class="btn btn-light d-xl-none mb-3 btn-close-bar">
                 <i class="bi bi-chevron-left"></i>
             </button>
+
+            <!-- Sidebar Navigation Links -->
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active text-white" href="dashboard.html" data-section="dashboard">
+                    <a class="nav-link active text-white" href="index.html" data-section="dashboard">
                         <i class="bi bi-grid me-2"></i> Dashboard
                     </a>
                 </li>
@@ -78,41 +81,49 @@
                         <i class="bi bi-envelope me-2"></i> Contact
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link text-white" href="education.html" data-section="education">
                         <i class="bi bi-mortarboard me-2"></i> Education
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link text-white" href="skill.html" data-section="skills">
                         <i class="bi bi-briefcase me-2"></i> Skills
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link text-white" href="project.html" data-section="projects">
                         <i class="bi bi-credit-card-2-back me-2"></i> Projects
                     </a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="sofware.html" data-section="software">
+                    <a class="nav-link text-white" href="software.html" data-section="software">
                         <i class="bi bi-plugin me-2"></i> Software
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link text-white" href="experience.html" data-section="experience">
                         <i class="bi bi-briefcase me-2"></i> Experience
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link text-white" href="language.html" data-section="language">
                         <i class="bi bi-translate me-2"></i> Language
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link text-white" href="profile.html" data-section="profile">
                         <i class="bi bi-person me-2"></i> Profile
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link text-white" href="bio.html" data-section="biography">
                         <i class="bi bi-file-text me-2"></i> Biography
@@ -121,62 +132,75 @@
             </ul>
         </div>
 
+
         <div class="main-content">
 
 
             <main class="container-fluid py-4">
-
                 <div id="dashboardContent">
-                    <h3 id="sectionTitle" class="mb-4 text-db">Dashboard</h3>
+                    <h3 id="sectionTitle" class="mb-4 text-primary">Dashboard</h3>
+
                     <div class="row mb-2">
-                        <div class="col-md-3 mb-3 ">
-                            <div class="card ">
+                        <!-- Card: Total View -->
+                        <div class="col-md-3 mb-3">
+                            <div class="card card-view text-center shadow-sm">
                                 <div class="card-body">
-
-                                    <h6 class="card-title">Total Veiw</h6>
-                                    <p class="card-text text-muted">Number of veiwer portfolio.</p>
-
+                                    <div class="d-flex align-items-center justify-content-center mb-3">
+                                        <i class="fas fa-eye icon-container"></i>
+                                        <h6 class="card-title mb-0">Total View</h6>
+                                    </div>
+                                    <p class="card-text text-muted">Number of viewer portfolio</p>
                                     <h2 class="card-text" id="tview">0</h2>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Card: Total Contact -->
                         <div class="col-md-3 mb-3">
-                            <div class="card ">
+                            <div class="card card-view text-center shadow-sm">
                                 <div class="card-body">
-
-                                    <h6 class="card-title">Total contact</h6>
-                                    <p class="card-text text-muted">Total number of contact.</p>
-
+                                    <div class="d-flex align-items-center justify-content-center mb-3">
+                                        <i class="fas fa-address-book icon-container"></i>
+                                        <h6 class="card-title mb-0">Total Contact</h6>
+                                    </div>
+                                    <p class="card-text text-muted">Total number of contacts</p>
                                     <h2 class="card-text" id="tcontact">0</h2>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Card: Total Own Project -->
                         <div class="col-md-3 mb-3">
-                            <div class="card ">
+                            <div class="card card-view text-center shadow-sm">
                                 <div class="card-body">
-
-                                    <h6 class="card-title">Total own project</h6>
-                                    <p class="card-text text-muted">Number of total own project.</p>
-
+                                    <div class="d-flex align-items-center justify-content-center mb-3">
+                                        <i class="fas fa-tasks icon-container"></i>
+                                        <h6 class="card-title mb-0">Total Own Project</h6>
+                                    </div>
+                                    <p class="card-text text-muted">Number of total own projects</p>
                                     <h2 class="card-text" id="tproject">0</h2>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Card: Total Blog -->
                         <div class="col-md-3 mb-3">
-                            <div class="card ">
+                            <div class="card card-view text-center shadow-sm">
                                 <div class="card-body">
-
-                                    <h6 class="card-title">Total blog</h6>
-                                    <p class="card-text text-muted">Number of total blogs.</p>
-
+                                    <div class="d-flex align-items-center justify-content-center mb-3">
+                                        <i class="fas fa-blog icon-container"></i>
+                                        <h6 class="card-title mb-0">Total Blog</h6>
+                                    </div>
+                                    <p class="card-text text-muted">Number of total blogs</p>
                                     <h2 class="card-text" id="tblog">0</h2>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="card ">
-                        <div class="card-header">
+                    <!-- Recent Projects Table -->
+                    <div class="card card-view shadow-sm">
+                        <div class="card-header bg-primary text-white">
                             <h5 class="card-title mb-0">Recent Projects</h5>
                         </div>
                         <div class="card-body">
@@ -198,13 +222,12 @@
                         </div>
                     </div>
                 </div>
-
             </main>
         </div>
     </div>
 
-    <script src="../asset/bootstrap/js/bootstrap.bundle.js"></script>
-    <script src="../asset/js/javascript.js"></script>
+    <script src="asset/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="asset/js/javascript.js"></script>
     <script>
         //get index dasbaord
 
