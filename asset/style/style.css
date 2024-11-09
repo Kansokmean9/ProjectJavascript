@@ -186,13 +186,14 @@ label {
   width: 120px;
   height: 35px;
   display: flex;
-  right: -86px;
+  right: -90px;
   justify-content: center;
   align-items: center;
   background: rgb(73, 167, 249);
   /* background: blue; */
   bottom: 8px;
   transition: 0.5s;
+  color: white;
 }
 .update-photo:hover {
   cursor: pointer;
