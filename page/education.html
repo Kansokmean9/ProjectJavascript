@@ -8,28 +8,32 @@
     <link rel="stylesheet" href="../asset/bootstrap/css/bootstrap.css">
     <link href="../asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../asset/style/style.css">
+    <link rel="stylesheet" href="../asset/style/flatpickr.min.css">
 </head>
- <style>
-    .cs{
+<style>
+    .cs {
         cursor: pointer;
     }
+
     th {
 
         color: white;
         padding: 20px;
     }
-    td{
+
+    td {
         padding: 20px;
     }
 
     table {
         width: 100%;
     }
- </style>
+</style>
+
 <body>
     <div id="dashboardContainer">
 
-        
+
         <nav class="navbar navbar-expand-lg navbar-light border-bottom" style="background-color: #edf2f9;">
             <!-- <div id="toggleNavigationTooltip" class="ratias" style="background-color: red; width: 50px; height: 39px; margin-left: 20px; border-radius: 100px;"></div> -->
 
@@ -45,9 +49,11 @@
                 <h2 class="welcome" style="font-size: 30px;">Wellcome admin <span id="adminName"></span>!</h2>
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
                     <li class="pe-2">
-                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank" class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i class="bi bi-box-arrow-up-right"></i> Open Site</a>
+                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank"
+                            class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
+                                class="bi bi-box-arrow-up-right"></i> Open Site</a>
                     </li>
-                    
+
                     <li class="nav-item pe-2">
                         <a class="nav-link" href="#" id="notificationBtn">
                             <i class="bi bi-bell fs-5"></i>
@@ -124,45 +130,50 @@
             <main class="container-fluid py-4">
                 <div id="dashboardContent">
 
-                    <div id="EduContent" >
+                    <div id="EduContent">
                         <h3 class="mb-3 text-db text-primary">Education</h3>
                         <form action="POST" id="EduForm" class="card mb-4">
                             <div class="card-body">
-                                <div class="mb-3 px-2">
+                                <div class="mb-1 px-2">
                                     <label for="en_degree" class="form-label">Degree</label>
-                                    <input type="text" class="form-control" id="en_degree" placeholder="Enter Degree" required>
+                                    <input type="text" class="form-control" id="en_degree" placeholder="Enter Degree"
+                                        required>
+                                </div>
+                                <div class="mb-1 px-2">
+                                    <label for="en_school" class="form-label">School</label>
+                                    <input type="text" class="form-control" id="en_school" placeholder="Enter school"
+                                        required>
+                                </div>
+
+                                <div class="mb-1 px-2">
+                                    <label for="start_year" class="form-label">Start year</label>
+                                    <input class="form-control" id="start_year" type="date"
+                                        placeholder="Select start year" style="width: 100%;">
                                 </div>
                                 <div class="mb-3 px-2">
-                                    <label for="en_school" class="form-label">School</label>
-                                    <input type="text" class="form-control" id="en_school" placeholder="Enter school" required>
+                                    <label for="end_year" class="form-label">End year</label>
+                                    <input class="form-control" id="end_year" type="date" placeholder="Select end year"
+                                        style="width: 100%;">
                                 </div>
-                            
-                                    <div class="mb-3 px-2">
-                                        <label for="start_year" class="mt-2">Start year</label>
-                                        <input class="form-control" id="start_year" type="date" style="width: 100%;">
-                                    </div>
-                                    <div class="mb-3 px-2">
-                                        <label for="end_year" class="mt-2">End year</label>
-                                        <input class="form-control" id="end_year" type="date" style="width: 100%;">
-                                    </div>       
-                                <div class="col-12">
-                                    <button type="button" class="btn btn-primary"  onclick="addEducation()">Add new</button>
+                                <div class="col-12 px-2">
+                                    <button type="button" class="btn btn-primary" onclick="addEducation()">Add
+                                        education</button>
                                 </div>
                             </div>
                         </form>
-                            <table border="0" class="bg-primarys" >
-                                <thead class="bg-tertiary">
-                                    <th >ID</th>
-                                    <th>Degree</th>
-                                    <th>School</th>
-                                    <th>Start year</th>
-                                    <th>End year</th>
-                                    <th>Action</th>
-                                </thead>
-                                <tbody>
-                        
-                                </tbody>
-                            </table>
+                        <table border="0" class="bg-primarys">
+                            <thead class="bg-tertiary">
+                                <th>ID</th>
+                                <th>Degree</th>
+                                <th>School</th>
+                                <th>Start year</th>
+                                <th>End year</th>
+                                <th>Action</th>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
                         <!-- </div> -->
                     </div>
                 </div>
@@ -173,38 +184,58 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-uppercase" id="myModalLabel1"> Update data!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title text-uppercase fw-bold" id="myModalLabel1"> Update data!</h5>
+                    <button type="button" class="btn-close rounded-5 bg-danger" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="PUT" id="updateForm">
-                        <label for="uen_degree">degree</label>
+                        <label for="uen_degree">Degree</label>
 
                         <input class="form-control" id="uen_degree" type="text" placeholder="New degree"
                             style="width: 100%;">
 
-                        <label for="uen_shcool" class="mt-2">shcool</label>
+                        <label for="uen_shcool" class="mt-2">School</label>
                         <input class="form-control" id="uen_shcool" type="text" placeholder="New shcool"
                             style="width: 100%;">
 
                         <label for="ustart_year" class="mt-2">Start year</label>
-                        <input class="form-control" id="ustart_year" type="date" style="width: 100%;">
+                        <input class="form-control" id="ustart_year" type="date" placeholder="Select start year"
+                            style="width: 100%;">
 
                         <label for="uend_year" class="mt-2">End year</label>
-                        <input class="form-control" id="uend_year" type="date" style="width: 100%;">
+                        <input class="form-control" id="uend_year" type="date" placeholder="Select end year"
+                            style="width: 100%;">
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
                     <button type="button" class="btn btn-primary" onclick="updateEducation()">Save changes</button>
                 </div>
             </div>
         </div>
     </div>
+    <script src="../asset/js/jquery-3.7.1.min.js"></script>
+    <script src="../asset/js/flatpickr.js"></script>
     <script src="../asset/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="../asset/js/javascript.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        $("#start_year").flatpickr({
+            enableTime: false,
+            dateFormat: "Y-m-d"
+        });
+        $("#end_year").flatpickr({
+            enableTime: false,
+            dateFormat: "Y-m-d"
+        });
+        $("#ustart_year").flatpickr({
+            enableTime: false,
+            dateFormat: "Y-m-d"
+        });
+        $("#uend_year").flatpickr({
+            enableTime: false,
+            dateFormat: "Y-m-d"
+        });
         function GetDate() {
             fetch('https://mps7.chandalen.dev/api/educations')
                 .then(res => res.json())
@@ -232,7 +263,7 @@
                     document.querySelector('tbody').innerHTML = tr;
                 });
         }
-        GetDate() ;
+        GetDate();
         // document.getElementsByTagName("tbody").value;
         function addEducation() {
             const en_degree = document.getElementById('en_degree').value;
@@ -252,9 +283,9 @@
                     "en_school": en_school,
                     "start_year": start_year,
                     "end_year": end_year
-                    
+
                 })
-                
+
             })
                 .then(res => res.json())
                 .then(json => {
@@ -263,7 +294,7 @@
                     GetDate();
                 })
                 .catch(err => console.error('Error:', err));
-             
+
 
         }
         // addEducation();
@@ -325,7 +356,7 @@
                         if (element.id == id) {
                             uen_degree.value = element.en_degree;
                             uen_shcool.value = element.en_school;
-                           
+
                         }
                     });
 
@@ -334,7 +365,7 @@
         }
         function updateEducation() {
             // console.log(uen_degree.value);
-            console.log(uen_degree.value+' '+uen_shcool.value+' '+ustart_year.value+" "+uend_year.value);
+            console.log(uen_degree.value + ' ' + uen_shcool.value + ' ' + ustart_year.value + " " + uend_year.value);
 
             fetch(`https://mps7.chandalen.dev/api/educations/${idUpdate}`, {
                 method: 'PUT',
@@ -352,7 +383,7 @@
                 })
             })
                 .then(res => res.json())
-                .then(json => {                    
+                .then(json => {
                     bootstrap.Modal.getInstance(
                         document.getElementById("myModal1")
                     ).hide();
@@ -360,9 +391,8 @@
                     GetDate(); // Refresh user details after updating the avatar
                 })
                 .catch(err => console.error('Error:', err));
-        }
-
-       
+        }    
     </script>
 </body>
+
 </html>

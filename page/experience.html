@@ -8,23 +8,36 @@
     <link rel="stylesheet" href="../asset/bootstrap/css/bootstrap.css">
     <link href="../asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../asset/style/style.css">
-
+    <link rel="stylesheet" href="../asset/style/flatpickr.min.css">
 </head>
 <style>
-    .cs{
+    .cs {
         cursor: pointer;
     }
+
     th {
 
         color: white;
         padding: 20px;
     }
-    td{
+
+    td {
         padding: 20px;
     }
 
     table {
         width: 100%;
+    }
+
+    /* validation */
+    #va_title,
+    #va_wp,
+    #va_sy,
+    #uva_title,
+    #uva_wp,
+    #uva_sy {
+        color: red;
+        font-size: small;
     }
 </style>
 
@@ -33,8 +46,6 @@
     <div id="dashboardContainer">
 
         <nav class="navbar navbar-expand-lg navbar-light border-bottom" style="background-color: #edf2f9;">
-            <!-- <div id="toggleNavigationTooltip" class="ratias" style="background-color: red; width: 50px; height: 39px; margin-left: 20px; border-radius: 100px;"></div> -->
-
             <div class="logo" style="width: 300px; margin-left: 5px;">
                 <h1 class="text-center text-addmin my-4 text-uppercase">Admin Portfolio</h1>
             </div>
@@ -68,7 +79,6 @@
             <button id="closeSidebar" class="btn btn-light d-xl-none mb-3 btn-close-bar">
                 <i class="bi bi-chevron-left"></i>
             </button>
-            <!-- <h3 class="text-center my-4 text-db">Admin Portfolio</h3> -->
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link text-white" href="dashboard.html" data-section="dashboard">
@@ -135,51 +145,39 @@
                             <div class="col-12">
                                 <form id="experForm" class="card mb-4 ">
                                     <div class="card-body">
-                                        <div class="mb-3 px-2">
+                                        <div class="mb-1 px-2">
                                             <label for="title" class="form-label">Title</label>
                                             <input type="text" class="form-control" id="title" placeholder="Enter title"
                                                 required>
+                                            <span id="va_title" class="opacity-0 text-danger">.</span>
                                         </div>
-                                        <div class="mb-3 px-2">
+                                        <div class="mb-1 px-2">
                                             <label for="workplace" class="form-label">Workplace</label>
                                             <input type="text" class="form-control" id="workplace"
                                                 placeholder="Enter workplace" required>
+                                            <span id="va_wp" class="opacity-0 text-danger">.</span>
                                         </div>
 
-                                        <div class="mb-3 px-2">
+                                        <div class="mb-1 px-2">
                                             <label for="start_year" class="form-label">Start year</label>
-                                            <input type="date" class="form-control" id="start_year" required>
+                                            <input type="date" class="form-control" placeholder="Select start year"
+                                                id="start_year" required>
+                                            <span id="va_sy" class="opacity-0 text-danger">.</span>
+
                                         </div>
                                         <div class="mb-3 px-2">
                                             <label for="end_year" class="form-label">End year</label>
-                                            <input type="date" class="form-control" id="end_year" required>
+                                            <input type="date" class="form-control" placeholder="Select end year"
+                                                id="end_year" required>
                                         </div>
-                                        <div class="col-12">
-                                            <button type="button" class="btn btn-primary" onclick="addExperince()">Add
-                                                new</button>
+                                        <div class="col-12 px-2 pt-1">
+                                            <button type="button" class="btn btn-primary" id="btnsubmit"
+                                                onclick="addExperince()">Add
+                                                experience</button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
-                            <!-- <div class="col-6">
-                                <form id="experPointForm" class="card mb-4">
-                                    <div class="card-body">
-                                        <div class="mb-3 px-2">
-                                            <label for="idProject" class="form-label">ID experience</label>
-                                            <input type="text" class="form-control" id="idProject" required>
-                                        </div>
-                                        <div class="mb-3 px-2">
-                                            <label for="textPoint" class="form-label">Text point</label>
-                                            <textarea type="text" class="form-control" id="textPoint"
-                                                required></textarea>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <button type="button" class="btn btn-primary">Add point</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div> -->
 
                         </div>
                         <table border="0" class="bg-primarys">
@@ -204,37 +202,61 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title text-uppercase" id="myModalLabel1"> Update data!</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title text-uppercase fw-bold" id="myModalLabel1"> Update data!</h5>
+                        <button type="button" class="btn-close bg-danger rounded-5" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="PUT" id="updateForm">
                             <label for="utitle">Title</label>
-
                             <input class="form-control" id="utitle" type="text" placeholder="New title"
                                 style="width: 100%;">
+                            <span id="uva_title" class="opacity-0 text-danger">.</span><br>
                             <label for="uworkplace" class="mt-2">Workplace</label>
                             <input class="form-control" id="uworkplace" type="text" placeholder="New Workplace"
                                 style="width: 100%;">
+                            <span id="uva_wp" class="opacity-0 text-danger">.</span><br>
+
                             <label for="ustart_year" class="mt-2">Start year</label>
-                            <input class="form-control" id="ustart_year" type="date" style="width: 100%;">
+                            <input class="form-control" id="ustart_year" type="date" placeholder="Select start year"
+                                style="width: 100%;">
+                            <span id="uva_sy" class="opacity-0 text-danger">.</span><br>
+
                             <label for="uend_year" class="mt-2">End year</label>
-                            <input class="form-control" id="uend_year" type="date" style="width: 100%;">
+                            <input class="form-control" id="uend_year" type="date" placeholder="Select end year"
+                                style="width: 100%;">
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
-                        <button type="button" class="btn btn-primary" onclick="updateExperience()">Save changes</button>
+                        <button type="button" class="btn btn-primary" id="btnUsubmit" onclick="updateExperience()">Save
+                            changes</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    <script src="../asset/js/jquery-3.7.1.min.js"></script>
+    <script src="../asset/js/flatpickr.js"></script>
     <script src="../asset/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="../asset/js/javascript.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        $("#start_year").flatpickr({
+            enableTime: false,
+            dateFormat: "Y-m-d"
+        });
+        $("#end_year").flatpickr({
+            enableTime: false,
+            dateFormat: "Y-m-d"
+        });
+        $("#ustart_year").flatpickr({
+            enableTime: false,
+            dateFormat: "Y-m-d"
+        });
+        $("#uend_year").flatpickr({
+            enableTime: false,
+            dateFormat: "Y-m-d"
+        });
         function GetDate() {
             fetch('https://mps7.chandalen.dev/api/experiences')
                 .then(res => res.json())
@@ -266,11 +288,18 @@
         GetDate();
 
         function addExperince() {
+            // disabled button when click
+            const btnSubmit = document.getElementById('btnsubmit');
+            btnSubmit.disabled = true;
+
             let title = document.getElementById('title');
             let workplace = document.getElementById('workplace');
             let start_year = document.getElementById('start_year');
             let end_year = document.getElementById('end_year');
 
+            let va_title = document.getElementById('va_title');
+            let va_wp = document.getElementById('va_wp');
+            let va_sy = document.getElementById('va_sy');
             fetch(`https://mps7.chandalen.dev/api/experiences`, {
                 method: 'POST',
                 headers: {
@@ -279,7 +308,7 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    
+
                     "en_title": title.value,
                     "en_workplace": workplace.value,
                     "start_year": start_year.value,
@@ -288,11 +317,85 @@
             })
                 .then(res => res.json())
                 .then(json => {
-                    console.log(json)
-                    alert(json.message);
-                    GetDate();
+                    console.log(json);
+                    if (title.value == "") {
+                        title.classList.add('border');
+                        title.classList.add('border-danger');
+                        va_title.innerHTML = json.data.en_title[1];
+                        va_title.classList.remove('opacity-0');
+
+                        //remove other input validation
+                        workplace.classList.remove('border');
+                        workplace.classList.remove('border-danger');
+                        va_wp.classList.add('opacity-0');
+
+                        start_year.classList.remove('border');
+                        start_year.classList.remove('border-danger');
+                        va_sy.classList.add('opacity-0');
+
+                    } else if (workplace.value == "") {
+                        workplace.classList.add('border');
+                        workplace.classList.add('border-danger');
+                        va_wp.innerHTML = json.data.en_workplace[1];
+                        va_wp.classList.remove('opacity-0');
+
+                        //remove other input validation
+                        title.classList.remove('border');
+                        title.classList.remove('border-danger');
+                        va_title.classList.add('opacity-0');
+
+                        start_year.classList.remove('border');
+                        start_year.classList.remove('border-danger');
+                        va_sy.classList.add('opacity-0');
+
+                    } else if (start_year.value == "") {
+                        start_year.classList.add('border');
+                        start_year.classList.add('border-danger');
+                        va_sy.innerHTML = json.data.start_year[1];
+                        va_sy.classList.remove('opacity-0');
+
+                        //remove other input validation
+                        title.classList.remove('border');
+                        title.classList.remove('border-danger');
+                        va_title.classList.add('opacity-0');
+
+                        workplace.classList.remove('border');
+                        workplace.classList.remove('border-danger');
+                        va_wp.classList.add('opacity-0');
+                    }
+                    else {
+
+                        title.classList.remove('border');
+                        title.classList.remove('border-danger');
+                        va_title.classList.add('opacity-0');
+
+                        workplace.classList.remove('border');
+                        workplace.classList.remove('border-danger');
+                        va_wp.classList.add('opacity-0');
+
+                        start_year.classList.remove('border');
+                        start_year.classList.remove('border-danger');
+                        va_sy.classList.add('opacity-0');
+
+                        title.value = "";
+                        workplace.value = "";
+                        start_year.value = "";
+                        end_year.value = " ";
+
+
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: json.message,
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                        GetDate();
+                    }
                 })
-                .catch(err => console.error('Error:', err));
+                .finally(() => {
+                    btnSubmit.disabled = false; // Enable button after request completes
+                });
 
         }
 
@@ -343,7 +446,9 @@
         let uworkplace = document.getElementById('uworkplace');
         let ustart_year = document.getElementById('ustart_year');
         let uend_year = document.getElementById('uend_year');
+
         function toUpdate(id) {
+
             idUpdate = id;
             fetch('https://mps7.chandalen.dev/api/experiences')
                 .then(res => res.json())
@@ -362,6 +467,12 @@
 
         }
         function updateExperience() {
+            const btnSubmit = document.getElementById('btnUsubmit');
+            btnSubmit.disabled = true;
+
+            let va_title = document.getElementById('uva_title');
+            let va_wp = document.getElementById('uva_wp');
+            let va_sy = document.getElementById('uva_sy');
             console.log(utitle.value);
             fetch(`https://mps7.chandalen.dev/api/experiences/${idUpdate}`, {
                 method: 'PUT',
@@ -380,13 +491,73 @@
             })
                 .then(res => res.json())
                 .then(json => {
-                    bootstrap.Modal.getInstance(
-                        document.getElementById("myModal1")
-                    ).hide();
-                    alert(json.message);
-                    GetDate(); // Refresh user details after updating the avatar
+                    if (utitle.value == "") {
+                        utitle.classList.add('border');
+                        utitle.classList.add('border-danger');
+                        va_title.innerHTML = json.data.en_title[1];
+                        va_title.classList.remove('opacity-0');
+
+                        //remove other input validation
+                        uworkplace.classList.remove('border');
+                        uworkplace.classList.remove('border-danger');
+                        va_wp.classList.add('opacity-0');
+
+                        ustart_year.classList.remove('border');
+                        ustart_year.classList.remove('border-danger');
+                        va_sy.classList.add('opacity-0');
+
+                    } else if (uworkplace.value == "") {
+                        uworkplace.classList.add('border');
+                        uworkplace.classList.add('border-danger');
+                        va_wp.innerHTML = json.data.en_workplace[1];
+                        va_wp.classList.remove('opacity-0');
+
+                        //remove other input validation
+                        utitle.classList.remove('border');
+                        utitle.classList.remove('border-danger');
+                        va_title.classList.add('opacity-0');
+
+                        ustart_year.classList.remove('border');
+                        ustart_year.classList.remove('border-danger');
+                        va_sy.classList.add('opacity-0');
+
+                    } else if (ustart_year.value == "") {
+                        ustart_year.classList.add('border');
+                        ustart_year.classList.add('border-danger');
+                        va_sy.innerHTML = json.data.start_year[1];
+                        va_sy.classList.remove('opacity-0');
+
+                        //remove other input validation
+                        utitle.classList.remove('border');
+                        utitle.classList.remove('border-danger');
+                        va_title.classList.add('opacity-0');
+
+                        uworkplace.classList.remove('border');
+                        uworkplace.classList.remove('border-danger');
+                        va_wp.classList.add('opacity-0');
+                    }
+                    else {
+                        ustart_year.classList.remove('border');
+                        ustart_year.classList.remove('border-danger');
+                        va_sy.classList.add('opacity-0');
+                        ustart_year.value = "";
+
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: json.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        bootstrap.Modal.getInstance(
+                            document.getElementById("myModal1")
+                        ).hide();
+                        GetDate();
+                    }
                 })
-                .catch(err => console.error('Error:', err));
+                .finally(() => {
+                    btnSubmit.disabled = false; // Enable button after request completes
+                });
         }
 
     </script>
