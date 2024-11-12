@@ -183,7 +183,7 @@
         <div class="row mt-3">
             <div class="col-md-4">
                 <div class="d-flex justify-content-center">
-                    <div class="profile-img">
+                    <div class="profile-img rounded-2" style="border: 1.5px solid rgb(86, 170, 244);">
                         <img id="avtadmin" src="#" alt="" />
                     </div>
 
@@ -306,7 +306,12 @@
                 .then(res => res.json())
                 .then(json => {
                     // console.log(json);
-                    document.getElementById('avtadmin').src = json.data.avatar;
+                    if(json.data.avatar== "https://mps7.chandalen.dev/storage/avatar/default.png"){
+                        document.getElementById('avtadmin').src ="../asset/img/frameIMG.webp";
+                    }else{
+                        document.getElementById('avtadmin').src = json.data.avatar;
+
+                    }
                     document.getElementById('adminName').innerHTML = json.data.name;
 
                     document.getElementById('idAd').innerHTML = json.data.id;
@@ -338,7 +343,11 @@
             })
                 .then(res => res.json())
                 .then(json => {
-                    alert(json.message);
+                    Swal.fire({
+                                title: "Updated!",
+                                text: json.message,
+                                icon: "success"
+                            });
                     getme(); 
                 })
                 .catch(err => console.error('Error:', err));
