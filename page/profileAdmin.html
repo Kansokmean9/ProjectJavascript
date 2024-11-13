@@ -415,6 +415,8 @@
         let names = document.getElementById('upName');
         let emails = document.getElementById('upGmail');
         function saveinfo() {
+            const btnSubmit = document.getElementById('saveInfo');
+            btnSubmit.disabled = true;
 
             let va_name = document.getElementById('va_name');
             let va_gmail = document.getElementById('va_gmail');
@@ -439,20 +441,20 @@
                         names.classList.add('border', 'border-danger');
                         va_name.classList.remove('opacity-0');
 
-                    } else{
+                    } else {
                         names.classList.remove('border', 'border-danger');
                         va_name.classList.add('opacity-0');
-                    } 
+                    }
                     if (emails.value == "") {
                         va_gmail.innerHTML = json.data.email[1];
                         emails.classList.add('border', 'border-danger');
                         va_gmail.classList.remove('opacity-0');
-                        
-                    } else if(json.data.email[0]=="The email field must be a valid email address."){
+
+                    } else if (json.data.email[0] == "The email field must be a valid email address.") {
                         va_gmail.innerHTML = json.data.email[0];
                         emails.classList.add('border', 'border-danger');
                         va_gmail.classList.remove('opacity-0');
-                    }else if(json.result){
+                    } else if (json.result) {
                         emails.classList.remove('border', 'border-danger');
                         va_gmail.classList.add('opacity-0');
                         Swal.fire({
@@ -464,19 +466,21 @@
                     }
 
                 })
-                .catch(err => console.error('Error:', err));
+                .finally(() => {
+                    btnSubmit.disabled = false; 
+                });
 
         }
         names.addEventListener("input", function () {
             if (names.value.trim() !== "") {
                 names.classList.remove('border', 'border-danger');
-                        va_name.classList.add('opacity-0');
+                va_name.classList.add('opacity-0');
             }
         });
         emails.addEventListener("input", function () {
             if (emails.value.trim() !== "") {
                 emails.classList.remove('border', 'border-danger');
-                        va_gmail.classList.add('opacity-0');
+                va_gmail.classList.add('opacity-0');
             }
         });
 
@@ -485,6 +489,8 @@
         let newPass = document.getElementById('newPass');
         let cfPass = document.getElementById('cfPass');
         function savePass() {
+            const btnSubmit = document.getElementById('savePass');
+            btnSubmit.disabled = true;
 
             let va_cPass = document.getElementById('va_cPass');
             let va_nPass = document.getElementById('va_nPass');
@@ -550,7 +556,11 @@
                             else {
                                 crPass.classList.remove('border', 'border-danger');
                                 va_cPass.classList.add('opacity-0');
-                                alert(json.message);
+                                Swal.fire({
+                                    title: "Updated!",
+                                    text: json.message,
+                                    icon: "success"
+                                });
                             }
                         }
 
@@ -558,28 +568,30 @@
                     }
 
                 })
-                .catch(err => console.error('Error:', err));
+                .finally(() => {
+                    btnSubmit.disabled = false; 
+                });
 
         }
         crPass.addEventListener("input", function () {
             if (crPass.value.trim() !== "") {
                 crPass.classList.remove('border', 'border-danger');
-                        va_cPass.classList.add('opacity-0');
+                va_cPass.classList.add('opacity-0');
             }
         });
         newPass.addEventListener("input", function () {
             if (newPass.value.trim() !== "") {
                 newPass.classList.remove('border', 'border-danger');
-                        va_nPass.classList.add('opacity-0');
+                va_nPass.classList.add('opacity-0');
             }
         });
         cfPass.addEventListener("input", function () {
             if (cfPass.value.trim() !== "") {
                 cfPass.classList.remove('border', 'border-danger');
-                        va_comPass.classList.add('opacity-0');
+                va_comPass.classList.add('opacity-0');
             }
         });
-        
+
         function logoutbtn() {
             let id = sessionStorage.getItem('Token');
             console.log(id);
