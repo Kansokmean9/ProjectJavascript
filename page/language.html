@@ -148,7 +148,7 @@
                                     <div class="mb-3">
                                         <label for="languagesName" class="form-label">Language</label>
                                         <input type="text" class="form-control" id="languagesName" placeholder="Language" required>
-                                        <span id="va_languagesName" class="opacity-0 text-danger">.</span><br>
+                                        <span id="va_languagesName" class="opacity-0 text-danger"></span><br>
                                     </div>
                                     <div class="mb-3">
                                         <label for="languagesLevel" class="form-label">Level Language</label><br>
@@ -218,6 +218,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+        getLang();
+
         function getLang() {
             fetch('https://mps7.chandalen.dev/api/languages')
                 .then(res => res.json())
@@ -238,7 +240,7 @@
                     document.querySelector('tbody').innerHTML = tr;
                 })
         }
-        getLang();
+
 
         function addLang() {
 
@@ -269,9 +271,19 @@
                         va_languagesName.innerHTML = json.data.en_name[1];
                         va_languagesName.classList.remove('opacity-0');
 
+                    } else {
+                        languagesName.classList.remove('border');
+                        languagesName.classList.remove('border-danger');
+                        va_languagesName.classList.add('opacity-0');
+                        Swal.fire({
+                            title: "Success",
+                            text: "You clicked the button!",
+                            icon: "success"
+                        });
                     }
                 })
                 .catch(err => console.error('Error:', err));
+
 
         }
 
@@ -365,7 +377,11 @@
                     getLang(); // Refresh user details after updating the avatar
                 })
                 .catch(err => console.error('Error:', err));
-
+            Swal.fire({
+                title: "Success",
+                text: "You clicked the button!",
+                icon: "success"
+            });
         }
     </script>
 
