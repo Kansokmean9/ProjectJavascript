@@ -14,17 +14,28 @@
     .cs {
         cursor: pointer;
     }
-
+    
     th {
         color: white;
         padding: 20px;
     }
-    td{
+    
+    td {
         padding: 20px;
     }
-
+    
     table {
         width: 100%;
+    }
+    
+    #va_title,
+    #va_wp,
+    #va_sy,
+    #uva_title,
+    #uva_wp,
+    #uva_sy {
+        color: red;
+        font-size: small;
     }
 </style>
 
@@ -48,8 +59,7 @@
                 <h2 class="welcome" style="font-size: 30px;">Welcome admin <span id="adminName"></span>!</h2>
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
                     <li class="pe-2">
-                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank"
-                            class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
+                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank" class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
                                 class="bi bi-box-arrow-up-right"></i> Open Site</a>
                     </li>
 
@@ -138,12 +148,12 @@
                                     <div class="mb-3">
                                         <label for="languagesName" class="form-label">Language</label>
                                         <input type="text" class="form-control" id="languagesName" placeholder="Language" required>
+                                        <span id="va_languagesName" class="opacity-0 text-danger">.</span><br>
                                     </div>
                                     <div class="mb-3">
                                         <label for="languagesLevel" class="form-label">Level Language</label><br>
                                         <output type="number" id="output" class="output">50</output>
-                                        <input class="w-100" type="range" value="50" min="0" max="100"
-                                            oninput="output.value = this.value">
+                                        <input class="w-100" type="range" value="50" min="0" max="100" oninput="output.value = this.value">
 
                                     </div>
                                     <button type="button" class="btn btn-primary" onclick="addLang()">Add
@@ -182,14 +192,16 @@
                 </div>
                 <div class="modal-body">
                     <form action="PUT" id="updateForm">
-                        <label for="unlanguagesName">Language</label>
-                        <input class="form-control" id="unlanguagesName" type="text" placeholder="New language"
-                            style="width: 100%;">
+                        <div class="mb-2 position-relative">
+                            <label for="unlanguagesName">Language</label>
+                            <input class="form-control" id="unlanguagesName" type="text" placeholder="New language" style="width: 100%;">
+
+
+                        </div>
 
                         <label for="unlanguagesLevel" class="mt-2">Level language</label><br>
                         <output type="number" id="unlanguagesLevel" class="output">50</output>
-                        <input id="rangePercent" class="w-100" type="range" value="50" min="0" max="100"
-                            oninput="unlanguagesLevel.value = this.value">
+                        <input id="rangePercent" class="w-100" type="range" value="50" min="0" max="100" oninput="unlanguagesLevel.value = this.value">
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -206,7 +218,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-
         function getLang() {
             fetch('https://mps7.chandalen.dev/api/languages')
                 .then(res => res.json())
@@ -230,27 +241,35 @@
         getLang();
 
         function addLang() {
+
+
+
             let languagesName = document.getElementById('languagesName');
             let languagesLevel = document.getElementById('output');
-
+            let va_languagesName = document.getElementById('va_languagesName');
 
             fetch(`https://mps7.chandalen.dev/api/languages`, {
-                method: 'POST',
-                headers: {
-                    "Accept": "application/json",
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    "en_name": languagesName.value,
-                    "percent": languagesLevel.value,
+                    method: 'POST',
+                    headers: {
+                        "Accept": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "en_name": languagesName.value,
+                        "percent": languagesLevel.value,
+                    })
                 })
-            })
                 .then(res => res.json())
                 .then(json => {
-                    console.log(json)
-                    alert(json.message);
-                    getLang();
+                    console.log(json);
+                    if (languagesName.value == "") {
+                        languagesName.classList.add('border');
+                        languagesName.classList.add('border-danger');
+                        va_languagesName.innerHTML = json.data.en_name[1];
+                        va_languagesName.classList.remove('opacity-0');
+
+                    }
                 })
                 .catch(err => console.error('Error:', err));
 
@@ -268,14 +287,14 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     fetch(`https://mps7.chandalen.dev/api/languages/${id}`, {
-                        method: 'DELETE',
-                        headers: {
-                            "Accept": "application/json",
-                            "Authorization": `Bearer ${token}`,
-                            "Content-Type": "application/json"
+                            method: 'DELETE',
+                            headers: {
+                                "Accept": "application/json",
+                                "Authorization": `Bearer ${token}`,
+                                "Content-Type": "application/json"
 
-                        }
-                    })
+                            }
+                        })
                         .then(res => res.json())
                         .then(json => {
                             console.log(json); // Log the response to see if delete was successful
@@ -325,24 +344,24 @@
         function updateLang() {
             console.log(unlanguagesName.value);
             fetch(`https://mps7.chandalen.dev/api/languages/${idUpdate}`, {
-                method: 'PUT',
-                headers: {
-                    "Accept": "application/json",
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json"
+                    method: 'PUT',
+                    headers: {
+                        "Accept": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
 
-                },
-                body: JSON.stringify({
-                    "en_name": unlanguagesName.value,
-                    "percent": unlanguagesLevel.value,
+                    },
+                    body: JSON.stringify({
+                        "en_name": unlanguagesName.value,
+                        "percent": unlanguagesLevel.value,
+                    })
                 })
-            })
                 .then(res => res.json())
                 .then(json => {
                     bootstrap.Modal.getInstance(
                         document.getElementById("languages")
                     ).hide();
-                    alert(json.message);
+
                     getLang(); // Refresh user details after updating the avatar
                 })
                 .catch(err => console.error('Error:', err));

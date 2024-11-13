@@ -14,22 +14,21 @@
     .cs {
         cursor: pointer;
     }
-
+    
     th {
-
         color: white;
         padding: 20px;
     }
-
+    
     td {
         padding: 20px;
     }
-
+    
     table {
         width: 100%;
     }
-
     /* validation */
+    
     #va_title,
     #va_wp,
     #va_sy,
@@ -58,8 +57,7 @@
                 <h2 class="welcome" style="font-size: 30px;">Welcome admin <span id="adminName"></span>!</h2>
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
                     <li class="pe-2">
-                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank"
-                            class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
+                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank" class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
                                 class="bi bi-box-arrow-up-right"></i> Open Site</a>
                     </li>
 
@@ -147,32 +145,27 @@
                                     <div class="card-body">
                                         <div class="mb-1 px-2">
                                             <label for="title" class="form-label">Title</label>
-                                            <input type="text" class="form-control" id="title" placeholder="Enter title"
-                                                required>
+                                            <input type="text" class="form-control" id="title" placeholder="Enter title" required>
                                             <span id="va_title" class="opacity-0 text-danger">.</span>
                                         </div>
                                         <div class="mb-1 px-2">
                                             <label for="workplace" class="form-label">Workplace</label>
-                                            <input type="text" class="form-control" id="workplace"
-                                                placeholder="Enter workplace" required>
+                                            <input type="text" class="form-control" id="workplace" placeholder="Enter workplace" required>
                                             <span id="va_wp" class="opacity-0 text-danger">.</span>
                                         </div>
 
                                         <div class="mb-1 px-2">
                                             <label for="start_year" class="form-label">Start year</label>
-                                            <input type="date" class="form-control" placeholder="Select start year"
-                                                id="start_year" required>
+                                            <input type="date" class="form-control" placeholder="Select start year" id="start_year" required>
                                             <span id="va_sy" class="opacity-0 text-danger">.</span>
 
                                         </div>
                                         <div class="mb-3 px-2">
                                             <label for="end_year" class="form-label">End year</label>
-                                            <input type="date" class="form-control" placeholder="Select end year"
-                                                id="end_year" required>
+                                            <input type="date" class="form-control" placeholder="Select end year" id="end_year" required>
                                         </div>
                                         <div class="col-12 px-2 pt-1">
-                                            <button type="button" class="btn btn-primary" id="btnsubmit"
-                                                onclick="addExperince()">Add
+                                            <button type="button" class="btn btn-primary" id="btnsubmit" onclick="addExperince()">Add
                                                 experience</button>
                                         </div>
                                     </div>
@@ -203,28 +196,23 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title text-uppercase fw-bold" id="myModalLabel1"> Update data!</h5>
-                        <button type="button" class="btn-close bg-danger rounded-5" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+                        <button type="button" class="btn-close bg-danger rounded-5" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="PUT" id="updateForm">
                             <label for="utitle">Title</label>
-                            <input class="form-control" id="utitle" type="text" placeholder="New title"
-                                style="width: 100%;">
+                            <input class="form-control" id="utitle" type="text" placeholder="New title" style="width: 100%;">
                             <span id="uva_title" class="opacity-0 text-danger">.</span><br>
                             <label for="uworkplace" class="mt-2">Workplace</label>
-                            <input class="form-control" id="uworkplace" type="text" placeholder="New Workplace"
-                                style="width: 100%;">
+                            <input class="form-control" id="uworkplace" type="text" placeholder="New Workplace" style="width: 100%;">
                             <span id="uva_wp" class="opacity-0 text-danger">.</span><br>
 
                             <label for="ustart_year" class="mt-2">Start year</label>
-                            <input class="form-control" id="ustart_year" type="date" placeholder="Select start year"
-                                style="width: 100%;">
+                            <input class="form-control" id="ustart_year" type="date" placeholder="Select start year" style="width: 100%;">
                             <span id="uva_sy" class="opacity-0 text-danger">.</span><br>
 
                             <label for="uend_year" class="mt-2">End year</label>
-                            <input class="form-control" id="uend_year" type="date" placeholder="Select end year"
-                                style="width: 100%;">
+                            <input class="form-control" id="uend_year" type="date" placeholder="Select end year" style="width: 100%;">
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -257,6 +245,7 @@
             enableTime: false,
             dateFormat: "Y-m-d"
         });
+
         function GetDate() {
             fetch('https://mps7.chandalen.dev/api/experiences')
                 .then(res => res.json())
@@ -301,20 +290,20 @@
             let va_wp = document.getElementById('va_wp');
             let va_sy = document.getElementById('va_sy');
             fetch(`https://mps7.chandalen.dev/api/experiences`, {
-                method: 'POST',
-                headers: {
-                    "Accept": "application/json",
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
+                    method: 'POST',
+                    headers: {
+                        "Accept": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
 
-                    "en_title": title.value,
-                    "en_workplace": workplace.value,
-                    "start_year": start_year.value,
-                    "end_year": end_year.value
+                        "en_title": title.value,
+                        "en_workplace": workplace.value,
+                        "start_year": start_year.value,
+                        "end_year": end_year.value
+                    })
                 })
-            })
                 .then(res => res.json())
                 .then(json => {
                     console.log(json);
@@ -362,8 +351,7 @@
                         workplace.classList.remove('border');
                         workplace.classList.remove('border-danger');
                         va_wp.classList.add('opacity-0');
-                    }
-                    else {
+                    } else {
 
                         title.classList.remove('border');
                         title.classList.remove('border-danger');
@@ -411,17 +399,17 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     fetch(`https://mps7.chandalen.dev/api/experiences/${id}`, {
-                        method: 'DELETE',
-                        headers: {
-                            "Accept": "application/json",
-                            "Authorization": `Bearer ${token}`,
-                            "Content-Type": "application/json"
+                            method: 'DELETE',
+                            headers: {
+                                "Accept": "application/json",
+                                "Authorization": `Bearer ${token}`,
+                                "Content-Type": "application/json"
 
-                        }
-                    })
+                            }
+                        })
                         .then(res => res.json())
                         .then(json => {
-                            console.log(json);  // Log the response to see if delete was successful
+                            console.log(json); // Log the response to see if delete was successful
                             if (json.result) {
                                 Swal.fire({
                                     title: "Deleted!",
@@ -466,6 +454,7 @@
                 })
 
         }
+
         function updateExperience() {
             const btnSubmit = document.getElementById('btnUsubmit');
             btnSubmit.disabled = true;
@@ -475,20 +464,20 @@
             let va_sy = document.getElementById('uva_sy');
             console.log(utitle.value);
             fetch(`https://mps7.chandalen.dev/api/experiences/${idUpdate}`, {
-                method: 'PUT',
-                headers: {
-                    "Accept": "application/json",
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json"
+                    method: 'PUT',
+                    headers: {
+                        "Accept": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
 
-                },
-                body: JSON.stringify({
-                    "en_title": utitle.value,
-                    "en_workplace": uworkplace.value,
-                    "start_year": ustart_year.value,
-                    "end_year": uend_year.value
+                    },
+                    body: JSON.stringify({
+                        "en_title": utitle.value,
+                        "en_workplace": uworkplace.value,
+                        "start_year": ustart_year.value,
+                        "end_year": uend_year.value
+                    })
                 })
-            })
                 .then(res => res.json())
                 .then(json => {
                     if (utitle.value == "") {
@@ -535,8 +524,7 @@
                         uworkplace.classList.remove('border');
                         uworkplace.classList.remove('border-danger');
                         va_wp.classList.add('opacity-0');
-                    }
-                    else {
+                    } else {
                         ustart_year.classList.remove('border');
                         ustart_year.classList.remove('border-danger');
                         va_sy.classList.add('opacity-0');
@@ -559,7 +547,6 @@
                     btnSubmit.disabled = false; // Enable button after request completes
                 });
         }
-
     </script>
 
 
