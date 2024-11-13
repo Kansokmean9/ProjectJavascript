@@ -103,38 +103,32 @@
                 if (json.message == "Invalid input value") {
                     document.getElementById('va_pass').classList.add('opacity-0');
                     va_username.classList.remove('opacity-0');
-                    username.classList.add('border');
-                    username.classList.add('border-danger');
-                    password.classList.remove('border');
-                    password.classList.remove('border-danger');
+                    username.classList.add('border','border-danger');
+                    password.classList.remove('border','border-danger');
 
                     if (username.value == "") {
                         va_username.innerHTML = json.data.email[1];
-                    } else if (!isNaN(username.value)) {
+                    }else if (!isNaN(username.value)) {
                         va_username.innerHTML = 'The email field must be a string.';
-                    } else if (password.value == "") {
-                        alert()
+                    }else if(json.data.email[0] == "The email field must be a valid email address."){
+                        va_username.innerHTML = json.data.email[0];
+
+                    }else{
+                        username.classList.remove('border','border-danger');
                         va_username.classList.add('opacity-0');
+                    } 
+                    if (password.value == "") {
                         document.getElementById('va_pass').classList.remove('opacity-0');
-                        password.classList.add('border');
-                        password.classList.add('border-danger');
-                        username.classList.remove('border');
-                        username.classList.remove('border-danger');
+                        password.classList.add('border','border-danger');
                         document.getElementById('va_pass').innerHTML = json.data.password[1];
 
-                    }
-                    else {
-                        // invalid gmail form
-                        va_username.innerHTML = json.data.email[0];
                     }
                 } else if (json.data.length == 0) {
                     // incorrect pass or username
                     va_username.classList.add('opacity-0');
                     document.getElementById('va_pass').classList.remove('opacity-0');
-                    password.classList.add('border');
-                    password.classList.add('border-danger');
-                    username.classList.remove('border');
-                    username.classList.remove('border-danger');
+                    password.classList.add('border','border-danger');
+                    username.classList.remove('border','border-danger');
                     document.getElementById('va_pass').innerHTML = json.message;
 
                 } else {
@@ -165,7 +159,7 @@
                 }
             })
             .finally(() => {
-                btnSubmit.disabled = false; // Enable button after request completes
+                btnSubmit.disabled = false; 
             });
     }
     function hidepass() {
