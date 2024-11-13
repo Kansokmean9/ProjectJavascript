@@ -28,6 +28,15 @@
     table {
         width: 100%;
     }
+    #va_degree,
+    #va_school,
+    #va_start,
+    #va_degreeE,
+    #va_schoolE,
+    #va_startE{
+        color: red;
+        font-size: small;
+    }
 </style>
 
 <body>
@@ -193,22 +202,22 @@
                 </div>
                 <div class="modal-body">
                     <form action="PUT" id="updateForm">
-                        <label for="uen_degree" class="pb-3">Degree</label>
+                        <label for="uen_degree">Degree</label>
                         <input class="form-control" id="uen_degree" type="text" placeholder="New degree"
                             style="width: 100%;">
                         <span id="va_degreeE" class="opacity-0 text-danger">.</span><br>
 
-                        <label for="uen_shcool" class="pb-3">School</label>
+                        <label for="uen_shcool">School</label>
                         <input class="form-control" id="uen_shcool" type="text" placeholder="New shcool"
                             style="width: 100%;">
                         <span id="va_schoolE" class="opacity-0 text-danger">.</span><br>
 
-                        <label for="ustart_year" class="pb-3">Start year</label>
+                        <label for="ustart_year">Start year</label>
                         <input class="form-control" id="ustart_year" type="date" placeholder="Select start year"
                             style="width: 100%;">
                         <span id="va_startE" class="opacity-0 text-danger">.</span><br>
 
-                        <label for="uend_year" class="pb-3">End year</label>
+                        <label for="uend_year">End year</label>
                         <input class="form-control" id="uend_year" type="date" placeholder="Select end year"
                             style="width: 100%;">
                     </form>
@@ -311,7 +320,7 @@
 
                         //remove other input validation
                         en_school.classList.remove('border','border-danger');
-                        va_start.classList.add('opacity-0');
+                        va_school.classList.add('opacity-0');
 
                         start_year.classList.remove('border','border-danger');
                         va_start.classList.add('opacity-0');

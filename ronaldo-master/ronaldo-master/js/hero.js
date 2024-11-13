@@ -17,10 +17,10 @@ function fetchAbout() {
         // Name header
         const name = document.getElementById('navbar-name');
         let names = document.getElementById('names');
-        name.innerHTML = profile.en_first_name[0];
-        let naa =  profile.en_first_name;
+        name.innerHTML = profile.en_last_name[0];
+        let naa =  profile.en_last_name;
         let result = naa.slice(1);
-        names.innerHTML ="&nbsp;&nbsp; " + result + " " + profile.en_last_name;
+        names.innerHTML ="&nbsp;&nbsp;" + result ;
 
 
         // Image footer
