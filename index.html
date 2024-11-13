@@ -76,6 +76,10 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="asset/bootstrap/js/bootstrap.bundle.js"></script>
 <script>
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+    let va_username = document.getElementById('va_user');
+    let va_pass = document.getElementById('va_pass');
     function adddata() {
         const btnSubmit = document.getElementById('btnsubmit');
         btnSubmit.disabled = true;
@@ -83,12 +87,8 @@
         const form = document.getElementById('loginForm');
         let formData = new FormData(form);
 
-        const username = document.getElementById('username');
-        const password = document.getElementById('password');
         formData.append('email', username.value);
         formData.append('password', password.value);
-        let va_username = document.getElementById('va_user');
-        let va_pass = document.getElementById('va_pass');
 
         fetch('https://mps7.chandalen.dev/api/login', {
             method: 'POST',
@@ -167,6 +167,18 @@
             document.getElementById('hidePass').innerHTML = `<i class="bi bi-eye-slash"></i>`;
         }
     }
+    username.addEventListener("input", function () {
+            if (username.value.trim() !== "") {
+                username.classList.remove('border', 'border-danger');
+                va_username.classList.add('opacity-0');
+            }
+        });
+    password.addEventListener("input", function () {
+            if (password.value.trim() !== "") {
+                password.classList.remove('border', 'border-danger');
+                va_pass.classList.add('opacity-0');
+            }
+        });
 </script>
 
 </html>
