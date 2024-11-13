@@ -138,17 +138,20 @@
                                     <label for="en_degree" class="form-label">Degree</label>
                                     <input type="text" class="form-control" id="en_degree" placeholder="Enter Degree"
                                         required>
+                                        <span id="va_degree" class="opacity-0 text-danger">.</span>
                                 </div>
                                 <div class="mb-1 px-2">
                                     <label for="en_school" class="form-label">School</label>
                                     <input type="text" class="form-control" id="en_school" placeholder="Enter school"
                                         required>
+                                        <span id="va_school" class="opacity-0 text-danger">.</span>
                                 </div>
 
                                 <div class="mb-1 px-2">
                                     <label for="start_year" class="form-label">Start year</label>
                                     <input class="form-control" id="start_year" type="date"
                                         placeholder="Select start year" style="width: 100%;">
+                                        <span id="va_start" class="opacity-0 text-danger">.</span>
                                 </div>
                                 <div class="mb-3 px-2">
                                     <label for="end_year" class="form-label">End year</label>
@@ -156,7 +159,7 @@
                                         style="width: 100%;">
                                 </div>
                                 <div class="col-12 px-2">
-                                    <button type="button" class="btn btn-primary" onclick="addEducation()">Add
+                                    <button type="button"  id="Add" class="btn btn-primary" onclick="addEducation()">Add
                                         education</button>
                                 </div>
                             </div>
@@ -190,26 +193,28 @@
                 </div>
                 <div class="modal-body">
                     <form action="PUT" id="updateForm">
-                        <label for="uen_degree">Degree</label>
-
+                        <label for="uen_degree" class="pb-3">Degree</label>
                         <input class="form-control" id="uen_degree" type="text" placeholder="New degree"
                             style="width: 100%;">
+                        <span id="va_degreeE" class="opacity-0 text-danger">.</span><br>
 
-                        <label for="uen_shcool" class="mt-2">School</label>
+                        <label for="uen_shcool" class="pb-3">School</label>
                         <input class="form-control" id="uen_shcool" type="text" placeholder="New shcool"
                             style="width: 100%;">
+                        <span id="va_schoolE" class="opacity-0 text-danger">.</span><br>
 
-                        <label for="ustart_year" class="mt-2">Start year</label>
+                        <label for="ustart_year" class="pb-3">Start year</label>
                         <input class="form-control" id="ustart_year" type="date" placeholder="Select start year"
                             style="width: 100%;">
+                        <span id="va_startE" class="opacity-0 text-danger">.</span><br>
 
-                        <label for="uend_year" class="mt-2">End year</label>
+                        <label for="uend_year" class="pb-3">End year</label>
                         <input class="form-control" id="uend_year" type="date" placeholder="Select end year"
                             style="width: 100%;">
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="updateEducation()">Save changes</button>
+                    <button type="button" class="btn btn-primary" id="AddE" onclick="updateEducation()">Save changes</button>
                 </div>
             </div>
         </div>
@@ -266,10 +271,17 @@
         GetDate();
         // document.getElementsByTagName("tbody").value;
         function addEducation() {
-            const en_degree = document.getElementById('en_degree').value;
-            const en_school = document.getElementById('en_school').value;
-            const start_year = document.getElementById('start_year').value;
-            const end_year = document.getElementById('end_year').value;
+            const Add=document.getElementById('Add');
+            Add.disabled=true;
+
+            let en_degree = document.getElementById('en_degree');
+            let en_school = document.getElementById('en_school');
+            let start_year = document.getElementById('start_year');
+            let end_year = document.getElementById('end_year');
+
+            let va_degree =document.getElementById('va_degree');
+            let va_school =document.getElementById('va_school');
+            let va_start =document.getElementById('va_start');
 
             fetch(`https://mps7.chandalen.dev/api/educations`, {
                 method: 'POST',
@@ -279,10 +291,10 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    "en_degree": en_degree,
-                    "en_school": en_school,
-                    "start_year": start_year,
-                    "end_year": end_year
+                    "en_degree": en_degree.value,
+                    "en_school": en_school.value,
+                    "start_year": start_year.value,
+                    "end_year": end_year.value
 
                 })
 
@@ -290,12 +302,75 @@
                 .then(res => res.json())
                 .then(json => {
                     console.log(json)
-                    alert(json.message);
-                    GetDate();
+                    // alert(json.message);
+                    if (en_degree.value == "") {
+                        // alert("asas")
+                        en_degree.classList.add('border','border-danger');
+                        va_degree.innerHTML = json.data.en_degree[1];
+                        va_degree.classList.remove('opacity-0');
+
+                        //remove other input validation
+                        en_school.classList.remove('border','border-danger');
+                        va_start.classList.add('opacity-0');
+
+                        start_year.classList.remove('border','border-danger');
+                        va_start.classList.add('opacity-0');
+
+                    } else if (en_school.value == "") {
+                        en_school.classList.add('border','border-danger');
+                        va_school.innerHTML = json.data.en_school[1];
+                        va_school.classList.remove('opacity-0');
+
+                        //remove other input validation
+                        en_degree.classList.remove('border','border-danger');
+                        va_degree.classList.add('opacity-0');
+
+                        start_year.classList.remove('border','border-danger');
+                        va_start.classList.add('opacity-0');
+
+                    } else if (start_year.value == "") {
+                        start_year.classList.add('border','border-danger');
+                        va_start.innerHTML = json.data.start_year[1];
+                        va_start.classList.remove('opacity-0');
+
+                        //remove other input validation
+                        en_degree.classList.remove('border','border-danger');
+                        va_degree.classList.add('opacity-0');
+
+                        en_school.classList.remove('border','border-danger');
+                        va_school.classList.add('opacity-0');
+                    }
+                    else {
+                        en_degree.classList.remove('border','border-danger');
+                        va_degree.classList.add('opacity-0');
+
+                        en_school.classList.remove('border','border-danger');
+                        va_school.classList.add('opacity-0');
+
+                        start_year.classList.remove('border','border-danger');
+                        va_start.classList.add('opacity-0');
+
+                        en_degree.value = "";
+                        en_school.value = "";
+                        start_year.value = "";
+                        end_year.value = "";
+
+
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: json.message,
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                        GetDate();
+                    }
                 })
-                .catch(err => console.error('Error:', err));
+                .finally(() => {
+                    Add.disabled = false; // Enable button after request completes
+                });
 
-
+                GetDate();
         }
         // addEducation();
 
@@ -356,7 +431,6 @@
                         if (element.id == id) {
                             uen_degree.value = element.en_degree;
                             uen_shcool.value = element.en_school;
-
                         }
                     });
 
@@ -365,8 +439,15 @@
         }
         function updateEducation() {
             // console.log(uen_degree.value);
-            console.log(uen_degree.value + ' ' + uen_shcool.value + ' ' + ustart_year.value + " " + uend_year.value);
+            const AddE=document.getElementById('AddE');
+            AddE.disabled=true;
 
+            let va_degree =document.getElementById('va_degreeE');
+            let va_school =document.getElementById('va_schoolE');
+            let va_start =document.getElementById('va_startE');
+
+            // console.log(uen_degree.value + ' ' + uen_shcool.value + ' ' + ustart_year.value + " " + uend_year.value);
+            console.log(uen_degree.value);
             fetch(`https://mps7.chandalen.dev/api/educations/${idUpdate}`, {
                 method: 'PUT',
                 headers: {
@@ -384,13 +465,65 @@
             })
                 .then(res => res.json())
                 .then(json => {
-                    bootstrap.Modal.getInstance(
-                        document.getElementById("myModal1")
-                    ).hide();
-                    alert(json.message);
-                    GetDate(); // Refresh user details after updating the avatar
+                  
+                    if (uen_degree.value == "") {
+                        uen_degree.classList.add('border','border-danger');
+                        va_degree.innerHTML = json.data.en_degree[1];
+                        va_degree.classList.remove('opacity-0');
+
+                        //remove other input validation
+                        uen_shcool.classList.remove('border','border-danger');
+                        va_school.classList.add('opacity-0');
+
+                        ustart_year.classList.remove('border','border-danger');
+                        va_start.classList.add('opacity-0');
+
+                    } else if (uen_shcool.value == "") {
+                        uen_degree.classList.add('border','border-danger');
+                        va_school.innerHTML = json.data.en_school[1];
+                        va_school.classList.remove('opacity-0');
+
+                        //remove other input validation
+                        uen_degree.classList.remove('border','border-danger');
+                        va_degree.classList.add('opacity-0');
+
+                        ustart_year.classList.remove('border','border-danger');
+                        va_start.classList.add('opacity-0');
+
+                    } else if (ustart_year.value == "") {
+                        ustart_year.classList.add('border','border-danger');
+                        va_start.innerHTML = json.data.start_year[1];
+                        va_start.classList.remove('opacity-0');
+
+                        //remove other input validation
+                        uen_degree.classList.remove('border','border-danger');
+                        va_degree.classList.add('opacity-0');
+
+                        uen_shcool.classList.remove('border','border-danger');
+                        va_school.classList.add('opacity-0');
+                    }
+                    else {
+                        ustart_year.classList.remove('border','border-danger');
+                        va_start.classList.add('opacity-0');
+                        ustart_year.value = null;
+
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: json.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        bootstrap.Modal.getInstance(
+                            document.getElementById("myModal1")
+                        ).hide();
+                        GetDate();
+                    }
                 })
-                .catch(err => console.error('Error:', err));
+                .finally(() => {
+                    AddE.disabled = false; // Enable button after request completes
+                });
+                 GetDate();
         }    
     </script>
 </body>
