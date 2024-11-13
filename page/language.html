@@ -108,7 +108,7 @@
                     </a>
                 </li>
                 <li class="nav-item bg-primary">
-                    <a class="nav-link text-white" href="language.html" data-section="language">
+                    <a class="nav-link text-white fw-bold" href="language.html" data-section="language">
                         <i class="bi bi-translate me-2"></i> Language
                     </a>
                 </li>
@@ -146,8 +146,8 @@
                                             oninput="output.value = this.value">
 
                                     </div>
-                                    <button type="submit" class="btn btn-primary" onclick="addSkill()">Add
-                                        Skill</button>
+                                    <button type="button" class="btn btn-primary" onclick="addLang()">Add
+                                        Language</button>
                                 </div>
                             </form>
                             <table border="0" class="bg-primarys">
@@ -177,8 +177,8 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-uppercase" id="myModalLabel1"> Update data!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title text-uppercase fw-bold" id="myModalLabel1"> Update data!</h5>
+                    <button type="button" class="btn-close bg-danger rounded-5" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="PUT" id="updateForm">
@@ -193,8 +193,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
-                    <button type="button" class="btn btn-primary" onclick="updateSkill()">Save changes</button>
+                    <button type="button" class="btn btn-primary" onclick="updateLang()">Save changes</button>
                 </div>
             </div>
         </div>
@@ -207,27 +206,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        // Skill Form Submission
-        const languagesFrom = document.getElementById('languagesFrom');
-        const languagesBody = document.getElementById('languagesBody');
 
-        languagesFrom.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const languagesName = document.getElementById('languagesName').value;
-            const languagesLevel = document.getElementById('languagesLevel').value;
-
-            const newRow = `
-                <tr>
-                    <td>${languagesName}</td>
-                    <td>${languagesLevel}</td>
-                </tr>
-            `;
-
-            languagesBody.innerHTML += newRow;
-            languagesFrom.reset();
-        });
-
-        function getskill() {
+        function getLang() {
             fetch('https://mps7.chandalen.dev/api/languages')
                 .then(res => res.json())
                 .then(json => {
@@ -247,9 +227,9 @@
                     document.querySelector('tbody').innerHTML = tr;
                 })
         }
-        getskill();
+        getLang();
 
-        function addSkill() {
+        function addLang() {
             let languagesName = document.getElementById('languagesName');
             let languagesLevel = document.getElementById('output');
 
@@ -270,7 +250,7 @@
                 .then(json => {
                     console.log(json)
                     alert(json.message);
-                    getskill();
+                    getLang();
                 })
                 .catch(err => console.error('Error:', err));
 
@@ -305,7 +285,7 @@
                                     text: json.message,
                                     icon: "success"
                                 });
-                                getskill(); // Refresh data
+                                getLang(); // Refresh data
                             } else {
                                 Swal.fire("Error!", "Failed to delete experience.", "error");
                             }
@@ -342,7 +322,7 @@
 
         }
 
-        function updateSkill() {
+        function updateLang() {
             console.log(unlanguagesName.value);
             fetch(`https://mps7.chandalen.dev/api/languages/${idUpdate}`, {
                 method: 'PUT',
@@ -363,7 +343,7 @@
                         document.getElementById("languages")
                     ).hide();
                     alert(json.message);
-                    getskill(); // Refresh user details after updating the avatar
+                    getLang(); // Refresh user details after updating the avatar
                 })
                 .catch(err => console.error('Error:', err));
 

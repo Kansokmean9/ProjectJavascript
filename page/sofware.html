@@ -94,7 +94,7 @@
                     </a>
                 </li>
                 <li class="nav-item bg-primary">
-                    <a class="nav-link text-white" href="sofware.html" data-section="software">
+                    <a class="nav-link text-white fw-bold" href="sofware.html" data-section="software">
                         <i class="bi bi-plugin me-2"></i> Software
                     </a>
                 </li>
@@ -129,17 +129,17 @@
                         <form id="subjectForm" class="card  mb-4">
                             <div class="card-body">
                                 <div class="mb-3">
-                                    <label for="skillName" class="form-label">Software Name</label>
-                                    <input type="text" class="form-control" id="skillName" placeholder="Enter software" required>
+                                    <label for="softName" class="form-label">Software Name</label>
+                                    <input type="text" class="form-control" id="softName" placeholder="Enter software" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="skillLevel" class="form-label">Level software</label><br>
+                                    <label for="softLevel" class="form-label">Level software</label><br>
                                     <output type="number" id="output" class="output">50</output>
                                     <input class="w-100" type="range" value="50" min="0" max="100"
                                         oninput="output.value = this.value">
 
                                 </div>
-                                <button type="submit" class="btn btn-primary" onclick="addSkill()">Add Subject</button>
+                                <button type="button" class="btn btn-primary" onclick="addSoft()">Add software</button>
                             </div>
                         </form>
                         <table border="0" class="bg-primarys">
@@ -162,24 +162,23 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title text-uppercase" id="myModalLabel1"> Update data!</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title text-uppercase fw-bold" id="myModalLabel1"> Update data!</h5>
+                        <button type="button" class="btn-close bg-danger rounded-5" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="PUT" id="updateForm">
-                            <label for="unskillname">Software Name</label>
-                            <input class="form-control" id="unskillname" type="text" placeholder="New software"
+                            <label for="usoftname">Software Name</label>
+                            <input class="form-control" id="usoftname" type="text" placeholder="New software"
                                 style="width: 100%;">
 
-                            <label for="unskillLevel" class="mt-2">Level software</label><br>
-                            <output type="number" id="unskillLevel" class="output">50</output>
+                            <label for="unSoftLevel" class="mt-2">Level software</label><br>
+                            <output type="number" id="unSoftLevel" class="output">50</output>
                             <input id="rangePercent" class="w-100" type="range" value="50" min="0" max="100"
-                                oninput="unskillLevel.value = this.value">
+                                oninput="unSoftLevel.value = this.value">
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
-                        <button type="button" class="btn btn-primary" onclick="updateSkill()">Save changes</button>
+                        <button type="button" class="btn btn-primary" onclick="updateSoftware()">Save changes</button>
                     </div>
                 </div>
             </div>
@@ -199,13 +198,13 @@
 
         subjectForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const skillName = document.getElementById('skillName').value;
-            const skillLevel = document.getElementById('skillLevel').value;
+            const softName = document.getElementById('softName').value;
+            const softLevel = document.getElementById('softLevel').value;
 
             const newRow = `
                 <tr>
-                    <td>${skillName}</td>
-                    <td>${skillLevel}</td>
+                    <td>${softName}</td>
+                    <td>${softLevel}</td>
                 </tr>
             `;
 
@@ -213,7 +212,7 @@
             subjectForm.reset();
         });
 
-        function getskill() {
+        function getSoftware() {
             fetch('https://mps7.chandalen.dev/api/softwares')
                 .then(res => res.json())
                 .then(json => {
@@ -233,11 +232,11 @@
                     document.querySelector('tbody').innerHTML = tr;
                 })
         }
-        getskill();
+        getSoftware();
 
-        function addSkill() {
-            let skillName = document.getElementById('skillName');
-            let skillLevel = document.getElementById('output');
+        function addSoft() {
+            let softName = document.getElementById('softName');
+            let softLevel = document.getElementById('output');
 
 
             fetch(`https://mps7.chandalen.dev/api/softwares/`, {
@@ -248,15 +247,15 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    "name": skillName.value,
-                    "percent": skillLevel.value,
+                    "name": softName.value,
+                    "percent": softLevel.value,
                 })
             })
                 .then(res => res.json())
                 .then(json => {
                     console.log(json)
                     alert(json.message);
-                    getskill();
+                    getSoftware();
                 })
                 .catch(err => console.error('Error:', err));
             
@@ -291,7 +290,7 @@
                                     text: json.message,
                                     icon: "success"
                                 });
-                                getskill(); // Refresh data
+                                getSoftware(); // Refresh data
                             } else {
                                 Swal.fire("Error!", "Failed to delete experience.", "error");
                             }
@@ -306,8 +305,8 @@
 
         /////update////////
         let idUpdate = 0;
-        let unskillname = document.getElementById('unskillname');
-        let unskillLevel = document.getElementById('unskillLevel');
+        let usoftname = document.getElementById('usoftname');
+        let unSoftLevel = document.getElementById('unSoftLevel');
 
         function toUpdate(id) {
             idUpdate = id;
@@ -318,8 +317,8 @@
                     json.data.forEach(element => {
 
                         if (element.id == id) {
-                            unskillname.value = element.name;
-                            unskillLevel.value = element.percent;
+                            usoftname.value = element.name;
+                            unSoftLevel.value = element.percent;
                             document.getElementById('rangePercent').value = element.percent;
                         }
                     });
@@ -328,8 +327,8 @@
 
         }
 
-        function updateSkill() {
-            console.log(unskillname.value);
+        function updateSoftware() {
+            console.log(usoftname.value);
             fetch(`https://mps7.chandalen.dev/api/softwares/${idUpdate}`, {
                 method: 'PUT',
                 headers: {
@@ -339,8 +338,8 @@
 
                 },
                 body: JSON.stringify({
-                    "name": unskillname.value,
-                    "percent": unskillLevel.value,
+                    "name": usoftname.value,
+                    "percent": unSoftLevel.value,
                 })
             })
                 .then(res => res.json())
@@ -349,7 +348,7 @@
                         document.getElementById("myModal1")
                     ).hide();
                     alert(json.message);
-                    getskill(); // Refresh user details after updating the avatar
+                    getSoftware(); // Refresh user details after updating the avatar
                 })
                 .catch(err => console.error('Error:', err));
 

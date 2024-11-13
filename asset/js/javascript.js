@@ -33,7 +33,11 @@ fetch(`https://mps7.chandalen.dev/api/me`, {
     .then(res => res.json())
     .then(json => {
         // console.log(json);
-        document.getElementById('avtadmin').src = json.data.avatar;
+        if(json.data.avatar== "https://mps7.chandalen.dev/storage/avatar/default.png"){
+            document.getElementById('avtadmin').src ="../asset/img/frameIMG.webp";
+        }else{
+            document.getElementById('avtadmin').src = json.data.avatar;
+        }
         document.getElementById('adminName').innerHTML = json.data.name;
 
     })

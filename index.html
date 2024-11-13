@@ -101,31 +101,41 @@
             .then(json => {
                 console.log(json);
                 if (json.message == "Invalid input value") {
-                        document.getElementById('va_pass').classList.add('opacity-0');
-                        va_username.classList.remove('opacity-0');
-                        username.classList.add('border');
-                        username.classList.add('border-danger');
-                        password.classList.remove('border');
-                        password.classList.remove('border-danger');
+                    document.getElementById('va_pass').classList.add('opacity-0');
+                    va_username.classList.remove('opacity-0');
+                    username.classList.add('border');
+                    username.classList.add('border-danger');
+                    password.classList.remove('border');
+                    password.classList.remove('border-danger');
 
-                        if (username.value == "") {
-                            va_username.innerHTML = json.data.email[1];
-                        } else if (!isNaN(username.value)) {
-                            va_username.innerHTML = 'The email field must be a string.';
-                        }
-                        else{
-                            // invalid gmail form
-                            va_username.innerHTML = json.data.email[0];
-                        }
-                    } else if (json.data.length == 0) {
-                        // incorrect pass or username
+                    if (username.value == "") {
+                        va_username.innerHTML = json.data.email[1];
+                    } else if (!isNaN(username.value)) {
+                        va_username.innerHTML = 'The email field must be a string.';
+                    } else if (password.value == "") {
+                        alert()
                         va_username.classList.add('opacity-0');
                         document.getElementById('va_pass').classList.remove('opacity-0');
                         password.classList.add('border');
                         password.classList.add('border-danger');
                         username.classList.remove('border');
                         username.classList.remove('border-danger');
-                        document.getElementById('va_pass').innerHTML = json.message;
+                        document.getElementById('va_pass').innerHTML = json.data.password[1];
+
+                    }
+                    else {
+                        // invalid gmail form
+                        va_username.innerHTML = json.data.email[0];
+                    }
+                } else if (json.data.length == 0) {
+                    // incorrect pass or username
+                    va_username.classList.add('opacity-0');
+                    document.getElementById('va_pass').classList.remove('opacity-0');
+                    password.classList.add('border');
+                    password.classList.add('border-danger');
+                    username.classList.remove('border');
+                    username.classList.remove('border-danger');
+                    document.getElementById('va_pass').innerHTML = json.message;
 
                 } else {
                     let timerInterval;
@@ -169,5 +179,4 @@
         }
     }
 </script>
-
 </html>

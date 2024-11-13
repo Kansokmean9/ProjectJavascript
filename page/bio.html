@@ -9,7 +9,17 @@
     <link href="../asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../asset/style/style.css">
 </head>
-
+<style>
+    #va_aboutTitle,
+    #va_heroBio,
+    #va_aboutSub,
+    #va_aboutBio,
+    #va_logo1,
+    #va_logo2 {
+        color: red;
+        font-size: small;
+    }
+</style>
 
 <body>
 
@@ -30,8 +40,9 @@
                 <h2 class="welcome" style="font-size: 30px;">Welcome admin <span id="adminName"></span>!</h2>
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
                     <li class="pe-2">
-                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank" class="btn btn-dark rounded-5"
-                            style="height: 30px; line-height: 10px;"><i class="bi bi-box-arrow-up-right"></i> Open
+                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank"
+                            class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
+                                class="bi bi-box-arrow-up-right"></i> Open
                             Site</a>
                     </li>
 
@@ -100,7 +111,7 @@
                     </a>
                 </li>
                 <li class="nav-item bg-primary">
-                    <a class="nav-link text-white" href="bio.html" data-section="biography">
+                    <a class="nav-link text-white fw-bold" href="bio.html" data-section="biography">
                         <i class="bi bi-file-text me-2"></i> Biography
                     </a>
                 </li>
@@ -116,23 +127,32 @@
                         <h3 class="mb-3 text-db text-primary">Biography</h3>
                         <form id="bioForm" class="card mb-4">
                             <div class="card-body">
-                                <div class="mb-3">
+                                <div class="mb-1">
                                     <label for="heorBio" class="form-label">Hero biography</label>
-                                    <input class="form-control" type="text" id="heorBio">
+                                    <input class="form-control" type="text" id="heorBio"
+                                        placeholder="Input hero biography">
+                                    <span id="va_heroBio" class="opacity-0">.</span>
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-1">
                                     <label for="aboutTitle" class="form-label">About title</label>
-                                    <input class="form-control" type="text" id="aboutTitle">
+                                    <input class="form-control" type="text" id="aboutTitle"
+                                        placeholder="Input about title">
+                                    <span id="va_aboutTitle" class="opacity-0">.</span>
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-1">
                                     <label for="subtitle" class="form-label">About subtitle</label>
-                                    <textarea class="form-control" type="text" id="subtitle" rows="4"></textarea>
+                                    <textarea class="form-control" type="text" id="subtitle" rows="4"
+                                        style="resize: none;" placeholder="Input about subtitle"></textarea>
+                                    <span id="va_aboutSub" class="opacity-0">.</span>
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-1">
                                     <label for="aboutBio" class="form-label">About biography</label>
-                                    <textarea class="form-control" type="text" id="aboutBio" rows="5"></textarea>
+                                    <textarea class="form-control" type="text" id="aboutBio" rows="5"
+                                        style="resize: none;" placeholder="Input about biography"></textarea>
+                                    <span id="va_aboutBio" class="opacity-0">.</span>
                                 </div>
-                                <button type="button" class="btn btn-primary" onclick="updateBio()">Save biography</button>
+                                <button type="button" class="btn btn-primary" onclick="updateBio()">Save
+                                    biography</button>
 
 
                             </div>
@@ -140,31 +160,37 @@
                         <div class="card">
                             <div class="card-body">
                                 <form action="PUT" id="logoSkillform">
-                                    <div class="d-flex align-items-center">
-                                        <div class="mb-3">
-                                            <label for="skilllogo1" class="form-label">Skill two logo</label><br>
-                                            <input class="form-control" type="file" id="skilllogo1">
+                                    <div class="row flex-column">
+                                        <div class="col-6 d-flex align-items-center">
+                                            <div class="mb-0">
+                                                <label for="skilllogo1" class="form-label">Skill two logo</label><br>
+                                                <input class="form-control" type="file" id="skilllogo1">
+                                                <span id="va_logo1" class="opacity-0">aa</span>
 
+                                            </div>
+                                            <div class="h-100 d-flex align-items-center ms-3" style="height: 50px;">
+                                                <img id="logo1" src="#"
+                                                    height="50px" alt="">
+                                            </div>
                                         </div>
-                                        <div class="h-100  border ms-3" style="height: 50px;">
-                                            <img id="logo1" src="https://mps7.chandalen.dev/storage/skill/vue.png"
-                                                height="50px" alt="">
+                                        <button type="button" style="width: 115px; height: 35px;"
+                                            class="ms-2 btn btn-primary" onclick="updateLogo1()">Save <i class="bi bi-floppy" style="font-size: small;"></i></button>
+                                        <div class="col-6 mt-4 d-flex align-items-center">
+                                            <div class="mb-0">
+                                                <label for="skilllogo2" class="form-label">Skill two logo</label><br>
+                                                <input class="form-control" type="file" id="skilllogo2">
+                                                <span id="va_logo2" class="opacity-0">aa</span>
+                                            </div>
+                                            <div class="h-100  d-flex align-items-center ms-3" style="height: 50px;">
+                                                <img id="logo2"
+                                                    src="#"
+                                                    height="50px" alt="">
+                                            </div>
                                         </div>
+                                        <button type="button" style="width: 115px; height: 35px;"
+                                            class="ms-2 btn btn-primary" onclick="updatelogo2()">Save <i class="bi bi-floppy" style="font-size: small;"></i></button>
                                     </div>
-                                    <div class="d-flex align-items-center">
-                                        <div class="mb-3">
-                                            <label for="skilllogo2" class="form-label">Skill two logo</label><br>
-                                            <input class="form-control" type="file" id="skilllogo2">
 
-                                        </div>
-                                        <div class="h-100  border ms-3" style="height: 50px;">
-                                            <img id="logo2"
-                                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/2048px-HTML5_logo_and_wordmark.svg.png"
-                                                height="50px" alt="">
-                                        </div>
-                                    </div>
-                                    <button type="button" class="btn btn-primary" onclick="updateLogo()">Save
-                                        logo</button>
                                 </form>
                             </div>
                         </div>
@@ -178,6 +204,7 @@
 
     <script src="../asset/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="../asset/js/javascript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         function getme() {
@@ -205,10 +232,15 @@
         getme();
 
         function updateBio() {
-            let heorBio = document.getElementById('heorBio').value;
-            let aboutTitle = document.getElementById('aboutTitle').value;
-            let aboutBio = document.getElementById('aboutBio').value;
-            let subtitle = document.getElementById('subtitle').value;
+            let heorBio = document.getElementById('heorBio');
+            let aboutTitle = document.getElementById('aboutTitle');
+            let aboutBio = document.getElementById('aboutBio');
+            let subtitle = document.getElementById('subtitle');
+
+            let va_heroBio = document.getElementById('va_heroBio');
+            let va_aboutTitle = document.getElementById('va_aboutTitle');
+            let va_aboutBio = document.getElementById('va_aboutBio');
+            let va_aboutSub = document.getElementById('va_aboutSub');
             fetch(`https://mps7.chandalen.dev/api/biographies`, {
                 method: 'PUT',
                 headers: {
@@ -217,49 +249,147 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    "en_hero_bio": heorBio,
-                    "en_about_title": aboutTitle,
-                    "en_about_bio": aboutBio,
-                    "en_about_sub_title": subtitle,
-                    "km_hero_bio": heorBio,
-                    "km_about_title": aboutTitle,
-                    "km_about_bio": aboutBio,
-                    "km_about_sub_title": subtitle
+                    "en_hero_bio": heorBio.value,
+                    "en_about_title": aboutTitle.value,
+                    "en_about_bio": aboutBio.value,
+                    "en_about_sub_title": subtitle.value,
+                    "km_hero_bio": heorBio.value,
+                    "km_about_title": aboutTitle.value,
+                    "km_about_bio": aboutBio.value,
+                    "km_about_sub_title": subtitle.value
 
                 })
             })
                 .then(res => res.json())
                 .then(json => {
                     console.log(json)
-                    alert(json.message);
-                    getme();
+                    if (heorBio.value == "") {
+                        heorBio.classList.add('border', 'border-danger');
+                        va_heroBio.classList.remove('opacity-0');
+                        va_heroBio.innerHTML = json.data.en_hero_bio[1];
+
+                        //remove other input validation
+                        aboutTitle.classList.remove('border', 'border-danger');
+                        va_aboutTitle.classList.add('opacity-0');
+
+                        aboutBio.classList.remove('border', 'border-danger');
+                        va_aboutBio.classList.add('opacity-0');
+
+                        subtitle.classList.remove('border', 'border-danger');
+                        va_aboutSub.classList.add('opacity-0');
+
+                    } else if (aboutTitle.value == "") {
+                        aboutTitle.classList.add('border', 'border-danger');
+                        va_aboutTitle.classList.remove('opacity-0');
+                        va_aboutTitle.innerHTML = json.data.en_about_title[1];
+
+                        heorBio.classList.remove('border', 'border-danger');
+                        va_heroBio.classList.add('opacity-0');
+
+                        aboutBio.classList.remove('border', 'border-danger');
+                        va_aboutBio.classList.add('opacity-0');
+
+                        subtitle.classList.remove('border', 'border-danger');
+                        va_aboutSub.classList.add('opacity-0');
+
+                    } else if (subtitle.value == "") {
+                        subtitle.classList.add('border', 'border-danger');
+                        va_aboutSub.classList.remove('opacity-0');
+                        va_aboutSub.innerHTML = json.data.en_about_sub_title[1];
+
+                        heorBio.classList.remove('border', 'border-danger');
+                        va_heroBio.classList.add('opacity-0');
+
+                        aboutTitle.classList.remove('border', 'border-danger');
+                        va_aboutTitle.classList.add('opacity-0');
+
+                        aboutBio.classList.remove('border', 'border-danger');
+                        va_aboutBio.classList.add('opacity-0');
+
+                    } else if (aboutBio.value == "") {
+                        aboutBio.classList.add('border', 'border-danger');
+                        va_aboutBio.classList.remove('opacity-0');
+                        va_aboutBio.innerHTML = json.data.en_about_bio[1];
+
+                        heorBio.classList.remove('border', 'border-danger');
+                        va_heroBio.classList.add('opacity-0');
+
+                        aboutTitle.classList.remove('border', 'border-danger');
+                        va_aboutTitle.classList.add('opacity-0');
+
+                        subtitle.classList.remove('border', 'border-danger');
+                        va_aboutSub.classList.add('opacity-0');
+
+
+
+                    } else {
+                        aboutBio.classList.remove('border', 'border-danger');
+                        va_aboutBio.classList.add('opacity-0');
+                        heorBio.classList.remove('border', 'border-danger');
+                        va_heroBio.classList.add('opacity-0');
+                        aboutTitle.classList.remove('border', 'border-danger');
+                        va_aboutTitle.classList.add('opacity-0');
+                        subtitle.classList.remove('border', 'border-danger');
+                        va_aboutSub.classList.add('opacity-0');
+                        getme();
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: json.message,
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                        
+                    }
                 })
-                .catch(err => console.error('Error:', err));
+            // .catch(err => console.error('Error:', err));
         }
-        function updateLogo() {
+        function updateLogo1() {
             const form = document.getElementById('logoSkillform');
             const formData = new FormData(form);
             let logo1 = document.getElementById('skilllogo1');
-            let logo2 = document.getElementById('skilllogo2');
-            {
-                if (logo1.files.length > 0) {
-                    formData.append('logo', logo1.files[0]);
-                }
-                fetch(`https://mps7.chandalen.dev/api/biographies/skill-logo-one`, {
-                    method: 'POST',
-                    headers: {
-                        "Accept": "application/json",
-                        "Authorization": `Bearer ${token}`
-                    },
-                    body: formData
-                })
-                    .then(res => res.json())
-                    .then(json => {
-                        alert(json.message);
-                        getme(); // Refresh user details after updating the avatar
-                    })
-                    .catch(err => console.error('Error:', err));
+
+            let va_logo1 = document.getElementById('va_logo1');
+            if (logo1.files.length > 0) {
+                formData.append('logo', logo1.files[0]);
             }
+            fetch(`https://mps7.chandalen.dev/api/biographies/skill-logo-one`, {
+                method: 'POST',
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: formData
+            })
+                .then(res => res.json())
+                .then(json => {
+                    if (json.message == "Invalid input value") {
+                        va_logo1.innerHTML = json.data.logo[0];
+                        va_logo1.classList.remove('opacity-0');
+                        logo1.classList.add('border', 'border-danger')
+                    }else{
+                            va_logo1.classList.add('opacity-0');
+                            logo1.classList.remove('border', 'border-danger');
+                            logo1.value = '';
+                        getme();
+                            Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: json.message,
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                            
+                        }
+                })
+                .catch(err => console.error('Error:', err));
+        }
+        function updatelogo2() {
+            const form = document.getElementById('logoSkillform');
+            const formData = new FormData(form);
+            let logo2 = document.getElementById('skilllogo2');
+            let va_logo2 = document.getElementById('va_logo2');
+
             {
                 if (logo2.files.length > 0) {
                     formData.append('logo', logo2.files[0]);
@@ -274,8 +404,24 @@
                 })
                     .then(res => res.json())
                     .then(json => {
-                        alert(json.message);
-                        getme(); // Refresh user details after updating the avatar
+                        if (json.message == "Invalid input value") {
+                            va_logo2.innerHTML = json.data.logo[0];
+                            va_logo2.classList.remove('opacity-0');
+                            logo2.classList.add('border', 'border-danger');
+                        }else{
+                            va_logo2.classList.add('opacity-0');
+                            logo2.classList.remove('border', 'border-danger');
+                            logo2.value = '';
+                            getme();
+                            Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: json.message,
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                           
+                        }
                     })
                     .catch(err => console.error('Error:', err));
             }

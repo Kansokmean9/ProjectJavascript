@@ -84,7 +84,7 @@
                     </a>
                 </li>
                 <li class="nav-item bg-primary">
-                    <a class="nav-link text-white" href="skill.html" data-section="skills">
+                    <a class="nav-link text-white fw-bold" href="skill.html" data-section="skills">
                         <i class="bi bi-briefcase me-2"></i> Skills
                     </a>
                 </li>
@@ -139,7 +139,7 @@
                                     <input class="w-100" type="range" value="50" min="0" max="100" oninput="output.value = this.value">
 
                                 </div>
-                                <button type="submit" class="btn btn-primary" onclick="addSkill()">Add Skill</button>
+                                <button type="button" class="btn btn-primary" onclick="addSkill()">Add skill</button>
                             </div>
                         </form>
                         <table border="0" class="bg-primarys">
@@ -162,8 +162,8 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title text-uppercase" id="myModalLabel1"> Update data!</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title text-uppercase fw-bold" id="myModalLabel1"> Update data!</h5>
+                        <button type="button" class="btn-close bg-danger rounded-5" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="PUT" id="updateForm">
@@ -176,7 +176,6 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
                         <button type="button" class="btn btn-primary" onclick="updateSkill()">Save changes</button>
                     </div>
                 </div>

@@ -10938,9 +10938,9 @@ h5,
 .navbar-brand:after {
   position: absolute;
   top: 50%;
-  left: -12px;
-  width: 50px;
-  height: 50px;
+  left: -10px;
+  width: 40px;
+  height: 40px;
   content: "";
   background: #3e64ff;
   z-index: -1;
@@ -11839,7 +11839,7 @@ textarea.form-control {
 }
 
 .ftco-section {
-  padding: 7em 0;
+  padding: 4em 0;
   position: relative;
 }
 @media (max-width: 767.98px) {
