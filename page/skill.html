@@ -10,19 +10,26 @@
     <link rel="stylesheet" href="../asset/style/style.css">
 </head>
 <style>
-    .cs{
-        cursor: pointer;
-    }
     th {
         color: white;
         padding: 20px;
     }
-    td{
+
+    td {
         padding: 20px;
     }
-    
+
     table {
         width: 100%;
+    }
+
+    #nodata {
+        height: 288px;
+        display: flex;
+        color: gray;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 </style>
 
@@ -45,7 +52,8 @@
                 <h2 class="welcome" style="font-size: 30px;">Welcome admin <span id="adminName"></span>!</h2>
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
                     <li class="pe-2">
-                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank" class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
+                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank"
+                            class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
                                 class="bi bi-box-arrow-up-right"></i> Open Site</a>
                     </li>
 
@@ -65,7 +73,6 @@
             <button id="closeSidebar" class="btn btn-light d-xl-none mb-3 btn-close-bar">
                 <i class="bi bi-chevron-left"></i>
             </button>
-            <!-- <h3 class="text-center my-4 text-db">Admin Portfolio</h3> -->
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link text-white" href="dashboard.html" data-section="dashboard">
@@ -126,17 +133,19 @@
             <main class="container-fluid py-4">
                 <div id="dashboardContent">
                     <div id="skillsContent">
-                        <h3 class="mb-4 text-db text-primary">Skills Management</h3>
+                        <h3 class="mb-3 text-db sec-title">Skills Management</h3>
                         <form id="skillForm" class="card  mb-4">
                             <div class="card-body">
                                 <div class="mb-3">
                                     <label for="skillName" class="form-label">Skill Name</label>
-                                    <input type="text" class="form-control" id="skillName" placeholder="Enter skill name" required>
+                                    <input type="text" class="form-control" id="skillName"
+                                        placeholder="Enter skill name" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="skillLevel" class="form-label">Percent Skill</label><br>
                                     <output type="number" id="output" class="output">50</output>
-                                    <input class="w-100" type="range" value="50" min="0" max="100" oninput="output.value = this.value">
+                                    <input class="w-100" type="range" value="50" min="0" max="100"
+                                        oninput="output.value = this.value">
 
                                 </div>
                                 <button type="button" class="btn btn-primary" onclick="addSkill()">Add skill</button>
@@ -153,6 +162,10 @@
 
                             </tbody>
                         </table>
+                        <div id="nodata" class="d-none bg-body-tertiary rounded">
+                            <i class="bi bi-database-dash" style="font-size: 50px;"></i>
+                            <h3>No data avilable.</h3>
+                        </div>
                     </div>
                 </div>
             </main>
@@ -163,16 +176,19 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title text-uppercase fw-bold" id="myModalLabel1"> Update data!</h5>
-                        <button type="button" class="btn-close bg-danger rounded-5" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close bg-danger rounded-5" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="PUT" id="updateForm">
                             <label for="unskillname">Skill Name</label>
-                            <input class="form-control" id="unskillname" type="text" placeholder="New skill name" style="width: 100%;">
+                            <input class="form-control" id="unskillname" type="text" placeholder="New skill name"
+                                style="width: 100%;">
 
                             <label for="unskillLevel" class="mt-2">Percent Skill</label><br>
                             <output type="number" id="unskillLevel" class="output">50</output>
-                            <input id="rangePercent" class="w-100" type="range" value="50" min="0" max="100" oninput="unskillLevel.value = this.value">
+                            <input id="rangePercent" class="w-100" type="range" value="50" min="0" max="100"
+                                oninput="unskillLevel.value = this.value">
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -191,7 +207,7 @@
 
 
     <script>
-     
+
 
         function getskill() {
             fetch('https://mps7.chandalen.dev/api/skills')
@@ -211,6 +227,11 @@
             </tr>`;
                     });
                     document.querySelector('tbody').innerHTML = tr;
+                    if (tr == '') {
+                        document.getElementById('nodata').classList.remove('d-none');
+                    } else {
+                        document.getElementById('nodata').classList.add('d-none');
+                    }
                 })
         }
         getskill();
@@ -221,17 +242,17 @@
 
 
             fetch(`https://mps7.chandalen.dev/api/skills`, {
-                    method: 'POST',
-                    headers: {
-                        "Accept": "application/json",
-                        "Authorization": `Bearer ${token}`,
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        "name": skillName.value,
-                        "percent": skillLevel.value,
-                    })
+                method: 'POST',
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "name": skillName.value,
+                    "percent": skillLevel.value,
                 })
+            })
                 .then(res => res.json())
                 .then(json => {
                     console.log(json)
@@ -254,14 +275,14 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     fetch(`https://mps7.chandalen.dev/api/skills/${id}`, {
-                            method: 'DELETE',
-                            headers: {
-                                "Accept": "application/json",
-                                "Authorization": `Bearer ${token}`,
-                                "Content-Type": "application/json"
+                        method: 'DELETE',
+                        headers: {
+                            "Accept": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                            "Content-Type": "application/json"
 
-                            }
-                        })
+                        }
+                    })
                         .then(res => res.json())
                         .then(json => {
                             console.log(json); // Log the response to see if delete was successful
@@ -311,18 +332,18 @@
         function updateSkill() {
             console.log(unskillname.value);
             fetch(`https://mps7.chandalen.dev/api/skills/${idUpdate}`, {
-                    method: 'PUT',
-                    headers: {
-                        "Accept": "application/json",
-                        "Authorization": `Bearer ${token}`,
-                        "Content-Type": "application/json"
+                method: 'PUT',
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
 
-                    },
-                    body: JSON.stringify({
-                        "name": unskillname.value,
-                        "percent": unskillLevel.value,
-                    })
+                },
+                body: JSON.stringify({
+                    "name": unskillname.value,
+                    "percent": unskillLevel.value,
                 })
+            })
                 .then(res => res.json())
                 .then(json => {
                     bootstrap.Modal.getInstance(

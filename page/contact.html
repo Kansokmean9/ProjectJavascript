@@ -12,9 +12,6 @@
 
 </head>
 <style>
-    .cs{
-        cursor: pointer;
-    }
     th {
 
         color: white;
@@ -27,6 +24,14 @@
 
     .bg-primarys {
         background: linear-gradient(118deg, rgb(10, 111, 199) 0%, rgba(53, 158, 231, 1) 99%);
+    }
+    #nodata{
+        height: 558px;
+        display: flex;
+        color: gray;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 </style>
 
@@ -130,7 +135,7 @@
             <main class="container-fluid py-4">
                 <div id="dashboardContent">
                     <div id="contactContent">
-                        <h3 class="mb-3 text-db text-primary">Contact Information</h3>
+                        <h3 class="mb-3 text-db sec-title">Contact Information</h3>
 
                         <table class="bg-primary" border="0">
                             <thead>
@@ -147,6 +152,10 @@
 
                             </tbody>
                         </table>
+                        <div id="nodata" class="d-none bg-body-tertiary rounded">
+                            <i class="bi bi-database-dash" style="font-size: 50px;"></i>
+                            <h3>No data avilable.</h3>
+                        </div>
 
                     </div>
                 </div>
@@ -189,6 +198,11 @@
                     </tr>`;
                 });
                 document.querySelector('tbody').innerHTML = tr;
+                if (tr == '') {
+                        document.getElementById('nodata').classList.remove('d-none');
+                }else{
+                        document.getElementById('nodata').classList.add('d-none');
+                    }
             })
       }
       GetDate();
