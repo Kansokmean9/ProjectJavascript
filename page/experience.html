@@ -11,10 +11,7 @@
     <link rel="stylesheet" href="../asset/style/flatpickr.min.css">
 </head>
 <style>
-    .cs {
-        cursor: pointer;
-    }
-
+    
     th {
 
         color: white;
@@ -38,6 +35,14 @@
     #uva_sy {
         color: red;
         font-size: small;
+    }
+    #nodata {
+        height: 200px;
+        display: flex;
+        color: gray;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 </style>
 
@@ -140,7 +145,7 @@
 
                 <div id="dashboardContent">
                     <div id="experienceContent">
-                        <h3 class="mb-3 text-db text-primary">Work Experience</h3>
+                        <h3 class="mb-3 text-db sec-title">Work Experience</h3>
                         <div class="row">
                             <div class="col-12">
                                 <form id="experForm" class="card mb-4 ">
@@ -193,6 +198,10 @@
 
                             </tbody>
                         </table>
+                        <div id="nodata" class="d-none bg-body-tertiary rounded">
+                            <i class="bi bi-database-dash" style="font-size: 50px;"></i>
+                            <h3>No data avilable.</h3>
+                        </div>
                     </div>
                 </div>
             </main>
@@ -283,6 +292,11 @@
             </tr>`;
                     });
                     document.querySelector('tbody').innerHTML = tr;
+                    if (tr == '') {
+                        document.getElementById('nodata').classList.remove('d-none');
+                    }else{
+                        document.getElementById('nodata').classList.add('d-none');
+                    }
                 })
         }
         GetDate();
