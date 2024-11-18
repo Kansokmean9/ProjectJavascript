@@ -12,15 +12,16 @@
 </head>
 <style>
     body {
-        
+
         display: flex;
+        /* align-items: center; */
         height: 100vh;
     }
 
     .emp-profile {
-        margin-top: 75px;
+        margin-top: 73px;
         padding-top: 35px;
-        height: 600px;
+        height: 630px;
         border-radius: 0.5rem;
         background: #fff;
         box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
@@ -167,14 +168,24 @@
     .hvr-icon-back:hover .hvr-icon {
         color: red;
     }
-    #profile .row .col-md-6 input::placeholder{
+
+    #profile .row .col-md-6 input::placeholder {
         color: rgb(199, 196, 196);
         font-size: 14px;
     }
-    .border-start{
+
+    .border-start {
         border-left: 1px solid #009dff !important;
         padding-left: 50px !;
-        
+    }
+
+    #va_gmail,
+    #va_name,
+    #va_cPass,
+    #va_nPass,
+    #va_comPass {
+        color: red;
+        font-size: small;
     }
 </style>
 
@@ -229,7 +240,8 @@
                     <a href="">WooCommerce</a><br />
                     <a href="">PHP, .Net</a><br />
                 </div>
-                <button style="margin-left: 19%; margin-top: 80px;" class="btn btn-outline-danger" id="logoutBtn" onclick="logoutbtn()"><i class="bi bi-box-arrow-left"></i> Logout</button>
+                <button style="margin-left: 19%; margin-top: 80px;" class="btn btn-outline-danger" id="logoutBtn"
+                    onclick="logoutbtn()"><i class="bi bi-box-arrow-left"></i> Logout</button>
             </div>
             <div class="border-start ps-5 col-md-8">
                 <div class="tab-content profile-tab" id="myTabContent">
@@ -244,7 +256,8 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label class="lb">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+                                <label
+                                    class="lb">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
                             </div>
                             <div class="col-md-6">
                                 <p class="lb" id="nameAd">Kshiti Ghelani</p>
@@ -252,33 +265,39 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label class="lb">Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+                                <label
+                                    class="lb">Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
                             </div>
                             <div class="col-md-6">
                                 <p class="lb" id="gmailAd">kshitighelani@gmail.com</p>
                             </div>
                         </div>
-
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="row">
                             <div class="col-md-6 mt-2 leftEdit">
                                 <h5 class="text-primary">Update info.</h5>
                                 <label>Name</label><br>
-                                <input type="text" id="upName" placeholder="Full name"><br>
-                                <label class="mt-2">Gmail</label><br>
+                                <input type="text" class="" id="upName" placeholder="Full name"><br>
+                                <span id="va_name" class="opacity-0">ss</span><br>
+                                <label class="mt-0">Gmail</label><br>
                                 <input type="text" id="upGmail" placeholder="Gmail"><br>
-                                <button id="saveInfo" class="btn btn-primary" onclick="saveinfo()">Save</button>
+                                <span id="va_gmail" class="opacity-0">ss</span><br>
+                                <button id="saveInfo" class="mt-1 btn btn-primary" onclick="saveinfo()">Save</button>
                             </div>
                             <div class="col-md-6 mt-2">
                                 <h5 class="text-primary">Change passsword</h5>
                                 <label>Current password</label><br>
                                 <input type="text" id="crPass" placeholder="Current passsword"><br>
-                                <label class="mt-2">New password</label><br>
+                                <span id="va_cPass" class="opacity-0">invalid</span><br>
+                                <label class="mt-1">New password</label><br>
                                 <input type="text" id="newPass" placeholder="New passsword"><br>
-                                <label class="mt-2">Comfirm password</label><br>
+                                <span id="va_nPass" class="opacity-0">a</span><br>
+                                <label class="mt-1">Comfirm password</label><br>
                                 <input type="text" id="cfPass" placeholder="Comfirm passsword"><br>
-                                <button id="savePass" class="btn btn-primary" onclick="savePass()">Save change</button>
+                                <span id="va_comPass" class="opacity-0">s</span><br>
+                                <button id="savePass" class="mt-1 btn btn-primary" onclick="savePass()">Save
+                                    change</button>
 
                             </div>
                         </div>
@@ -306,9 +325,9 @@
                 .then(res => res.json())
                 .then(json => {
                     // console.log(json);
-                    if(json.data.avatar== "https://mps7.chandalen.dev/storage/avatar/default.png"){
-                        document.getElementById('avtadmin').src ="../asset/img/frameIMG.webp";
-                    }else{
+                    if (json.data.avatar == "https://mps7.chandalen.dev/storage/avatar/default.png") {
+                        document.getElementById('avtadmin').src = "../asset/img/frameIMG.webp";
+                    } else {
                         document.getElementById('avtadmin').src = json.data.avatar;
 
                     }
@@ -331,7 +350,7 @@
             const formData = new FormData(form);
             let av = document.getElementById('editpic');
             if (av.files.length > 0) {
-                formData.append('avatar', av.files[0]); 
+                formData.append('avatar', av.files[0]);
             }
             fetch(`https://mps7.chandalen.dev/api/own/avatars`, {
                 method: 'POST',
@@ -344,11 +363,11 @@
                 .then(res => res.json())
                 .then(json => {
                     Swal.fire({
-                                title: "Updated!",
-                                text: json.message,
-                                icon: "success"
-                            });
-                    getme(); 
+                        title: "Updated!",
+                        text: json.message,
+                        icon: "success"
+                    });
+                    getme();
                 })
                 .catch(err => console.error('Error:', err));
         }
@@ -393,9 +412,14 @@
         }
 
         // save info
+        let names = document.getElementById('upName');
+        let emails = document.getElementById('upGmail');
         function saveinfo() {
-            let names = document.getElementById('upName');
-            let emails = document.getElementById('upGmail');
+            const btnSubmit = document.getElementById('saveInfo');
+            btnSubmit.disabled = true;
+
+            let va_name = document.getElementById('va_name');
+            let va_gmail = document.getElementById('va_gmail');
 
             fetch(`https://mps7.chandalen.dev/api/own/personal-information`, {
                 method: 'PUT',
@@ -407,21 +431,70 @@
                 body: JSON.stringify({
                     "name": names.value,
                     "email": emails.value
-                }) 
+                })
             })
                 .then(res => res.json())
                 .then(json => {
                     console.log(json)
-                    alert(json.message);
-                    getme(); 
+                    if (names.value == "") {
+                        va_name.innerHTML = json.data.name[1];
+                        names.classList.add('border', 'border-danger');
+                        va_name.classList.remove('opacity-0');
+
+                    } else {
+                        names.classList.remove('border', 'border-danger');
+                        va_name.classList.add('opacity-0');
+                    }
+                    if (emails.value == "") {
+                        va_gmail.innerHTML = json.data.email[1];
+                        emails.classList.add('border', 'border-danger');
+                        va_gmail.classList.remove('opacity-0');
+
+                    } else if (json.data.email[0] == "The email field must be a valid email address.") {
+                        va_gmail.innerHTML = json.data.email[0];
+                        emails.classList.add('border', 'border-danger');
+                        va_gmail.classList.remove('opacity-0');
+                    } else if (json.result) {
+                        emails.classList.remove('border', 'border-danger');
+                        va_gmail.classList.add('opacity-0');
+                        Swal.fire({
+                            title: "Updated!",
+                            text: json.message,
+                            icon: "success"
+                        });
+                        getme();
+                    }
+
                 })
-                .catch(err => console.error('Error:', err));
+                .finally(() => {
+                    btnSubmit.disabled = false; 
+                });
 
         }
+        names.addEventListener("input", function () {
+            if (names.value.trim() !== "") {
+                names.classList.remove('border', 'border-danger');
+                va_name.classList.add('opacity-0');
+            }
+        });
+        emails.addEventListener("input", function () {
+            if (emails.value.trim() !== "") {
+                emails.classList.remove('border', 'border-danger');
+                va_gmail.classList.add('opacity-0');
+            }
+        });
+
+
+        let crPass = document.getElementById('crPass');
+        let newPass = document.getElementById('newPass');
+        let cfPass = document.getElementById('cfPass');
         function savePass() {
-            let crPass = document.getElementById('crPass');
-            let newPass = document.getElementById('newPass');
-            let cfPass = document.getElementById('cfPass');
+            const btnSubmit = document.getElementById('savePass');
+            btnSubmit.disabled = true;
+
+            let va_cPass = document.getElementById('va_cPass');
+            let va_nPass = document.getElementById('va_nPass');
+            let va_comPass = document.getElementById('va_comPass');
 
             fetch(`https://mps7.chandalen.dev/api/own/password`, {
                 method: 'PUT',
@@ -433,67 +506,136 @@
                 body: JSON.stringify({
                     "current_password": crPass.value,
                     "password": newPass.value,
-                    "password_confirmation" : cfPass.value
-                }) 
+                    "password_confirmation": cfPass.value
+                })
             })
                 .then(res => res.json())
                 .then(json => {
-                    console.log(json)
-                    alert(json.message);
-                    getme(); 
+                    console.log(json);
+                    if (crPass.value == "") {
+                        crPass.classList.add('border', 'border-danger');
+                        va_cPass.classList.remove('opacity-0');
+                        va_cPass.innerHTML = json.errors.current_password[1];
+                    }
+                    else {
+                        crPass.classList.remove('border', 'border-danger');
+                        va_cPass.classList.add('opacity-0');
+                    }
+                    if (newPass.value == "") {
+                        newPass.classList.add('border', 'border-danger');
+                        va_nPass.classList.remove('opacity-0');
+                        va_nPass.innerHTML = json.errors.password[1];
+                    } else {
+                        newPass.classList.remove('border', 'border-danger');
+                        va_nPass.classList.add('opacity-0');
+                    }
+                    if (cfPass.value == "") {
+                        cfPass.classList.add('border', 'border-danger');
+                        va_comPass.classList.remove('opacity-0');
+                        va_comPass.innerHTML = json.errors.password_confirmation[1];
+
+                    } else {
+                        cfPass.classList.remove('border', 'border-danger');
+                        va_comPass.classList.add('opacity-0');
+
+                    }
+                    if (cfPass.value != "" && newPass.value != "" && crPass.value != "") {
+                        if (newPass.value != cfPass.value) {
+                            cfPass.classList.add('border', 'border-danger');
+                            va_comPass.innerHTML = json.errors.password;
+                            va_comPass.classList.remove('opacity-0');
+                        } else if (newPass.value == cfPass.value) {
+                            cfPass.classList.remove('border', 'border-danger');
+                            va_comPass.classList.add('opacity-0');
+                            if (!json.result) {
+                                // alert()
+                                crPass.classList.add('border', 'border-danger');
+                                va_cPass.classList.remove('opacity-0');
+                                va_cPass.innerHTML = json.message;
+                            }
+                            else {
+                                crPass.classList.remove('border', 'border-danger');
+                                va_cPass.classList.add('opacity-0');
+                                Swal.fire({
+                                    title: "Updated!",
+                                    text: json.message,
+                                    icon: "success"
+                                });
+                            }
+                        }
+
+
+                    }
+
                 })
-                .catch(err => console.error('Error:', err));
+                .finally(() => {
+                    btnSubmit.disabled = false; 
+                });
 
         }
-    </script>
-        <script>
-
-
-            //logout
-            function logoutbtn() {
-                let id = sessionStorage.getItem('Token');
-                console.log(id);
-    
-                Swal.fire({
-                    title: "Are you sure",
-                    text: "you want to logout?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        fetch(`https://mps7.chandalen.dev/api/logout`, {
-                            method: 'DELETE',
-                            headers: {
-                                "Accept": "application/json",
-                                "Authorization": `Bearer ${id}`
-                            }
-                        })
-                            .then(res => res.json())
-                            .then(json => {
-                                if (json.message == "Logout successful.") {
-                                    // alert(json.message);
-                                    sessionStorage.clear();
-                                    location.href = '../index.html';
-                                } else {
-                                    Swal.fire({
-                                        title: "Logout",
-                                        text: json.message ,
-                                        icon: "warning"
-                                    });
-                                    // alert(json.message);
-                                }
-    
-    
-                            })
-                    }
-                });
-   
+        crPass.addEventListener("input", function () {
+            if (crPass.value.trim() !== "") {
+                crPass.classList.remove('border', 'border-danger');
+                va_cPass.classList.add('opacity-0');
             }
-    
-        </script>
+        });
+        newPass.addEventListener("input", function () {
+            if (newPass.value.trim() !== "") {
+                newPass.classList.remove('border', 'border-danger');
+                va_nPass.classList.add('opacity-0');
+            }
+        });
+        cfPass.addEventListener("input", function () {
+            if (cfPass.value.trim() !== "") {
+                cfPass.classList.remove('border', 'border-danger');
+                va_comPass.classList.add('opacity-0');
+            }
+        });
+
+        function logoutbtn() {
+            let id = sessionStorage.getItem('Token');
+            console.log(id);
+
+            Swal.fire({
+                title: "Are you sure",
+                text: "you want to logout?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`https://mps7.chandalen.dev/api/logout`, {
+                        method: 'DELETE',
+                        headers: {
+                            "Accept": "application/json",
+                            "Authorization": `Bearer ${id}`
+                        }
+                    })
+                        .then(res => res.json())
+                        .then(json => {
+                            if (json.message == "Logout successful.") {
+                                // alert(json.message);
+                                sessionStorage.clear();
+                                location.href = '../index.html';
+                            } else {
+                                Swal.fire({
+                                    title: "Logout",
+                                    text: json.message,
+                                    icon: "warning"
+                                });
+                                // alert(json.message);
+                            }
+
+
+                        })
+                }
+            });
+
+        }
+
+    </script>
 </body>
 
 </html>

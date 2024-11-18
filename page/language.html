@@ -193,13 +193,10 @@
                 <div class="modal-body">
                     <form action="PUT" id="updateForm">
                         <div class="mb-2 position-relative">
-                            <label for="uplanguagesName">Language</label>
-                            <input class="form-control" id="uplanguagesName" type="text" placeholder="New language" style="width: 100%;">
+                            <label for="mdlanguagesName">Language</label>
+                            <input class="form-control" id="mdlanguagesName" type="text" placeholder="New language" style="width: 100%;">
                             <span id="up_languagesName" class="opacity-0 text-danger"></span><br>
-
-
                         </div>
-
                         <label for="unlanguagesLevel" class="mt-2">Level language</label><br>
                         <output type="number" id="unlanguagesLevel" class="output">50</output>
                         <input id="rangePercent" class="w-100" type="range" value="50" min="0" max="100" oninput="unlanguagesLevel.value = this.value">
@@ -332,7 +329,7 @@
 
         /////update////////
         let idUpdate = 0;
-        let unlanguagesName = document.getElementById('uplanguagesName');
+        let unlanguagesName = document.getElementById('mdlanguagesName');
         let unlanguagesLevel = document.getElementById('unlanguagesLevel');
 
         function toUpdate(id) {
@@ -355,7 +352,7 @@
         }
 
         function updateLang() {
-            let languagesName = document.getElementById('uplanguagesName');
+            let unlanguagesName = document.getElementById('mdlanguagesName');
             let va_languagesName = document.getElementById('up_languagesName');
 
             console.log(unlanguagesName.value);
@@ -374,16 +371,16 @@
                 })
                 .then(res => res.json())
                 .then(json => {
-                    if (languagesName.value == "") {
-                        languagesName.classList.add('border');
-                        languagesName.classList.add('border-danger');
-                        vp_languagesName.innerHTML = json.data.en_name[1];
-                        vp_languagesName.classList.remove('opacity-0');
+                    if (unlanguagesName.value == " ") {
+                        unlanguagesName.classList.add('border');
+                        unlanguagesName.classList.add('border-danger');
+                        va_languagesName.innerHTML = json.data.en_name[1];
+                        va_languagesName.classList.remove('opacity-0');
 
                     } else {
-                        languagesName.classList.remove('border');
-                        languagesName.classList.remove('border-danger');
-                        vp_languagesName.classList.add('opacity-0');
+                        unlanguagesName.classList.remove('border');
+                        unlanguagesName.classList.remove('border-danger');
+                        va_languagesName.classList.add('opacity-0');
                         Swal.fire({
                             title: "Success",
                             text: "You clicked the button!",
