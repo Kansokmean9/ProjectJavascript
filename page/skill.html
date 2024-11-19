@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="../asset/style/style.css">
 </head>
 <style>
+    .cs {
+        cursor: pointer;
+    }
+
     th {
         color: white;
         padding: 20px;
@@ -21,15 +25,6 @@
 
     table {
         width: 100%;
-    }
-
-    #nodata {
-        height: 288px;
-        display: flex;
-        color: gray;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
     }
 </style>
 
@@ -73,6 +68,7 @@
             <button id="closeSidebar" class="btn btn-light d-xl-none mb-3 btn-close-bar">
                 <i class="bi bi-chevron-left"></i>
             </button>
+            <!-- <h3 class="text-center my-4 text-db">Admin Portfolio</h3> -->
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link text-white" href="dashboard.html" data-section="dashboard">
@@ -133,14 +129,17 @@
             <main class="container-fluid py-4">
                 <div id="dashboardContent">
                     <div id="skillsContent">
-                        <h3 class="mb-3 text-db sec-title">Skills Management</h3>
+                        <h3 class="mb-4 text-db text-primary">Skills Management</h3>
                         <form id="skillForm" class="card  mb-4">
                             <div class="card-body">
-                                <div class="mb-3">
+                                <div class="mb-1">
                                     <label for="skillName" class="form-label">Skill Name</label>
                                     <input type="text" class="form-control" id="skillName"
                                         placeholder="Enter skill name" required>
+                                    <span id="nameError" class="text-danger small opacity-0">.</span>
+                                    <!-- Error message -->
                                 </div>
+
                                 <div class="mb-3">
                                     <label for="skillLevel" class="form-label">Percent Skill</label><br>
                                     <output type="number" id="output" class="output">50</output>
@@ -148,7 +147,7 @@
                                         oninput="output.value = this.value">
 
                                 </div>
-                                <button type="button" class="btn btn-primary" onclick="addSkill()">Add skill</button>
+                                <button type="button" class="btn btn-primary" id="btnsk" onclick="addSkill()">Add skill</button>
                             </div>
                         </form>
                         <table border="0" class="bg-primarys">
@@ -162,10 +161,6 @@
 
                             </tbody>
                         </table>
-                        <div id="nodata" class="d-none bg-body-tertiary rounded">
-                            <i class="bi bi-database-dash" style="font-size: 50px;"></i>
-                            <h3>No data avilable.</h3>
-                        </div>
                     </div>
                 </div>
             </main>
@@ -184,6 +179,8 @@
                             <label for="unskillname">Skill Name</label>
                             <input class="form-control" id="unskillname" type="text" placeholder="New skill name"
                                 style="width: 100%;">
+                            <span id="updateNameError" class="text-danger small opacity-0">.</span><br>
+                            <!-- Error message -->
 
                             <label for="unskillLevel" class="mt-2">Percent Skill</label><br>
                             <output type="number" id="unskillLevel" class="output">50</output>
@@ -192,7 +189,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="updateSkill()">Save changes</button>
+                        <button type="button" class="btn btn-primary" id="updatesk" onclick="updateSkill()">Save changes</button>
                     </div>
                 </div>
             </div>
@@ -227,19 +224,24 @@
             </tr>`;
                     });
                     document.querySelector('tbody').innerHTML = tr;
-                    if (tr == '') {
-                        document.getElementById('nodata').classList.remove('d-none');
-                    } else {
-                        document.getElementById('nodata').classList.add('d-none');
-                    }
                 })
         }
         getskill();
 
         function addSkill() {
+            const btnsk = document.getElementById('btnsk');
+            btnsk.disabled = true;
             let skillName = document.getElementById('skillName');
             let skillLevel = document.getElementById('output');
+            let nameError = document.getElementById('nameError'); // Error span for skill name
 
+            if (!isNaN(skillName.value) && skillName.value != '') {
+                nameError.classList.remove('opacity-0');
+                skillName.classList.add('border', 'border-danger');
+                nameError.innerHTML = "Skill must be a string.";
+                btnsk.disabled = false;
+                return;
+            }
 
             fetch(`https://mps7.chandalen.dev/api/skills`, {
                 method: 'POST',
@@ -255,13 +257,35 @@
             })
                 .then(res => res.json())
                 .then(json => {
-                    console.log(json)
-                    alert(json.message);
-                    getskill();
+                    if (skillName.value == "") {
+                        nameError.innerHTML = json.data.name[1];
+                        skillName.classList.add('border', 'border-danger');
+                        nameError.classList.remove('opacity-0');
+                    } else if (json.result) {
+                        nameError.classList.add('opacity-0');
+                        skillName.classList.remove('border', 'border-danger');
+                        Swal.fire({
+                            icon: "success",
+                            title: json.message,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        skillName.value = "";
+                        getskill();
+                    }
+
                 })
-                .catch(err => console.error('Error:', err));
+                .finally(() => {
+                    btnsk.disabled = false;
+                });
 
         }
+        skillName.addEventListener("input", function () {
+            if (skillName.value.trim() !== "") {
+                skillName.classList.remove('border', 'border-danger');
+                nameError.classList.add('opacity-0');
+            }
+        });
 
         function deleteSkill(id) {
             Swal.fire({
@@ -309,8 +333,12 @@
         let idUpdate = 0;
         let unskillname = document.getElementById('unskillname');
         let unskillLevel = document.getElementById('unskillLevel');
+        let updateNameError = document.getElementById('updateNameError'); // Error span for update name
+
 
         function toUpdate(id) {
+            unskillname.classList.remove('border', 'border-danger');
+            updateNameError.classList.add('opacity-0');
             idUpdate = id;
             fetch('https://mps7.chandalen.dev/api/skills')
                 .then(res => res.json())
@@ -330,7 +358,16 @@
         }
 
         function updateSkill() {
-            console.log(unskillname.value);
+            const updatesk = document.getElementById('updatesk');
+            updatesk.disabled = true;
+
+            if (!isNaN(unskillname.value) && unskillname.value != '') {
+                updateNameError.classList.remove('opacity-0');
+                unskillname.classList.add('border', 'border-danger');
+                updateNameError.innerHTML = "Skill must be a string.";
+                updatesk.disabled = false;
+                return;
+            }
             fetch(`https://mps7.chandalen.dev/api/skills/${idUpdate}`, {
                 method: 'PUT',
                 headers: {
@@ -346,15 +383,37 @@
             })
                 .then(res => res.json())
                 .then(json => {
-                    bootstrap.Modal.getInstance(
-                        document.getElementById("myModal1")
-                    ).hide();
-                    alert(json.message);
-                    getskill(); // Refresh user details after updating the avatar
-                })
-                .catch(err => console.error('Error:', err));
 
+                    if (unskillname.value == "") {
+                        updateNameError.innerHTML = json.data.name[1];
+                        unskillname.classList.add('border', 'border-danger');
+                        updateNameError.classList.remove('opacity-0');
+                    } else if (json.result) {
+
+                        bootstrap.Modal.getInstance(
+                            document.getElementById("myModal1")
+                        ).hide(); // Close the modal
+                        Swal.fire({
+                            icon: "success",
+                            title: json.message,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        getskill(); // Refresh the skill list
+                    }
+                })
+                .finally(() => {
+                    updatesk.disabled = false;
+                });
         }
+        unskillname.addEventListener("input", function () {
+            if (unskillname.value.trim() !== "") {
+                unskillname.classList.remove('border', 'border-danger');
+                updateNameError.classList.add('opacity-0');
+            }
+        });
+
+
     </script>
 </body>
 
