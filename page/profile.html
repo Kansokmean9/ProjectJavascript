@@ -10,21 +10,12 @@
     <link rel="stylesheet" href="../asset/style/style.css">
 </head>
 <style>
-      .form-control:focus {
-        box-shadow: none;
-        border-color: #BA68C8
-    }
+
 
     .labels {
         font-size: 11px
     }
 
-    .add-experience:hover {
-        background: #BA68C8;
-        color: #fff;
-        cursor: pointer;
-        border: solid 1px #BA68C8
-    }
 </style>
 
 <body>
@@ -128,9 +119,9 @@
             <main class="container-fluid py-4">
                 <div id="dashboardContent">
                     <div id="profileContent" class="">
-                        
-                        <div class="heroIMG rounded bg-white mt-5 mb-5 ">
-                            <div class="row border-right">
+                        <h3 class="mb-3 text-db sec-title">Profile Infomation</h3>
+                        <div class="heroIMG rounded bg-white mt-2 mb-3">
+                            <div class="row border-right ps-2">
                                 <div class="col-6 d-flex">
                                     <div class="d-flex flex-column align-items-center text-center p-3 "
                                         style="max-width: 300px; margin-top: 8px; ">
@@ -166,7 +157,6 @@
                                                 alt="Profile Photo">
 
                                         </div>
-                                        <!-- <span class="font-weight-bold mt-2">Bot Sivila</span> -->
                                         <label for="edit" class="text-primary mt-2 ps-2 pe-2 rounded-2 "
                                             style="cursor: pointer;">
                                             Photo About
@@ -174,12 +164,12 @@
                                         <input id="edithero" type="file" class="d-none">
                                     </div>
                                 </div>
-                                <div class="col-6 pe-4">
+                                <div class="col-6 p-2 pe-4">
                                     <div class="d-flex justify-content-between align-items-center experience mt-3">
                                         <h4 class="fs-5">Update personal information</h4>
                                     </div>
 
-                                    <div class="row mt-2">
+                                    <div class="row mt-2 pe-1">
                                         <div class="col-md-6 mb-3">
                                             <label class="labels">Fullname</label>
                                             <input type="text" class="form-control" placeholder="first name" value="">
@@ -193,7 +183,7 @@
                                             <input type="text" class="form-control" placeholder="enter nationality" value="">
                                         </div>
                                     </div>
-                                    <div class="mt-5 text-center">
+                                    <div class="mt-1 text-end pe-1">
                                         <button class="btn btn-primary profile-button mb-3"  style="margin-top: 50px;" type="button">
                                             Save Update
                                         </button>
@@ -204,16 +194,14 @@
                             </div>
                         </div>
 
-                        <!-- <h4 class="mb-4">Profile</h4> -->
-                        <div class="rounded bg-white mt-5 mb-5">
-                            <div class="row">
-
-                                <div class="col-md-6 border-right">
+                        <div class="rounded mt-4 mb-5 ">
+                            <div class="row m-0 p-0 gap-4">
+                                <div style="width: 49%;" class="rounded bg-white">
                                     <div class="p-3">
-                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
                                             <h4  class="fs-5">Profile Settings</h4>
                                         </div>
-
+                                        <form >
                                         <div class="row">
                                             <div class="col-md-12 mb-3">
                                                 <div class="row">
@@ -251,7 +239,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-12 mb-3">
+                                            <div class="col-md-12">
                                                 <div class="row">
                                                     <div class="col-1 d-flex align-items-end">
                                                         <div class="col-3 p-0 social-logo"
@@ -266,78 +254,84 @@
                                                             class="form-control" placeholder="enter address" value="">
                                                     </div>
                                                 </div>
+                                                <div class="mt-5 text-end">
+                                                    <button class="btn btn-primary profile-button" style="margin-bottom: 5px;" type="button">
+                                                        Update contact
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
+                                    </form>
                                     </div>
                                 </div>
 
 
-                                <div class="col-md-6">
+                                <div style="width: 49%;" class="rounded bg-white">
                                     <div class="p-3">
-                                        <div class="d-flex justify-content-between align-items-center experience">
-                                            <h4  class="fs-5">Socale media</h4>
-                                        </div><br>
-
-                                        <div class="row">
-                                            <div class="col-md-12 mb-3">
-                                                <div class="row">
-                                                    <div class="col-1 d-flex align-items-end">
-                                                        <div class="col-3 p-0 social-logo"
-                                                            style="width: 30px; height: 30px; margin-bottom: 1px;">
-                                                            <img class="h-100"
-                                                                src="../ronaldo-master/ronaldo-master/images/facebook.png"
-                                                                alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <label class="labels">Facebook link</label>
-                                                        <input type="text" class="form-control" placeholder="facebook"
-                                                            value="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 mb-3">
-                                                <div class="row">
-                                                    <div class="col-1  d-flex align-items-end">
-                                                        <div class="col-3 p-0 social-logo"
-                                                            style="width: 30px; height: 30px; margin-bottom: 1px;">
-                                                            <img class="h-100"
-                                                                src="../ronaldo-master/ronaldo-master/images/telegram.png"
-                                                                alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <label class="labels">Telegram link</label>
-                                                        <input type="text" class="form-control" placeholder="telegram"
-                                                            value="">
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="row">
-                                                    <div class="col-1  d-flex align-items-end">
-                                                        <div class="col-3 p-0 social-logo"
-                                                            style="width: 30px; height: 30px; margin-bottom: 1px;">
-                                                            <img class="h-100"
-                                                                src="../ronaldo-master/ronaldo-master/images/linkin.png"
-                                                                alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <label class="labels">Linkedin link</label>
-                                                        <input type="text" class="form-control" placeholder="Linkedin"
-                                                            value="">
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="mt-5 text-center">
-                                                <button class="btn btn-primary profile-button" style="margin-bottom: 5px;" type="button">
-                                                    Save Profile
-                                                </button>
-                                            </div>
+                                        <div class="d-flex justify-content-between align-items-center experience mb-2">
+                                            <h4  class="fs-5">Socail media</h4>
                                         </div>
+                                        <form >
+                                            <div class="row">
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="row">
+                                                        <div class="col-1 d-flex align-items-end">
+                                                            <div class="col-3 p-0 social-logo"
+                                                                style="width: 30px; height: 30px; margin-bottom: 1px;">
+                                                                <img class="h-100"
+                                                                    src="../ronaldo-master/ronaldo-master/images/facebook.png"
+                                                                    alt="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label class="labels">Facebook link</label>
+                                                            <input type="text" class="form-control" placeholder="facebook"
+                                                                value="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="row">
+                                                        <div class="col-1  d-flex align-items-end">
+                                                            <div class="col-3 p-0 social-logo"
+                                                                style="width: 30px; height: 30px; margin-bottom: 1px;">
+                                                                <img class="h-100"
+                                                                    src="../ronaldo-master/ronaldo-master/images/telegram.png"
+                                                                    alt="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label class="labels">Telegram link</label>
+                                                            <input type="text" class="form-control" placeholder="telegram"
+                                                                value="">
+                                                        </div>
+                                                    </div>
+    
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-1  d-flex align-items-end">
+                                                            <div class="col-3 p-0 social-logo"
+                                                                style="width: 30px; height: 30px; margin-bottom: 1px;">
+                                                                <img class="h-100"
+                                                                    src="../ronaldo-master/ronaldo-master/images/linkin.png"
+                                                                    alt="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label class="labels">Linkedin link</label>
+                                                            <input type="text" class="form-control" placeholder="Linkedin"
+                                                                value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="mt-5 text-end">
+                                                        <button class="btn btn-primary profile-button" style="margin-bottom: 5px;" type="button">
+                                                            Update Socail
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

@@ -38,6 +38,15 @@
         color: red;
         font-size: small;
     }
+    
+    #nodata {
+        height: 200px;
+        display: flex;
+        color: gray;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 </style>
 
 <body>
@@ -138,7 +147,7 @@
 
                 <div id="dashboardContent">
                     <div id="experienceContent">
-                        <h3 class="mb-3 text-db text-primary">Work Experience</h3>
+                        <h3 class="mb-3 text-db sec-title">Work Experience</h3>
                         <div class="row">
                             <div class="col-12">
                                 <form id="experForm" class="card mb-4 ">
@@ -186,6 +195,10 @@
 
                             </tbody>
                         </table>
+                        <div id="nodata" class="d-none bg-body-tertiary rounded">
+                            <i class="bi bi-database-dash" style="font-size: 50px;"></i>
+                            <h3>No data avilable.</h3>
+                        </div>
                     </div>
                 </div>
             </main>
@@ -272,6 +285,11 @@
             </tr>`;
                     });
                     document.querySelector('tbody').innerHTML = tr;
+                    if (tr == '') {
+                        document.getElementById('nodata').classList.remove('d-none');
+                    } else {
+                        document.getElementById('nodata').classList.add('d-none');
+                    }
                 })
         }
         GetDate();
@@ -308,49 +326,61 @@
                 .then(json => {
                     console.log(json);
                     if (title.value == "") {
-                        title.classList.add('border', 'border-danger');
+                        title.classList.add('border');
+                        title.classList.add('border-danger');
                         va_title.innerHTML = json.data.en_title[1];
                         va_title.classList.remove('opacity-0');
 
                         //remove other input validation
-                        workplace.classList.remove('border', 'border-danger');
+                        workplace.classList.remove('border');
+                        workplace.classList.remove('border-danger');
                         va_wp.classList.add('opacity-0');
 
-                        start_year.classList.remove('border', 'border-danger');
+                        start_year.classList.remove('border');
+                        start_year.classList.remove('border-danger');
                         va_sy.classList.add('opacity-0');
 
                     } else if (workplace.value == "") {
-                        workplace.classList.add('border', 'border-danger');
+                        workplace.classList.add('border');
+                        workplace.classList.add('border-danger');
                         va_wp.innerHTML = json.data.en_workplace[1];
                         va_wp.classList.remove('opacity-0');
 
                         //remove other input validation
-                        title.classList.remove('border', 'border-danger');
+                        title.classList.remove('border');
+                        title.classList.remove('border-danger');
                         va_title.classList.add('opacity-0');
 
-                        start_year.classList.remove('border', 'border-danger');
+                        start_year.classList.remove('border');
+                        start_year.classList.remove('border-danger');
                         va_sy.classList.add('opacity-0');
 
                     } else if (start_year.value == "") {
-                        start_year.classList.add('border', 'border-danger');
+                        start_year.classList.add('border');
+                        start_year.classList.add('border-danger');
                         va_sy.innerHTML = json.data.start_year[1];
                         va_sy.classList.remove('opacity-0');
 
                         //remove other input validation
-                        title.classList.remove('border', 'border-danger');
+                        title.classList.remove('border');
+                        title.classList.remove('border-danger');
                         va_title.classList.add('opacity-0');
 
-                        workplace.classList.remove('border', 'border-danger');
+                        workplace.classList.remove('border');
+                        workplace.classList.remove('border-danger');
                         va_wp.classList.add('opacity-0');
                     } else {
 
-                        title.classList.remove('border', 'border-danger');
+                        title.classList.remove('border');
+                        title.classList.remove('border-danger');
                         va_title.classList.add('opacity-0');
 
-                        workplace.classList.remove('border', 'border-danger');
+                        workplace.classList.remove('border');
+                        workplace.classList.remove('border-danger');
                         va_wp.classList.add('opacity-0');
 
-                        start_year.classList.remove('border', 'border-danger');
+                        start_year.classList.remove('border');
+                        start_year.classList.remove('border-danger');
                         va_sy.classList.add('opacity-0');
 
                         title.value = "";
@@ -370,7 +400,7 @@
                     }
                 })
                 .finally(() => {
-                    btnSubmit.disabled = false;
+                    btnSubmit.disabled = false; // Enable button after request completes
                 });
 
         }
@@ -404,7 +434,7 @@
                                     text: json.message,
                                     icon: "success"
                                 });
-                                GetDate();
+                                GetDate(); // Refresh data
                             } else {
                                 Swal.fire("Error!", "Failed to delete experience.", "error");
                             }
@@ -469,39 +499,48 @@
                 .then(res => res.json())
                 .then(json => {
                     if (utitle.value == "") {
-                        utitle.classList.add('border', 'border-danger');
+                        utitle.classList.add('border');
+                        utitle.classList.add('border-danger');
                         va_title.innerHTML = json.data.en_title[1];
                         va_title.classList.remove('opacity-0');
 
                         //remove other input validation
-                        uworkplace.classList.remove('border', 'border-danger');
+                        uworkplace.classList.remove('border');
+                        uworkplace.classList.remove('border-danger');
                         va_wp.classList.add('opacity-0');
 
-                        ustart_year.classList.remove('border', 'border-danger');
+                        ustart_year.classList.remove('border');
+                        ustart_year.classList.remove('border-danger');
                         va_sy.classList.add('opacity-0');
 
                     } else if (uworkplace.value == "") {
-                        uworkplace.classList.add('border', 'border-danger');
+                        uworkplace.classList.add('border');
+                        uworkplace.classList.add('border-danger');
                         va_wp.innerHTML = json.data.en_workplace[1];
                         va_wp.classList.remove('opacity-0');
 
                         //remove other input validation
-                        utitle.classList.remove('border', 'border-danger');
+                        utitle.classList.remove('border');
+                        utitle.classList.remove('border-danger');
                         va_title.classList.add('opacity-0');
 
-                        ustart_year.classList.remove('border', 'border-danger');
+                        ustart_year.classList.remove('border');
+                        ustart_year.classList.remove('border-danger');
                         va_sy.classList.add('opacity-0');
 
                     } else if (ustart_year.value == "") {
-                        ustart_year.classList.add('border', 'border-danger');
+                        ustart_year.classList.add('border');
+                        ustart_year.classList.add('border-danger');
                         va_sy.innerHTML = json.data.start_year[1];
                         va_sy.classList.remove('opacity-0');
 
                         //remove other input validation
-                        utitle.classList.remove('border', 'border-danger');
+                        utitle.classList.remove('border');
+                        utitle.classList.remove('border-danger');
                         va_title.classList.add('opacity-0');
 
-                        uworkplace.classList.remove('border', 'border-danger');
+                        uworkplace.classList.remove('border');
+                        uworkplace.classList.remove('border-danger');
                         va_wp.classList.add('opacity-0');
                     } else {
                         ustart_year.classList.remove('border');
@@ -523,7 +562,7 @@
                     }
                 })
                 .finally(() => {
-                    btnSubmit.disabled = false;
+                    btnSubmit.disabled = false; // Enable button after request completes
                 });
         }
     </script>
