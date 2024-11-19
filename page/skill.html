@@ -10,17 +10,19 @@
     <link rel="stylesheet" href="../asset/style/style.css">
 </head>
 <style>
-    .cs{
+    .cs {
         cursor: pointer;
     }
+
     th {
         color: white;
         padding: 20px;
     }
-    td{
+
+    td {
         padding: 20px;
     }
-    
+
     table {
         width: 100%;
     }
@@ -45,7 +47,8 @@
                 <h2 class="welcome" style="font-size: 30px;">Welcome admin <span id="adminName"></span>!</h2>
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
                     <li class="pe-2">
-                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank" class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
+                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank"
+                            class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
                                 class="bi bi-box-arrow-up-right"></i> Open Site</a>
                     </li>
 
@@ -129,14 +132,19 @@
                         <h3 class="mb-4 text-db text-primary">Skills Management</h3>
                         <form id="skillForm" class="card  mb-4">
                             <div class="card-body">
-                                <div class="mb-3">
+                                <div class="mb-1">
                                     <label for="skillName" class="form-label">Skill Name</label>
-                                    <input type="text" class="form-control" id="skillName" placeholder="Enter skill name" required>
+                                    <input type="text" class="form-control" id="skillName"
+                                        placeholder="Enter skill name" required>
+                                    <span id="nameError" class="text-danger small opacity-0">.</span>
+                                    <!-- Error message -->
                                 </div>
+
                                 <div class="mb-3">
                                     <label for="skillLevel" class="form-label">Percent Skill</label><br>
                                     <output type="number" id="output" class="output">50</output>
-                                    <input class="w-100" type="range" value="50" min="0" max="100" oninput="output.value = this.value">
+                                    <input class="w-100" type="range" value="50" min="0" max="100"
+                                        oninput="output.value = this.value">
 
                                 </div>
                                 <button type="button" class="btn btn-primary" onclick="addSkill()">Add skill</button>
@@ -163,16 +171,21 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title text-uppercase fw-bold" id="myModalLabel1"> Update data!</h5>
-                        <button type="button" class="btn-close bg-danger rounded-5" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close bg-danger rounded-5" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="PUT" id="updateForm">
                             <label for="unskillname">Skill Name</label>
-                            <input class="form-control" id="unskillname" type="text" placeholder="New skill name" style="width: 100%;">
+                            <input class="form-control" id="unskillname" type="text" placeholder="New skill name"
+                                style="width: 100%;">
+                            <span id="updateNameError" class="text-danger small opacity-0">.</span><br>
+                            <!-- Error message -->
 
                             <label for="unskillLevel" class="mt-2">Percent Skill</label><br>
                             <output type="number" id="unskillLevel" class="output">50</output>
-                            <input id="rangePercent" class="w-100" type="range" value="50" min="0" max="100" oninput="unskillLevel.value = this.value">
+                            <input id="rangePercent" class="w-100" type="range" value="50" min="0" max="100"
+                                oninput="unskillLevel.value = this.value">
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -191,7 +204,7 @@
 
 
     <script>
-     
+
 
         function getskill() {
             fetch('https://mps7.chandalen.dev/api/skills')
@@ -216,31 +229,61 @@
         getskill();
 
         function addSkill() {
+            const btnSubmit = document.getElementById('btnsubmit');
+            btnSubmit.disabled = true;
             let skillName = document.getElementById('skillName');
             let skillLevel = document.getElementById('output');
+            let nameError = document.getElementById('nameError'); // Error span for skill name
 
+            if (!isNaN(skillName.value) && skillName.value != '') {
+                nameError.classList.remove('opacity-0');
+                skillName.classList.add('border', 'border-danger');
+                nameError.innerHTML = "Skill must be a string.";
+                btnSubmit.disabled = false;
+                return;
+            }
 
             fetch(`https://mps7.chandalen.dev/api/skills`, {
-                    method: 'POST',
-                    headers: {
-                        "Accept": "application/json",
-                        "Authorization": `Bearer ${token}`,
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        "name": skillName.value,
-                        "percent": skillLevel.value,
-                    })
+                method: 'POST',
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "name": skillName.value,
+                    "percent": skillLevel.value,
                 })
+            })
                 .then(res => res.json())
                 .then(json => {
-                    console.log(json)
-                    alert(json.message);
-                    getskill();
+                    if (skillName.value == "") {
+                        nameError.innerHTML = json.data.name[1];
+                        skillName.classList.add('border', 'border-danger');
+                        nameError.classList.remove('opacity-0');
+                    } else if (json.result) {
+                        nameError.classList.add('opacity-0');
+                        skillName.classList.remove('border', 'border-danger');
+                        Swal.fire({
+                            icon: "success",
+                            title: json.message,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        skillName.value = "";
+                        getskill();
+                    }
+
                 })
                 .catch(err => console.error('Error:', err));
 
         }
+        skillName.addEventListener("input", function () {
+            if (skillName.value.trim() !== "") {
+                skillName.classList.remove('border', 'border-danger');
+                nameError.classList.add('opacity-0');
+            }
+        });
 
         function deleteSkill(id) {
             Swal.fire({
@@ -254,14 +297,14 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     fetch(`https://mps7.chandalen.dev/api/skills/${id}`, {
-                            method: 'DELETE',
-                            headers: {
-                                "Accept": "application/json",
-                                "Authorization": `Bearer ${token}`,
-                                "Content-Type": "application/json"
+                        method: 'DELETE',
+                        headers: {
+                            "Accept": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                            "Content-Type": "application/json"
 
-                            }
-                        })
+                        }
+                    })
                         .then(res => res.json())
                         .then(json => {
                             console.log(json); // Log the response to see if delete was successful
@@ -288,8 +331,12 @@
         let idUpdate = 0;
         let unskillname = document.getElementById('unskillname');
         let unskillLevel = document.getElementById('unskillLevel');
+        let updateNameError = document.getElementById('updateNameError'); // Error span for update name
+
 
         function toUpdate(id) {
+            unskillname.classList.remove('border', 'border-danger');
+            updateNameError.classList.add('opacity-0');
             idUpdate = id;
             fetch('https://mps7.chandalen.dev/api/skills')
                 .then(res => res.json())
@@ -309,31 +356,58 @@
         }
 
         function updateSkill() {
-            console.log(unskillname.value);
+            if (!isNaN(unskillname.value) && unskillname.value != '') {
+                updateNameError.classList.remove('opacity-0');
+                unskillname.classList.add('border', 'border-danger');
+                updateNameError.innerHTML = "Skill must be a string.";
+                return;
+            }
             fetch(`https://mps7.chandalen.dev/api/skills/${idUpdate}`, {
-                    method: 'PUT',
-                    headers: {
-                        "Accept": "application/json",
-                        "Authorization": `Bearer ${token}`,
-                        "Content-Type": "application/json"
+                method: 'PUT',
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
 
-                    },
-                    body: JSON.stringify({
-                        "name": unskillname.value,
-                        "percent": unskillLevel.value,
-                    })
+                },
+                body: JSON.stringify({
+                    "name": unskillname.value,
+                    "percent": unskillLevel.value,
                 })
+            })
                 .then(res => res.json())
                 .then(json => {
-                    bootstrap.Modal.getInstance(
-                        document.getElementById("myModal1")
-                    ).hide();
-                    alert(json.message);
-                    getskill(); // Refresh user details after updating the avatar
+
+                    if (unskillname.value == "") {
+                        updateNameError.innerHTML = json.data.name[1];
+                        unskillname.classList.add('border', 'border-danger');
+                        updateNameError.classList.remove('opacity-0');
+                    } else if (json.result) {
+
+                        bootstrap.Modal.getInstance(
+                            document.getElementById("myModal1")
+                        ).hide(); // Close the modal
+                        Swal.fire({
+                            icon: "success",
+                            title: json.message,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        getskill(); // Refresh the skill list
+                    }
                 })
                 .catch(err => console.error('Error:', err));
 
+
         }
+        unskillname.addEventListener("input", function () {
+            if (unskillname.value.trim() !== "") {
+                unskillname.classList.remove('border', 'border-danger');
+                updateNameError.classList.add('opacity-0');
+            }
+        });
+
+
     </script>
 </body>
 

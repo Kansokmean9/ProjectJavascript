@@ -8,21 +8,24 @@
     <link rel="stylesheet" href="../asset/bootstrap/css/bootstrap.css">
     <link href="../asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../asset/style/style.css">
+    <link rel="stylesheet" href="../asset/style/flatpickr.min.css">
     <style>
-        .cs{
-        cursor: pointer;
-    }
-    th {
-        color: white;
-        padding: 20px;
-    }
-    td{
-        padding: 20px;
-    }
-    
-    table {
-        width: 100%;
-    }
+        .cs {
+            cursor: pointer;
+        }
+
+        th {
+            color: white;
+            padding: 20px;
+        }
+
+        td {
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -121,28 +124,31 @@
                 </li>
             </ul>
         </div>
-
         <div class="main-content">
-
             <main class="container-fluid py-4">
-
                 <div id="dashboardContent">
                     <div id="projectsContent">
                         <h3 class="mb-4 text-db text-primary">Projects Management</h3>
                         <form id="projectForm" class="card mb-4">
                             <div class="card-body">
-                                <div class="mb-3">
+                                <div class="mb-1">
                                     <label for="projectName" class="form-label">Project Name</label>
-                                    <input type="text" class="form-control" id="projectName" placeholder="inter name" required>
+                                    <input type="text" class="form-control" id="projectName" placeholder="inter name"
+                                        required>
+                                    <span id="projectError" class="text-danger small opacity-0">.</span>
+                                    <!-- Error message -->
                                 </div>
 
-                                <div class="mb-3">
+                                <div class="mb-1">
                                     <label for="projectTechnologies" class="form-label">workplace</label>
                                     <input type="text" class="form-control" id="projectTechnologies"
                                         placeholder="Inter workplace" required>
+                                    <span id="workplaceError" class="text-danger small opacity-0">.</span>
+                                    <!-- Error message -->
                                 </div>
 
-                                <button type="button" class="btn btn-primary" onclick="addproject()">Add project</button>
+                                <button type="button" class="btn btn-primary" id="btnsubmit" onclick="addproject()">Add
+                                    project</button>
                             </div>
                         </form>
                         <table border="0" class="bg-primarys">
@@ -165,20 +171,28 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title text-uppercase fw-bold" id="myModalLabel1"> Update data!</h5>
-                        <button type="button" class="btn-close bg-danger rounded-5" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close bg-danger rounded-5" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="PUT" id="updateForm">
                             <label for="unprojectname">Project Name</label>
-                            <input class="form-control" id="unprojectname" type="text" placeholder="New project name" style="width: 100%;">
+                            <input class="form-control" id="unprojectname" type="text" placeholder="New project name"
+                                style="width: 100%;">
+                            <span id="updateProjectError" class="text-danger small opacity-0">.</span><br>
+                            <!-- Error message -->
 
                             <label for="unworkplace" class="mt-2">Workplace</label><br>
-                            <input class="form-control" id="unworkplace" type="text" placeholder="New workplace" style="width: 100%;">
+                            <input class="form-control" id="unworkplace" type="text" placeholder="New workplace"
+                                style="width: 100%;">
+                            <span id="updateWorkplaceError" class="text-danger small opacity-0">.</span><br>
+                            <!-- Error message -->
 
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="updateproject()">Save changes</button>
+                        <button type="button" class="btn btn-primary" id="updatebtn" onclick="updateproject()">Save
+                            changes</button>
                     </div>
                 </div>
             </div>
@@ -191,7 +205,6 @@
 
 
     <script>
-
         function getsproject() {
             fetch('https://mps7.chandalen.dev/api/projects')
                 .then(res => res.json())
@@ -200,14 +213,14 @@
                     let tr = '';
                     json.data.forEach(element => {
                         tr += `<tr class="bg bg-body-secondary">
-                <td>${element.id}</td>
-                <td>${element.en_name}</td>
-                <td>${element.en_workplace}</td>
-               <td>
-                    <img class="cs" src="../asset/img/edit.png" data-bs-toggle="modal" data-bs-target="#myModal1" onclick="toUpdate(${element.id})" width="20px" height="20px">
-                    <img class="ms-2 cs" src="../asset/img/rubbish-bin.png" onclick="deleteExperience(${element.id})" width="20px" height="20px">     
-                </td>
-            </tr>`;
+                    <td>${element.id}</td>
+                    <td>${element.en_name}</td>
+                    <td>${element.en_workplace}</td>
+                    <td>
+                        <img class="cs" src="../asset/img/edit.png" data-bs-toggle="modal" data-bs-target="#myModal1" onclick="toUpdate(${element.id})" width="20px" height="20px">
+                        <img class="ms-2 cs" src="../asset/img/rubbish-bin.png" onclick="deleteExperience(${element.id})" width="20px" height="20px">     
+                    </td>
+                </tr>`;
                     });
                     document.querySelector('tbody').innerHTML = tr;
                 })
@@ -215,11 +228,43 @@
         getsproject();
 
 
-
         /// Add ///
         function addproject() {
+            const btnSubmit = document.getElementById('btnsubmit');
+            btnSubmit.disabled = true;
+
             let projectName = document.getElementById('projectName');
             let projectTechnologies = document.getElementById('projectTechnologies');
+            let projectError = document.getElementById('projectError');
+            let workplaceError = document.getElementById('workplaceError');
+            let succ = 0;
+            let succ1 = 0;
+
+            if (!isNaN(projectName.value) && projectName.value != '') {
+                projectError.classList.remove('opacity-0');
+                projectName.classList.add('border', 'border-danger');
+                projectError.innerHTML = "Project must be a string.";
+                succ = 1;
+            }
+            else if (projectName.value == "") {
+                projectError.classList.remove('opacity-0');
+                projectName.classList.add('border', 'border-danger');
+                projectError.innerHTML = "The en name field is required.";
+            }
+            if (!isNaN(projectTechnologies.value) && projectTechnologies.value != '') {
+                workplaceError.classList.remove('opacity-0');
+                projectTechnologies.classList.add('border', 'border-danger');
+                workplaceError.innerHTML = "Workplace must be a string.";
+                succ1 = 1;
+            } else if (projectTechnologies.value == "") {
+                workplaceError.classList.remove('opacity-0');
+                projectTechnologies.classList.add('border', 'border-danger');
+                workplaceError.innerHTML = "The en name field is required.";
+            }
+            if (succ == 1 || succ1 == 1) {
+                btnSubmit.disabled = false;
+                return;
+            }
 
 
             fetch(`https://mps7.chandalen.dev/api/projects`, {
@@ -236,46 +281,121 @@
             })
                 .then(res => res.json())
                 .then(json => {
-                    console.log(json)
-                    alert(json.message);
-                    getsproject();
+                    // Project Name validation
+                    if (projectName.value === "") {
+                        projectError.classList.remove('opacity-0');
+                        projectName.classList.add('border', 'border-danger');
+                        projectError.innerHTML = json.data.en_name[1];
+                    } else if (isNaN(projectName.value)) {
+                        projectError.classList.add('opacity-0');
+                        projectName.classList.remove('border', 'border-danger');
+
+                    }
+
+                    // Workplace validation
+                    if (projectTechnologies.value === "") {
+                        workplaceError.classList.remove('opacity-0');
+                        projectTechnologies.classList.add('border', 'border-danger');
+                        workplaceError.innerHTML = json.data.en_workplace[1];
+                    } else if (isNaN(projectTechnologies.value)) {
+                        workplaceError.classList.add('opacity-0');
+                        projectTechnologies.classList.remove('border', 'border-danger');
+
+                    }
+
+                    if (json.message === "Create project successful.") {
+                        Swal.fire({
+                            title: "Success!",
+                            text: "Project has been added.",
+                            icon: "success"
+                        });
+                        getsproject();
+                    }
                 })
-                .catch(err => console.error('Error:', err));
-
+                .finally(() => {
+                    btnSubmit.disabled = false;
+                });
         }
+        projectName.addEventListener("input", function () {
+            if (projectName.value.trim() !== "") {
+                projectName.classList.remove('border', 'border-danger');
+                projectError.classList.add('opacity-0');
+            }
+        });
+        projectTechnologies.addEventListener("input", function () {
+            if (projectTechnologies.value.trim() !== "") {
+                projectTechnologies.classList.remove('border', 'border-danger');
+                workplaceError.classList.add('opacity-0');
+            }
+        });
 
-        /////update////////
+
+        ///// Update /////
         let idUpdate = 0;
         let unprojectname = document.getElementById('unprojectname');
         let unworkplace = document.getElementById('unworkplace');
+        let updateProjectError = document.getElementById('updateProjectError');
+        let updateWorkplaceError = document.getElementById('updateWorkplaceError');
+
+
 
         function toUpdate(id) {
             idUpdate = id;
+            unprojectname.classList.remove('border', 'border-danger');
+            updateProjectError.classList.add('opacity-0');
+            unworkplace.classList.remove('border', 'border-danger');
+            updateWorkplaceError.classList.add('opacity-0');
             fetch('https://mps7.chandalen.dev/api/projects')
                 .then(res => res.json())
                 .then(json => {
                     console.log(json.data);
                     json.data.forEach(element => {
-
                         if (element.id == id) {
                             unprojectname.value = element.en_name;
                             unworkplace.value = element.en_workplace;
                         }
                     });
-
-                })
-
+                });
         }
 
         function updateproject() {
+            const updatebtn = document.getElementById('updatebtn');
+            updatebtn.disabled = true;
+            let usucc = 0;
+            let usucc1 = 0;
             console.log(unprojectname.value);
+
+            if (!isNaN(unprojectname.value) && unprojectname.value != '') {
+                updateProjectError.classList.remove('opacity-0');
+                unprojectname.classList.add('border', 'border-danger');
+                updateProjectError.innerHTML = "Project must be a string.";
+                usucc = 1;
+            } else if (unprojectname.value == "") {
+                updateProjectError.classList.remove('opacity-0');
+                unprojectname.classList.add('border', 'border-danger');
+                updateProjectError.innerHTML = "The en name field is required.";
+            }
+            if (!isNaN(unworkplace.value) && unworkplace.value != '') {
+                updateWorkplaceError.classList.remove('opacity-0');
+                unworkplace.classList.add('border', 'border-danger');
+                updateWorkplaceError.innerHTML = "Workplace must be a string.";
+                usucc1 = 1;
+            } else if (unworkplace.value == "") {
+                updateWorkplaceError.classList.remove('opacity-0');
+                unworkplace.classList.add('border', 'border-danger');
+                updateWorkplaceError.innerHTML = "The en name field is required.";
+            }
+            if (usucc == 1 || usucc1 == 1) {
+                updatebtn.disabled = false;
+                return;
+            }
+
             fetch(`https://mps7.chandalen.dev/api/projects/${idUpdate}`, {
                 method: 'PUT',
                 headers: {
                     "Accept": "application/json",
                     "Authorization": `Bearer ${token}`,
                     "Content-Type": "application/json"
-
                 },
                 body: JSON.stringify({
                     "en_name": unprojectname.value,
@@ -284,20 +404,62 @@
             })
                 .then(res => res.json())
                 .then(json => {
-                    bootstrap.Modal.getInstance(
-                        document.getElementById("myModal1")
-                    ).hide();
-                    alert(json.message);
-                    getsproject(); // Refresh user details after updating the avatar
-                })
-                .catch(err => console.error('Error:', err));
+                    // Project Name validation
+                    if (unprojectname.value == "") {
+                        updateProjectError.classList.remove('opacity-0');
+                        unprojectname.classList.add('border', 'border-danger');
+                        updateProjectError.innerHTML = json.data.en_name[1];
+                    } else {
+                        updateProjectError.classList.add('opacity-0');
+                        unprojectname.classList.remove('border', 'border-danger');
 
+                    }
+
+                    // Workplace validation
+                    if (unworkplace.value === "") {
+                        updateWorkplaceError.classList.remove('opacity-0');
+                        unworkplace.classList.add('border', 'border-danger');
+                        updateWorkplaceError.innerHTML = json.data.en_workplace[1];
+                    } else {
+                        updateWorkplaceError.classList.add('opacity-0');
+                        unworkplace.classList.remove('border', 'border-danger');
+                        usucc1 = 1;
+                    }
+
+                    if (json.message === "Update project successful.") {
+                        Swal.fire({
+                            title: "Success!",
+                            text: json.message,
+                            icon: "success"
+                        });
+                        bootstrap.Modal.getInstance(
+                            document.getElementById("myModal1")
+                        ).hide(); // Hide the modal
+                        getsproject();
+                    }
+                })
+                .finally(() => {
+                    updatebtn.disabled = false;
+                });
         }
+        unprojectname.addEventListener("input", function () {
+            if (unprojectname.value.trim() !== "") {
+                unprojectname.classList.remove('border', 'border-danger');
+                updateProjectError.classList.add('opacity-0');
+            }
+        });
+        unworkplace.addEventListener("input", function () {
+            if (unworkplace.value.trim() !== "") {
+                unworkplace.classList.remove('border', 'border-danger');
+                updateWorkplaceError.classList.add('opacity-0');
+            }
+        });
+
 
         /// Delete ///
         function deleteExperience(id) {
             Swal.fire({
-                title: "Are you sure?",
+                title: "Are you sure",
                 text: "You won't be able to revert this!",
                 icon: "warning",
                 showCancelButton: true,
@@ -312,19 +474,17 @@
                             "Accept": "application/json",
                             "Authorization": `Bearer ${token}`,
                             "Content-Type": "application/json"
-
                         }
                     })
                         .then(res => res.json())
                         .then(json => {
-                            console.log(json);  // Log the response to see if delete was successful
                             if (json.result) {
                                 Swal.fire({
                                     title: "Deleted!",
                                     text: json.message,
                                     icon: "success"
                                 });
-                                getsproject(); // Refresh data
+                                getsproject();
                             } else {
                                 Swal.fire("Error!", "Failed to delete experience.", "error");
                             }
@@ -336,9 +496,8 @@
                 }
             });
         }
-
-
     </script>
+
 </body>
 
 </html>
