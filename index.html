@@ -75,18 +75,27 @@
               />
               <span id="va_user" class="opacity-0">.</span>
             </div>
-            <div class="mb-2 position-relative">
-              <label for="password" class="form-label">Password</label>
-              <input
-                type="password"
-                placeholder="Password"
-                class="form-control"
-                id="password"
-              />
-              <span id="hidePass" style="cursor: pointer" onclick="hidepass()"
-                ><i class="bi bi-eye-slash"></i
-              ></span>
-              <span id="va_pass" class="opacity-0">.</span>
+            <div class="card px-5 pt-5"
+                style="width: 400px; height: 430px; box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;">
+                <h2 class="text-center mb-4 fw-bold">LOG IN</h2>
+                <form id="loginForm">
+                    <div class="mb-2">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" placeholder="Username" class="form-control" id="username">
+                        <span id="va_user" class="opacity-0">.</span>
+                    </div>
+                    <div class="mb-2 position-relative">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" placeholder="Password" class="form-control" id="password">
+                        <span id="hidePass" style="cursor: pointer;" onclick="hidepass()"><i
+                                class="bi bi-eye-slash"></i></span>
+                        <span id="va_pass" class="opacity-0">.</span>
+
+                    </div>
+                    <div class="w-100 mt-4 text-center">
+                        <button type="button" id="btnsubmit" class="btn btn-primary w-75" onclick="adddata()">Login</button>
+                    </div>
+                </form>
             </div>
             <div class="w-100 mt-4 text-center">
               <button

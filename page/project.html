@@ -9,20 +9,27 @@
     <link href="../asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../asset/style/style.css">
     <style>
-        .cs{
-        cursor: pointer;
-    }
-    th {
-        color: white;
-        padding: 20px;
-    }
-    td{
-        padding: 20px;
-    }
-    
-    table {
-        width: 100%;
-    }
+        th {
+            color: white;
+            padding: 20px;
+        }
+
+        td {
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        #nodata {
+            height: 288px;
+            display: flex;
+            color: gray;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 
@@ -66,7 +73,6 @@
             <button id="closeSidebar" class="btn btn-light d-xl-none mb-3 btn-close-bar">
                 <i class="bi bi-chevron-left"></i>
             </button>
-            <!-- <h3 class="text-center my-4 text-db">Admin Portfolio</h3> -->
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link text-white" href="dashboard.html" data-section="dashboard">
@@ -128,12 +134,13 @@
 
                 <div id="dashboardContent">
                     <div id="projectsContent">
-                        <h3 class="mb-4 text-db text-primary">Projects Management</h3>
+                        <h3 class="mb-3 text-db sec-title">Projects Management</h3>
                         <form id="projectForm" class="card mb-4">
                             <div class="card-body">
                                 <div class="mb-3">
                                     <label for="projectName" class="form-label">Project Name</label>
-                                    <input type="text" class="form-control" id="projectName" placeholder="inter name" required>
+                                    <input type="text" class="form-control" id="projectName" placeholder="inter name"
+                                        required>
                                 </div>
 
                                 <div class="mb-3">
@@ -142,7 +149,8 @@
                                         placeholder="Inter workplace" required>
                                 </div>
 
-                                <button type="button" class="btn btn-primary" onclick="addproject()">Add project</button>
+                                <button type="button" class="btn btn-primary" onclick="addproject()">Add
+                                    project</button>
                             </div>
                         </form>
                         <table border="0" class="bg-primarys">
@@ -156,6 +164,10 @@
 
                             </tbody>
                         </table>
+                        <div id="nodata" class="d-none bg-body-tertiary rounded">
+                            <i class="bi bi-database-dash" style="font-size: 50px;"></i>
+                            <h3>No data avilable.</h3>
+                        </div>
                     </div>
                 </div>
             </main>
@@ -165,15 +177,18 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title text-uppercase fw-bold" id="myModalLabel1"> Update data!</h5>
-                        <button type="button" class="btn-close bg-danger rounded-5" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close bg-danger rounded-5" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="PUT" id="updateForm">
                             <label for="unprojectname">Project Name</label>
-                            <input class="form-control" id="unprojectname" type="text" placeholder="New project name" style="width: 100%;">
+                            <input class="form-control" id="unprojectname" type="text" placeholder="New project name"
+                                style="width: 100%;">
 
                             <label for="unworkplace" class="mt-2">Workplace</label><br>
-                            <input class="form-control" id="unworkplace" type="text" placeholder="New workplace" style="width: 100%;">
+                            <input class="form-control" id="unworkplace" type="text" placeholder="New workplace"
+                                style="width: 100%;">
 
                         </form>
                     </div>
@@ -210,6 +225,11 @@
             </tr>`;
                     });
                     document.querySelector('tbody').innerHTML = tr;
+                    if (tr == '') {
+                        document.getElementById('nodata').classList.remove('d-none');
+                    } else {
+                        document.getElementById('nodata').classList.add('d-none');
+                    }
                 })
         }
         getsproject();

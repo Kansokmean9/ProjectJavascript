@@ -11,10 +11,6 @@
 
 </head>
 <style>
-    .cs {
-        cursor: pointer;
-    }
-
     th {
         color: white;
         padding: 20px;
@@ -25,6 +21,14 @@
 
     table {
         width: 100%;
+    }
+    #nodata {
+        height: 288px;
+        display: flex;
+        color: gray;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 </style>
 
@@ -132,7 +136,7 @@
                 <div id="dashboardContent">
                     <div id="languageContent">
                         <div id="skillsContent">
-                            <h3 class="mb-3 text-db text-primary">Language Management</h3>
+                            <h3 class="mb-3 text-db sec-title">Language Management</h3>
                             <form id="languagesFrom" class="card  mb-4">
                                 <div class="card-body">
                                     <div class="mb-3">
@@ -161,6 +165,10 @@
 
                                 </tbody>
                             </table>
+                            <div id="nodata" class="d-none bg-body-tertiary rounded">
+                                <i class="bi bi-database-dash" style="font-size: 50px;"></i>
+                                <h3>No data avilable.</h3>
+                            </div>
 
                         </div>
                     </div>
@@ -225,6 +233,11 @@
             </tr>`;
                     });
                     document.querySelector('tbody').innerHTML = tr;
+                    if (tr == '') {
+                        document.getElementById('nodata').classList.remove('d-none');
+                    } else {
+                        document.getElementById('nodata').classList.add('d-none');
+                    }
                 })
         }
         getLang();
