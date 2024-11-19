@@ -173,6 +173,7 @@
                                     <input class="form-control" id="end_year" type="date" placeholder="Select end year"
                                         style="width: 100%;">
                                 </div>
+
                                 <div class="col-12 px-2 pt-1">
                                     <button type="button" id="Add" class="btn btn-primary" onclick="addEducation()">Add
                                         education</button>
@@ -230,6 +231,7 @@
                         <input class="form-control" id="uend_year" type="date" placeholder="Select end year"
                             style="width: 100%;">
                     </form>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="AddE" onclick="updateEducation()">Save
@@ -307,6 +309,29 @@
             let va_school = document.getElementById('va_school');
             let va_start = document.getElementById('va_start');
 
+            let succ = 0;
+            let succ1 = 0;
+
+            if (!isNaN(en_degree.value) && en_degree.value != '') {
+                va_degree.classList.remove('opacity-0');
+                en_degree.classList.add('border', 'border-danger');
+                va_degree.innerHTML = 'Degree must be a string.';
+                succ = 1;
+                Add.disabled = false; 
+                
+            }
+            if (!isNaN(en_school.value) && en_school.value != '') {
+                va_school.classList.remove('opacity-0');
+                en_school.classList.add('border', 'border-danger');
+                va_school.innerHTML = 'School must be a string.';
+                Add.disabled = false; 
+                succ = 1;
+                
+            }
+            if(succ==1 && succ1 ==1 ){
+                return;
+            }
+
             fetch(`https://mps7.chandalen.dev/api/educations`, {
                 method: 'POST',
                 headers: {
@@ -328,43 +353,34 @@
                     console.log(json)
                     // alert(json.message);
                     if (en_degree.value == "") {
-                        // alert("asas")
+
+                        va_degree.classList.remove('opacity-0');
                         en_degree.classList.add('border', 'border-danger');
                         va_degree.innerHTML = json.data.en_degree[1];
-                        va_degree.classList.remove('opacity-0');
-
-                        //remove other input validation
-                        en_school.classList.remove('border', 'border-danger');
-                        va_school.classList.add('opacity-0');
-
-                        start_year.classList.remove('border', 'border-danger');
-                        va_start.classList.add('opacity-0');
-
-                    } else if (en_school.value == "") {
+                    } else if(isNaN(en_degree.value)){
+                        va_degree.classList.add('opacity-0');
+                        en_degree.classList.remove('border', 'border-danger');
+                    }
+                    if (en_school.value === "") {
+                        va_school.classList.remove('opacity-0');
                         en_school.classList.add('border', 'border-danger');
                         va_school.innerHTML = json.data.en_school[1];
-                        va_school.classList.remove('opacity-0');
+                    } else if(isNaN(en_school.value)){
 
-                        //remove other input validation
-                        en_degree.classList.remove('border', 'border-danger');
-                        va_degree.classList.add('opacity-0');
+                        va_school.classList.add('opacity-0');
+                        en_school.classList.remove('border', 'border-danger');
+                    }
 
-                        start_year.classList.remove('border', 'border-danger');
-                        va_start.classList.add('opacity-0');
-
-                    } else if (start_year.value == "") {
+                    if (start_year.value === "") {
+                        va_start.classList.remove('opacity-0');
                         start_year.classList.add('border', 'border-danger');
                         va_start.innerHTML = json.data.start_year[1];
-                        va_start.classList.remove('opacity-0');
-
-                        //remove other input validation
-                        en_degree.classList.remove('border', 'border-danger');
-                        va_degree.classList.add('opacity-0');
-
-                        en_school.classList.remove('border', 'border-danger');
-                        va_school.classList.add('opacity-0');
                     }
-                    else {
+                    if (json.result) {
+                        va_start.classList.add('opacity-0');
+                        start_year.classList.remove('border', 'border-danger');
+
+
                         en_degree.classList.remove('border', 'border-danger');
                         va_degree.classList.add('opacity-0');
 
@@ -392,10 +408,30 @@
                 })
                 .finally(() => {
                     Add.disabled = false; // Enable button after request completes
+
                 });
 
-            GetDate();
         }
+        // GetDate();
+        en_degree.addEventListener("input", function () {
+            if (en_degree.value.trim() !== "") {
+                en_degree.classList.remove('border', 'border-danger');
+                va_degree.classList.add('opacity-0');
+            }
+        });
+        en_school.addEventListener("input", function () {
+            if (en_school.value.trim() !== "") {
+                en_school.classList.remove('border', 'border-danger');
+                va_school.classList.add('opacity-0');
+            }
+        });
+        start_year.addEventListener("input", function () {
+            if (start_year.value.trim() !== "") {
+                start_year.classList.remove('border', 'border-danger');
+                va_start.classList.add('opacity-0');
+
+            }
+        });
         // addEducation();
 
         function deleteEducation(id) {
@@ -445,6 +481,15 @@
         let ustart_year = document.getElementById('ustart_year');
         let uend_year = document.getElementById('uend_year');
         function toUpdate(id) {
+            va_degreeE.classList.add('opacity-0');
+            uen_degree.classList.remove('border', 'border-danger');
+
+            va_schoolE.classList.add('opacity-0');
+            uen_shcool.classList.remove('border', 'border-danger');
+
+            va_startE.classList.add('opacity-0');
+            ustart_year.classList.remove('border', 'border-danger');
+
             idUpdate = id;
             fetch('https://mps7.chandalen.dev/api/educations')
                 .then(res => res.json())
@@ -456,21 +501,25 @@
                             uen_degree.value = element.en_degree;
                             uen_shcool.value = element.en_school;
                         }
+
                     });
 
                 })
-
         }
         function updateEducation() {
-            // console.log(uen_degree.value);
             const AddE = document.getElementById('AddE');
             AddE.disabled = true;
+
+            let en_degree = document.getElementById('en_degree');
+            let en_school = document.getElementById('en_school');
+            let start_year = document.getElementById('start_year');
+            let end_year = document.getElementById('end_year');
+
 
             let va_degree = document.getElementById('va_degreeE');
             let va_school = document.getElementById('va_schoolE');
             let va_start = document.getElementById('va_startE');
 
-            // console.log(uen_degree.value + ' ' + uen_shcool.value + ' ' + ustart_year.value + " " + uend_year.value);
             console.log(uen_degree.value);
             fetch(`https://mps7.chandalen.dev/api/educations/${idUpdate}`, {
                 method: 'PUT',
@@ -490,65 +539,83 @@
                 .then(res => res.json())
                 .then(json => {
 
+                    console.log(json)
+                    // alert(json.message);
                     if (uen_degree.value == "") {
+                        va_degreeE.classList.remove('opacity-0');
                         uen_degree.classList.add('border', 'border-danger');
-                        va_degree.innerHTML = json.data.en_degree[1];
-                        va_degree.classList.remove('opacity-0');
-
-                        //remove other input validation
-                        uen_shcool.classList.remove('border', 'border-danger');
-                        va_school.classList.add('opacity-0');
-
-                        ustart_year.classList.remove('border', 'border-danger');
-                        va_start.classList.add('opacity-0');
-
-                    } else if (uen_shcool.value == "") {
-                        uen_degree.classList.add('border', 'border-danger');
-                        va_school.innerHTML = json.data.en_school[1];
-                        va_school.classList.remove('opacity-0');
-
-                        //remove other input validation
+                        va_degreeE.innerHTML = json.data.en_degree[1];
+                    } else {
+                        va_degreeE.classList.add('opacity-0');
                         uen_degree.classList.remove('border', 'border-danger');
-                        va_degree.classList.add('opacity-0');
-
-                        ustart_year.classList.remove('border', 'border-danger');
-                        va_start.classList.add('opacity-0');
-
-                    } else if (ustart_year.value == "") {
-                        ustart_year.classList.add('border', 'border-danger');
-                        va_start.innerHTML = json.data.start_year[1];
-                        va_start.classList.remove('opacity-0');
-
-                        //remove other input validation
-                        uen_degree.classList.remove('border', 'border-danger');
-                        va_degree.classList.add('opacity-0');
-
-                        uen_shcool.classList.remove('border', 'border-danger');
-                        va_school.classList.add('opacity-0');
                     }
-                    else {
+                    if (uen_shcool.value == "") {
+                        va_schoolE.classList.remove('opacity-0');
+                        uen_shcool.classList.add('border', 'border-danger');
+                        va_schoolE.innerHTML = json.data.en_school[1];
+                    } else {
+                        va_schoolE.classList.add('opacity-0');
+                        uen_shcool.classList.remove('border', 'border-denger');
+                    }
+                    if (ustart_year.value == "") {
+                        va_startE.classList.remove('opacity-0');
+                        ustart_year.classList.add('border', 'border-danger');
+                        va_startE.innerHTML = json.data.start_year[1];
+                    }
+                    if (json.result) {
+                        va_startE.classList.add('opacity-0');
                         ustart_year.classList.remove('border', 'border-danger');
-                        va_start.classList.add('opacity-0');
-                        ustart_year.value = null;
 
+                        uen_degree.classList.remove('border', 'border-danger');
+                        va_degreeE.classList.add('opacity-0');
+
+                        uen_shcool.classList.remove('border', 'border-danger');
+                        va_schoolE.classList.add('opacity-0');
+
+                        ustart_year.classList.remove('border', 'border-danger');
+                        va_startE.classList.add('opacity-0');
+
+                        uen_degree.value = "";
+                        uen_shcool.value = "";
+                        ustart_year.value = "";
+                        uend_year.value = "";
                         Swal.fire({
                             position: "center",
                             icon: "success",
                             title: json.message,
                             showConfirmButton: false,
-                            timer: 1500
+                            timer: 1000
                         });
-                        bootstrap.Modal.getInstance(
-                            document.getElementById("myModal1")
-                        ).hide();
                         GetDate();
                     }
                 })
                 .finally(() => {
                     AddE.disabled = false; // Enable button after request completes
+
                 });
-            GetDate();
-        }    
+
+        }
+        // GetDate();
+        uen_degree.addEventListener("input", function () {
+            if (uen_degree.value.trim() !== "") {
+                uen_degree.classList.remove('border', 'border-danger');
+                va_degreeE.classList.add('opacity-0');
+            }
+        });
+        uen_shcool.addEventListener("input", function () {
+            if (uen_shcool.value.trim() !== "") {
+                uen_shcool.classList.remove('border', 'border-danger');
+                va_schoolE.classList.add('opacity-0');
+            }
+        });
+        ustart_year.addEventListener("input", function () {
+            if (ustart_year.value.trim() !== "") {
+                ustart_year.classList.remove('border', 'border-danger');
+                va_startE.classList.add('opacity-0');
+
+            }
+        });
+
     </script>
 </body>
 
