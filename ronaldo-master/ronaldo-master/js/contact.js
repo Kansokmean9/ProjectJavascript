@@ -309,6 +309,9 @@ document.getElementById("contactForm").addEventListener("submit", function (even
         data[key] = value;
     });
 
+    document.getElementById('loading').classList.remove('d-none');
+    document.getElementById('send_message').innerHTML = ''
+
 
     fetch("https://mps7.chandalen.dev/api/contacts", {
         method: "POST",
@@ -332,7 +335,9 @@ document.getElementById("contactForm").addEventListener("submit", function (even
     .then((json) => {
         console.log("Success:", json);
 
+
         let hasError=false ;
+        
 
         // Display errors if fields are empty
         if (iname.value === "") {
@@ -370,6 +375,9 @@ document.getElementById("contactForm").addEventListener("submit", function (even
             hasError = true;
         }
 
+        // setTimeout(() => {
+        //     document.getElementById('loading').classList.add('d-none');
+        // }, 2000);
         // Reset the form if there are no errors
         if (!hasError) {
             document.getElementById("contactForm").reset();
@@ -380,10 +388,15 @@ document.getElementById("contactForm").addEventListener("submit", function (even
                 confirmButtonText: 'OK'
             });
         }
+        document.getElementById('loading').classList.add('d-none');
+        document.getElementById('send_message').innerHTML = 'Send message'
+
     })
     .catch((error) => {
         console.error("Error:", error);
     });
+
+    
 });
 
 // Add input event listeners to reset error styles

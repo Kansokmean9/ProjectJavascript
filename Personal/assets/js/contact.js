@@ -314,6 +314,8 @@ document.getElementById("contactForm").addEventListener("submit", function (even
     formData.forEach((value, key) => {
         data[key] = value;
     });
+    document.getElementById('loading').classList.remove('d-none');
+    document.getElementById('send_message').innerHTML = ''
 
 
     fetch("https://mps7.chandalen.dev/api/contacts", {
@@ -386,6 +388,8 @@ document.getElementById("contactForm").addEventListener("submit", function (even
                 confirmButtonText: 'OK'
             });
         }
+        document.getElementById('loading').classList.add('d-none');
+        document.getElementById('send_message').innerHTML = 'Send message'
     })
     .catch((error) => {
         console.error("Error:", error);

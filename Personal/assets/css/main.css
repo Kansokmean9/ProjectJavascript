@@ -222,6 +222,7 @@ h6 {
     white-space: nowrap;
     transition: 0.3s;
     position: relative;
+    text-decoration: none;
   }
 
   .navmenu a i,

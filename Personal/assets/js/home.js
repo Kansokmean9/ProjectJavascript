@@ -39,7 +39,7 @@ function fetchAbout() {
           // Image footer
           
           const navbar_title = document.getElementById('navbar_title');
-          console.log(navbar_title);
+        //  console.log(navbar_title);
           navbar_title.innerHTML = profile.en_first_name + " " + profile.en_last_name;
        
   
@@ -47,7 +47,7 @@ function fetchAbout() {
           hero_title.innerHTML = profile.en_first_name + " " + profile.en_last_name;
           const image_contact = document.getElementById('hero-bg');
           image_contact.style.backgroundImage = `url('${profile.photo_hero}')`;
-          console.log(image_contact)
+         // console.log(image_contact)
           // image_contact.src = profile.photo_about;
   
   

@@ -373,7 +373,18 @@
             <!-- <div class="form-group">
               <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5" />
             </div> -->
-            <button type="submit" class="btn btn-primary py-3 px-5">send message</button>
+            <button  type="submit" class="btn btn-primary py-2 px-3"><span  id="send_message">
+              Send message
+            </span>
+            <div class="text-center d-none" id="loading">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+             
+            </button>
+       
+            
           </form>
         </div>
         <div class="col-md-6 d-flex">
