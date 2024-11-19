@@ -147,7 +147,7 @@
                                         oninput="output.value = this.value">
 
                                 </div>
-                                <button type="button" class="btn btn-primary" onclick="addSkill()">Add skill</button>
+                                <button type="button" class="btn btn-primary" id="btnsk" onclick="addSkill()">Add skill</button>
                             </div>
                         </form>
                         <table border="0" class="bg-primarys">
@@ -189,7 +189,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="updateSkill()">Save changes</button>
+                        <button type="button" class="btn btn-primary" id="updatesk" onclick="updateSkill()">Save changes</button>
                     </div>
                 </div>
             </div>
@@ -229,8 +229,8 @@
         getskill();
 
         function addSkill() {
-            const btnSubmit = document.getElementById('btnsubmit');
-            btnSubmit.disabled = true;
+            const btnsk = document.getElementById('btnsk');
+            btnsk.disabled = true;
             let skillName = document.getElementById('skillName');
             let skillLevel = document.getElementById('output');
             let nameError = document.getElementById('nameError'); // Error span for skill name
@@ -239,7 +239,7 @@
                 nameError.classList.remove('opacity-0');
                 skillName.classList.add('border', 'border-danger');
                 nameError.innerHTML = "Skill must be a string.";
-                btnSubmit.disabled = false;
+                btnsk.disabled = false;
                 return;
             }
 
@@ -275,7 +275,9 @@
                     }
 
                 })
-                .catch(err => console.error('Error:', err));
+                .finally(() => {
+                    btnsk.disabled = false;
+                });
 
         }
         skillName.addEventListener("input", function () {
@@ -356,10 +358,14 @@
         }
 
         function updateSkill() {
+            const updatesk = document.getElementById('updatesk');
+            updatesk.disabled = true;
+
             if (!isNaN(unskillname.value) && unskillname.value != '') {
                 updateNameError.classList.remove('opacity-0');
                 unskillname.classList.add('border', 'border-danger');
                 updateNameError.innerHTML = "Skill must be a string.";
+                updatesk.disabled = false;
                 return;
             }
             fetch(`https://mps7.chandalen.dev/api/skills/${idUpdate}`, {
@@ -396,9 +402,9 @@
                         getskill(); // Refresh the skill list
                     }
                 })
-                .catch(err => console.error('Error:', err));
-
-
+                .finally(() => {
+                    updatesk.disabled = false;
+                });
         }
         unskillname.addEventListener("input", function () {
             if (unskillname.value.trim() !== "") {

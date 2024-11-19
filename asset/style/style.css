@@ -303,3 +303,13 @@ h2.card-text,
     transform: scale(1.1);
     color: #e0e0e0;
 }
+.cs{
+    cursor: pointer;
+}
+.cs:hover{
+    transform: scale(1.12);
+}
+.sec-title{
+    color: rgba(1, 75, 164, 1);
+    margin-left: 5px;
+}

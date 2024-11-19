@@ -11,10 +11,6 @@
 
 </head>
 <style>
-    .cs {
-        cursor: pointer;
-    }
-
     th {
         color: white;
         padding: 20px;
@@ -26,6 +22,15 @@
 
     table {
         width: 100%;
+    }
+
+    #nodata {
+        height: 288px;
+        display: flex;
+        color: gray;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 </style>
 
@@ -133,7 +138,7 @@
                 <div id="dashboardContent">
                     <div id="languageContent">
                         <div id="skillsContent">
-                            <h3 class="mb-3 text-db text-primary">Language Management</h3>
+                            <h3 class="mb-3 text-db sec-title">Language Management</h3>
                             <form id="languagesFrom" class="card  mb-4">
                                 <div class="card-body">
                                     <div class="mb-1">
@@ -151,7 +156,7 @@
                                             oninput="output.value = this.value">
 
                                     </div>
-                                    <button type="button" class="btn btn-primary" onclick="addLang()">Add
+                                    <button type="button" class="btn btn-primary" id="btnlg" onclick="addLang()">Add
                                         Language</button>
                                 </div>
                             </form>
@@ -166,6 +171,10 @@
 
                                 </tbody>
                             </table>
+                            <div id="nodata" class="d-none bg-body-tertiary rounded">
+                                <i class="bi bi-database-dash" style="font-size: 50px;"></i>
+                                <h3>No data avilable.</h3>
+                            </div>
 
                         </div>
                     </div>
@@ -202,7 +211,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="updateLang()">Save changes</button>
+                    <button type="button" class="btn btn-primary" id="updatelg" onclick="updateLang()">Save
+                        changes</button>
                 </div>
             </div>
         </div>
@@ -234,11 +244,18 @@
             </tr>`;
                     });
                     document.querySelector('tbody').innerHTML = tr;
+                    if (tr == '') {
+                        document.getElementById('nodata').classList.remove('d-none');
+                    } else {
+                        document.getElementById('nodata').classList.add('d-none');
+                    }
                 })
         }
         getLang();
 
         function addLang() {
+            const btnlg = document.getElementById('btnlg');
+            btnlg.disabled = true;
             let languagesName = document.getElementById('languagesName');
             let languagesLevel = document.getElementById('output');
             let langError = document.getElementById('langError');
@@ -247,6 +264,7 @@
                 langError.classList.remove('opacity-0');
                 languagesName.classList.add('border', 'border-danger');
                 langError.innerHTML = "Language must be a string.";
+                btnlg.disabled = false;
                 return;
             }
 
@@ -280,7 +298,9 @@
                         getLang();
                     }
                 })
-                .catch(err => console.error('Error:', err));
+                .finally(() => {
+                    btnlg.disabled = false;
+                });
         }
         languagesName.addEventListener("input", function () {
             if (languagesName.value.trim() !== "") {
@@ -359,10 +379,13 @@
         }
 
         function updateLang() {
+            const updatelg = document.getElementById('updatelg');
+            updatelg.disabled = true;
             if (!isNaN(unlanguagesName.value) && unlanguagesName.value != '') {
                 updateLangError.classList.remove('opacity-0');
                 unlanguagesName.classList.add('border', 'border-danger');
                 updateLangError.innerHTML = "Language must be a string.";
+                updatelg.disabled = false;
                 return;
             }
             fetch(`https://mps7.chandalen.dev/api/languages/${idUpdate}`, {
@@ -398,7 +421,9 @@
                         getLang(); // Refresh the skill list
                     }
                 })
-                .catch(err => console.error('Error:', err));
+                .finally(() => {
+                    updatelg.disabled = false;
+                });
         }
         unlanguagesName.addEventListener("input", function () {
             if (unlanguagesName.value.trim() !== "") {

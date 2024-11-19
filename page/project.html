@@ -10,10 +10,6 @@
     <link rel="stylesheet" href="../asset/style/style.css">
     <link rel="stylesheet" href="../asset/style/flatpickr.min.css">
     <style>
-        .cs {
-            cursor: pointer;
-        }
-
         th {
             color: white;
             padding: 20px;
@@ -26,6 +22,15 @@
         table {
             width: 100%;
         }
+        #nodata {
+            height: 288px;
+            display: flex;
+            color: gray;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
     </style>
 </head>
 
@@ -69,7 +74,6 @@
             <button id="closeSidebar" class="btn btn-light d-xl-none mb-3 btn-close-bar">
                 <i class="bi bi-chevron-left"></i>
             </button>
-            <!-- <h3 class="text-center my-4 text-db">Admin Portfolio</h3> -->
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link text-white" href="dashboard.html" data-section="dashboard">
@@ -128,15 +132,17 @@
             <main class="container-fluid py-4">
                 <div id="dashboardContent">
                     <div id="projectsContent">
-                        <h3 class="mb-4 text-db text-primary">Projects Management</h3>
+                        <h3 class="mb-3 text-db sec-title">Projects Management</h3>
                         <form id="projectForm" class="card mb-4">
                             <div class="card-body">
                                 <div class="mb-1">
                                     <label for="projectName" class="form-label">Project Name</label>
                                     <input type="text" class="form-control" id="projectName" placeholder="inter name"
                                         required>
+
                                     <span id="projectError" class="text-danger small opacity-0">.</span>
                                     <!-- Error message -->
+
                                 </div>
 
                                 <div class="mb-1">
@@ -162,6 +168,10 @@
 
                             </tbody>
                         </table>
+                        <div id="nodata" class="d-none bg-body-tertiary rounded">
+                            <i class="bi bi-database-dash" style="font-size: 50px;"></i>
+                            <h3>No data avilable.</h3>
+                        </div>
                     </div>
                 </div>
             </main>
@@ -185,6 +195,7 @@
                             <label for="unworkplace" class="mt-2">Workplace</label><br>
                             <input class="form-control" id="unworkplace" type="text" placeholder="New workplace"
                                 style="width: 100%;">
+
                             <span id="updateWorkplaceError" class="text-danger small opacity-0">.</span><br>
                             <!-- Error message -->
 
@@ -223,6 +234,11 @@
                 </tr>`;
                     });
                     document.querySelector('tbody').innerHTML = tr;
+                    if (tr == '') {
+                        document.getElementById('nodata').classList.remove('d-none');
+                    } else {
+                        document.getElementById('nodata').classList.add('d-none');
+                    }
                 })
         }
         getsproject();
