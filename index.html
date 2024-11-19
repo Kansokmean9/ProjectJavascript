@@ -1,79 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="asset/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="asset/style/style.css" />
-    <link rel="stylesheet" href="asset/bootstrap-icons/bootstrap-icons.css" />
-  </head>
-  <style>
+    <link rel="stylesheet" href="asset/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="asset/style/style.css">
+    <link rel="stylesheet" href="asset/bootstrap-icons/bootstrap-icons.css">
+</head>
+<style>
     #hidePass {
-      position: absolute;
-      right: 7px;
-      top: 38px;
+        position: absolute;
+        right: 7px;
+        top: 38px;
     }
 
     #va_user,
     #va_pass {
-      color: red;
-      font-size: small;
-      /* margin-left: 135px; */
+        color: red;
+        font-size: small;
+        /* margin-left: 135px; */
     }
 
     input {
-      border-radius: 10px !important;
+        border-radius: 10px !important;
     }
 
     .card {
-      border-radius: 15px !important;
+        border-radius: 15px !important;
     }
-  </style>
+</style>
 
-  <body>
-    <div
-      id="loginContainer"
-      class="bg container-fluid vh-100 d-flex align-items-center justify-content-center bg-light"
-    >
-      <div
-        class="position-absolute"
-        style="margin-left: 30px; right: 100px; top: 80px; width: 250px"
-      >
-        <img src="asset/img/bglogin1.png" class="w-100" alt="" />
-      </div>
-      <div class="position-absolute" style="left: 100px; top: 400px">
-        <img src="asset/img/bgloogin.png" alt="" />
-      </div>
-
-      <div>
-        <div
-          class="logo m-auto mb-3"
-          style="width: 300px; margin-left: 5px; z-index: 99"
-        >
-          <h1 class="text-center text-addmin my-4 text-uppercase fs-3">
-            Admin Portfolio
-          </h1>
+<body>
+    <div id="loginContainer"
+        class="bg container-fluid vh-100 d-flex align-items-center justify-content-center bg-light">
+        <div class="position-absolute " style="margin-left: 30px; right: 100px; top: 80px; width: 250px;">
+            <img src="asset/img/bglogin1.png" class="w-100" alt="">
         </div>
-        <div
-          class="card px-5 pt-5"
-          style="
-            width: 400px;
-            height: 430px;
-            box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
-          "
-        >
-          <h2 class="text-center mb-4 fw-bold">LOG IN</h2>
-          <form id="loginForm">
-            <div class="mb-2">
-              <label for="username" class="form-label">Username</label>
-              <input
-                type="text"
-                placeholder="Username"
-                class="form-control"
-                id="username"
-              />
-              <span id="va_user" class="opacity-0">.</span>
+        <div class="position-absolute " style="left: 100px; top: 400px;">
+            <img src="asset/img/bgloogin.png" alt="">
+        </div>
+
+        <div>
+            <div class="logo m-auto mb-3" style="width: 300px; margin-left: 5px; z-index: 99;">
+                <h1 class="text-center text-addmin my-4 text-uppercase fs-3">Admin Portfolio</h1>
             </div>
             <div class="card px-5 pt-5"
                 style="width: 400px; height: 430px; box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;">
@@ -93,141 +64,121 @@
 
                     </div>
                     <div class="w-100 mt-4 text-center">
-                        <button type="button" id="btnsubmit" class="btn btn-primary w-75" onclick="adddata()">Login</button>
+                        <button type="button" id="btnsubmit" class="btn btn-primary w-75"
+                            onclick="adddata()">Login</button>
                     </div>
                 </form>
             </div>
-            <div class="w-100 mt-4 text-center">
-              <button
-                type="button"
-                id="btnsubmit"
-                class="btn btn-primary w-75"
-                onclick="adddata()"
-              >
-                Log in
-              </button>
-            </div>
-          </form>
         </div>
-      </div>
     </div>
-  </body>
+</body>
 
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="asset/bootstrap/js/bootstrap.bundle.js"></script>
-  <script>
-    const username = document.getElementById("username");
-    const password = document.getElementById("password");
-    let va_username = document.getElementById("va_user");
-    let va_pass = document.getElementById("va_pass");
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="asset/bootstrap/js/bootstrap.bundle.js"></script>
+<script>
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+    let va_username = document.getElementById('va_user');
+    let va_pass = document.getElementById('va_pass');
     function adddata() {
-      const btnSubmit = document.getElementById("btnsubmit");
-      btnSubmit.disabled = true;
+        const btnSubmit = document.getElementById('btnsubmit');
+        btnSubmit.disabled = true;
 
-      const form = document.getElementById("loginForm");
-      let formData = new FormData(form);
+        const form = document.getElementById('loginForm');
+        let formData = new FormData(form);
 
-      formData.append("email", username.value);
-      formData.append("password", password.value);
+        formData.append('email', username.value);
+        formData.append('password', password.value);
 
-      fetch("https://mps7.chandalen.dev/api/login", {
-        method: "POST",
-        body: formData,
-      })
-        .then((res) => res.json())
-        .then((json) => {
-          console.log(json);
-
-          // Password validation
-          if (password.value === "") {
-            va_pass.classList.remove("opacity-0");
-            password.classList.add("border", "border-danger");
-            va_pass.innerHTML =
-              json.data?.password?.[1] || "Password is required.";
-          } else {
-            va_pass.classList.add("opacity-0");
-            password.classList.remove("border", "border-danger");
-          }
-
-          // Username/Email validation
-          if (username.value === "") {
-            va_username.classList.remove("opacity-0");
-            username.classList.add("border", "border-danger");
-            va_username.innerHTML =
-              json.data?.email?.[1] || "Username is required.";
-          } else if (!isNaN(username.value)) {
-            va_username.classList.remove("opacity-0");
-            username.classList.add("border", "border-danger");
-            va_username.innerHTML = "The email field must be a string.";
-          } else if (
-            json.data?.email?.[0] ===
-            "The email field must be a valid email address."
-          ) {
-            va_username.classList.remove("opacity-0");
-            username.classList.add("border", "border-danger");
-            va_username.innerHTML = json.data.email[0];
-          } else {
-            va_username.classList.add("opacity-0");
-            username.classList.remove("border", "border-danger");
-          }
-
-          // Incorrect credentials handling
-          if (json.data?.length === 0) {
-            va_username.classList.add("opacity-0");
-            va_pass.classList.remove("opacity-0");
-            password.classList.add("border", "border-danger");
-            va_pass.innerHTML =
-              json.message || "Incorrect username or password.";
-          } else if (json.message === "Login successful.") {
-            // Successful login
-            Swal.fire({
-              title: "Login processing!",
-              html: "Wait for <b></b> milliseconds.",
-              timer: 800,
-              timerProgressBar: true,
-              didOpen: () => {
-                Swal.showLoading();
-                const timer = Swal.getPopup().querySelector("b");
-                setInterval(() => {
-                  timer.textContent = `${Swal.getTimerLeft()}`;
-                }, 100);
-              },
-            }).then((result) => {
-              sessionStorage.setItem("Token", json.data.token);
-              location.href = "page/dashboard.html";
-            });
-          }
+        fetch('https://mps7.chandalen.dev/api/login', {
+            method: 'POST',
+            body: formData,
         })
-        .finally(() => {
-          btnSubmit.disabled = false;
-        });
+            .then(res => res.json())
+            .then(json => {
+                console.log(json);
+
+                // Password validation
+                if (password.value === "") {
+                    va_pass.classList.remove('opacity-0');
+                    password.classList.add('border', 'border-danger');
+                    va_pass.innerHTML = json.data?.password?.[1] || "Password is required.";
+                } else {
+                    va_pass.classList.add('opacity-0');
+                    password.classList.remove('border', 'border-danger');
+                }
+
+                // Username/Email validation
+                if (username.value === "") {
+                    va_username.classList.remove('opacity-0');
+                    username.classList.add('border', 'border-danger');
+                    va_username.innerHTML = json.data?.email?.[1] || "Username is required.";
+                } else if (!isNaN(username.value)) {
+                    va_username.classList.remove('opacity-0');
+                    username.classList.add('border', 'border-danger');
+                    va_username.innerHTML = 'The email field must be a string.';
+                } else if (json.data?.email?.[0] === "The email field must be a valid email address.") {
+                    va_username.classList.remove('opacity-0');
+                    username.classList.add('border', 'border-danger');
+                    va_username.innerHTML = json.data.email[0];
+                } else {
+                    va_username.classList.add('opacity-0');
+                    username.classList.remove('border', 'border-danger');
+                }
+
+                // Incorrect credentials handling
+                if (json.data?.length === 0) {
+                    va_username.classList.add('opacity-0');
+                    va_pass.classList.remove('opacity-0');
+                    password.classList.add('border', 'border-danger');
+                    va_pass.innerHTML = json.message || "Incorrect username or password.";
+                } else if (json.message === "Login successful.") {
+                    // Successful login
+                    Swal.fire({
+                        title: "Login processing!",
+                        html: "Wait for <b></b> milliseconds.",
+                        timer: 800,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading();
+                            const timer = Swal.getPopup().querySelector("b");
+                            setInterval(() => {
+                                timer.textContent = `${Swal.getTimerLeft()}`;
+                            }, 100);
+                        }
+                    }).then((result) => {
+                        sessionStorage.setItem('Token', json.data.token);
+                        location.href = 'page/dashboard.html';
+                    });
+                }
+            })
+            .finally(() => {
+                btnSubmit.disabled = false;
+            });
     }
 
     function hidepass() {
-      let pass = document.getElementById("password");
-      if (pass.type === "password") {
-        pass.type = "text";
-        document.getElementById(
-          "hidePass"
-        ).innerHTML = `<i class="bi bi-eye-fill"></i>`;
-      } else {
-        pass.type = "password";
-        document.getElementById(
-          "hidePass"
-        ).innerHTML = `<i class="bi bi-eye-slash"></i>`;
-      }
+        let pass = document.getElementById('password');
+        if (pass.type === 'password') {
+            pass.type = 'text';
+            document.getElementById('hidePass').innerHTML = `<i class="bi bi-eye-fill"></i>`;
+        } else {
+            pass.type = 'password';
+            document.getElementById('hidePass').innerHTML = `<i class="bi bi-eye-slash"></i>`;
+        }
     }
     username.addEventListener("input", function () {
-      if (username.value.trim() !== "") {
-        username.classList.remove("border", "border-danger");
-        va_username.classList.add("opacity-0");
-      }
+        if (username.value.trim() !== "") {
+            username.classList.remove('border', 'border-danger');
+            va_username.classList.add('opacity-0');
+        }
     });
     password.addEventListener("input", function () {
-      if (password.value.trim() !== "") {
-        password.classList.remove("border", "border-danger");
-        va_pass.classList.add("opacity-0");
-      }
+        if (password.value.trim() !== "") {
+            password.classList.remove('border', 'border-danger');
+            va_pass.classList.add('opacity-0');
+        }
     });
-  </script>
+</script>
+
 </html>
