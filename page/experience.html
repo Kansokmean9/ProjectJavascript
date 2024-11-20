@@ -339,6 +339,11 @@
                 workplace.classList.add('border', 'border-danger');
                 va_wp.innerHTML = "The en workplace field is required.";
             }
+            if(start_year.value == ""){
+                va_sy.classList.remove('opacity-0');
+                start_year.classList.add('border', 'border-danger');
+                va_sy.innerHTML = "The en start year field is required.";
+            }
 
             if (succ == 1 || succ1 == 1) {
                 btnSubmit.disabled = false;
@@ -543,6 +548,11 @@
                 uworkplace.classList.add('border', 'border-danger');
                 uva_wp.innerHTML = "The en workplace field is required.";
             }
+            if(ustart_year.value == ""){
+                uva_sy.classList.remove('opacity-0');
+                ustart_year.classList.add('border', 'border-danger');
+                uva_sy.innerHTML = "The en start year field is required.";
+            }
             if (usucc == 1 || usucc1 == 1) {
                 btnUsubmit.disabled = false;
                 return;
@@ -565,23 +575,23 @@
             })
                 .then(res => res.json())
                 .then(json => {
-                    if (utitle.value == "") {
-                        uva_title.classList.remove('opacity-0');
-                        utitle.classList.add('border', 'border-danger');
-                        uva_title.innerHTML = json.data.en_title[1];
-                    } else {
-                        uva_title.classList.add('opacity-0');
-                        utitle.classList.remove('border', 'border-danger');
-                    }
+                    // if (utitle.value == "") {
+                    //     uva_title.classList.remove('opacity-0');
+                    //     utitle.classList.add('border', 'border-danger');
+                    //     uva_title.innerHTML = json.data.en_title[1];
+                    // } else {
+                    //     uva_title.classList.add('opacity-0');
+                    //     utitle.classList.remove('border', 'border-danger');
+                    // }
 
-                    if (uworkplace.value == "") {
-                        uva_wp.classList.remove('opacity-0');
-                        uworkplace.classList.add('border', 'border-danger');
-                        uva_wp.innerHTML = json.data.en_workplace[1];
-                    } else {
-                        uva_wp.classList.add('opacity-0');
-                        uworkplace.classList.remove('border', 'border-denger');
-                    }
+                    // if (uworkplace.value == "") {
+                    //     uva_wp.classList.remove('opacity-0');
+                    //     uworkplace.classList.add('border', 'border-danger');
+                    //     uva_wp.innerHTML = json.data.en_workplace[1];
+                    // } else {
+                    //     uva_wp.classList.add('opacity-0');
+                    //     uworkplace.classList.remove('border', 'border-denger');
+                    // }
 
                     if (ustart_year.value == "") {
                         uva_sy.classList.remove('opacity-0');
