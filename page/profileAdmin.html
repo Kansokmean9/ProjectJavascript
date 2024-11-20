@@ -200,9 +200,10 @@
                     </div>
 
                     <div class="d-flex flex-column">
-                        
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#modalUpdateAvt" class="editpic" for="editpic"><i class="bi bi-pencil-square"></i></button>
-                        
+
+                        <button onclick="toupAV()" type="button" data-bs-toggle="modal" data-bs-target="#modalUpdateAvt" class="editpic"
+                            for="editpic"><i class="bi bi-pencil-square"></i></button>
+
                         <button onclick="deleteavt()" class="deletepic mt-2"><i class="bi bi-trash3"></i></button>
                     </div>
                 </div>
@@ -314,18 +315,19 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                   <form action="POST" id="updateAvt">
+                    <form action="POST" id="updateAvt">
                         <label for="editpic" class="ms-1">Choose file</label>
                         <input id="editpic" class="form-control mt-2" type="file" name="file" />
+                        <span id="va_av" class="small text-danger opacity-0">.</span>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="updateavt()" >Save</button>
+                    <button type="button" class="btn btn-primary" onclick="updateavt()">Save</button>
                 </div>
             </div>
         </div>
     </div>
-      
+
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -364,11 +366,15 @@
         }
         getme();
 
-        // update avatar
+        let av = document.getElementById('editpic');
+        let va_av = document.getElementById('va_av');
+        function toupAV() {
+            av.classList.remove('border', 'border-danger');
+            va_av.classList.add('opacity-0');
+        }
         function updateavt() {
             const form = document.getElementById('updateAvt');
             const formData = new FormData(form);
-            let av = document.getElementById('editpic');
             if (av.files.length > 0) {
                 formData.append('avatar', av.files[0]);
             }
@@ -382,15 +388,22 @@
             })
                 .then(res => res.json())
                 .then(json => {
-                    Swal.fire({
-                        title: "Updated!",
-                        text: json.message,
-                        icon: "success"
-                    });
-                    bootstrap.Modal.getInstance(
-                        document.getElementById("modalUpdateAvt")
-                    ).hide();
-                    getme();
+                    if (av.value == '') {
+                        av.classList.add('border', 'border-danger');
+                        va_av.classList.remove('opacity-0');
+                        va_av.innerHTML = json.data.avatar[0];
+                    } else {
+
+                        Swal.fire({
+                            title: "Updated!",
+                            text: json.message,
+                            icon: "success"
+                        });
+                        bootstrap.Modal.getInstance(
+                            document.getElementById("modalUpdateAvt")
+                        ).hide();
+                        getme();
+                    }
                 })
                 .catch(err => console.error('Error:', err));
         }
@@ -489,7 +502,7 @@
 
                 })
                 .finally(() => {
-                    btnSubmit.disabled = false; 
+                    btnSubmit.disabled = false;
                 });
 
         }
@@ -591,7 +604,7 @@
 
                 })
                 .finally(() => {
-                    btnSubmit.disabled = false; 
+                    btnSubmit.disabled = false;
                 });
 
         }
