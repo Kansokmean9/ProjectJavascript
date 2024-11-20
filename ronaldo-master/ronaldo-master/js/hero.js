@@ -7,7 +7,7 @@ function fetchAbout() {
       return res.json();
     })
     .then((json) => {
-      console.log(json); // Log the entire response for debugging
+      //console.log(json); // Log the entire response for debugging
 
       if (json.result && json.data && json.data.profile) {
         const profile = json.data.profile;
@@ -54,7 +54,7 @@ function fetchAbout() {
         `;
 
         document.getElementById("hero-section").innerHTML = About;
-        console.log(json.data);
+        //console.log(json.data);
       } else {
         console.error("No data found in the API response");
       }
