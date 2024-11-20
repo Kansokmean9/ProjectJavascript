@@ -322,7 +322,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="updateavt()">Save</button>
+                    <button type="button" class="btn btn-primary" id="btnUpdate" onclick="updateavt()">Save</button>
                 </div>
             </div>
         </div>
@@ -373,6 +373,8 @@
             va_av.classList.add('opacity-0');
         }
         function updateavt() {
+            const btnUpdate = document.getElementById('btnUpdate');
+            btnUpdate.disabled = true;
             const form = document.getElementById('updateAvt');
             const formData = new FormData(form);
             if (av.files.length > 0) {
@@ -405,7 +407,9 @@
                         getme();
                     }
                 })
-                .catch(err => console.error('Error:', err));
+                .finally(() => {
+                    btnUpdate.disabled = false;
+                });
         }
 
         //delete avatar
