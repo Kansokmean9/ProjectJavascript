@@ -10,7 +10,7 @@ function fetchAbout() {
         return res.json();
       })
       .then((json) => {
-        console.log(json); // Log the entire response for debugging
+       // console.log(json); // Log the entire response for debugging
   
         if (json.result && json.data && json.data.profile) {
           const profile = json.data.profile;
@@ -24,7 +24,7 @@ function fetchAbout() {
          <a href="${social.linkedin}"><i class="bi bi-linkedin"></i></a>
          `
 
-         console.log(social_link)
+       //  console.log(social_link)
          document.getElementById("social-links").innerHTML = social_link;
          
   

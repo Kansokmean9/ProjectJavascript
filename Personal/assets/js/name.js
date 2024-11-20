@@ -10,14 +10,14 @@ function fetchAbout() {
         return res.json();
       })
       .then((json) => {
-        console.log(json); // Log the entire response for debugging
+       // console.log(json); // Log the entire response for debugging
   
         if (json.result && json.data && json.data.profile) {
           const profile = json.data.profile;
           // Image footer
           
           const navbar_title = document.getElementById('navbar_title');
-          console.log(navbar_title);
+        //  console.log(navbar_title);
           navbar_title.innerHTML = profile.en_first_name + " " + profile.en_last_name;
        
         } else {
