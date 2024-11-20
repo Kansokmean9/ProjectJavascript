@@ -169,12 +169,12 @@
 
                                             </div>
                                             <div class="h-100 d-flex align-items-center ms-3" style="height: 50px;">
-                                                <img id="logo1" src="#"
-                                                    height="50px" alt="">
+                                                <img id="logo1" src="#" height="50px" alt="">
                                             </div>
                                         </div>
                                         <button type="button" style="width: 115px; height: 35px;"
-                                            class="ms-2 btn btn-primary" onclick="updateLogo1()">Save <i class="bi bi-floppy" style="font-size: small;"></i></button>
+                                            class="ms-2 btn btn-primary" onclick="updateLogo1()">Save <i
+                                                class="bi bi-floppy" style="font-size: small;"></i></button>
                                         <div class="col-6 mt-4 d-flex align-items-center">
                                             <div class="mb-0">
                                                 <label for="skilllogo2" class="form-label">Skill two logo</label><br>
@@ -182,13 +182,12 @@
                                                 <span id="va_logo2" class="opacity-0">aa</span>
                                             </div>
                                             <div class="h-100  d-flex align-items-center ms-3" style="height: 50px;">
-                                                <img id="logo2"
-                                                    src="#"
-                                                    height="50px" alt="">
+                                                <img id="logo2" src="#" height="50px" alt="">
                                             </div>
                                         </div>
                                         <button type="button" style="width: 115px; height: 35px;"
-                                            class="ms-2 btn btn-primary" onclick="updatelogo2()">Save <i class="bi bi-floppy" style="font-size: small;"></i></button>
+                                            class="ms-2 btn btn-primary" onclick="updatelogo2()">Save <i
+                                                class="bi bi-floppy" style="font-size: small;"></i></button>
                                     </div>
 
                                 </form>
@@ -241,6 +240,61 @@
             let va_aboutTitle = document.getElementById('va_aboutTitle');
             let va_aboutBio = document.getElementById('va_aboutBio');
             let va_aboutSub = document.getElementById('va_aboutSub');
+
+            let usucc = 0;
+            let usucc1 = 0;
+            let usucc2 = 0;
+            let usucc3 = 0;
+
+            if (!isNaN(heorBio.value) && heorBio.value != '') {
+                va_heroBio.classList.remove('opacity-0');
+                heorBio.classList.add('border', 'border-danger');
+                va_heroBio.innerHTML = "Hero must be a string.";
+                usucc = 1;
+            } else if (heorBio.value == "") {
+                va_heroBio.classList.remove('opacity-0');
+                heorBio.classList.add('border', 'border-danger');
+                va_heroBio.innerHTML = "The en hero bio field is required.";
+            }
+
+            if (!isNaN(aboutTitle.value) && aboutTitle.value != '') {
+                va_aboutTitle.classList.remove('opacity-0');
+                aboutTitle.classList.add('border', 'border-danger');
+                va_aboutTitle.innerHTML = "Title must be a string.";
+                usucc1 = 1;
+            } else if (aboutTitle.value == "") {
+                va_aboutTitle.classList.remove('opacity-0');
+                aboutTitle.classList.add('border', 'border-danger');
+                va_aboutTitle.innerHTML = "The en about title field is required.";
+            }
+
+            if (!isNaN(aboutBio.value) && aboutBio.value != '') {
+                va_aboutBio.classList.remove('opacity-0');
+                aboutBio.classList.add('border', 'border-danger');
+                va_aboutBio.innerHTML = "Biography must be a string.";
+                usucc2 = 1;
+            } else if (aboutBio.value == "") {
+                va_aboutBio.classList.remove('opacity-0');
+                aboutBio.classList.add('border', 'border-danger');
+                va_aboutBio.innerHTML = "The en about bio field is required.";
+            }
+
+            if (!isNaN(subtitle.value) && subtitle.value != '') {
+                va_aboutSub.classList.remove('opacity-0');
+                subtitle.classList.add('border', 'border-danger');
+                va_aboutSub.innerHTML = "Subtitle must be a string.";
+                usucc1 = 3;
+            } else if (subtitle.value == "") {
+                va_aboutSub.classList.remove('opacity-0');
+                subtitle.classList.add('border', 'border-danger');
+                va_aboutSub.innerHTML = "The en about sub title field is required.";
+            }
+
+
+            if (usucc == 1 || usucc1 == 1 || usucc2 == 1 || usucc3 == 1) {
+                btnUsubmit.disabled = false;
+                return;
+            }
             fetch(`https://mps7.chandalen.dev/api/biographies`, {
                 method: 'PUT',
                 headers: {
@@ -267,62 +321,39 @@
                         heorBio.classList.add('border', 'border-danger');
                         va_heroBio.classList.remove('opacity-0');
                         va_heroBio.innerHTML = json.data.en_hero_bio[1];
+                    } else {
+                        heorBio.classList.remove('border', 'border-danger');
+                        va_heroBio.classList.add('opacity-0');
+                    }
 
-                        //remove other input validation
-                        aboutTitle.classList.remove('border', 'border-danger');
-                        va_aboutTitle.classList.add('opacity-0');
-
-                        aboutBio.classList.remove('border', 'border-danger');
-                        va_aboutBio.classList.add('opacity-0');
-
-                        subtitle.classList.remove('border', 'border-danger');
-                        va_aboutSub.classList.add('opacity-0');
-
-                    } else if (aboutTitle.value == "") {
+                    if (aboutTitle.value == "") {
                         aboutTitle.classList.add('border', 'border-danger');
                         va_aboutTitle.classList.remove('opacity-0');
                         va_aboutTitle.innerHTML = json.data.en_about_title[1];
+                    } else {
+                        aboutTitle.classList.remove('border', 'border-danger');
+                        va_aboutTitle.classList.add('opacity-0');
+                    }
 
-                        heorBio.classList.remove('border', 'border-danger');
-                        va_heroBio.classList.add('opacity-0');
-
-                        aboutBio.classList.remove('border', 'border-danger');
-                        va_aboutBio.classList.add('opacity-0');
-
-                        subtitle.classList.remove('border', 'border-danger');
-                        va_aboutSub.classList.add('opacity-0');
-
-                    } else if (subtitle.value == "") {
+                    if (subtitle.value == "") {
                         subtitle.classList.add('border', 'border-danger');
                         va_aboutSub.classList.remove('opacity-0');
                         va_aboutSub.innerHTML = json.data.en_about_sub_title[1];
+                    } else {
+                        subtitle.classList.remove('border', 'border-danger');
+                        va_aboutSub.classList.add('opacity-0');
+                    }
 
-                        heorBio.classList.remove('border', 'border-danger');
-                        va_heroBio.classList.add('opacity-0');
-
-                        aboutTitle.classList.remove('border', 'border-danger');
-                        va_aboutTitle.classList.add('opacity-0');
-
-                        aboutBio.classList.remove('border', 'border-danger');
-                        va_aboutBio.classList.add('opacity-0');
-
-                    } else if (aboutBio.value == "") {
+                    if (aboutBio.value == "") {
                         aboutBio.classList.add('border', 'border-danger');
                         va_aboutBio.classList.remove('opacity-0');
                         va_aboutBio.innerHTML = json.data.en_about_bio[1];
-
-                        heorBio.classList.remove('border', 'border-danger');
-                        va_heroBio.classList.add('opacity-0');
-
-                        aboutTitle.classList.remove('border', 'border-danger');
-                        va_aboutTitle.classList.add('opacity-0');
-
-                        subtitle.classList.remove('border', 'border-danger');
-                        va_aboutSub.classList.add('opacity-0');
-
-
-
                     } else {
+                        aboutBio.classList.remove('border', 'border-danger');
+                        va_aboutBio.classList.add('opacity-0');
+                    }
+
+                    if (json.result) {
                         aboutBio.classList.remove('border', 'border-danger');
                         va_aboutBio.classList.add('opacity-0');
                         heorBio.classList.remove('border', 'border-danger');
@@ -339,11 +370,36 @@
                             showConfirmButton: false,
                             timer: 1000
                         });
-                        
+
                     }
                 })
             // .catch(err => console.error('Error:', err));
         }
+        heorBio.addEventListener("input", function () {
+            if (heorBio.value.trim() !== "") {
+                heorBio.classList.remove('border', 'border-danger');
+                va_heroBio.classList.add('opacity-0');
+            }
+        });
+        aboutTitle.addEventListener("input", function () {
+            if (aboutTitle.value.trim() !== "") {
+                aboutTitle.classList.remove('border', 'border-danger');
+                va_aboutTitle.classList.add('opacity-0');
+            }
+        });
+        aboutBio.addEventListener("input", function () {
+            if (aboutBio.value.trim() !== "") {
+                aboutBio.classList.remove('border', 'border-danger');
+                va_aboutBio.classList.add('opacity-0');
+            }
+        });
+        subtitle.addEventListener("input", function () {
+            if (subtitle.value.trim() !== "") {
+                subtitle.classList.remove('border', 'border-danger');
+                va_aboutSub.classList.add('opacity-0');
+            }
+        });
+
         function updateLogo1() {
             const form = document.getElementById('logoSkillform');
             const formData = new FormData(form);
@@ -367,20 +423,20 @@
                         va_logo1.innerHTML = json.data.logo[0];
                         va_logo1.classList.remove('opacity-0');
                         logo1.classList.add('border', 'border-danger')
-                    }else{
-                            va_logo1.classList.add('opacity-0');
-                            logo1.classList.remove('border', 'border-danger');
-                            logo1.value = '';
+                    } else {
+                        va_logo1.classList.add('opacity-0');
+                        logo1.classList.remove('border', 'border-danger');
+                        logo1.value = '';
                         getme();
-                            Swal.fire({
+                        Swal.fire({
                             position: "center",
                             icon: "success",
                             title: json.message,
                             showConfirmButton: false,
                             timer: 1000
                         });
-                            
-                        }
+
+                    }
                 })
                 .catch(err => console.error('Error:', err));
         }
@@ -408,19 +464,19 @@
                             va_logo2.innerHTML = json.data.logo[0];
                             va_logo2.classList.remove('opacity-0');
                             logo2.classList.add('border', 'border-danger');
-                        }else{
+                        } else {
                             va_logo2.classList.add('opacity-0');
                             logo2.classList.remove('border', 'border-danger');
                             logo2.value = '';
                             getme();
                             Swal.fire({
-                            position: "center",
-                            icon: "success",
-                            title: json.message,
-                            showConfirmButton: false,
-                            timer: 1000
-                        });
-                           
+                                position: "center",
+                                icon: "success",
+                                title: json.message,
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
+
                         }
                     })
                     .catch(err => console.error('Error:', err));
