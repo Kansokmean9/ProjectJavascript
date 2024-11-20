@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="../asset/style/flatpickr.min.css">
 </head>
 <style>
-    
     th {
 
         color: white;
@@ -36,6 +35,7 @@
         color: red;
         font-size: small;
     }
+
     #nodata {
         height: 200px;
         display: flex;
@@ -266,7 +266,7 @@
             enableTime: false,
             dateFormat: "Y-m-d"
         });
-        function GetDate() {
+        function GetExperience() {
             fetch('https://mps7.chandalen.dev/api/experiences')
                 .then(res => res.json())
                 .then(json => {
@@ -294,15 +294,14 @@
                     document.querySelector('tbody').innerHTML = tr;
                     if (tr == '') {
                         document.getElementById('nodata').classList.remove('d-none');
-                    }else{
+                    } else {
                         document.getElementById('nodata').classList.add('d-none');
                     }
                 })
         }
-        GetDate();
+        GetExperience();
 
         function addExperince() {
-            // disabled button when click
             const btnSubmit = document.getElementById('btnsubmit');
             btnSubmit.disabled = true;
 
@@ -314,6 +313,38 @@
             let va_title = document.getElementById('va_title');
             let va_wp = document.getElementById('va_wp');
             let va_sy = document.getElementById('va_sy');
+
+
+            let succ = 0;
+            let succ1 = 0;
+
+            if (!isNaN(title.value) && title.value != '') {
+                va_title.classList.remove('opacity-0');
+                title.classList.add('border', 'border-danger');
+                va_title.innerHTML = "Title must be a string.";
+                succ = 1;
+            } else if (title.value == "") {
+                va_title.classList.remove('opacity-0');
+                title.classList.add('border', 'border-danger');
+                va_title.innerHTML = "The en title field is required.";
+            }
+
+            if (!isNaN(workplace.value) && workplace.value != '') {
+                va_wp.classList.remove('opacity-0');
+                workplace.classList.add('border', 'border-danger');
+                va_wp.innerHTML = "Workplace must be a string.";
+                succ1 = 1;
+            } else if (workplace.value == "") {
+                va_wp.classList.remove('opacity-0');
+                workplace.classList.add('border', 'border-danger');
+                va_wp.innerHTML = "The en workplace field is required.";
+            }
+
+            if (succ == 1 || succ1 == 1) {
+                btnSubmit.disabled = false;
+                return;
+            }
+
             fetch(`https://mps7.chandalen.dev/api/experiences`, {
                 method: 'POST',
                 headers: {
@@ -353,6 +384,7 @@
                         start_year.classList.add('border', 'border-danger');
                         va_sy.innerHTML = json.data.start_year[1];
                     }
+
                     if (json.result) {
                         va_sy.classList.add('opacity-0');
                         start_year.classList.remove('border', 'border-danger');
@@ -371,7 +403,6 @@
                         start_year.value = "";
                         end_year.value = "";
 
-
                         Swal.fire({
                             position: "center",
                             icon: "success",
@@ -379,7 +410,7 @@
                             showConfirmButton: false,
                             timer: 1000
                         });
-                        GetDate();
+                        GetExperience();
                     }
                 })
                 .finally(() => {
@@ -433,7 +464,7 @@
                                     text: json.message,
                                     icon: "success"
                                 });
-                                GetDate();
+                                GetExperience();
                             } else {
                                 Swal.fire("Error!", "Failed to delete experience.", "error");
                             }
@@ -480,13 +511,43 @@
 
         }
         function updateExperience() {
-            const btnSubmit = document.getElementById('btnUsubmit');
-            btnSubmit.disabled = true;
+            const btnUsubmit = document.getElementById('btnUsubmit');
+            btnUsubmit.disabled = true;
 
             let va_title = document.getElementById('uva_title');
             let va_wp = document.getElementById('uva_wp');
             let va_sy = document.getElementById('uva_sy');
             console.log(utitle.value);
+
+            let usucc = 0;
+            let usucc1 = 0;
+
+            if (!isNaN(utitle.value) && utitle.value != '') {
+                uva_title.classList.remove('opacity-0');
+                utitle.classList.add('border', 'border-danger');
+                uva_title.innerHTML = "Title must be a string.";
+                usucc = 1;
+            } else if (utitle.value == "") {
+                uva_title.classList.remove('opacity-0');
+                utitle.classList.add('border', 'border-danger');
+                uva_title.innerHTML = "The en title field is required.";
+            }
+
+            if (!isNaN(uworkplace.value) && uworkplace.value != '') {
+                uva_wp.classList.remove('opacity-0');
+                uworkplace.classList.add('border', 'border-danger');
+                uva_wp.innerHTML = "workplace must be a string.";
+                usucc1 = 1;
+            } else if (uworkplace.value == "") {
+                uva_wp.classList.remove('opacity-0');
+                uworkplace.classList.add('border', 'border-danger');
+                uva_wp.innerHTML = "The en workplace field is required.";
+            }
+            if (usucc == 1 || usucc1 == 1) {
+                btnUsubmit.disabled = false;
+                return;
+            }
+
             fetch(`https://mps7.chandalen.dev/api/experiences/${idUpdate}`, {
                 method: 'PUT',
                 headers: {
@@ -512,6 +573,7 @@
                         uva_title.classList.add('opacity-0');
                         utitle.classList.remove('border', 'border-danger');
                     }
+
                     if (uworkplace.value == "") {
                         uva_wp.classList.remove('opacity-0');
                         uworkplace.classList.add('border', 'border-danger');
@@ -520,6 +582,7 @@
                         uva_wp.classList.add('opacity-0');
                         uworkplace.classList.remove('border', 'border-denger');
                     }
+
                     if (ustart_year.value == "") {
                         uva_sy.classList.remove('opacity-0');
                         ustart_year.classList.add('border', 'border-danger');
@@ -543,7 +606,9 @@
                         ustart_year.value = "";
                         uend_year.value = "";
 
-
+                        bootstrap.Modal.getInstance(
+                            document.getElementById("myModal1")
+                        ).hide();
                         Swal.fire({
                             position: "center",
                             icon: "success",
@@ -551,11 +616,11 @@
                             showConfirmButton: false,
                             timer: 1000
                         });
-                        GetDate();
+                        GetExperience();
                     }
                 })
                 .finally(() => {
-                    btnSubmit.disabled = false;
+                    btnUsubmit.disabled = false;
                 });
         }
         utitle.addEventListener("input", function () {

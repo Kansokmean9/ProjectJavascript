@@ -28,9 +28,9 @@
     #va_degree,
     #va_school,
     #va_start,
-    #va_degreeE,
-    #va_schoolE,
-    #va_startE {
+    #uva_degree,
+    #uva_school,
+    #uva_start {
         color: red;
         font-size: small;
     }
@@ -215,17 +215,17 @@
                         <label for="uen_degree">Degree</label>
                         <input class="form-control" id="uen_degree" type="text" placeholder="New degree"
                             style="width: 100%;">
-                        <span id="va_degreeE" class="opacity-0 text-danger">.</span><br>
+                        <span id="uva_degree" class="opacity-0 text-danger">.</span><br>
 
                         <label for="uen_shcool">School</label>
                         <input class="form-control" id="uen_shcool" type="text" placeholder="New shcool"
                             style="width: 100%;">
-                        <span id="va_schoolE" class="opacity-0 text-danger">.</span><br>
+                        <span id="uva_school" class="opacity-0 text-danger">.</span><br>
 
                         <label for="ustart_year">Start year</label>
                         <input class="form-control" id="ustart_year" type="date" placeholder="Select start year"
                             style="width: 100%;">
-                        <span id="va_startE" class="opacity-0 text-danger">.</span><br>
+                        <span id="uva_start" class="opacity-0 text-danger">.</span><br>
 
                         <label for="uend_year">End year</label>
                         <input class="form-control" id="uend_year" type="date" placeholder="Select end year"
@@ -262,7 +262,7 @@
             enableTime: false,
             dateFormat: "Y-m-d"
         });
-        function GetDate() {
+        function GetEducation() {
             fetch('https://mps7.chandalen.dev/api/educations')
                 .then(res => res.json())
                 .then(json => {
@@ -294,8 +294,7 @@
                     }
                 });
         }
-        GetDate();
-        // document.getElementsByTagName("tbody").value;
+        GetEducation();
         function addEducation() {
             const Add = document.getElementById('Add');
             Add.disabled = true;
@@ -315,20 +314,27 @@
             if (!isNaN(en_degree.value) && en_degree.value != '') {
                 va_degree.classList.remove('opacity-0');
                 en_degree.classList.add('border', 'border-danger');
-                va_degree.innerHTML = 'Degree must be a string.';
+                va_degree.innerHTML = "Degree must be a string.";
                 succ = 1;
-                Add.disabled = false; 
-                
+            } else if (en_degree.value == "") {
+                va_degree.classList.remove('opacity-0');
+                en_degree.classList.add('border', 'border-danger');
+                va_degree.innerHTML = "The en degree field is required.";
             }
+
             if (!isNaN(en_school.value) && en_school.value != '') {
                 va_school.classList.remove('opacity-0');
                 en_school.classList.add('border', 'border-danger');
-                va_school.innerHTML = 'School must be a string.';
-                Add.disabled = false; 
-                succ = 1;
-                
+                va_school.innerHTML = "School must be a string.";
+                succ1 = 1;
+            } else if (en_school.value == "") {
+                va_school.classList.remove('opacity-0');
+                en_school.classList.add('border', 'border-danger');
+                va_school.innerHTML = "The en school field is required.";
             }
-            if(succ==1 && succ1 ==1 ){
+
+            if (succ == 1 || succ1 == 1) {
+                Add.disabled = false;
                 return;
             }
 
@@ -351,7 +357,6 @@
                 .then(res => res.json())
                 .then(json => {
                     console.log(json)
-                    // alert(json.message);
                     if (en_degree.value == "") {
 
                         va_degree.classList.remove('opacity-0');
@@ -403,16 +408,16 @@
                             showConfirmButton: false,
                             timer: 1000
                         });
-                        GetDate();
+                        GetEducation();
                     }
                 })
                 .finally(() => {
-                    Add.disabled = false; // Enable button after request completes
+                    Add.disabled = false;
 
                 });
 
         }
-        // GetDate();
+
         en_degree.addEventListener("input", function () {
             if (en_degree.value.trim() !== "") {
                 en_degree.classList.remove('border', 'border-danger');
@@ -432,7 +437,6 @@
 
             }
         });
-        // addEducation();
 
         function deleteEducation(id) {
             Swal.fire({
@@ -456,14 +460,14 @@
                     })
                         .then(res => res.json())
                         .then(json => {
-                            console.log(json);  // Log the response to see if delete was successful
+                            console.log(json);
                             if (json.result) {
                                 Swal.fire({
                                     title: "Deleted!",
                                     text: json.message,
                                     icon: "success"
                                 });
-                                GetDate(); // Refresh data
+                                GetEducation(); // Refresh data
                             } else {
                                 Swal.fire("Error!", "Failed to delete education.", "error");
                             }
@@ -480,14 +484,19 @@
         let uen_shcool = document.getElementById('uen_shcool');
         let ustart_year = document.getElementById('ustart_year');
         let uend_year = document.getElementById('uend_year');
+
+        let uva_degree = document.getElementById('uva_degree');
+            let uva_school = document.getElementById('uva_school');
+            let uva_start = document.getElementById('uva_start');
+
         function toUpdate(id) {
-            va_degreeE.classList.add('opacity-0');
+            uva_degree.classList.add('opacity-0');
             uen_degree.classList.remove('border', 'border-danger');
 
-            va_schoolE.classList.add('opacity-0');
+            uva_school.classList.add('opacity-0');
             uen_shcool.classList.remove('border', 'border-danger');
 
-            va_startE.classList.add('opacity-0');
+            uva_start.classList.add('opacity-0');
             ustart_year.classList.remove('border', 'border-danger');
 
             idUpdate = id;
@@ -509,16 +518,35 @@
         function updateEducation() {
             const AddE = document.getElementById('AddE');
             AddE.disabled = true;
+            let usucc = 0;
+            let usucc1 = 0
 
-            let en_degree = document.getElementById('en_degree');
-            let en_school = document.getElementById('en_school');
-            let start_year = document.getElementById('start_year');
-            let end_year = document.getElementById('end_year');
+            if (!isNaN(uen_degree.value) && uen_degree.value != '') {
+                uva_degree.classList.remove('opacity-0');
+                uen_degree.classList.add('border', 'border-danger');
+                uva_degree.innerHTML = "Degree must be a string.";
+                usucc = 1;
+            } else if (uen_degree.value == "") {
+                uva_degree.classList.remove('opacity-0');
+                uen_degree.classList.add('border', 'border-danger');
+                uva_degree.innerHTML = "The en degree field is required.";
+            }
 
+            if (!isNaN(uen_shcool.value) && uen_shcool.value != '') {
+                uva_school.classList.remove('opacity-0');
+                uen_shcool.classList.add('border', 'border-danger');
+                uva_school.innerHTML = "School must be a string.";
+                usucc1 = 1;
+            } else if (uen_shcool.value == "") {
+                uva_school.classList.remove('opacity-0');
+                uen_shcool.classList.add('border', 'border-danger');
+                uva_school.innerHTML = "The en school field is required.";
+            }
 
-            let va_degree = document.getElementById('va_degreeE');
-            let va_school = document.getElementById('va_schoolE');
-            let va_start = document.getElementById('va_startE');
+            if (usucc == 1 || usucc1 == 1) {
+                AddE.disabled = false;
+                return;
+            }
 
             console.log(uen_degree.value);
             fetch(`https://mps7.chandalen.dev/api/educations/${idUpdate}`, {
@@ -538,47 +566,51 @@
             })
                 .then(res => res.json())
                 .then(json => {
-
                     console.log(json)
-                    // alert(json.message);
+
                     if (uen_degree.value == "") {
-                        va_degreeE.classList.remove('opacity-0');
+                        uva_degree.classList.remove('opacity-0');
                         uen_degree.classList.add('border', 'border-danger');
-                        va_degreeE.innerHTML = json.data.en_degree[1];
+                        uva_degree.innerHTML = json.data.en_degree[1];
                     } else {
-                        va_degreeE.classList.add('opacity-0');
+                        uva_degree.classList.add('opacity-0');
                         uen_degree.classList.remove('border', 'border-danger');
                     }
                     if (uen_shcool.value == "") {
-                        va_schoolE.classList.remove('opacity-0');
+                        uva_school.classList.remove('opacity-0');
                         uen_shcool.classList.add('border', 'border-danger');
-                        va_schoolE.innerHTML = json.data.en_school[1];
+                        uva_school.innerHTML = json.data.en_school[1];
                     } else {
-                        va_schoolE.classList.add('opacity-0');
+                        uva_school.classList.add('opacity-0');
                         uen_shcool.classList.remove('border', 'border-denger');
                     }
                     if (ustart_year.value == "") {
-                        va_startE.classList.remove('opacity-0');
+                        uva_start.classList.remove('opacity-0');
                         ustart_year.classList.add('border', 'border-danger');
-                        va_startE.innerHTML = json.data.start_year[1];
+                        uva_start.innerHTML = json.data.start_year[1];
                     }
+
                     if (json.result) {
-                        va_startE.classList.add('opacity-0');
+                        uva_start.classList.add('opacity-0');
                         ustart_year.classList.remove('border', 'border-danger');
 
                         uen_degree.classList.remove('border', 'border-danger');
-                        va_degreeE.classList.add('opacity-0');
+                        uva_degree.classList.add('opacity-0');
 
                         uen_shcool.classList.remove('border', 'border-danger');
-                        va_schoolE.classList.add('opacity-0');
+                        uva_school.classList.add('opacity-0');
 
                         ustart_year.classList.remove('border', 'border-danger');
-                        va_startE.classList.add('opacity-0');
+                        uva_start.classList.add('opacity-0');
 
                         uen_degree.value = "";
                         uen_shcool.value = "";
                         ustart_year.value = "";
                         uend_year.value = "";
+                        
+                        bootstrap.Modal.getInstance(
+                            document.getElementById("myModal1")
+                        ).hide(); 
                         Swal.fire({
                             position: "center",
                             icon: "success",
@@ -586,33 +618,31 @@
                             showConfirmButton: false,
                             timer: 1000
                         });
-                        GetDate();
+                        GetEducation();
                     }
                 })
                 .finally(() => {
-                    AddE.disabled = false; // Enable button after request completes
-
+                    AddE.disabled = false;
                 });
 
         }
-        // GetDate();
         uen_degree.addEventListener("input", function () {
             if (uen_degree.value.trim() !== "") {
                 uen_degree.classList.remove('border', 'border-danger');
-                va_degreeE.classList.add('opacity-0');
+                uva_degree.classLit.add('opacity-0');
             }
         });
+
         uen_shcool.addEventListener("input", function () {
             if (uen_shcool.value.trim() !== "") {
                 uen_shcool.classList.remove('border', 'border-danger');
-                va_schoolE.classList.add('opacity-0');
+                uva_school.classList.add('opacity-0');
             }
         });
         ustart_year.addEventListener("input", function () {
             if (ustart_year.value.trim() !== "") {
                 ustart_year.classList.remove('border', 'border-danger');
-                va_startE.classList.add('opacity-0');
-
+                uva_start.classList.add('opacity-0');
             }
         });
 
