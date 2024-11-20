@@ -7,15 +7,13 @@
     <title>profile</title>
     <link rel="stylesheet" href="../asset/bootstrap/css/bootstrap.css">
     <link href="../asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../asset/style/style.css">
 </head>
 <style>
-
-
     .labels {
         font-size: 11px
     }
-
 </style>
 
 <body>
@@ -127,12 +125,12 @@
                                         style="max-width: 300px; margin-top: 8px; ">
                                         <div class="profile-img position-relative"
                                             style="width: 250px; height: 250px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                            <label for="edit-about" class="update-photo position-absolute">
-                                                <i class="bi bi-camera-fill me-1"></i> <span>Edit Photo</span>
+                                            <label onclick="toupHero()" for="edit-about" data-bs-toggle="modal"
+                                                data-bs-target="#modalUpdatehero"
+                                                class="update-photo position-absolute">
+                                                <i class="bi bi-pencil-square ms-2"></i> &nbsp; <span>Edit Photo</span>
                                             </label>
-                                            <input type="file" class="d-none" id="edit-about">
-                                            <img class="w-100 h-100" style="object-fit: cover;"
-                                                src="../ronaldo-master/ronaldo-master/images/aout.jpg"
+                                            <img id="heroImage" class="w-100 h-100" style="object-fit: cover;" src="#"
                                                 alt="Profile Photo">
 
                                         </div>
@@ -148,12 +146,12 @@
                                         style="max-width: 300px; margin-top: 8px; ">
                                         <div class="profile-img position-relative"
                                             style="width: 250px; height: 250px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                            <label for="edit-hero" class="update-photo position-absolute">
-                                                <i class="bi bi-camera-fill me-1"></i> <span>Edit Photo</span>
+                                            <label onclick="toupAbout()" for="edit-hero" data-bs-toggle="modal"
+                                                data-bs-target="#modalUpdateAbout"
+                                                class="update-photo position-absolute">
+                                                <i class="bi bi-pencil-square ms-2"></i> &nbsp; <span>Edit Photo</span>
                                             </label>
-                                            <input type="file" class="d-none" id="edit-hero">
-                                            <img class="w-100 h-100" style="object-fit: cover;"
-                                                src="../ronaldo-master/ronaldo-master/images/hero.jpg"
+                                            <img id="aboutImage" class="w-100 h-100" style="object-fit: cover;" src="#"
                                                 alt="Profile Photo">
 
                                         </div>
@@ -164,12 +162,12 @@
                                         <input id="edithero" type="file" class="d-none">
                                     </div>
                                 </div>
-                                <div class="col-6 p-2 pe-4">
+                                <div class="col-6 py-2 pe-5">
                                     <div class="d-flex justify-content-between align-items-center experience mt-3">
                                         <h4 class="fs-5">Update personal information</h4>
                                     </div>
 
-                                    <div class="row mt-2 pe-1">
+                                    <div class="row mt-2">
                                         <div class="col-md-6 mb-3">
                                             <label class="labels">Fullname</label>
                                             <input type="text" class="form-control" placeholder="first name" value="">
@@ -180,11 +178,13 @@
                                         </div>
                                         <div class="col-md-12">
                                             <label class="labels">Nationality</label>
-                                            <input type="text" class="form-control" placeholder="enter nationality" value="">
+                                            <input type="text" class="form-control" placeholder="enter nationality"
+                                                value="">
                                         </div>
                                     </div>
-                                    <div class="mt-1 text-end pe-1">
-                                        <button class="btn btn-primary profile-button mb-3"  style="margin-top: 50px;" type="button">
+                                    <div class="mt-1 text-end">
+                                        <button class="btn btn-primary profile-button mb-3" style="margin-top: 50px;"
+                                            type="button">
                                             Save Update
                                         </button>
                                     </div>
@@ -199,69 +199,71 @@
                                 <div style="width: 49%;" class="rounded bg-white">
                                     <div class="p-3">
                                         <div class="d-flex justify-content-between align-items-center mb-2">
-                                            <h4  class="fs-5">Profile Settings</h4>
+                                            <h4 class="fs-5">Profile Settings</h4>
                                         </div>
-                                        <form >
-                                        <div class="row">
-                                            <div class="col-md-12 mb-3">
-                                                <div class="row">
-                                                    <div class="col-1 d-flex align-items-end">
-                                                        <div class="col-3 p-0 social-logo"
-                                                            style="width: 30px; height: 30px; margin-bottom: 1px;">
-                                                            <img class="h-100"
-                                                                src="../ronaldo-master/ronaldo-master/images/Email.png"
-                                                                alt="">
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="row">
+                                                        <div class="col-1 d-flex align-items-end">
+                                                            <div class="col-3 p-0 social-logo"
+                                                                style="width: 30px; height: 30px; margin-bottom: 1px;">
+                                                                <img class="h-100"
+                                                                    src="../ronaldo-master/ronaldo-master/images/Email.png"
+                                                                    alt="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label class="labels">Email</label>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="enter email" value="">
                                                         </div>
                                                     </div>
-                                                    <div class="col">
-                                                        <label class="labels">Email</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="enter email" value="">
-                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="col-md-12 mb-3">
-                                                <div class="row">
-                                                    <div class="col-1 d-flex align-items-end">
-                                                        <div class="col-3 p-0 social-logo"
-                                                            style="width: 30px; height: 30px; margin-bottom: 1px;">
-                                                            <img class="h-100"
-                                                                src="../ronaldo-master/ronaldo-master/images/Phone.png"
-                                                                alt="">
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="row">
+                                                        <div class="col-1 d-flex align-items-end">
+                                                            <div class="col-3 p-0 social-logo"
+                                                                style="width: 30px; height: 30px; margin-bottom: 1px;">
+                                                                <img class="h-100"
+                                                                    src="../ronaldo-master/ronaldo-master/images/Phone.png"
+                                                                    alt="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label class="labels">Phone number</label><input type="text"
+                                                                class="form-control" placeholder="enter phone number"
+                                                                value="">
                                                         </div>
                                                     </div>
-                                                    <div class="col">
-                                                        <label class="labels">Phone number</label><input type="text"
-                                                            class="form-control" placeholder="enter phone number"
-                                                            value="">
-                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="col-md-12">
-                                                <div class="row">
-                                                    <div class="col-1 d-flex align-items-end">
-                                                        <div class="col-3 p-0 social-logo"
-                                                            style="width: 30px; height: 30px; margin-bottom: 1px;">
-                                                            <img class="h-100"
-                                                                src="../ronaldo-master/ronaldo-master/images/Address.png"
-                                                                alt="">
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-1 d-flex align-items-end">
+                                                            <div class="col-3 p-0 social-logo"
+                                                                style="width: 30px; height: 30px; margin-bottom: 1px;">
+                                                                <img class="h-100"
+                                                                    src="../ronaldo-master/ronaldo-master/images/Address.png"
+                                                                    alt="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label class="labels">Address</label><input type="text"
+                                                                class="form-control" placeholder="enter address"
+                                                                value="">
                                                         </div>
                                                     </div>
-                                                    <div class="col">
-                                                        <label class="labels">Address</label><input type="text"
-                                                            class="form-control" placeholder="enter address" value="">
+                                                    <div class="mt-5 text-end">
+                                                        <button class="btn btn-primary profile-button"
+                                                            style="margin-bottom: 5px;" type="button">
+                                                            Update contact
+                                                        </button>
                                                     </div>
                                                 </div>
-                                                <div class="mt-5 text-end">
-                                                    <button class="btn btn-primary profile-button" style="margin-bottom: 5px;" type="button">
-                                                        Update contact
-                                                    </button>
-                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
+                                        </form>
                                     </div>
                                 </div>
 
@@ -269,9 +271,9 @@
                                 <div style="width: 49%;" class="rounded bg-white">
                                     <div class="p-3">
                                         <div class="d-flex justify-content-between align-items-center experience mb-2">
-                                            <h4  class="fs-5">Socail media</h4>
+                                            <h4 class="fs-5">Socail media</h4>
                                         </div>
-                                        <form >
+                                        <form>
                                             <div class="row">
                                                 <div class="col-md-12 mb-3">
                                                     <div class="row">
@@ -285,8 +287,8 @@
                                                         </div>
                                                         <div class="col">
                                                             <label class="labels">Facebook link</label>
-                                                            <input type="text" class="form-control" placeholder="facebook"
-                                                                value="">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="facebook" value="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -302,11 +304,11 @@
                                                         </div>
                                                         <div class="col">
                                                             <label class="labels">Telegram link</label>
-                                                            <input type="text" class="form-control" placeholder="telegram"
-                                                                value="">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="telegram" value="">
                                                         </div>
                                                     </div>
-    
+
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="row">
@@ -320,12 +322,13 @@
                                                         </div>
                                                         <div class="col">
                                                             <label class="labels">Linkedin link</label>
-                                                            <input type="text" class="form-control" placeholder="Linkedin"
-                                                                value="">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Linkedin" value="">
                                                         </div>
                                                     </div>
                                                     <div class="mt-5 text-end">
-                                                        <button class="btn btn-primary profile-button" style="margin-bottom: 5px;" type="button">
+                                                        <button class="btn btn-primary profile-button"
+                                                            style="margin-bottom: 5px;" type="button">
                                                             Update Socail
                                                         </button>
                                                     </div>
@@ -342,9 +345,154 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modalUpdatehero" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold">Update Photo Hero</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="POST" id="updatehero">
+                        <label for="editpic1" class="ms-1">Choose file</label>
+                        <input id="editpic1" class="form-control mt-2" type="file" name="file" />
+                        <span id="va_hero" class="small text-danger opacity-0">.</span>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="updateHero()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalUpdateAbout" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold">Update Photo About</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="POST" id="updateAbout">
+                        <label for="editpic2" class="ms-1">Choose file</label>
+                        <input id="editpic2" class="form-control mt-2" type="file" name="file" />
+                        <span id="va_about" class="small text-danger opacity-0">.</span>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="updateAboutPhoto()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="../asset/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="../asset/js/javascript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function getme() {
+            fetch(`https://mps7.chandalen.dev/api/profile`, {
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+                .then(res => res.json())
+                .then(json => {
+                    document.getElementById('heroImage').src = json.data.profile.photo_hero;
+                    document.getElementById('aboutImage').src = json.data.profile.photo_about;
+
+                })
+        }
+        getme();
+
+        let hero = document.getElementById('editpic1');
+        let va_hero = document.getElementById('va_hero');
+        let about = document.getElementById('editpic2');
+        let va_about = document.getElementById('va_about');
+        function toupHero() {
+            hero.classList.remove('border', 'border-danger');
+            va_hero.classList.add('opacity-0');
+        }
+        function toupAbout() {
+            about.classList.remove('border', 'border-danger');
+            va_about.classList.add('opacity-0');
+        }
+
+        function updateHero() {
+            const form = document.getElementById('updatehero');
+            const formData = new FormData(form);
+
+            if (hero.files.length > 0) {
+                formData.append('photo', hero.files[0]);
+            }
+            fetch(`https://mps7.chandalen.dev/api/photo/hero`, {
+                method: 'POST',
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: formData
+            })
+                .then(res => res.json())
+                .then(json => {
+                    if (hero.value == '') {
+                        hero.classList.add('border', 'border-danger');
+                        va_hero.classList.remove('opacity-0');
+                        va_hero.innerHTML = json.data.photo[0];
+                    } else {
+
+                        // Swal.fire({
+                        //     title: "Updated!",
+                        //     text: json.message,
+                        //     icon: "success"
+                        // });
+                        bootstrap.Modal.getInstance(
+                            document.getElementById("modalUpdatehero")
+                        ).hide();
+                        getme();
+                    }
+                })
+                .catch(err => console.error('Error:', err));
+
+        }
+        function updateAboutPhoto() {
+            const form = document.getElementById('updateAbout');
+            const formData = new FormData(form);
+            if (about.files.length > 0) {
+                formData.append('photo', about.files[0]);
+            }
+            fetch(`https://mps7.chandalen.dev/api/photo/about`, {
+                method: 'POST',
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: formData
+            })
+                .then(res => res.json())
+                .then(json => {
+                    if (about.value == '') {
+                        about.classList.add('border', 'border-danger');
+                        va_about.classList.remove('opacity-0');
+                        va_about.innerHTML = json.data.photo[0];
+                    } else {
+
+                        Swal.fire({
+                            title: "Updated!",
+                            text: json.message,
+                            icon: "success"
+                        });
+                        bootstrap.Modal.getInstance(
+                            document.getElementById("modalUpdateAbout")
+                        ).hide();
+                        getme();
+                    }
+                })
+                .catch(err => console.error('Error:', err));
+        }
+    </script>
 
 
 </body>

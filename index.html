@@ -64,7 +64,8 @@
 
                     </div>
                     <div class="w-100 mt-4 text-center">
-                        <button type="button" id="btnsubmit" class="btn btn-primary w-75" onclick="adddata()">Login</button>
+                        <button type="button" id="btnsubmit" class="btn btn-primary w-75"
+                            onclick="adddata()">Login</button>
                     </div>
                 </form>
             </div>
@@ -167,17 +168,17 @@
         }
     }
     username.addEventListener("input", function () {
-            if (username.value.trim() !== "") {
-                username.classList.remove('border', 'border-danger');
-                va_username.classList.add('opacity-0');
-            }
-        });
+        if (username.value.trim() !== "") {
+            username.classList.remove('border', 'border-danger');
+            va_username.classList.add('opacity-0');
+        }
+    });
     password.addEventListener("input", function () {
-            if (password.value.trim() !== "") {
-                password.classList.remove('border', 'border-danger');
-                va_pass.classList.add('opacity-0');
-            }
-        });
+        if (password.value.trim() !== "") {
+            password.classList.remove('border', 'border-danger');
+            va_pass.classList.add('opacity-0');
+        }
+    });
 </script>
 
 </html>

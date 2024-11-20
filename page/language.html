@@ -27,6 +27,15 @@
     table {
         width: 100%;
     }
+    
+    #nodata {
+        height: 288px;
+        display: flex;
+        color: gray;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 </style>
 
 
@@ -135,10 +144,9 @@
                             <h3 class="mb-3 text-db sec-title">Language Management</h3>
                             <form id="languagesFrom" class="card  mb-4">
                                 <div class="card-body">
-                                    <div class="mb-3">
+                                    <div class="mb-1">
                                         <label for="languagesName" class="form-label">Language</label>
                                         <input type="text" class="form-control" id="languagesName" placeholder="Language" required>
-                                        <span id="va_languagesName" class="opacity-0 text-danger"></span><br>
                                     </div>
                                     <div class="mb-3">
                                         <label for="languagesLevel" class="form-label">Level Language</label><br>
@@ -146,7 +154,7 @@
                                         <input class="w-100" type="range" value="50" min="0" max="100" oninput="output.value = this.value">
 
                                     </div>
-                                    <button type="button" class="btn btn-primary" onclick="addLang()">Add
+                                    <button type="button" class="btn btn-primary" id="btnlg" onclick="addLang()">Add
                                         Language</button>
                                 </div>
                             </form>
@@ -186,18 +194,17 @@
                 </div>
                 <div class="modal-body">
                     <form action="PUT" id="updateForm">
-                        <div class="mb-2 position-relative">
-                            <label for="mdlanguagesName">Language</label>
-                            <input class="form-control" id="mdlanguagesName" type="text" placeholder="New language" style="width: 100%;">
-                            <span id="up_languagesName" class="opacity-0 text-danger"></span><br>
-                        </div>
+                        <label for="unlanguagesName">Language</label>
+                        <input class="form-control" id="unlanguagesName" type="text" placeholder="New language" style="width: 100%;">
+
                         <label for="unlanguagesLevel" class="mt-2">Level language</label><br>
                         <output type="number" id="unlanguagesLevel" class="output">50</output>
                         <input id="rangePercent" class="w-100" type="range" value="50" min="0" max="100" oninput="unlanguagesLevel.value = this.value">
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="updateLang()">Save changes</button>
+                    <button type="button" class="btn btn-primary" id="updatelg" onclick="updateLang()">Save
+                        changes</button>
                 </div>
             </div>
         </div>
@@ -240,12 +247,9 @@
 
 
         function addLang() {
-
-
-
             let languagesName = document.getElementById('languagesName');
             let languagesLevel = document.getElementById('output');
-            let va_languagesName = document.getElementById('va_languagesName');
+
 
             fetch(`https://mps7.chandalen.dev/api/languages`, {
                     method: 'POST',
@@ -261,26 +265,11 @@
                 })
                 .then(res => res.json())
                 .then(json => {
-                    console.log(json);
-                    if (languagesName.value == "") {
-                        languagesName.classList.add('border');
-                        languagesName.classList.add('border-danger');
-                        va_languagesName.innerHTML = json.data.en_name[1];
-                        va_languagesName.classList.remove('opacity-0');
-
-                    } else {
-                        languagesName.classList.remove('border');
-                        languagesName.classList.remove('border-danger');
-                        va_languagesName.classList.add('opacity-0');
-                        Swal.fire({
-                            title: "Success",
-                            text: "You clicked the button!",
-                            icon: "success"
-                        });
-                    }
+                    console.log(json)
+                    alert(json.message);
+                    getLang();
                 })
                 .catch(err => console.error('Error:', err));
-
 
         }
 
@@ -330,9 +319,12 @@
         let idUpdate = 0;
         let unlanguagesName = document.getElementById('mdlanguagesName');
         let unlanguagesLevel = document.getElementById('unlanguagesLevel');
+        let updateLangError = document.getElementById('updateLangError'); // Error span for update name
 
         function toUpdate(id) {
             idUpdate = id;
+            unlanguagesName.classList.remove('border', 'border-danger');
+            updateLangError.classList.add('opacity-0');
             fetch('https://mps7.chandalen.dev/api/languages')
                 .then(res => res.json())
                 .then(json => {
@@ -351,9 +343,6 @@
         }
 
         function updateLang() {
-            let unlanguagesName = document.getElementById('mdlanguagesName');
-            let va_languagesName = document.getElementById('up_languagesName');
-
             console.log(unlanguagesName.value);
             fetch(`https://mps7.chandalen.dev/api/languages/${idUpdate}`, {
                     method: 'PUT',
@@ -370,28 +359,14 @@
                 })
                 .then(res => res.json())
                 .then(json => {
-                    if (unlanguagesName.value == " ") {
-                        unlanguagesName.classList.add('border');
-                        unlanguagesName.classList.add('border-danger');
-                        va_languagesName.innerHTML = json.data.en_name[1];
-                        va_languagesName.classList.remove('opacity-0');
-
-                    } else {
-                        unlanguagesName.classList.remove('border');
-                        unlanguagesName.classList.remove('border-danger');
-                        va_languagesName.classList.add('opacity-0');
-                        Swal.fire({
-                            title: "Success",
-                            text: "You clicked the button!",
-                            icon: "success"
-                        });
-                    }
+                    bootstrap.Modal.getInstance(
+                        document.getElementById("languages")
+                    ).hide();
+                    alert(json.message);
+                    getLang(); // Refresh user details after updating the avatar
                 })
-            bootstrap.Modal.getInstance(
-                document.getElementById("languages")
-            ).hide();
+                .catch(err => console.error('Error:', err));
 
-            getLang(); // Refresh user details after updating the avatar
         }
     </script>
 

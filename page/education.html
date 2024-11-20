@@ -145,8 +145,8 @@
                                     <label for="end_year" class="form-label">End year</label>
                                     <input class="form-control" id="end_year" type="date" placeholder="Select end year" style="width: 100%;">
                                 </div>
-                                <div class="col-12 px-2">
-                                    <button type="button" class="btn btn-primary" onclick="addEducation()">Add
+                                <div class="col-12 px-2 pt-1">
+                                    <button type="button" id="Add" class="btn btn-primary" onclick="addEducation()">Add
                                         education</button>
                                 </div>
                             </div>
@@ -197,6 +197,7 @@
                         <label for="uend_year">End year</label>
                         <input class="form-control" id="uend_year" type="date" placeholder="Select end year" style="width: 100%;">
                     </form>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="updateEducation()">Save changes</button>
@@ -262,10 +263,17 @@
         GetDate();
         // document.getElementsByTagName("tbody").value;
         function addEducation() {
-            const en_degree = document.getElementById('en_degree').value;
-            const en_school = document.getElementById('en_school').value;
-            const start_year = document.getElementById('start_year').value;
-            const end_year = document.getElementById('end_year').value;
+            const Add = document.getElementById('Add');
+            Add.disabled = true;
+
+            let en_degree = document.getElementById('en_degree');
+            let en_school = document.getElementById('en_school');
+            let start_year = document.getElementById('start_year');
+            let end_year = document.getElementById('end_year');
+
+            let va_degree = document.getElementById('va_degree');
+            let va_school = document.getElementById('va_school');
+            let va_start = document.getElementById('va_start');
 
             fetch(`https://mps7.chandalen.dev/api/educations`, {
                     method: 'POST',
@@ -286,14 +294,74 @@
                 .then(res => res.json())
                 .then(json => {
                     console.log(json)
-                    alert(json.message);
-                    GetDate();
+                        // alert(json.message);
+                    if (en_degree.value == "") {
+                        // alert("asas")
+                        en_degree.classList.add('border', 'border-danger');
+                        va_degree.innerHTML = json.data.en_degree[1];
+                        va_degree.classList.remove('opacity-0');
+
+                        //remove other input validation
+                        en_school.classList.remove('border', 'border-danger');
+                        va_school.classList.add('opacity-0');
+
+                        start_year.classList.remove('border', 'border-danger');
+                        va_start.classList.add('opacity-0');
+
+                    } else if (en_school.value == "") {
+                        en_school.classList.add('border', 'border-danger');
+                        va_school.innerHTML = json.data.en_school[1];
+                        va_school.classList.remove('opacity-0');
+
+                        //remove other input validation
+                        en_degree.classList.remove('border', 'border-danger');
+                        va_degree.classList.add('opacity-0');
+
+                        start_year.classList.remove('border', 'border-danger');
+                        va_start.classList.add('opacity-0');
+
+                    } else if (start_year.value == "") {
+                        start_year.classList.add('border', 'border-danger');
+                        va_start.innerHTML = json.data.start_year[1];
+                        va_start.classList.remove('opacity-0');
+
+                        //remove other input validation
+                        en_degree.classList.remove('border', 'border-danger');
+                        va_degree.classList.add('opacity-0');
+
+                        en_school.classList.remove('border', 'border-danger');
+                        va_school.classList.add('opacity-0');
+                    } else {
+                        en_degree.classList.remove('border', 'border-danger');
+                        va_degree.classList.add('opacity-0');
+
+                        en_school.classList.remove('border', 'border-danger');
+                        va_school.classList.add('opacity-0');
+
+                        start_year.classList.remove('border', 'border-danger');
+                        va_start.classList.add('opacity-0');
+
+                        en_degree.value = "";
+                        en_school.value = "";
+                        start_year.value = "";
+                        end_year.value = "";
+
+
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: json.message,
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                        GetDate();
+                    }
                 })
                 .finally(() => {
                     Add.disabled = false; // Enable button after request completes
                 });
 
-
+            GetDate();
         }
         // addEducation();
 
@@ -345,6 +413,15 @@
         let uend_year = document.getElementById('uend_year');
 
         function toUpdate(id) {
+            va_degreeE.classList.add('opacity-0');
+            uen_degree.classList.remove('border', 'border-danger');
+
+            va_schoolE.classList.add('opacity-0');
+            uen_shcool.classList.remove('border', 'border-danger');
+
+            va_startE.classList.add('opacity-0');
+            ustart_year.classList.remove('border', 'border-danger');
+
             idUpdate = id;
             fetch('https://mps7.chandalen.dev/api/educations')
                 .then(res => res.json())
@@ -356,16 +433,23 @@
                             uen_degree.value = element.en_degree;
                             uen_shcool.value = element.en_school;
                         }
+
                     });
 
                 })
-
         }
 
         function updateEducation() {
             // console.log(uen_degree.value);
-            console.log(uen_degree.value + ' ' + uen_shcool.value + ' ' + ustart_year.value + " " + uend_year.value);
+            const AddE = document.getElementById('AddE');
+            AddE.disabled = true;
 
+            let va_degree = document.getElementById('va_degreeE');
+            let va_school = document.getElementById('va_schoolE');
+            let va_start = document.getElementById('va_startE');
+
+            // console.log(uen_degree.value + ' ' + uen_shcool.value + ' ' + ustart_year.value + " " + uend_year.value);
+            console.log(uen_degree.value);
             fetch(`https://mps7.chandalen.dev/api/educations/${idUpdate}`, {
                     method: 'PUT',
                     headers: {
@@ -383,13 +467,64 @@
                 })
                 .then(res => res.json())
                 .then(json => {
-                    bootstrap.Modal.getInstance(
-                        document.getElementById("myModal1")
-                    ).hide();
-                    alert(json.message);
-                    GetDate(); // Refresh user details after updating the avatar
+
+                    if (uen_degree.value == "") {
+                        uen_degree.classList.add('border', 'border-danger');
+                        va_degree.innerHTML = json.data.en_degree[1];
+                        va_degree.classList.remove('opacity-0');
+
+                        //remove other input validation
+                        uen_shcool.classList.remove('border', 'border-danger');
+                        va_school.classList.add('opacity-0');
+
+                        ustart_year.classList.remove('border', 'border-danger');
+                        va_start.classList.add('opacity-0');
+
+                    } else if (uen_shcool.value == "") {
+                        uen_degree.classList.add('border', 'border-danger');
+                        va_school.innerHTML = json.data.en_school[1];
+                        va_school.classList.remove('opacity-0');
+
+                        //remove other input validation
+                        uen_degree.classList.remove('border', 'border-danger');
+                        va_degree.classList.add('opacity-0');
+
+                        ustart_year.classList.remove('border', 'border-danger');
+                        va_start.classList.add('opacity-0');
+
+                    } else if (ustart_year.value == "") {
+                        ustart_year.classList.add('border', 'border-danger');
+                        va_start.innerHTML = json.data.start_year[1];
+                        va_start.classList.remove('opacity-0');
+
+                        //remove other input validation
+                        uen_degree.classList.remove('border', 'border-danger');
+                        va_degree.classList.add('opacity-0');
+
+                        uen_shcool.classList.remove('border', 'border-danger');
+                        va_school.classList.add('opacity-0');
+                    } else {
+                        ustart_year.classList.remove('border', 'border-danger');
+                        va_start.classList.add('opacity-0');
+                        ustart_year.value = null;
+
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: json.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        bootstrap.Modal.getInstance(
+                            document.getElementById("myModal1")
+                        ).hide();
+                        GetDate();
+                    }
                 })
-                .catch(err => console.error('Error:', err));
+                .finally(() => {
+                    AddE.disabled = false; // Enable button after request completes
+                });
+            GetDate();
         }
     </script>
 </body>

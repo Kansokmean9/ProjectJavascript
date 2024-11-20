@@ -9,15 +9,17 @@
     <link href="../asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../asset/style/style.css">
     <style>
+
         th {
-    
+
             color: white;
             padding: 20px;
         }
-        td{
+
+        td {
             padding: 20px;
         }
-    
+
         table {
             width: 100%;
         }
@@ -35,7 +37,7 @@
 <body>
 
     <div id="dashboardContainer">
-        
+
         <nav class="navbar navbar-expand-lg navbar-light border-bottom" style="background-color: #edf2f9;">
             <!-- <div id="toggleNavigationTooltip" class="ratias" style="background-color: red; width: 50px; height: 39px; margin-left: 20px; border-radius: 100px;"></div> -->
 
@@ -51,9 +53,11 @@
                 <h2 class="welcome" style="font-size: 30px;">Welcome admin <span id="adminName"></span>!</h2>
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
                     <li class="pe-2">
-                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank" class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i class="bi bi-box-arrow-up-right"></i> Open Site</a>
+                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank"
+                            class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
+                                class="bi bi-box-arrow-up-right"></i> Open Site</a>
                     </li>
-                    
+
                     <li class="nav-item pe-2">
                         <a class="nav-link" href="#" id="notificationBtn">
                             <i class="bi bi-bell fs-5"></i>
@@ -132,9 +136,12 @@
                         <h3 class="mb-3 text-db sec-title">Software</h3>
                         <form id="subjectForm" class="card  mb-4">
                             <div class="card-body">
-                                <div class="mb-3">
+                                <div class="mb-1">
                                     <label for="softName" class="form-label">Software Name</label>
-                                    <input type="text" class="form-control" id="softName" placeholder="Enter software" required>
+                                    <input type="text" class="form-control" id="softName" placeholder="Enter software"
+                                        required>
+                                    <span id="softError" class="text-danger small opacity-0">.</span>
+                                    <!-- Error message -->
                                 </div>
                                 <div class="mb-3">
                                     <label for="softLevel" class="form-label">Level software</label><br>
@@ -143,7 +150,7 @@
                                         oninput="output.value = this.value">
 
                                 </div>
-                                <button type="button" class="btn btn-primary" onclick="addSoft()">Add software</button>
+                                <button type="button" class="btn btn-primary" id="btnsw" onclick="addSoft()">Add software</button>
                             </div>
                         </form>
                         <table border="0" class="bg-primarys">
@@ -171,22 +178,25 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title text-uppercase fw-bold" id="myModalLabel1"> Update data!</h5>
-                        <button type="button" class="btn-close bg-danger rounded-5" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close bg-danger rounded-5" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="PUT" id="updateForm">
                             <label for="usoftname">Software Name</label>
                             <input class="form-control" id="usoftname" type="text" placeholder="New software"
                                 style="width: 100%;">
+                            <span id="updatesoftError" class="text-danger small opacity-0">.</span><br>
+                            <!-- Error message -->
 
-                            <label for="unSoftLevel" class="mt-2">Level software</label><br>
+                            <label for="unSoftLevel" class="mt-1">Level software</label><br>
                             <output type="number" id="unSoftLevel" class="output">50</output>
                             <input id="rangePercent" class="w-100" type="range" value="50" min="0" max="100"
                                 oninput="unSoftLevel.value = this.value">
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="updateSoftware()">Save changes</button>
+                        <button type="button" class="btn btn-primary" id="updatesw" onclick="updateSoftware()">Save changes</button>
                     </div>
                 </div>
             </div>
@@ -197,7 +207,7 @@
     <script src="../asset/js/javascript.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    
+
     <script>
 
         // Subject Form Submission
@@ -248,9 +258,19 @@
         getSoftware();
 
         function addSoft() {
+            const btnsw = document.getElementById('btnsw');
+            btnsw.disabled = true;
             let softName = document.getElementById('softName');
             let softLevel = document.getElementById('output');
+            let softError = document.getElementById('softError'); // Error span for skill name
 
+            if (!isNaN(softName.value) && softName.value != '') {
+                softError.classList.remove('opacity-0');
+                softName.classList.add('border', 'border-danger');
+                softError.innerHTML = "Software must be a string.";
+                btnsw.disabled = false;
+                return;
+            }
 
             fetch(`https://mps7.chandalen.dev/api/softwares/`, {
                 method: 'POST',
@@ -266,13 +286,31 @@
             })
                 .then(res => res.json())
                 .then(json => {
-                    console.log(json)
-                    alert(json.message);
-                    getSoftware();
+                    if (softName.value == "") {
+                        softError.innerHTML = json.data.name[1];
+                        softName.classList.add('border', 'border-danger');
+                        softError.classList.remove('opacity-0');
+                    } else {
+                        Swal.fire({
+                            icon: "success",
+                            title: json.message,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        softName.value = "";
+                        getSoftware();
+                    }
                 })
-                .catch(err => console.error('Error:', err));
-            
+                .finally(() => {
+                    btnsw.disabled = false;
+                });
         }
+        softName.addEventListener("input", function () {
+            if (softName.value.trim() !== "") {
+                softName.classList.remove('border', 'border-danger');
+                softError.classList.add('opacity-0');
+            }
+        });
 
         function deleteSoftware(id) {
             Swal.fire({
@@ -320,9 +358,12 @@
         let idUpdate = 0;
         let usoftname = document.getElementById('usoftname');
         let unSoftLevel = document.getElementById('unSoftLevel');
+        let updatesoftError = document.getElementById('updatesoftError'); // Error span for update name
 
         function toUpdate(id) {
             idUpdate = id;
+            usoftname.classList.remove('border', 'border-danger');
+            updatesoftError.classList.add('opacity-0');
             fetch('https://mps7.chandalen.dev/api/softwares')
                 .then(res => res.json())
                 .then(json => {
@@ -341,6 +382,15 @@
         }
 
         function updateSoftware() {
+            const updatesw = document.getElementById('updatesw');
+            updatesw.disabled = true;
+            if (!isNaN(usoftname.value) && usoftname.value != '') {
+                updatesoftError.classList.remove('opacity-0');
+                usoftname.classList.add('border', 'border-danger');
+                updatesoftError.innerHTML = "Software must be a string.";
+                updatesw.disabled = false;
+                return;
+            }
             console.log(usoftname.value);
             fetch(`https://mps7.chandalen.dev/api/softwares/${idUpdate}`, {
                 method: 'PUT',
@@ -357,15 +407,33 @@
             })
                 .then(res => res.json())
                 .then(json => {
-                    bootstrap.Modal.getInstance(
-                        document.getElementById("myModal1")
-                    ).hide();
-                    alert(json.message);
-                    getSoftware(); // Refresh user details after updating the avatar
+                    if (usoftname.value == "") {
+                        updatesoftError.innerHTML = json.data.name[1];
+                        usoftname.classList.add('border', 'border-danger');
+                        updatesoftError.classList.remove('opacity-0');
+                    } else if (json.result) {
+                        bootstrap.Modal.getInstance(
+                            document.getElementById("myModal1")
+                        ).hide(); // Close the modal
+                        Swal.fire({
+                            icon: "success",
+                            title: json.message,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        getSoftware();
+                    }
                 })
-                .catch(err => console.error('Error:', err));
-
+                .finally(() => {
+                    updatesw.disabled = false;
+                });
         }
+        usoftname.addEventListener("input", function () {
+            if (usoftname.value.trim() !== "") {
+                usoftname.classList.remove('border', 'border-danger');
+                updatesoftError.classList.add('opacity-0');
+            }
+        });
     </script>
 </body>
 

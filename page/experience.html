@@ -326,61 +326,49 @@
                 .then(json => {
                     console.log(json);
                     if (title.value == "") {
-                        title.classList.add('border');
-                        title.classList.add('border-danger');
+                        title.classList.add('border', 'border-danger');
                         va_title.innerHTML = json.data.en_title[1];
                         va_title.classList.remove('opacity-0');
 
                         //remove other input validation
-                        workplace.classList.remove('border');
-                        workplace.classList.remove('border-danger');
+                        workplace.classList.remove('border', 'border-danger');
                         va_wp.classList.add('opacity-0');
 
-                        start_year.classList.remove('border');
-                        start_year.classList.remove('border-danger');
+                        start_year.classList.remove('border', 'border-danger');
                         va_sy.classList.add('opacity-0');
 
                     } else if (workplace.value == "") {
-                        workplace.classList.add('border');
-                        workplace.classList.add('border-danger');
+                        workplace.classList.add('border', 'border-danger');
                         va_wp.innerHTML = json.data.en_workplace[1];
                         va_wp.classList.remove('opacity-0');
 
                         //remove other input validation
-                        title.classList.remove('border');
-                        title.classList.remove('border-danger');
+                        title.classList.remove('border', 'border-danger');
                         va_title.classList.add('opacity-0');
 
-                        start_year.classList.remove('border');
-                        start_year.classList.remove('border-danger');
+                        start_year.classList.remove('border', 'border-danger');
                         va_sy.classList.add('opacity-0');
 
                     } else if (start_year.value == "") {
-                        start_year.classList.add('border');
-                        start_year.classList.add('border-danger');
+                        start_year.classList.add('border', 'border-danger');
                         va_sy.innerHTML = json.data.start_year[1];
                         va_sy.classList.remove('opacity-0');
 
                         //remove other input validation
-                        title.classList.remove('border');
-                        title.classList.remove('border-danger');
+                        title.classList.remove('border', 'border-danger');
                         va_title.classList.add('opacity-0');
 
-                        workplace.classList.remove('border');
-                        workplace.classList.remove('border-danger');
+                        workplace.classList.remove('border', 'border-danger');
                         va_wp.classList.add('opacity-0');
                     } else {
 
-                        title.classList.remove('border');
-                        title.classList.remove('border-danger');
+                        title.classList.remove('border', 'border-danger');
                         va_title.classList.add('opacity-0');
 
-                        workplace.classList.remove('border');
-                        workplace.classList.remove('border-danger');
+                        workplace.classList.remove('border', 'border-danger');
                         va_wp.classList.add('opacity-0');
 
-                        start_year.classList.remove('border');
-                        start_year.classList.remove('border-danger');
+                        start_year.classList.remove('border', 'border-danger');
                         va_sy.classList.add('opacity-0');
 
                         title.value = "";
@@ -400,10 +388,27 @@
                     }
                 })
                 .finally(() => {
-                    btnSubmit.disabled = false; // Enable button after request completes
+                    btnSubmit.disabled = false;
                 });
-
         }
+        title.addEventListener("input", function() {
+            if (title.value.trim() !== "") {
+                title.classList.remove('border', 'border-danger');
+                va_title.classList.add('opacity-0');
+            }
+        });
+        workplace.addEventListener("input", function() {
+            if (workplace.value.trim() !== "") {
+                workplace.classList.remove('border', 'border-danger');
+                va_wp.classList.add('opacity-0');
+            }
+        });
+        start_year.addEventListener("input", function() {
+            if (start_year.value.trim() !== "") {
+                start_year.classList.remove('border', 'border-danger');
+                va_sy.classList.add('opacity-0');
+            }
+        });
 
         function deleteExperience(id) {
             Swal.fire({
@@ -427,14 +432,14 @@
                         })
                         .then(res => res.json())
                         .then(json => {
-                            console.log(json); // Log the response to see if delete was successful
+                            console.log(json);
                             if (json.result) {
                                 Swal.fire({
                                     title: "Deleted!",
                                     text: json.message,
                                     icon: "success"
                                 });
-                                GetDate(); // Refresh data
+                                GetDate();
                             } else {
                                 Swal.fire("Error!", "Failed to delete experience.", "error");
                             }
@@ -454,6 +459,14 @@
         let uend_year = document.getElementById('uend_year');
 
         function toUpdate(id) {
+            uva_title.classList.add('opacity-0');
+            utitle.classList.remove('border', 'border-danger');
+
+            uva_wp.classList.add('opacity-0');
+            uworkplace.classList.remove('border', 'border-danger');
+
+            uva_sy.classList.add('opacity-0');
+            ustart_year.classList.remove('border', 'border-danger');
 
             idUpdate = id;
             fetch('https://mps7.chandalen.dev/api/experiences')
@@ -499,52 +512,42 @@
                 .then(res => res.json())
                 .then(json => {
                     if (utitle.value == "") {
-                        utitle.classList.add('border');
-                        utitle.classList.add('border-danger');
+                        utitle.classList.add('border', 'border-danger');
                         va_title.innerHTML = json.data.en_title[1];
                         va_title.classList.remove('opacity-0');
 
                         //remove other input validation
-                        uworkplace.classList.remove('border');
-                        uworkplace.classList.remove('border-danger');
+                        uworkplace.classList.remove('border', 'border-danger');
                         va_wp.classList.add('opacity-0');
 
-                        ustart_year.classList.remove('border');
-                        ustart_year.classList.remove('border-danger');
+                        ustart_year.classList.remove('border', 'border-danger');
                         va_sy.classList.add('opacity-0');
 
                     } else if (uworkplace.value == "") {
-                        uworkplace.classList.add('border');
-                        uworkplace.classList.add('border-danger');
+                        uworkplace.classList.add('border', 'border-danger');
                         va_wp.innerHTML = json.data.en_workplace[1];
                         va_wp.classList.remove('opacity-0');
 
                         //remove other input validation
-                        utitle.classList.remove('border');
-                        utitle.classList.remove('border-danger');
+                        utitle.classList.remove('border', 'border-danger');
                         va_title.classList.add('opacity-0');
 
-                        ustart_year.classList.remove('border');
-                        ustart_year.classList.remove('border-danger');
+                        ustart_year.classList.remove('border', 'border-danger');
                         va_sy.classList.add('opacity-0');
 
                     } else if (ustart_year.value == "") {
-                        ustart_year.classList.add('border');
-                        ustart_year.classList.add('border-danger');
+                        ustart_year.classList.add('border', 'border-danger');
                         va_sy.innerHTML = json.data.start_year[1];
                         va_sy.classList.remove('opacity-0');
 
                         //remove other input validation
-                        utitle.classList.remove('border');
-                        utitle.classList.remove('border-danger');
+                        utitle.classList.remove('border', 'border-danger');
                         va_title.classList.add('opacity-0');
 
-                        uworkplace.classList.remove('border');
-                        uworkplace.classList.remove('border-danger');
+                        uworkplace.classList.remove('border', 'border-danger');
                         va_wp.classList.add('opacity-0');
                     } else {
-                        ustart_year.classList.remove('border');
-                        ustart_year.classList.remove('border-danger');
+                        ustart_year.classList.remove('border', 'border-danger');
                         va_sy.classList.add('opacity-0');
                         ustart_year.value = null;
 
@@ -553,16 +556,13 @@
                             icon: "success",
                             title: json.message,
                             showConfirmButton: false,
-                            timer: 1500
+                            timer: 1000
                         });
-                        bootstrap.Modal.getInstance(
-                            document.getElementById("myModal1")
-                        ).hide();
                         GetDate();
                     }
                 })
                 .finally(() => {
-                    btnSubmit.disabled = false; // Enable button after request completes
+                    btnSubmit.disabled = false;
                 });
         }
     </script>
