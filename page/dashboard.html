@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../asset/bootstrap/css/bootstrap.css">
     <link href="../asset/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../asset/style/style.css">
+    <link rel="stylesheet" href="../asset/js/notification.js">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
@@ -82,8 +83,14 @@
                     </li>
 
                     <li class="nav-item pe-2">
-                        <a class="nav-link" href="#" id="notificationBtn">
-                            <i class="bi bi-bell fs-5"></i>
+                        <a  href="contact.html">
+
+                            <div class="position-absolute bg-danger rounded-5 ms-3" style="width: 20px; height: 20px; ">
+                                <div class="text-center m-auto p-1 small text-white" id="catchdata" style="font-size: 10px;">0</div>
+                            </div>
+                            <div class="nav-link" id="notificationBtn">
+                                <i class="bi bi-bell fs-5"></i>
+                            </div>
                         </a>
                     </li>
                     <li class="nav-item align-items-center d-flex">
@@ -239,9 +246,9 @@
                                         Charts page
                                     </div>
                                     <div class="bg-white rounded-bottom-3" id="chart"
-                                        style="height: 350px;  border-radius: 0px 0px 10px 10;">
 
-                                    </div>
+                                        style="height: 350px;  border-radius: 0px 0px 10px 10;"></div>
+
                                 </div>
                                 <div class="col-6 mt-0">
                                     <div class="text-chart bg-white text-primary p-3"

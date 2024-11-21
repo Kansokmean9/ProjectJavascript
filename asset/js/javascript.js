@@ -42,5 +42,21 @@ fetch(`https://mps7.chandalen.dev/api/me`, {
 
     })
 
+    
+    fetch(`https://mps7.chandalen.dev/api/dashboard`, {
+        method: 'GET',
+        headers: {
+            "Accept": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    })
+        .then(res => res.json())
+        .then(json => {
+            console.log(json.data.total_view);
+            
+            document.getElementById('catchdata').innerText = json.data.total_contact;
+    
+        })
+
 
 
