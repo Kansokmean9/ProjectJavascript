@@ -7,7 +7,7 @@ function fetchAbout() {
       return res.json();
     })
     .then((json) => {
-      console.log(json); // Log the entire response for debugging
+      //console.log(json); // Log the entire response for debugging
 
       if (json.result && json.data && json.data.profile) {
         const profile = json.data.profile;
@@ -38,10 +38,10 @@ function fetchAbout() {
                 <a href="${social.facebook}" target="_blank">
                   <i class="fab fa-facebook-f"></i>
                 </a>
-                <a href="https://t.me/tchandalen" target="_blank">
+                <a href="${social.telegram}" target="_blank">
                   <i class="fab fa-telegram-plane"></i>
                 </a>
-                <a href="https://www.linkedin.com/in/chandalen-teang" target="_blank">
+                <a href="${social.linkedin}" target="_blank">
                   <i class="fab fa-linkedin-in"></i>
                 </a>
               </div>
@@ -54,7 +54,7 @@ function fetchAbout() {
         `;
 
         document.getElementById("hero-section").innerHTML = About;
-        console.log(json.data);
+        //console.log(json.data);
       } else {
         console.error("No data found in the API response");
       }

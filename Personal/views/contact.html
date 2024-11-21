@@ -78,6 +78,10 @@
   .loading {
     background-color: #f8f9fa;
   }
+  .spinner-border{
+    width: 15px !important;
+    height: 15px !important;
+  }
 
   .sent-message {
     background-color: #d4edda;
@@ -199,27 +203,27 @@
             <form class="contact-form php-email-form" id="contactForm" data-aos="fade-up" data-aos-delay="600">
               <div class="row g-4">
                 <div class="col-md-6">
-                  <input type="text" name="name" id="iname" class="form-control" placeholder="Your Name" >
+                  <input type="text" name="name" id="iname" class="form-control mb-1" placeholder="Your Name" >
                   <span id="name_error" class="text-danger opacity-0">.</span>
                 </div>
                 <div class="col-md-6">
-                  <input type="email" class="form-control" name="iemail" id="iemail" placeholder="Your Email" >
-                  <span id="email_error" class="text-danger opacity-0">.</span>
+                  <input type="text" class="form-control mb-1" name="iemail" id="iemail" placeholder="Your Email" >
+                  <span id="email_error" class="text-danger  opacity-0">.</span>
 
 
                 </div>
-                <div class="col-12">
-                  <input type="text" class="form-control" name="subject" id="isubject" placeholder="Subject" >
+                <div class="col-12 mt-3">
+                  <input type="text" class="form-control mb-1" name="subject" id="isubject" placeholder="Subject" >
                   <span id="subject_error" class="text-danger opacity-0">.</span>
 
                 </div>
-                <div class="col-12">
-                  <input type="number" class="form-control" name="phone" id="iphone" placeholder="Phone" >
-                 <span id="phone_error" class="text-danger opacity-0"></span>
+                <div class="col-12 mt-3">
+                  <input type="number" class="form-control " name="phone" id="iphone" placeholder="Phone" >
+                 <!-- <span id="phone_error" class="text-danger opacity-0"></span> -->
                 </div>
-                <div class="col-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" id="imessage" ></textarea>
-                  <span id="message_error" class="text-danger opacity-0">.</span>
+                <div class="col-12 mt-4 ">
+                  <textarea class="form-control mb-1" name="message" rows="6" placeholder="Message" id="imessage" ></textarea>
+                  <span id="message_error" class="text-danger opacity-0 ">.</span>
                 </div>
                 <div class="col-12 text-center">
                   <div class="loading">Loading</div>
@@ -234,6 +238,7 @@
                       <span class="visually-hidden">Loading...</span>
                     </div>
                   </div>
+                  </button>
 
                 </div>
               </div>
