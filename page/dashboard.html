@@ -25,32 +25,32 @@
             border-radius: 5px;
             z-index: 1000;
         }
-
+        
         body {
             color: #ffffff;
             font-family: 'Roboto', sans-serif;
         }
-
+        
         h1 {
             font-size: 2.5rem;
             margin-bottom: 20px;
         }
-
+        
         .chart-container {
             position: relative;
             height: 300px;
             /* margin-bottom: 5px; */
         }
-
+        
         canvas {
             margin-top: 2px !important;
             max-height: 300px;
         }
-
+        
         #chart {
             height: 320px;
         }
-
+        
         .border {
             border: 1px solid #ddd;
         }
@@ -73,16 +73,15 @@
                     <i class="bi bi-list"></i>
                 </button>
 
-                <h2 class="welcome" style="font-size: 30px;">Welcome admin <span id="adminName"
-                        style="font-weight: bold;"></span>!</h2>
+                <h2 class="welcome" style="font-size: 30px;">Welcome admin <span id="adminName" style="font-weight: bold;"></span>!</h2>
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
                     <li class="pe-2">
-                        <button class="btn btn-dark rounded-5" type="button" style="height: 30px; line-height: 10px;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i
-                            class="bi bi-box-arrow-up-right"></i> Open Site</button>
+                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank" class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
+                                class="bi bi-box-arrow-up-right"></i> Open Site</a>
                     </li>
 
                     <li class="nav-item pe-2">
-                        <a  href="contact.html">
+                        <a href="contact.html">
 
                             <div class="position-absolute bg-danger rounded-5 ms-3" style="width: 20px; height: 20px; ">
                                 <div class="text-center m-auto p-1 small text-white" id="catchdata" style="font-size: 10px;">0</div>
@@ -240,97 +239,92 @@
                         <div class="col-12">
                             <div class="row g-4">
                                 <div class="col-6 mt-0">
-                                    <div class="text-chart bg-white text-primary p-3"
-                                        style="text-align: center; margin-top: 20px; font-weight: bold; border-radius: 10px 10px 0px 0;">
+                                    <div class="text-chart bg-white text-primary p-3" style="text-align: center; margin-top: 20px; font-weight: bold; border-radius: 10px 10px 0px 0;">
                                         Charts page
                                     </div>
-                                    <div class="bg-white rounded-bottom-3" id="chart"
+                                    <div class="bg-white rounded-bottom-3" id="chart" style="height: 350px;  border-radius: 0px 0px 10px 10;">
 
-                                        style="height: 350px;  border-radius: 0px 0px 10px 10;"></div>
-
-                                </div>
-                                <div class="col-6 mt-0">
-                                    <div class="text-chart bg-white text-primary p-3"
-                                        style="text-align: center; margin-top: 20px; font-weight: bold; border-radius: 10px 10px 0px 0;">
-                                        Skill Product
                                     </div>
-                                    <div class=" bg-white rounded-bottom-3" id="chart1"
-                                        style="height: 350px;  border-radius: 0px 0px 10px 10;"></div>
+                                    <div class="col-6 mt-0">
+                                        <div class="text-chart bg-white text-primary p-3" style="text-align: center; margin-top: 20px; font-weight: bold; border-radius: 10px 10px 0px 0;">
+                                            Skill Product
+                                        </div>
+                                        <div class=" bg-white rounded-bottom-3" id="chart1" style="height: 350px;  border-radius: 0px 0px 10px 10;"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row g-3">
+                        <div class="row g-3">
 
+                        </div>
                     </div>
-                </div>
             </main>
+            </div>
         </div>
-    </div>
-    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-        <div class="offcanvas-header shadow-sm">
-          <h3 class="offcanvas-title text-uppercase" id="offcanvasWithBothOptionsLabel">Our templates</h3>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+            <div class="offcanvas-header shadow-sm">
+                <h3 class="offcanvas-title text-uppercase" id="offcanvasWithBothOptionsLabel">Our templates</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <h4 class="text-primary mb-2 mt-4">Template 1</h4>
+                <a class="imgTemplate" target="_blank" href="../ronaldo-master/ronaldo-master/index.html">
+                    <img src="../asset/img/temp1.png" style="width: 350px;" alt="">
+                </a>
+                <h4 class="text-primary mb-2 mt-4">Template 2</h4>
+                <a class="imgTemplate bg-black" target="_blank" href="../Personal/views/index.html">
+                    <img src="../asset/img/temp2.png" style="width: 350px;" alt="">
+                </a>
+            </div>
         </div>
-        <div class="offcanvas-body">
-          <h4 class="text-primary mb-2 mt-4">Template 1</h4>
-          <a class="imgTemplate" target="_blank" href="../ronaldo-master/ronaldo-master/index.html">
-            <img  src="../asset/img/temp1.png" style="width: 350px;" alt="">
-          </a>
-          <h4 class="text-primary mb-2 mt-4">Template 2</h4>
-          <a class="imgTemplate bg-black" target="_blank" href="../Personal/views/index.html">
-            <img  src="../asset/img/temp2.png" style="width: 350px;" alt="">
-          </a>
-        </div>
-      </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="../asset/bootstrap/js/bootstrap.bundle.js"></script>
-    <script src="../asset/js/javascript.js"></script>
-    <script>
-        let totalEducation, totalProject, totalSkills, totalExperience, totalLanguage;
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="../asset/bootstrap/js/bootstrap.bundle.js"></script>
+        <script src="../asset/js/javascript.js"></script>
+        <script>
+            let totalEducation, totalProject, totalSkills, totalExperience, totalLanguage, totalSoftware;
 
 
-        function getdataed() {
-            fetch('https://mps7.chandalen.dev/api/educations')
-                .then(res => res.json())
-                .then(json => {
-                    totalEducation = json.data.length;
-                    //console.log(totalEducation)
-                })
+            function getdataed() {
+                fetch('https://mps7.chandalen.dev/api/educations')
+                    .then(res => res.json())
+                    .then(json => {
+                        totalEducation = json.data.length;
+                        //console.log(totalEducation)
+                    })
 
-        }
+            }
 
-        function gettatolExperience() {
-            fetch('https://mps7.chandalen.dev/api/experiences')
-                .then(res => res.json())
-                .then(json => {
-                    totalExperience = json.data.length;
+            function gettatolExperience() {
+                fetch('https://mps7.chandalen.dev/api/experiences')
+                    .then(res => res.json())
+                    .then(json => {
+                        totalExperience = json.data.length;
 
-                })
+                    })
 
-        }
+            }
 
-        function gettatolLanguage() {
-            fetch('https://mps7.chandalen.dev/api/languages')
-                .then(res => res.json())
-                .then(json => {
-                    totalLanguage = json.data.length;
+            function gettatolLanguage() {
+                fetch('https://mps7.chandalen.dev/api/languages')
+                    .then(res => res.json())
+                    .then(json => {
+                        totalLanguage = json.data.length;
 
-                })
+                    })
 
-        }
+            }
 
-        function gettatolSkills() {
-            fetch('https://mps7.chandalen.dev/api/skills')
-                .then(res => res.json())
-                .then(json => {
-                    totalSkills = json.data.length;
-                    skills = `
+            function gettatolSkills() {
+                fetch('https://mps7.chandalen.dev/api/skills')
+                    .then(res => res.json())
+                    .then(json => {
+                        totalSkills = json.data.length;
+                        skills = `
                 {
                    value: ${json.data.name},
                    name: '${json.data.percent}',
@@ -340,42 +334,53 @@
                     `;
 
 
-                })
+                    })
 
 
-        }
+            }
 
-        function gettatolProject() {
-            fetch('https://mps7.chandalen.dev/api/projects')
-                .then(res => res.json())
-                .then(json => {
-                    totalProject = json.data.length;
+            function gettatolProject() {
+                fetch('https://mps7.chandalen.dev/api/projects')
+                    .then(res => res.json())
+                    .then(json => {
+                        totalProject = json.data.length;
 
-                })
+                    })
 
-        }
-        gettatolProject();
-        gettatolSkills();
-        gettatolLanguage();
-        gettatolExperience();
-        getdataed();
-        //get index dasbaord
-        function getdata() {
-            let dashboardData = {
-                total_contact: 0,
-                total_view: 0,
-                total_own_project: 0,
-                total_blog: 0,
-            };
+            }
 
-            fetch(`https://mps7.chandalen.dev/api/dashboard`, {
-                method: 'GET',
-                headers: {
-                    "Accept": "application/json",
-                    "Authorization": `Bearer ${token}`
-                }
-            })
-                .then(res => res.json())
+            function gettatolSoftware() {
+                fetch('https://mps7.chandalen.dev/api/softwares')
+                    .then(res => res.json())
+                    .then(json => {
+                        totalSoftware = json.data.length;
+
+                    })
+
+            }
+            gettatolSoftware()
+            gettatolProject();
+            gettatolSkills();
+            gettatolLanguage();
+            gettatolExperience();
+            getdataed();
+            //get index dasbaord
+            function getdata() {
+                let dashboardData = {
+                    total_contact: 0,
+                    total_view: 0,
+                    total_own_project: 0,
+                    total_blog: 0,
+                };
+
+                fetch(`https://mps7.chandalen.dev/api/dashboard`, {
+                        method: 'GET',
+                        headers: {
+                            "Accept": "application/json",
+                            "Authorization": `Bearer ${token}`
+                        }
+                    })
+                    .then(res => res.json())
 
                 .then(json => {
                     // Save fetched data globally
@@ -400,8 +405,8 @@
                     // Chat api data 
                     function getOption() {
 
-                        const months = ['Contact', 'Education', 'Experience', 'Language', 'Project', 'Skills'];
-                        const data = [dashboardData.total_contact, totalEducation, totalExperience, totalLanguage, totalProject, totalSkills];
+                        const months = ['Software', 'Education', 'Experience', 'Language', 'Project', 'Skills'];
+                        const data = [totalSoftware, totalEducation, totalExperience, totalLanguage, totalProject, totalSkills];
                         return {
                             title: [
                                 // { text: 'Skill chart', left: 'center', textStyle: { color: themeColors.gray600 } },
@@ -629,20 +634,20 @@
                     });
 
                 })
-        }
-        getdata()
-        const toggleTooltip = document.getElementById('toggleNavigationTooltip');
-        const tooltip = document.getElementById('tooltip');
+            }
+            getdata()
+            const toggleTooltip = document.getElementById('toggleNavigationTooltip');
+            const tooltip = document.getElementById('tooltip');
 
-        toggleTooltip.addEventListener('click', () => {
-            tooltip.style.display = tooltip.style.display === 'none' ? 'block' : 'none';
-        });
-        // Data form caht
-    </script>
+            toggleTooltip.addEventListener('click', () => {
+                tooltip.style.display = tooltip.style.display === 'none' ? 'block' : 'none';
+            });
+            // Data form caht
+        </script>
 
-    <script>
-        // Utility functions for theme colors
-    </script>
+        <script>
+            // Utility functions for theme colors
+        </script>
 </body>
 
 </html>
