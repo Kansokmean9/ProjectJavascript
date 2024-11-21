@@ -186,9 +186,9 @@ label {
     border-radius: 5px;
 }
 
-#dashboardContent table tbody tr {
+/* #dashboardContent table tbody tr {
     border-top: 1px solid rgb(180, 216, 255);
-}
+} */
 
 .update-photo {
 
@@ -351,4 +351,10 @@ transform: scale(1.05);
     opacity: 1;
 transform: scale(1.05);
 
+}
+tr.bg-body-secondary{
+    transition: 0.3S;
+}
+tr.bg-body-secondary:hover{
+    transform: scale(1.009);
 }
