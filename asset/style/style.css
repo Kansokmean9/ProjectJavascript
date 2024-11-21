@@ -313,3 +313,42 @@ h2.card-text,
     color: rgba(1, 75, 164, 1);
     margin-left: 5px;
 }
+.imgTemplate{
+    position: relative;
+    img{
+        transition: 0.3s;
+    }
+}
+.imgTemplate:hover img{
+transform: scale(1.05);
+}
+.offcanvas-body{
+    margin-left: 9px;
+}
+.offcanvas-title{
+    font-weight: bold;
+}
+.imgTemplate::after{
+    content: 'Veiw site';
+    font-size: larger;
+    color: white;
+    font-weight: bold;
+    left: 0;
+    top: -76px;
+    position: absolute;
+    width: 100%;
+    height: 180px;
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(72, 153, 246, 0.5);
+    opacity: 0;
+
+
+}
+.imgTemplate:hover::after{
+    opacity: 1;
+transform: scale(1.05);
+
+}

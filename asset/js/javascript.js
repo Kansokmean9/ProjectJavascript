@@ -3,21 +3,14 @@ const sidebar = document.querySelector('.sidebar');
 const sidebarToggle = document.getElementById('sidebarToggle');
 const closeSidebar = document.getElementById('closeSidebar');
 
-// Toggle sidebar open/close
 sidebarToggle.addEventListener('click', () => {
     sidebar.classList.toggle('active');
 });
 
-// Close sidebar when close button is clicked
 closeSidebar.addEventListener('click', () => {
     sidebar.classList.remove('active');
 });
-// Notification button click event
-const notificationBtn = document.getElementById('notificationBtn');
-notificationBtn.addEventListener('click', () => {
-    alert('Notifications feature coming soon!');
-    location.reload();
-});
+
 
 // get me
 let token = sessionStorage.getItem('Token');
@@ -41,6 +34,22 @@ fetch(`https://mps7.chandalen.dev/api/me`, {
         document.getElementById('adminName').innerHTML = json.data.name;
 
     })
+
+    
+    fetch(`https://mps7.chandalen.dev/api/dashboard`, {
+        method: 'GET',
+        headers: {
+            "Accept": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    })
+        .then(res => res.json())
+        .then(json => {
+            console.log(json.data.total_view);
+            
+            document.getElementById('catchdata').innerText = json.data.total_contact;
+    
+        })
 
 
 
