@@ -313,3 +313,18 @@ h2.card-text,
     color: rgba(1, 75, 164, 1);
     margin-left: 5px;
 }
+.imgTemplate{
+    position: relative;
+}
+.imgTemplate::after{
+    content: 'Veiw site';
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: blue;
+
+}

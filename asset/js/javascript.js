@@ -3,21 +3,14 @@ const sidebar = document.querySelector('.sidebar');
 const sidebarToggle = document.getElementById('sidebarToggle');
 const closeSidebar = document.getElementById('closeSidebar');
 
-// Toggle sidebar open/close
 sidebarToggle.addEventListener('click', () => {
     sidebar.classList.toggle('active');
 });
 
-// Close sidebar when close button is clicked
 closeSidebar.addEventListener('click', () => {
     sidebar.classList.remove('active');
 });
-// Notification button click event
-const notificationBtn = document.getElementById('notificationBtn');
-notificationBtn.addEventListener('click', () => {
-    alert('Notifications feature coming soon!');
-    location.reload();
-});
+
 
 // get me
 let token = sessionStorage.getItem('Token');
