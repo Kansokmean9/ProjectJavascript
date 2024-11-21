@@ -40,10 +40,8 @@
                 <h2 class="welcome" style="font-size: 30px;">Welcome admin <span id="adminName"></span>!</h2>
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
                     <li class="pe-2">
-                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank"
-                            class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
-                                class="bi bi-box-arrow-up-right"></i> Open
-                            Site</a>
+                        <button class="btn btn-dark rounded-5" type="button" style="height: 30px; line-height: 10px;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i
+                            class="bi bi-box-arrow-up-right"></i> Open Site</button>
                     </li>
 
                     <li class="nav-item pe-2">
@@ -117,6 +115,22 @@
                 </li>
             </ul>
         </div>
+        <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Our templates</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <h2>Template 1</h2>
+              <a href="../ronaldo-master/ronaldo-master/index.html">
+                <img src="../asset/img/mean.png" style="width: 350px;" alt="">
+              </a>
+              <h2>Template 2</h2>
+              <a href="../Personal/views/index.html">
+                <img src="../asset/img/mean.png" style="width: 350px;" alt="">
+              </a>
+            </div>
+          </div>
 
         <div class="main-content">
 

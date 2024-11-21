@@ -11,23 +11,19 @@
 
 </head>
 <style>
-    .cs {
-        cursor: pointer;
-    }
-    
     th {
         color: white;
         padding: 20px;
     }
-    
+
     td {
         padding: 20px;
     }
-    
+
     table {
         width: 100%;
     }
-    
+
     #nodata {
         height: 288px;
         display: flex;
@@ -58,7 +54,8 @@
                 <h2 class="welcome" style="font-size: 30px;">Welcome admin <span id="adminName"></span>!</h2>
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
                     <li class="pe-2">
-                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank" class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
+                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank"
+                            class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
                                 class="bi bi-box-arrow-up-right"></i> Open Site</a>
                     </li>
 
@@ -146,12 +143,17 @@
                                 <div class="card-body">
                                     <div class="mb-1">
                                         <label for="languagesName" class="form-label">Language</label>
-                                        <input type="text" class="form-control" id="languagesName" placeholder="Language" required>
+                                        <input type="text" class="form-control" id="languagesName"
+                                            placeholder="Language" required>
+                                        <span id="langError" class="text-danger small opacity-0">.</span>
+                                        <!-- Error message -->
+
                                     </div>
                                     <div class="mb-3">
                                         <label for="languagesLevel" class="form-label">Level Language</label><br>
                                         <output type="number" id="output" class="output">50</output>
-                                        <input class="w-100" type="range" value="50" min="0" max="100" oninput="output.value = this.value">
+                                        <input class="w-100" type="range" value="50" min="0" max="100"
+                                            oninput="output.value = this.value">
 
                                     </div>
                                     <button type="button" class="btn btn-primary" id="btnlg" onclick="addLang()">Add
@@ -190,16 +192,22 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title text-uppercase fw-bold" id="myModalLabel1"> Update data!</h5>
-                    <button type="button" class="btn-close bg-danger rounded-5" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close bg-danger rounded-5" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="PUT" id="updateForm">
                         <label for="unlanguagesName">Language</label>
-                        <input class="form-control" id="unlanguagesName" type="text" placeholder="New language" style="width: 100%;">
+                        <input class="form-control" id="unlanguagesName" type="text" placeholder="New language"
+                            style="width: 100%;">
+                        <span id="updateLangError" class="text-danger small opacity-0">.</span><br>
+                        <!-- Error message -->
 
-                        <label for="unlanguagesLevel" class="mt-2">Level language</label><br>
+
+                        <label for="unlanguagesLevel" class="mt-1">Level language</label><br>
                         <output type="number" id="unlanguagesLevel" class="output">50</output>
-                        <input id="rangePercent" class="w-100" type="range" value="50" min="0" max="100" oninput="unlanguagesLevel.value = this.value">
+                        <input id="rangePercent" class="w-100" type="range" value="50" min="0" max="100"
+                            oninput="unlanguagesLevel.value = this.value">
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -217,7 +225,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        getLang();
 
         function getLang() {
             fetch('https://mps7.chandalen.dev/api/languages')
@@ -244,34 +251,63 @@
                     }
                 })
         }
-
+        getLang();
 
         function addLang() {
+            const btnlg = document.getElementById('btnlg');
+            btnlg.disabled = true;
             let languagesName = document.getElementById('languagesName');
             let languagesLevel = document.getElementById('output');
+            let langError = document.getElementById('langError');
+
+            if (!isNaN(languagesName.value) && languagesName.value != '') {
+                langError.classList.remove('opacity-0');
+                languagesName.classList.add('border', 'border-danger');
+                langError.innerHTML = "Language must be a string.";
+                btnlg.disabled = false;
+                return;
+            }
 
 
             fetch(`https://mps7.chandalen.dev/api/languages`, {
-                    method: 'POST',
-                    headers: {
-                        "Accept": "application/json",
-                        "Authorization": `Bearer ${token}`,
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        "en_name": languagesName.value,
-                        "percent": languagesLevel.value,
-                    })
+                method: 'POST',
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "en_name": languagesName.value,
+                    "percent": languagesLevel.value,
                 })
+            })
                 .then(res => res.json())
                 .then(json => {
-                    console.log(json)
-                    alert(json.message);
-                    getLang();
+                    if (languagesName.value == "") {
+                        langError.innerHTML = json.data.en_name[1];
+                        languagesName.classList.add('border', 'border-danger');
+                        langError.classList.remove('opacity-0');
+                    } else {
+                        Swal.fire({
+                            icon: "success",
+                            title: json.message,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        languagesName.value = "";
+                        getLang();
+                    }
                 })
-                .catch(err => console.error('Error:', err));
-
+                .finally(() => {
+                    btnlg.disabled = false;
+                });
         }
+        languagesName.addEventListener("input", function () {
+            if (languagesName.value.trim() !== "") {
+                languagesName.classList.remove('border', 'border-danger');
+                langError.classList.add('opacity-0');
+            }
+        });
 
         function deleteLang(id) {
             Swal.fire({
@@ -285,14 +321,14 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     fetch(`https://mps7.chandalen.dev/api/languages/${id}`, {
-                            method: 'DELETE',
-                            headers: {
-                                "Accept": "application/json",
-                                "Authorization": `Bearer ${token}`,
-                                "Content-Type": "application/json"
+                        method: 'DELETE',
+                        headers: {
+                            "Accept": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                            "Content-Type": "application/json"
 
-                            }
-                        })
+                        }
+                    })
                         .then(res => res.json())
                         .then(json => {
                             console.log(json); // Log the response to see if delete was successful
@@ -317,7 +353,7 @@
 
         /////update////////
         let idUpdate = 0;
-        let unlanguagesName = document.getElementById('mdlanguagesName');
+        let unlanguagesName = document.getElementById('unlanguagesName');
         let unlanguagesLevel = document.getElementById('unlanguagesLevel');
         let updateLangError = document.getElementById('updateLangError'); // Error span for update name
 
@@ -343,31 +379,58 @@
         }
 
         function updateLang() {
-            console.log(unlanguagesName.value);
+            const updatelg = document.getElementById('updatelg');
+            updatelg.disabled = true;
+            if (!isNaN(unlanguagesName.value) && unlanguagesName.value != '') {
+                updateLangError.classList.remove('opacity-0');
+                unlanguagesName.classList.add('border', 'border-danger');
+                updateLangError.innerHTML = "Language must be a string.";
+                updatelg.disabled = false;
+                return;
+            }
             fetch(`https://mps7.chandalen.dev/api/languages/${idUpdate}`, {
-                    method: 'PUT',
-                    headers: {
-                        "Accept": "application/json",
-                        "Authorization": `Bearer ${token}`,
-                        "Content-Type": "application/json"
+                method: 'PUT',
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
 
-                    },
-                    body: JSON.stringify({
-                        "en_name": unlanguagesName.value,
-                        "percent": unlanguagesLevel.value,
-                    })
+                },
+                body: JSON.stringify({
+                    "en_name": unlanguagesName.value,
+                    "percent": unlanguagesLevel.value,
                 })
+            })
                 .then(res => res.json())
                 .then(json => {
-                    bootstrap.Modal.getInstance(
-                        document.getElementById("languages")
-                    ).hide();
-                    alert(json.message);
-                    getLang(); // Refresh user details after updating the avatar
-                })
-                .catch(err => console.error('Error:', err));
+                    if (unlanguagesName.value == "") {
+                        updateLangError.innerHTML = json.errors.en_name[1];
+                        unlanguagesName.classList.add('border', 'border-danger');
+                        updateLangError.classList.remove('opacity-0');
+                    } else if (json.message) {
 
+                        bootstrap.Modal.getInstance(
+                            document.getElementById("languages")
+                        ).hide(); // Close the modal
+                        Swal.fire({
+                            icon: "success",
+                            title: json.message,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        getLang(); // Refresh the skill list
+                    }
+                })
+                .finally(() => {
+                    updatelg.disabled = false;
+                });
         }
+        unlanguagesName.addEventListener("input", function () {
+            if (unlanguagesName.value.trim() !== "") {
+                unlanguagesName.classList.remove('border', 'border-danger');
+                updateLangError.classList.add('opacity-0');
+            }
+        });
     </script>
 
 
