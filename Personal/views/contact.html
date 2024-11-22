@@ -31,7 +31,8 @@
 <style>
   .contact-form {
     padding: 3rem 1rem;
-    background-color:#e5e5e5;
+ 
+   background-color: rgb(32, 32, 32);
   
     border-radius: 10px;
  
@@ -40,13 +41,17 @@
   .form-control {
     padding: 0.8rem;
     margin-bottom: 1rem;
-    border: 1px solid #dee2e6;
+
+  background-color: rgb(9, 9, 9);
     border-radius: 5px;
+    color: white !important;;
   }
 
   .form-control:focus {
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.331);
     border-color: #80bdff;
+    background-color: #606261  !important;
+    color: white !important;
   }
 
   textarea.form-control {
@@ -86,6 +91,11 @@
     background-color: #d4edda;
     color: #155724;
   }
+  input::placeholder,
+  textarea::placeholder{
+    color:  white !important;
+  }
+
 </style>
 
 <body class="contact-page">
@@ -199,7 +209,7 @@
       <div class="container py-5">
         <div class="row justify-content-center">
           <div class="col-lg-12">
-            <form class="contact-form php-email-form" id="contactForm" data-aos="fade-up" data-aos-delay="600">
+            <form class="contact-form php-email-form " id="contactForm" data-aos="fade-up" data-aos-delay="600">
               <div class="row g-4">
                 <div class="col-md-6">
                   <input type="text" name="name" id="iname" class="form-control mb-1" placeholder="Your Name" >
@@ -212,7 +222,7 @@
 
                 </div>
                 <div class="col-12 mt-3">
-                  <input type="text" class="form-control mb-1" name="subject" id="isubject" placeholder="Subject" >
+                  <input type="text" class="form-control  mb-1" name="subject" id="isubject" placeholder="Subject" >
                   <span id="subject_error" class="text-danger opacity-0">.</span>
 
                 </div>

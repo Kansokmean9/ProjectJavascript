@@ -48,9 +48,8 @@
                 <h2 class="welcome" style="font-size: 30px;">Welcome admin <span id="adminName"></span>!</h2>
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
                     <li class="pe-2">
-                        <a href="../ronaldo-master/ronaldo-master/index.html" target="_blank"
-                            class="btn btn-dark rounded-5" style="height: 30px; line-height: 10px;"><i
-                                class="bi bi-box-arrow-up-right"></i> Open Site</a>
+                        <button class="btn btn-dark rounded-5" type="button" style="height: 30px; line-height: 10px;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i
+                            class="bi bi-box-arrow-up-right"></i> Open Site</button>
                     </li>
 
                     <li class="nav-item pe-2">
@@ -158,8 +157,8 @@
                                 <button type="button" class="btn btn-primary" id="btnsk" onclick="addSkill()">Add skill</button>
                             </div>
                         </form>
-                        <table border="0" class="bg-primarys">
-                            <thead class="bg-tertiary">
+                        <table border="0" >
+                            <thead class="bg-primarys">
                                 <th>ID</th>
                                 <th>Title</th>
                                 <th>Workplace</th>
@@ -204,7 +203,22 @@
         </div>
     </div>
 
-
+    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas-header shadow-sm">
+          <h3 class="offcanvas-title text-uppercase" id="offcanvasWithBothOptionsLabel">Our templates</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <h4 class="text-primary mb-2 mt-4">Template 1</h4>
+          <a class="imgTemplate" target="_blank" href="../ronaldo-master/ronaldo-master/index.html">
+            <img  src="../asset/img/temp1.png" style="width: 350px;" alt="">
+          </a>
+          <h4 class="text-primary mb-2 mt-4">Template 2</h4>
+          <a class="imgTemplate bg-black" target="_blank" href="../Personal/views/index.html">
+            <img  src="../asset/img/temp2.png" style="width: 350px;" alt="">
+          </a>
+        </div>
+      </div>
     <script src="../asset/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="../asset/js/javascript.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
