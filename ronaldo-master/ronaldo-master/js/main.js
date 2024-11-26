@@ -27,7 +27,6 @@
 	};
 	fullHeight();
 
-	// loader
 	var loader = function() {
 		setTimeout(function() { 
 			if($('#ftco-loader').length > 0) {
@@ -37,12 +36,10 @@
 	};
 	loader();
 
-	// Scrollax
    $.Scrollax();
 
 
 
-   // Burger Menu
 	var burgerMenu = function() {
 
 		$('body').on('click', '.js-fh5co-nav-toggle', function(event){
@@ -79,7 +76,6 @@
 	    $('html, body').animate({
 	        scrollTop: $($.attr(this, 'href')).offset().top - 70
 	    }, 500, function() {
-	    	// window.location.hash = href;
 	    });
 		});
 
@@ -116,21 +112,14 @@
 
 	$('nav .dropdown').hover(function(){
 		var $this = $(this);
-		// 	 timer;
-		// clearTimeout(timer);
 		$this.addClass('show');
 		$this.find('> a').attr('aria-expanded', true);
-		// $this.find('.dropdown-menu').addClass('animated-fast fadeInUp show');
 		$this.find('.dropdown-menu').addClass('show');
 	}, function(){
 		var $this = $(this);
-			// timer;
-		// timer = setTimeout(function(){
 			$this.removeClass('show');
 			$this.find('> a').attr('aria-expanded', false);
-			// $this.find('.dropdown-menu').removeClass('animated-fast fadeInUp show');
 			$this.find('.dropdown-menu').removeClass('show');
-		// }, 100);
 	});
 
 
@@ -138,7 +127,6 @@
 	  console.log('show');
 	});
 
-	// scroll
 	var scrollWindow = function() {
 		$(window).scroll(function(){
 			var $w = $(this),
@@ -243,7 +231,6 @@
 	};
 	contentWayPoint();
 
-	// magnific popup
 	$('.image-popup').magnificPopup({
     type: 'image',
     closeOnContentClick: true,
@@ -289,8 +276,6 @@
 		});
 	};
 	goHere();
-
-	// $("#myScrollspy").scrollspy({ offset: -75 });
 
 
 
@@ -344,7 +329,6 @@ window.onload = function() {
       new TxtRotate(elements[i], JSON.parse(toRotate), period);
     }
   }
-  // INJECT CSS
   var css = document.createElement("style");
   css.type = "text/css";
   css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
@@ -355,8 +339,6 @@ window.onload = function() {
 })(jQuery);
 
 
-
-// scrollspy section
 (function($){
   var sections = [];
   var id = false;

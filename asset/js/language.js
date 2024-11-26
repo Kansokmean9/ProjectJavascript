@@ -105,14 +105,14 @@ function deleteLang(id) {
             })
                 .then(res => res.json())
                 .then(json => {
-                    console.log(json); // Log the response to see if delete was successful
+                    console.log(json); 
                     if (json.result) {
                         Swal.fire({
                             title: "Deleted!",
                             text: json.message,
                             icon: "success"
                         });
-                        getLang(); // Refresh data
+                        getLang(); 
                     } else {
                         Swal.fire("Error!", "Failed to delete experience.", "error");
                     }
@@ -125,11 +125,10 @@ function deleteLang(id) {
     });
 }
 
-/////update////////
 let idUpdate = 0;
 let unlanguagesName = document.getElementById('unlanguagesName');
 let unlanguagesLevel = document.getElementById('unlanguagesLevel');
-let updateLangError = document.getElementById('updateLangError'); // Error span for update name
+let updateLangError = document.getElementById('updateLangError'); 
 
 function toUpdate(id) {
     idUpdate = id;
@@ -185,14 +184,14 @@ function updateLang() {
 
                 bootstrap.Modal.getInstance(
                     document.getElementById("languages")
-                ).hide(); // Close the modal
+                ).hide(); 
                 Swal.fire({
                     icon: "success",
                     title: json.message,
                     showConfirmButton: false,
                     timer: 1500,
                 });
-                getLang(); // Refresh the skill list
+                getLang(); 
             }
         })
         .finally(() => {

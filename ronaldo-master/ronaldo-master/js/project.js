@@ -8,7 +8,6 @@ function fetchProjects() {
         })
         
         .then(json => {
-           // console.log(json); // Log the entire response for debugging
             
             if (json.result && json.data) {
                 const projects = json.data.map(project => `
@@ -43,5 +42,4 @@ function fetchProjects() {
         .catch(error => console.error('Error fetching data:', error));
 }
 
-// Call the function to fetch and display the data
 fetchProjects();

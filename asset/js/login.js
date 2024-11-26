@@ -21,7 +21,6 @@ function adddata() {
         .then(json => {
             console.log(json);
 
-            // Password validation
             if (password.value === "") {
                 va_pass.classList.remove('opacity-0');
                 password.classList.add('border', 'border-danger');
@@ -31,7 +30,6 @@ function adddata() {
                 password.classList.remove('border', 'border-danger');
             }
 
-            // Username/Email validation
             if (username.value === "") {
                 va_username.classList.remove('opacity-0');
                 username.classList.add('border', 'border-danger');
@@ -49,14 +47,12 @@ function adddata() {
                 username.classList.remove('border', 'border-danger');
             }
 
-            // Incorrect credentials handling
             if (json.data?.length === 0) {
                 va_username.classList.add('opacity-0');
                 va_pass.classList.remove('opacity-0');
                 password.classList.add('border', 'border-danger');
                 va_pass.innerHTML = json.message || "Incorrect username or password.";
             } else if (json.message === "Login successful.") {
-                // Successful login
                 Swal.fire({
                     title: "Login processing!",
                     html: "Wait for <b></b> milliseconds.",

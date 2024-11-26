@@ -50,8 +50,6 @@ function Experience(data = '') {
                 
                 const Experience = json.data.map(element => {
                     const points = element.points.map(point => `<li>${point.en_text}</li>`).join('');
-                 //   console.log(points);
-                    
                     return `
                     <div class="resume-wrap d-flex">
                         <div class="text pl-3">
@@ -66,17 +64,12 @@ function Experience(data = '') {
                 
                 
                 document.getElementById('list-exp').innerHTML = Experience;
-            //    console.log(Experience);
             }
         })
         .catch(error => console.error('Error fetching data:', error));
 }
 
-// Call the function to fetch and display the data
 Experience();
-
-
-///skill list all data
 
 function Skills(data = '') {
     fetch(`https://mps7.chandalen.dev/api/skills${data ? `?filter=${data}` : ''}`)

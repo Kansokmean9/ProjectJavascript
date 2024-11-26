@@ -5,7 +5,6 @@ function getdataed() {
         .then(res => res.json())
         .then(json => {
             totalEducation = json.data.length;
-            //console.log(totalEducation)
         })
 
 }
@@ -94,7 +93,6 @@ function getdata() {
         .then(res => res.json())
 
         .then(json => {
-            // Save fetched data globally
 
             dashboardData = json.data;
             document.getElementById('tview').innerText = dashboardData.total_view;
@@ -113,15 +111,12 @@ function getdata() {
                 };
                 return colors[name] || '#000';
             }
-            // Chat api data 
             function getOption() {
 
                 const months = ['Software', 'Education', 'Experience', 'Language', 'Project', 'Skills'];
                 const data = [totalSoftware, totalEducation, totalExperience, totalLanguage, totalProject, totalSkills];
                 return {
                     title: [
-                        // { text: 'Skill chart', left: 'center', textStyle: { color: themeColors.gray600 } },
-                        // { subtext: 'alignTo: "edge"', left: '50%', top: '85%', textAlign: 'center', subtextStyle: { color: themeColors.gray700 } }
                     ],
                     tooltip: {
                         trigger: 'axis',
@@ -205,7 +200,6 @@ function getdata() {
                 };
             }
 
-            // Initialize the chart
             const chartDom = document.getElementById('chart');
             const myChart = echarts.init(chartDom);
             myChart.setOption(getOption());
@@ -227,7 +221,6 @@ function getdata() {
                 return color.replace(')', `, ${opacity})`).replace('rgb', 'rgba');
             }
 
-            // Chart Data
             const data = [
 
                 {
@@ -288,16 +281,12 @@ function getdata() {
             ];
 
 
-            // Chart Initialization
             const chartElement = document.getElementById('chart1');
             const chart = echarts.init(chartElement);
 
-            // Function to get chart options
             function getOption1() {
                 return {
                     title: [
-                        // { text: 'Skill chart', left: 'center', textStyle: { color: themeColors.gray600 } },
-                        // { subtext: 'alignTo: "edge"', left: '50%', top: '85%', textAlign: 'center', subtextStyle: { color: themeColors.gray700 } }
                     ],
                     tooltip: {
                         trigger: 'item',
@@ -332,10 +321,8 @@ function getdata() {
                 };
             }
 
-            // Set initial chart options
             chart.setOption(getOption1());
 
-            // Responsive chart on window resize
             window.addEventListener('resize', () => {
                 chart.setOption({
                     series: [{
@@ -353,4 +340,3 @@ const tooltip = document.getElementById('tooltip');
 toggleTooltip.addEventListener('click', () => {
     tooltip.style.display = tooltip.style.display === 'none' ? 'block' : 'none';
 });
-// Data form caht

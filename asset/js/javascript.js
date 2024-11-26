@@ -1,4 +1,3 @@
-// Sidebar toggle
 const sidebar = document.querySelector('.sidebar');
 const sidebarToggle = document.getElementById('sidebarToggle');
 const closeSidebar = document.getElementById('closeSidebar');
@@ -12,7 +11,6 @@ closeSidebar.addEventListener('click', () => {
 });
 
 
-// get me
 let token = sessionStorage.getItem('Token');
 console.log(token);
 
@@ -25,7 +23,7 @@ fetch(`https://mps7.chandalen.dev/api/me`, {
 })
     .then(res => res.json())
     .then(json => {
-        // console.log(json);
+        console.log(json);
         if(json.data.avatar== "https://mps7.chandalen.dev/storage/avatar/default.png"){
             document.getElementById('avtadmin').src ="../asset/img/frameIMG.webp";
         }else{

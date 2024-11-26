@@ -7,7 +7,6 @@ function fetchAbout() {
       return res.json();
     })
     .then(json => {
-    //  console.log(json); // Log the entire response for debugging
 
       if (json.result && json.data && json.data.profile) {
         const profile = json.data.profile;
@@ -52,7 +51,6 @@ function fetchAbout() {
         document.getElementById('logoskill2').innerHTML = `<a href="#" class="partner"><img src="${Bio.skill_logo_two}" class="img-fluid" alt="Colorlib Template" /></a>`
         document.getElementById('logoskill1').innerHTML = `<a href="#" class="partner"><img src="${Bio.skill_logo_one}" class="img-fluid" alt="Colorlib Template" /></a>`
         document.getElementById('about-section').innerHTML = About;
-      //  console.log(json.data);
       } else {
         console.error('No data found in the API response');
       }
@@ -60,5 +58,4 @@ function fetchAbout() {
     .catch(error => console.error('Error fetching data:', error));
 }
 
-// Call the function to fetch and display the data
 fetchAbout();

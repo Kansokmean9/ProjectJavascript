@@ -1,5 +1,5 @@
 
-      function GetDate(){
+      function Getdata(){
         fetch('https://mps7.chandalen.dev/api/contacts?page=1&per_page=10&search',{
                 method: 'GET',
                 headers: {
@@ -36,7 +36,7 @@
                     }
             })
       }
-      GetDate();
+      Getdata();
         function deletePost(id) {
             Swal.fire({
                 title: "Are you sure?",
@@ -59,14 +59,14 @@
                     })
                         .then(res => res.json())
                         .then(json => {
-                            console.log(json);  // Log the response to see if delete was successful
+                            console.log(json);  
                             if (json.result) {
                                 Swal.fire({
                                     title: "Deleted!",
                                     text: json.message,
                                     icon: "success"
                                 });
-                                GetDate(); // Refresh data
+                                Getdata(); 
                             } else {
                                 Swal.fire("Error!", "Failed to delete contect.", "error");
                             }

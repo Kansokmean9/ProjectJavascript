@@ -13,7 +13,7 @@ function getme() {
     })
         .then(res => res.json())
         .then(json => {
-            // console.log(json);
+            console.log(json);
             if (json.data.avatar == "https://mps7.chandalen.dev/storage/avatar/default.png") {
                 document.getElementById('avtadmin').src = "../asset/img/frameIMG.webp";
             } else {
@@ -25,7 +25,6 @@ function getme() {
             document.getElementById('idAd').innerHTML = json.data.id;
             document.getElementById('nameAd').innerHTML = json.data.name;
             document.getElementById('gmailAd').innerHTML = json.data.email;
-            // form edit
             document.getElementById('upName').value = json.data.name;
             document.getElementById('upGmail').value = json.data.email;
         })
@@ -78,8 +77,6 @@ function updateavt() {
         });
 }
 
-//delete avatar
-
 function deleteavt() {
     Swal.fire({
         title: "Are you sure?",
@@ -101,7 +98,7 @@ function deleteavt() {
             })
                 .then(res => res.json())
                 .then(json => {
-                    // alert(json.message);
+                    alert(json.message);
                     Swal.fire({
                         title: "Deleted!",
                         text: json.message,
@@ -116,7 +113,6 @@ function deleteavt() {
     });
 }
 
-// save info
 let names = document.getElementById('upName');
 let emails = document.getElementById('upGmail');
 function saveinfo() {
@@ -330,7 +326,6 @@ function logoutbtn() {
                             text: json.message,
                             icon: "warning"
                         });
-                        // alert(json.message);
                     }
 
 

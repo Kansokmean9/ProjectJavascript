@@ -121,18 +121,14 @@
                         va_title.classList.remove('opacity-0');
                         title.classList.add('border', 'border-danger');
                         va_title.innerHTML = json.data.en_title[1];
-                    } else {
-                        va_title.classList.add('opacity-0');
-                        title.classList.remove('border', 'border-danger');
                     }
+                    
                     if (workplace.value == "") {
                         va_wp.classList.remove('opacity-0');
                         workplace.classList.add('border', 'border-danger');
                         va_wp.innerHTML = json.data.en_workplace[1];
-                    } else {
-                        va_wp.classList.add('opacity-0');
-                        workplace.classList.remove('border', 'border-denger');
-                    }
+                    } 
+                    
                     if (start_year.value == "") {
                         va_sy.classList.remove('opacity-0');
                         start_year.classList.add('border', 'border-danger');
@@ -140,17 +136,7 @@
                     }
 
                     if (json.result) {
-                        va_sy.classList.add('opacity-0');
-                        start_year.classList.remove('border', 'border-danger');
-
-                        title.classList.remove('border', 'border-danger');
-                        va_title.classList.add('opacity-0');
-
-                        workplace.classList.remove('border', 'border-danger');
-                        va_wp.classList.add('opacity-0');
-
-                        start_year.classList.remove('border', 'border-danger');
-                        va_sy.classList.add('opacity-0');
+                        
 
                         title.value = "";
                         workplace.value = "";
@@ -268,11 +254,6 @@
             const btnUsubmit = document.getElementById('btnUsubmit');
             btnUsubmit.disabled = true;
 
-            let va_title = document.getElementById('uva_title');
-            let va_wp = document.getElementById('uva_wp');
-            let va_sy = document.getElementById('uva_sy');
-            console.log(utitle.value);
-
             let usucc = 0;
             let usucc1 = 0;
 
@@ -331,20 +312,7 @@
                         uva_sy.innerHTML = json.data.start_year[1];
                     }
                     if (json.result) {
-                        uva_sy.classList.add('opacity-0');
-                        ustart_year.classList.remove('border', 'border-danger');
 
-                        utitle.classList.remove('border', 'border-danger');
-                        uva_title.classList.add('opacity-0');
-
-                        uworkplace.classList.remove('border', 'border-danger');
-                        uva_wp.classList.add('opacity-0');
-
-                        ustart_year.classList.remove('border', 'border-danger');
-                        uva_sy.classList.add('opacity-0');
-
-                        utitle.value = "";
-                        uworkplace.value = "";
                         ustart_year.value = "";
                         uend_year.value = "";
 

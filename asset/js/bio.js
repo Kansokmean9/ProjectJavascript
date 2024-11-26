@@ -113,47 +113,28 @@ function updateBio() {
                 heorBio.classList.add('border', 'border-danger');
                 va_heroBio.classList.remove('opacity-0');
                 va_heroBio.innerHTML = json.data.en_hero_bio[1];
-            } else {
-                heorBio.classList.remove('border', 'border-danger');
-                va_heroBio.classList.add('opacity-0');
             }
 
             if (aboutTitle.value == "") {
                 aboutTitle.classList.add('border', 'border-danger');
                 va_aboutTitle.classList.remove('opacity-0');
                 va_aboutTitle.innerHTML = json.data.en_about_title[1];
-            } else {
-                aboutTitle.classList.remove('border', 'border-danger');
-                va_aboutTitle.classList.add('opacity-0');
             }
 
             if (subtitle.value == "") {
                 subtitle.classList.add('border', 'border-danger');
                 va_aboutSub.classList.remove('opacity-0');
                 va_aboutSub.innerHTML = json.data.en_about_sub_title[1];
-            } else {
-                subtitle.classList.remove('border', 'border-danger');
-                va_aboutSub.classList.add('opacity-0');
             }
 
             if (aboutBio.value == "") {
                 aboutBio.classList.add('border', 'border-danger');
                 va_aboutBio.classList.remove('opacity-0');
                 va_aboutBio.innerHTML = json.data.en_about_bio[1];
-            } else {
-                aboutBio.classList.remove('border', 'border-danger');
-                va_aboutBio.classList.add('opacity-0');
             }
 
             if (json.result) {
-                aboutBio.classList.remove('border', 'border-danger');
-                va_aboutBio.classList.add('opacity-0');
-                heorBio.classList.remove('border', 'border-danger');
-                va_heroBio.classList.add('opacity-0');
-                aboutTitle.classList.remove('border', 'border-danger');
-                va_aboutTitle.classList.add('opacity-0');
-                subtitle.classList.remove('border', 'border-danger');
-                va_aboutSub.classList.add('opacity-0');
+                
                 getme();
                 Swal.fire({
                     position: "center",
@@ -165,7 +146,6 @@ function updateBio() {
 
             }
         })
-    // .catch(err => console.error('Error:', err));
 }
 heorBio.addEventListener("input", function () {
     if (heorBio.value.trim() !== "") {

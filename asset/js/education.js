@@ -140,18 +140,6 @@ function addEducation() {
                 va_start.innerHTML = json.data.start_year[1];
             }
             if (json.result) {
-                va_start.classList.add('opacity-0');
-                start_year.classList.remove('border', 'border-danger');
-
-
-                en_degree.classList.remove('border', 'border-danger');
-                va_degree.classList.add('opacity-0');
-
-                en_school.classList.remove('border', 'border-danger');
-                va_school.classList.add('opacity-0');
-
-                start_year.classList.remove('border', 'border-danger');
-                va_start.classList.add('opacity-0');
 
                 en_degree.value = "";
                 en_school.value = "";
@@ -354,20 +342,7 @@ function updateEducation() {
             }
 
             if (json.result) {
-                uva_start.classList.add('opacity-0');
-                ustart_year.classList.remove('border', 'border-danger');
-
-                uen_degree.classList.remove('border', 'border-danger');
-                uva_degree.classList.add('opacity-0');
-
-                uen_shcool.classList.remove('border', 'border-danger');
-                uva_school.classList.add('opacity-0');
-
-                ustart_year.classList.remove('border', 'border-danger');
-                uva_start.classList.add('opacity-0');
-
-                uen_degree.value = "";
-                uen_shcool.value = "";
+                
                 ustart_year.value = "";
                 uend_year.value = "";
 
@@ -392,7 +367,8 @@ function updateEducation() {
 uen_degree.addEventListener("input", function () {
     if (uen_degree.value.trim() !== "") {
         uen_degree.classList.remove('border', 'border-danger');
-        uva_degree.classLit.add('opacity-0');
+        uva_degree.classList.add('opacity-0');
+
     }
 });
 

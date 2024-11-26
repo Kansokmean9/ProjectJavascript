@@ -111,7 +111,7 @@ function deleteSoftware(id) {
                             text: json.message,
                             icon: "success"
                         });
-                        getSoftware(); // Refresh data
+                        getSoftware(); 
                     } else {
                         Swal.fire("Error!", "Failed to delete experience.", "error");
                     }
@@ -124,7 +124,6 @@ function deleteSoftware(id) {
     });
 }
 
-/////update////////
 let idUpdate = 0;
 let usoftname = document.getElementById('usoftname');
 let unSoftLevel = document.getElementById('unSoftLevel');
@@ -184,7 +183,7 @@ function updateSoftware() {
             } else if (json.result) {
                 bootstrap.Modal.getInstance(
                     document.getElementById("myModal1")
-                ).hide(); // Close the modal
+                ).hide(); 
                 Swal.fire({
                     icon: "success",
                     title: json.message,

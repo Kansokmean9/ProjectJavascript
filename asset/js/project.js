@@ -26,8 +26,6 @@ function getsproject() {
 }
 getsproject();
 
-
-/// Add ///
 function addproject() {
     const btnSubmit = document.getElementById('btnsubmit');
     btnSubmit.disabled = true;
@@ -91,7 +89,6 @@ function addproject() {
 
             }
 
-            // Workplace validation
             if (projectTechnologies.value === "") {
                 workplaceError.classList.remove('opacity-0');
                 projectTechnologies.classList.add('border', 'border-danger');
@@ -103,6 +100,8 @@ function addproject() {
             }
 
             if (json.message === "Create project successful.") {
+                projectTechnologies.value = '';
+                projectName.value = '';
                 Swal.fire({
                     title: "Success!",
                     text: "Project has been added.",
@@ -129,7 +128,6 @@ projectTechnologies.addEventListener("input", function () {
 });
 
 
-///// Update /////
 let idUpdate = 0;
 let unprojectname = document.getElementById('unprojectname');
 let unworkplace = document.getElementById('unworkplace');
@@ -208,21 +206,12 @@ function updateproject() {
                 updateProjectError.classList.remove('opacity-0');
                 unprojectname.classList.add('border', 'border-danger');
                 updateProjectError.innerHTML = json.data.en_name[1];
-            } else {
-                updateProjectError.classList.add('opacity-0');
-                unprojectname.classList.remove('border', 'border-danger');
-
             }
 
-            // Workplace validation
             if (unworkplace.value === "") {
                 updateWorkplaceError.classList.remove('opacity-0');
                 unworkplace.classList.add('border', 'border-danger');
                 updateWorkplaceError.innerHTML = json.data.en_workplace[1];
-            } else {
-                updateWorkplaceError.classList.add('opacity-0');
-                unworkplace.classList.remove('border', 'border-danger');
-                usucc1 = 1;
             }
 
             if (json.message === "Update project successful.") {
@@ -233,7 +222,7 @@ function updateproject() {
                 });
                 bootstrap.Modal.getInstance(
                     document.getElementById("myModal1")
-                ).hide(); // Hide the modal
+                ).hide();
                 getsproject();
             }
         })

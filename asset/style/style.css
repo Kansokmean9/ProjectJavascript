@@ -6,16 +6,13 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-  /* font-size: 14px; */
 }
 
-/* font English */
 @font-face {
     font-family: jost;
     src: url(/asset/font/Eng/Jost-Regular.ttf);
 }
 
-/* font Khmer */
 @font-face {
     font-family: Preahvihear;
     src: url(/asset/font/khmer/Preahvihear-Regular.ttf);
@@ -186,9 +183,6 @@ label {
     border-radius: 5px;
 }
 
-/* #dashboardContent table tbody tr {
-    border-top: 1px solid rgb(180, 216, 255);
-} */
 
 .update-photo {
 
@@ -209,8 +203,6 @@ label {
     cursor: pointer;
     right: 0px;
 }
-
-
 
 .card {
     border-radius: 8px;

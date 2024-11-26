@@ -8,11 +8,9 @@ function fetchAbout() {
         return res.json();
       })
       .then((json) => {
-    //    console.log(json); // Log the entire response for debugging
   
         if (json.result && json.data && json.data.profile) {
           const profile = json.data.profile;
-        //   const Bio = json.data.bio;
           const social = json.data.social;
   
      
@@ -24,7 +22,6 @@ function fetchAbout() {
       .catch((error) => console.error("Error fetching data:", error));
   }
   
-  // Call the function to fetch and display the data
   fetchAbout();
   
 
@@ -78,7 +75,6 @@ document.getElementById("contactForm").addEventListener("submit", function (even
         let hasError=false ;
         
 
-        // Display errors if fields are empty
         if (iname.value === "") {
             iname.classList.add("border", "border-danger");
             name_error.classList.remove("opacity-0");
@@ -113,10 +109,6 @@ document.getElementById("contactForm").addEventListener("submit", function (even
             hasError = true;
         }
 
-        // setTimeout(() => {
-        //     document.getElementById('loading').classList.add('d-none');
-        // }, 2000);
-        // Reset the form if there are no errors
         if (!hasError) {
             document.getElementById("contactForm").reset();
             Swal.fire({

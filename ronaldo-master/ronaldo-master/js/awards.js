@@ -3,7 +3,7 @@ function Awards() {
       method: 'GET',
       headers: {
           'Authorization': `Bearer 116|ChZ2xtwKhEEnHkHoSstcYZIin4Vg8rOdAiofdhrV8e9376da`,
-          'Content-Type': 'application/json' // Optional: Set content type if needed
+          'Content-Type': 'application/json' 
       }
   })
   .then(res => {
@@ -13,13 +13,10 @@ function Awards() {
       return res.json();
   })
   .then(json => {
-    //  console.log(json); // Log the entire response for debugging
       
-      // Check if the response is successful
       if (json.result) {
           const { total_education, total_experience, total_project, total_skill } = json.data;
 
-          // Build the HTML content with the specified style
           const awardsContainer = document.getElementById('awards');
           awardsContainer.innerHTML = `
               <div class="col-md d-flex justify-content-center counter-wrap ">
@@ -62,5 +59,4 @@ function Awards() {
   .catch(error => console.error('Error fetching data:', error));
 }
 
-// Call the function
 Awards();

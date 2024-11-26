@@ -7,14 +7,12 @@ function fetchAbout() {
       return res.json();
     })
     .then((json) => {
-      //console.log(json); // Log the entire response for debugging
 
       if (json.result && json.data && json.data.profile) {
         const profile = json.data.profile;
         const Bio = json.data.bio;
         const social = json.data.social;
 
-        // Name header
         const name = document.getElementById('navbar-name');
         let names = document.getElementById('names');
         name.innerHTML = profile.en_last_name[0];
@@ -23,10 +21,8 @@ function fetchAbout() {
         names.innerHTML ="&nbsp;&nbsp;" + result ;
 
 
-        // Image footer
         const image_contact = document.getElementById('image-contact');
         image_contact.style.backgroundImage = `url('${profile.photo_about}')`;
-        // image_contact.src = profile.photo_about;
 
         const About = `
           <div class="col-lg-6 col-md-6 align-items-center">
@@ -54,7 +50,6 @@ function fetchAbout() {
         `;
 
         document.getElementById("hero-section").innerHTML = About;
-        //console.log(json.data);
       } else {
         console.error("No data found in the API response");
       }
@@ -62,5 +57,4 @@ function fetchAbout() {
     .catch((error) => console.error("Error fetching data:", error));
 }
 
-// Call the function to fetch and display the data
 fetchAbout();

@@ -104,7 +104,7 @@ function deleteSkill(id) {
             })
                 .then(res => res.json())
                 .then(json => {
-                    console.log(json); // Log the response to see if delete was successful
+                    console.log(json);
                     if (json.result) {
                         Swal.fire({
                             title: "Deleted!",
@@ -124,7 +124,6 @@ function deleteSkill(id) {
     });
 }
 
-/////update////////
 let idUpdate = 0;
 let unskillname = document.getElementById('unskillname');
 let unskillLevel = document.getElementById('unskillLevel');
@@ -187,14 +186,14 @@ function updateSkill() {
 
                 bootstrap.Modal.getInstance(
                     document.getElementById("myModal1")
-                ).hide(); // Close the modal
+                ).hide();
                 Swal.fire({
                     icon: "success",
                     title: json.message,
                     showConfirmButton: false,
                     timer: 1500,
                 });
-                getskill(); // Refresh the skill list
+                getskill();
             }
         })
         .finally(() => {
