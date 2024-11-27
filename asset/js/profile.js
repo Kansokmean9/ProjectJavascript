@@ -213,15 +213,13 @@ function updateInfo() {
                 va_nationality.classList.remove('opacity-0');
             }
             if (json.result) {
-                fname.value = "";
-                lname.value = "";
-                nationality.value = "";
                 Swal.fire({
                     icon: "success",
                     title: json.message,
                     showConfirmButton: false,
                     timer: 1500,
                 });
+                getme();
             }
         })
         .finally(() => {
@@ -292,15 +290,13 @@ function updateContact() {
                 va_address.classList.remove('opacity-0');
             }
             if (json.result) {
-                email.value = "";
-                phone.value = "";
-                address.value = "";
                 Swal.fire({
                     icon: "success",
                     title: json.message,
                     showConfirmButton: false,
                     timer: 1500,
                 });
+                getme()
             }
         })
         .finally(() => {
@@ -382,15 +378,13 @@ function updateSocail() {
                 va_li.classList.remove('opacity-0');
             }
             if (json.result) {
-                fb.value = "";
-                tg.value = "";
-                li.value = "";
                 Swal.fire({
                     icon: "success",
                     title: json.message,
                     showConfirmButton: false,
                     timer: 1500,
                 });
+                getme();
             }
         })
         .finally(() => {
